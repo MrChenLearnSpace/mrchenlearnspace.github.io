@@ -1,6 +1,109 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>搭建博客</title>
+    <url>/2021/11/01/Hollow/</url>
+    <content><![CDATA[<h1 id="博客搭建"><a href="#博客搭建" class="headerlink" title="博客搭建"></a>博客搭建</h1><p>文档格式<br><strong>需要git，Node.js，npm</strong></p>
+<h2 id="做好准备"><a href="#做好准备" class="headerlink" title="做好准备"></a>做好准备</h2><p>安装好软件，配置好相关的环境</p>
+<p>建立一个github仓库，由于在部署时未设置配置建议改成 用户名.github.io,方便网站进入导致只打开一个html，与整个页面脱节的情况</p>
+<h2 id="寻找材料"><a href="#寻找材料" class="headerlink" title="寻找材料"></a>寻找材料</h2><p>到Hexo中找相关喜欢的主题，并找到相应的开源的GitHub，先hexo init在空文件夹中初始化，导入相关主题，修改全局中的theme变量</p>
+<h2 id="修改配置"><a href="#修改配置" class="headerlink" title="修改配置"></a>修改配置</h2><p><a href="https://hexo.io/zh-cn/docs/configuration">https://hexo.io/zh-cn/docs/configuration</a><br>具体配置连接</p>
+<p><strong>网站</strong></p>
+<p>参数  ||    描述</p>
+<p>title ||    网站标题</p>
+<p>subtitle ||    网站副标题</p>
+<p>description ||    网站描述</p>
+<p>keywords ||    网站的关键词。支持多个关键词。</p>
+<p>author ||    您的名字</p>
+<p>language  ||    网站使用的语言。对于简体中文用户来说，使用不同的主题可能需要设置成不同的值，请参考你的主题的文档自行设置，常见的有 zh-Hans和 zh-CN。</p>
+<p>timezone ||    网站时区。Hexo 默认使用您电脑的时区。请参考 时区列表 进行设置，如 America/New_York, Japan, 和 UTC 。一般的，对于中国大陆地区可以使用 Asia/Shanghai。</p>
+<p><strong>网址</strong></p>
+<p>url    || 网址, 必须以 http:// 或 https:// 开头    </p>
+<p>root ||    网站根目录    url’s pathname</p>
+<p>permalink ||    文章的 永久链接 格式    :year/:month/:day/:title/</p>
+<p>permalink_defaults ||     永久链接中各部分的默认值    </p>
+<p>pretty_urls ||    改写 permalink 的值来美化 URL    </p>
+<p>pretty_urls.trailing_index ||    是否在永久链接中保留尾部的index.html，设置为 false 时去除    true</p>
+<p>pretty_urls.trailing_html    是否在永久链接中保留尾部的 .html, 设置为 false 时去除 (对尾部的 index.html无效)</p>
+<p><em>网站存放在子目录<br>如果您的网站存放在子目录中，例如 <a href="http://example.com/blog%EF%BC%8C%E5%88%99%E8%AF%B7%E5%B0%86%E6%82%A8%E7%9A%84">http://example.com/blog，则请将您的</a> url 设为 <a href="http://example.com/blog">http://example.com/blog</a> 并把 root 设为 /blog/。</em><br><em>例如：# 比如，一个页面的永久链接是 <a href="http://example.com/foo/bar/index.html">http://example.com/foo/bar/index.html</a><br>pretty_urls:<br>  trailing_index: false<br>此时页面的永久链接会变为 <a href="http://example.com/foo/bar/">http://example.com/foo/bar/</a></em></p>
+<p><strong>目录</strong><br>参数  ||    描述  ||    默认值</p>
+<p>source_dir ||    资源文件夹，这个文件夹用来存放内容。||    source</p>
+<p>public_dir ||    公共文件夹，这个文件夹用于存放生成的站点文件。||    public</p>
+<p>tag_dir  ||    标签文件夹 ||    tags</p>
+<p>archive_dir    归档文件夹    archives</p>
+<p>category_dir    分类文件夹    categories</p>
+<p>code_dir    Include code 文件夹，source_dir 下的子目录    downloads/code</p>
+<p>i18n_dir    国际化（i18n）文件夹    :lang</p>
+<p>skip_render    跳过指定文件的渲染。匹配到的文件将会被不做改动地复制到 public 目录中。您可使用 glob 表达式来匹配路径。</p>
+<p><strong>文章</strong><br>参数    描述    默认值</p>
+<p>new_post_name    新文章的文件名称    :title.md</p>
+<p>default_layout    预设布局    post</p>
+<p>auto_spacing    在中文和英文之间加入空格    false</p>
+<p>titlecase    把标题转换为 title case    false</p>
+<p>external_link    在新标签中打开链接    true</p>
+<p>external_link.enable    在新标签中打开链接    true</p>
+<p>external_link.field    对整个网站（site）生效或仅对文章（post）生效    site</p>
+<p>external_link.exclude    需要排除的域名。主域名和子域名如 www 需分别配置    []</p>
+<p>filename_case    把文件名称转换为 (1) 小写或 (2) 大写    0</p>
+<p>render_drafts    显示草稿    false</p>
+<p>post_asset_folder    启动 Asset 文件夹    false</p>
+<p>relative_link    把链接改为与根目录的相对位址    false</p>
+<p>future    显示未来的文章    true</p>
+<p>highlight    代码块的设置, 请参考 Highlight.js 进行设置    </p>
+<p>prismjs    代码块的设置, 请参考 PrismJS 进行设置</p>
+<p><em>默认情况下，Hexo 生成的超链接都是绝对地址。例如，如果您的网站域名为 example.com,您有一篇文章名为 hello，那么绝对链接可能像这样：<a href="http://example.com/hello.html%EF%BC%8C%E5%AE%83%E6%98%AF%E7%BB%9D%E5%AF%B9%E4%BA%8E%E5%9F%9F%E5%90%8D%E7%9A%84%E3%80%82%E7%9B%B8%E5%AF%B9%E9%93%BE%E6%8E%A5%E5%83%8F%E8%BF%99%E6%A0%B7%EF%BC%9A/hello.html%EF%BC%8C%E4%B9%9F%E5%B0%B1%E6%98%AF%E8%AF%B4%EF%BC%8C%E6%97%A0%E8%AE%BA%E7%94%A8%E4%BB%80%E4%B9%88%E5%9F%9F%E5%90%8D%E8%AE%BF%E9%97%AE%E8%AF%A5%E7%AB%99%E7%82%B9%EF%BC%8C%E9%83%BD%E6%B2%A1%E6%9C%89%E5%85%B3%E7%B3%BB%EF%BC%8C%E8%BF%99%E5%9C%A8%E8%BF%9B%E8%A1%8C%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E6%97%B6%E5%8F%AF%E8%83%BD%E7%94%A8%E5%88%B0%E3%80%82%E9%80%9A%E5%B8%B8%E6%83%85%E5%86%B5%E4%B8%8B%EF%BC%8C%E5%BB%BA%E8%AE%AE%E4%BD%BF%E7%94%A8%E7%BB%9D%E5%AF%B9%E5%9C%B0%E5%9D%80%E3%80%82">http://example.com/hello.html，它是绝对于域名的。相对链接像这样：/hello.html，也就是说，无论用什么域名访问该站点，都没有关系，这在进行反向代理时可能用到。通常情况下，建议使用绝对地址。</a></em></p>
+<p><strong>分类 &amp; 标签</strong></p>
+<p>参数    描述    默认值</p>
+<p>default_category    默认分类    uncategorized</p>
+<p>category_map    分类别名    </p>
+<p>tag_map    标签别名    </p>
+<p><strong>日期 / 时间格式</strong></p>
+<p>参数    描述    默认值</p>
+<p>date_format    日期格式    YYYY-MM-DD</p>
+<p>time_format    时间格式    HH:mm:ss</p>
+<p>updated_option    当 Front Matter 中没有指定 updated 时 updated 的取值    mtime</p>
+<p>updated_option<br><em>updated_option 控制了当 Front Matter 中没有指定 updated 时，updated 如何取值：</em></p>
+<p><em>mtime: 使用文件的最后修改时间。这是从 Hexo 3.0.0 开始的默认行为。</em><br><em>date: 使用 date 作为 updated 的值。可被用于 Git 工作流之中，因为使用 Git 管理站点时，文件的最后修改日期常常会发生改变</em><br><em>empty: 直接删除 updated。使用这一选项可能会导致大部分主题和插件无法正常工作。</em><br><em>use_date_for_updated 选项已经被废弃，将会在下个重大版本发布时去除。请改为使用 updated_option: ‘date’。</em></p>
+<p><em>use_date_for_updated | 启用以后，如果 Front Matter 中没有指定 updated， post.updated 将会使用 date 的值而不是文件的创建时间。在 Git 工作流中这个选项会很有用 | true</em></p>
+<p><strong>分页</strong></p>
+<p>参数    描述    默认值</p>
+<p>per_page    每页显示的文章量 (0 = 关闭分页功能)    10</p>
+<p>pagination_dir    分页目录    page</p>
+<p><strong>扩展</strong><br>参数    描述</p>
+<p>theme    当前主题名称。值为false时禁用主题</p>
+<p>theme_config    主题的配置文件。在这里放置的配置会覆盖主题目录下的 _config.yml 中的配置</p>
+<p>deploy    部署部分的设置</p>
+<p>meta_generator    Meta generator 标签。 值为 false 时 Hexo 不会在头部插入该标签</p>
+<ul>
+<li>*<h3 id="特别注意，记得修改配置中的连接和主题"><a href="#特别注意，记得修改配置中的连接和主题" class="headerlink" title="特别注意，记得修改配置中的连接和主题"></a>特别注意，记得修改配置中的连接和主题</h3></li>
+<li>*</li>
+</ul>
+<h2 id="开始部署"><a href="#开始部署" class="headerlink" title="开始部署"></a>开始部署</h2><p>配置好配置中的部署部分</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repository: https://github.com/MrChenLreanSpace/MrChenLreanSpace.github.io.git</span><br><span class="line">  branch: main</span><br></pre></td></tr></table></figure>
+<p>用 npm 安装好hexo-deployer-git.</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install hexo-deployer-git </span><br></pre></td></tr></table></figure>
+<p>有些加入搜索功能，需要插件</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install hexo-generator-searchdb --save</span><br></pre></td></tr></table></figure>
+<p>配置hexo全局配置文件（请将生成的索引文件放在网站根目录或修改主题js文件的path值）</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">search:</span><br><span class="line">  path: search.xml</span><br><span class="line">  field: post</span><br><span class="line">  format: html</span><br><span class="line">  limit: 10000</span><br></pre></td></tr></table></figure>
+<p>在主题配置文件启用本地搜索</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#本地搜索,请将索引文件放在网站根目录</span><br><span class="line">local_search:</span><br><span class="line">    #是否启用</span><br><span class="line">    enable: true</span><br></pre></td></tr></table></figure>
+<p>开始生成本地站点</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo g</span><br></pre></td></tr></table></figure>
+<p>本地测试</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo s 或者 hexo serve</span><br></pre></td></tr></table></figure>
+<p>完成之后，连上github，需要GitHub的令牌，令牌生成后记得记住密钥，之后会看不到<br>令牌在设置的开发者选项中第三个第一次上传需要登入和用用户名和令牌连上账户</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo clean&amp;&amp;hexo d</span><br></pre></td></tr></table></figure>
+<p>清除本地文件且部署到GitHub上</p>
+]]></content>
+      <categories>
+        <category>博客开始</category>
+      </categories>
+      <tags>
+        <tag>标签和分类可以多个</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Hello World</title>
     <url>/2021/11/01/hello-world/</url>
     <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
