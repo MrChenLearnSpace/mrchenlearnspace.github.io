@@ -1,0 +1,255 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>UnityShader入门-课程学习 - 浪子之心</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Blog,"> 
+    <meta name="description" content="MrChen Bolg,总结基本操作平铺和偏移1234567//properties_Texture(&amp;quot;Texture&amp;quot;,2D)=&amp;quot;white&amp;quot;&amp;#123;&amp;#125;//SubPa,"> 
+    <meta name="author" content="Jack Chen"> 
+    <link rel="alternative" href="atom.xml" title="浪子之心" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">浪子之心</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="https://mrchenlreanspace.github.io"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">UnityShader入门-课程学习</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">UnityShader入门-课程学习</h1>
+        <div class="stuff">
+            <span>一月 10, 2022</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/Shader/" rel="tag">Shader</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><h2 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h2><h4 id="平铺和偏移"><a href="#平铺和偏移" class="headerlink" title="平铺和偏移"></a>平铺和偏移</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//properties</span></span><br><span class="line">_Texture(<span class="string">&quot;Texture&quot;</span>,<span class="number">2</span>D)=<span class="string">&quot;white&quot;</span>&#123;&#125;</span><br><span class="line"><span class="comment">//SubPass/Pass</span></span><br><span class="line">sampler2D _Texture;</span><br><span class="line">float4 _Texture_ST;	</span><br><span class="line">o.uv=v.uv*_Texture_ST.xy+_Texture_ST.zw;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="顶点坐标系MVP转换"><a href="#顶点坐标系MVP转换" class="headerlink" title="顶点坐标系MVP转换"></a>顶点坐标系MVP转换</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">float4 pos_world = mul(unity_ObjectToWorld, v.vertex);</span><br><span class="line">float4 pos_view = mul(UNITY_MATRIX_V,pos_world);</span><br><span class="line">float4 pos_clip = mul(UNITY_MATRIX_P,pos_view);</span><br><span class="line">o.pos=pos_clip;</span><br></pre></td></tr></table></figure>
+
+<p>或者</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">o.pos=UnityObjectToClipPos(v.vertex);</span><br></pre></td></tr></table></figure>
+
+<h4 id="CG变量用法"><a href="#CG变量用法" class="headerlink" title="CG变量用法"></a>CG变量用法</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">float</span> = <span class="number">32</span><span class="comment">//坐标</span></span><br><span class="line">half = <span class="number">16</span><span class="comment">//uv，大部分向量</span></span><br><span class="line">fixed =<span class="number">8</span><span class="comment">//颜色</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="图像处理"><a href="#图像处理" class="headerlink" title="图像处理"></a>图像处理</h2><h3 id="面剔除"><a href="#面剔除" class="headerlink" title="面剔除"></a>面剔除</h3><h4 id="单独写死"><a href="#单独写死" class="headerlink" title="单独写死"></a>单独写死</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Cull off</span><br></pre></td></tr></table></figure>
+
+<h4 id="在面板上显示"><a href="#在面板上显示" class="headerlink" title="在面板上显示"></a>在面板上显示</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[Enum(UnityEngine.Rendering.CullMode)]_CullMode(<span class="string">&quot;CullMode&quot;</span>,Float)=<span class="number">2</span><span class="comment">//Properties</span></span><br><span class="line">Cull [_CullMode]<span class="comment">//SubPass/Pass</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="图片铺在模型上"><a href="#图片铺在模型上" class="headerlink" title="图片铺在模型上"></a>图片铺在模型上</h3><p>图片将平铺到x与y组成的平面上</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">o.uv=v.vertex.xy*_Texture_ST.xy+_Texture_ST.zw;</span><br></pre></td></tr></table></figure>
+
+<p>xy变成yx时</p>
+<p>相当与x轴旋转180度y轴旋转-90度</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">o.uv=v.vertex.yx*_Texture_ST.xy+_Texture_ST.zw;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">float4 pos_world = mul(unity_ObjectToWorld, v.vertex);</span><br></pre></td></tr></table></figure>
+
+
+
+<p>加面解决圆面失真的问题</p>
+<h2 id="水波的制作"><a href="#水波的制作" class="headerlink" title="水波的制作"></a>水波的制作</h2><h3 id="先制作动态圆盘"><a href="#先制作动态圆盘" class="headerlink" title="先制作动态圆盘"></a>先制作动态圆盘</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">_Float(<span class="string">&quot;Float&quot;</span>,Float)=<span class="number">0.0</span></span><br><span class="line">_Vector(<span class="string">&quot;Vector&quot;</span>,Vector)=(<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>)</span><br><span class="line">_Texture(<span class="string">&quot;Texture&quot;</span>,<span class="number">2</span>D)=<span class="string">&quot;white&quot;</span>&#123;&#125;<span class="comment">//Properties</span></span><br><span class="line">half gradient=tex2D(_Texture,i.uv+_Time.y*_Vector.xy).x;</span><br><span class="line">clip(gradient-_Float);</span><br><span class="line"><span class="keyword">return</span> gradient.xxxx;<span class="comment">//fragment</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="噪声"><a href="#噪声" class="headerlink" title="噪声"></a>噪声</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">_NoiseTex(<span class="string">&quot;NoiseTex&quot;</span>,<span class="number">2</span>D)=<span class="string">&quot;white&quot;</span>&#123;&#125;<span class="comment">//Properties</span></span><br><span class="line">half noise=<span class="number">1.0f</span>-tex2D(_NoiseTex,i.uv+_Time.y*_Vector.wz).x;</span><br><span class="line">clip(gradient-_Float-noise);<span class="comment">//fragment</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="完善颜色-完整代码"><a href="#完善颜色-完整代码" class="headerlink" title="完善颜色,完整代码"></a>完善颜色,完整代码</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line">Shader<span class="string">&quot;MyShader/03shader&quot;</span></span><br><span class="line">&#123;</span><br><span class="line">    Properties&#123;</span><br><span class="line">        _Float(<span class="string">&quot;Float&quot;</span>,Float)=<span class="number">0.0</span></span><br><span class="line">        _Range(<span class="string">&quot;Range&quot;</span>,Range(<span class="number">0</span>,<span class="number">1</span>))=<span class="number">0.0</span></span><br><span class="line">        _Vector(<span class="string">&quot;Vector&quot;</span>,Vector)=(<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>)</span><br><span class="line">        _Color(<span class="string">&quot;Color&quot;</span>,Color)=(<span class="number">0.5</span>,<span class="number">0.5</span>,<span class="number">0.5</span>,<span class="number">0.5</span>)</span><br><span class="line">        _Texture(<span class="string">&quot;Texture&quot;</span>,<span class="number">2</span>D)=<span class="string">&quot;white&quot;</span>&#123;&#125;</span><br><span class="line">        _NoiseTex(<span class="string">&quot;NoiseTex&quot;</span>,<span class="number">2</span>D)=<span class="string">&quot;white&quot;</span>&#123;&#125;</span><br><span class="line">        [Enum(UnityEngine.Rendering.CullMode)]_CullMode(<span class="string">&quot;CullMode&quot;</span>,Float)=<span class="number">2</span></span><br><span class="line">    &#125;</span><br><span class="line">    SubShader&#123;</span><br><span class="line">        Pass&#123;</span><br><span class="line">            Cull [_CullMode]</span><br><span class="line">            CGPROGRAM</span><br><span class="line">            <span class="meta">#<span class="meta-keyword">pragma</span> vertex vert</span></span><br><span class="line">            <span class="meta">#<span class="meta-keyword">pragma</span> fragment frag</span></span><br><span class="line">            <span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&quot;UnityCG.cginc&quot;</span></span></span><br><span class="line">            struct appdata&#123;</span><br><span class="line">                float4 vertex:POSITION;</span><br><span class="line">                float2 uv:TEXCOORD0;</span><br><span class="line">             <span class="comment">//   float4 color:COLOR;</span></span><br><span class="line">            &#125;;</span><br><span class="line">            <span class="class"><span class="keyword">struct</span> <span class="title">v2f</span>&#123;</span></span><br><span class="line">                float4 pos:SV_POSITION;</span><br><span class="line">                float2 uv:TEXCOORD0;</span><br><span class="line">            &#125;;</span><br><span class="line">            sampler2D _Texture;</span><br><span class="line">            float4 _Texture_ST;</span><br><span class="line">            <span class="keyword">float</span> _Float;</span><br><span class="line">            float4 _Vector;</span><br><span class="line">            sampler2D _NoiseTex;</span><br><span class="line">            float2 _NoiseTex_ST;</span><br><span class="line">            fixed4 _Color;</span><br><span class="line"></span><br><span class="line">            <span class="function">v2f <span class="title">vert</span><span class="params">(appdata v)</span></span></span><br><span class="line"><span class="function">            </span>&#123;</span><br><span class="line">                v2f o;</span><br><span class="line">                float4 pos_world = mul(unity_ObjectToWorld, v.vertex);</span><br><span class="line">                float4 pos_view = mul(UNITY_MATRIX_V,pos_world);</span><br><span class="line">                float4 pos_clip = mul(UNITY_MATRIX_P,pos_view);</span><br><span class="line">                <span class="comment">//o.pos=pos_clip;</span></span><br><span class="line">                o.pos=UnityObjectToClipPos(v.vertex);</span><br><span class="line">                o.uv=v.uv.xy*_Texture_ST.xy+_Texture_ST.zw;</span><br><span class="line">                <span class="keyword">return</span> o;</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            <span class="function">half4 <span class="title">frag</span><span class="params">(v2f i)</span>:SV_Target</span></span><br><span class="line"><span class="function">            </span>&#123;</span><br><span class="line">                half gradient=tex2D(_Texture,i.uv+_Time.y*_Vector.xy).x;</span><br><span class="line">                half noise=<span class="number">1.0f</span>-tex2D(_NoiseTex,i.uv+_Time.y*_Vector.wz).x;</span><br><span class="line">                clip(gradient-_Float-noise);</span><br><span class="line">                <span class="keyword">return</span> _Color;</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            ENDCG</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="半透明混合"><a href="#半透明混合" class="headerlink" title="半透明混合"></a>半透明混合</h2><h3 id="参数意思"><a href="#参数意思" class="headerlink" title="参数意思"></a>参数意思</h3><table>
+<thead>
+<tr>
+<th></th>
+<th>one</th>
+<th>此输入的值是 one。该值用于使用源或目标的颜色的值。</th>
+</tr>
+</thead>
+<tbody><tr>
+<td></td>
+<td><code>Zero</code></td>
+<td>此输入的值是 zero。该值用于删除源或目标值。</td>
+</tr>
+<tr>
+<td></td>
+<td><code>SrcColor</code></td>
+<td>GPU 将此输入的值乘以源颜色值。</td>
+</tr>
+<tr>
+<td></td>
+<td><code>SrcAlpha</code></td>
+<td>GPU 将此输入的值乘以源 Alpha 值。</td>
+</tr>
+<tr>
+<td></td>
+<td><code>DstColor</code></td>
+<td>GPU 将此输入的值乘以帧缓冲区的源颜色值。</td>
+</tr>
+<tr>
+<td></td>
+<td><code>DstAlpha</code></td>
+<td>GPU 将此输入的值乘以帧缓冲区的源 Alpha 值。</td>
+</tr>
+<tr>
+<td></td>
+<td><code>OneMinusSrcColor</code></td>
+<td>GPU 将此输入的值乘以（1 - 源颜色）。</td>
+</tr>
+<tr>
+<td></td>
+<td><code>OneMinusSrcAlpha</code></td>
+<td>GPU 将此输入的值乘以（1 - 源 Alpha）。</td>
+</tr>
+<tr>
+<td></td>
+<td><code>OneMinusDstColor</code></td>
+<td>GPU 将此输入的值乘以（1 - 目标颜色）。</td>
+</tr>
+<tr>
+<td></td>
+<td><code>OneMinusDstAlpha</code></td>
+<td>GPU 将此输入的值乘以（1 - 目标 Alpha）。</td>
+</tr>
+</tbody></table>
+<h3 id="常见混合类型"><a href="#常见混合类型" class="headerlink" title="常见混合类型"></a>常见混合类型</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Blend SrcAlpha OneMinusSrcAlpha <span class="comment">// 传统透明度</span></span><br><span class="line">Blend SrcAlpha One</span><br><span class="line"><span class="comment">//以上两种常用</span></span><br><span class="line">Blend One OneMinusSrcAlpha <span class="comment">// 预乘透明度</span></span><br><span class="line">Blend One One <span class="comment">// 加法</span></span><br><span class="line">Blend OneMinusDstColor One <span class="comment">// 软加法</span></span><br><span class="line">Blend DstColor Zero <span class="comment">// 乘法</span></span><br><span class="line">Blend DstColor SrcColor <span class="comment">// 2x 乘法</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="代码修改"><a href="#代码修改" class="headerlink" title="代码修改"></a>代码修改</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Tags &#123; <span class="string">&quot;Queue&quot;</span> = <span class="string">&quot;Transparent&quot;</span> &#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ZWrite Off</span><br><span class="line">Blend SrcAlpha One<span class="comment">//预乘透明度</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">half3 col=_Color.xyz*_Float;</span><br><span class="line">half alpha=saturate(tex2D(_Texture,i.uv).r*_Color.a*_Float);</span><br><span class="line"><span class="keyword">return</span> half4(col,alpha);</span><br></pre></td></tr></table></figure>
+
+<h2 id="边缘光-fresnel-简版的菲涅尔方程"><a href="#边缘光-fresnel-简版的菲涅尔方程" class="headerlink" title="边缘光(fresnel)简版的菲涅尔方程"></a>边缘光(fresnel)简版的菲涅尔方程</h2><h3 id="菲涅尔边缘光实现"><a href="#菲涅尔边缘光实现" class="headerlink" title="菲涅尔边缘光实现"></a>菲涅尔边缘光实现</h3><p>口述： 菲涅耳系数=pow (1.0f-saturate(dot(世界坐标到局部坐标的法线向量,世界坐标的顶点到摄像头的单位向量)) ,梯度系数)</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">o.normal_world=normalize( mul(float4(v.normal,<span class="number">0</span>),unity_WorldToObject));<span class="comment">//世界坐标到局部坐标的法线向量</span></span><br><span class="line">float4 pos_world = mul(unity_ObjectToWorld, v.vertex);</span><br><span class="line">o.view_world=normalize(_WorldSpaceCameraPos.xyz-pos_world);<span class="comment">//世界坐标的顶点到摄像头的单位向量</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">float3 normal_world=normalize(i.normal_world);</span><br><span class="line">float3 view_world=normalize(i.view_world);<span class="comment">//光栅化后向量需要标准化</span></span><br><span class="line"><span class="keyword">float</span> NdotV=saturate(dot(normal_world,view_world));</span><br><span class="line">half3 col=_Color.xyz*_Float;</span><br><span class="line"><span class="keyword">float</span> fresnel=<span class="built_in">pow</span>(<span class="number">1.0f</span>-NdotV,_Rim);<span class="comment">//菲涅尔系数</span></span><br><span class="line">half alpha=saturate(_Float*fresnel);</span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> half4(col,alpha);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">Pass&#123;</span><br><span class="line">    ZWrite Off</span><br><span class="line">    Blend SrcAlpha One<span class="comment">//预乘透明度</span></span><br><span class="line">    Cull [_CullMode]</span><br><span class="line">    CGPROGRAM</span><br><span class="line">    <span class="meta">#<span class="meta-keyword">pragma</span> vertex vert</span></span><br><span class="line">    <span class="meta">#<span class="meta-keyword">pragma</span> fragment frag</span></span><br><span class="line">    <span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&quot;UnityCG.cginc&quot;</span></span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">appdata</span>&#123;</span></span><br><span class="line">        float4 vertex:POSITION;</span><br><span class="line">        float2 uv:TEXCOORD0;</span><br><span class="line">        float3 normal:NORMAL;</span><br><span class="line">     <span class="comment">//   float4 color:COLOR;</span></span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">v2f</span>&#123;</span></span><br><span class="line">        float4 pos:SV_POSITION;</span><br><span class="line">        float2 uv:TEXCOORD0;</span><br><span class="line">        float3 normal_world:TEXCOORD1;</span><br><span class="line">        float3 view_world:TEXCOORD2;</span><br><span class="line">    &#125;;</span><br><span class="line">    sampler2D _Texture;</span><br><span class="line">    float4 _Texture_ST;</span><br><span class="line">    fixed4 _Color;</span><br><span class="line">    <span class="keyword">float</span> _Float;</span><br><span class="line">    <span class="keyword">float</span> _Rim;</span><br><span class="line">    <span class="function">v2f <span class="title">vert</span><span class="params">(appdata v)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        v2f o;</span><br><span class="line">        o.pos=UnityObjectToClipPos(v.vertex);</span><br><span class="line">        o.normal_world=normalize( mul(float4(v.normal,<span class="number">0</span>),unity_WorldToObject));</span><br><span class="line">        float4 pos_world = mul(unity_ObjectToWorld, v.vertex);</span><br><span class="line">        o.view_world=normalize(_WorldSpaceCameraPos.xyz-pos_world);</span><br><span class="line">        o.uv=v.uv*_Texture_ST.xy+_Texture_ST.zw;</span><br><span class="line">        <span class="keyword">return</span> o;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function">half4 <span class="title">frag</span><span class="params">(v2f i)</span>:SV_Target</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        float3 normal_world=normalize(i.normal_world);</span><br><span class="line">        float3 view_world=normalize(i.view_world);</span><br><span class="line">        <span class="keyword">float</span> NdotV=saturate(dot(normal_world,view_world));</span><br><span class="line">        half3 col=_Color.xyz*_Float;</span><br><span class="line">        <span class="keyword">float</span> fresnel=<span class="built_in">pow</span>(<span class="number">1.0f</span>-NdotV,_Rim);</span><br><span class="line">        half alpha=saturate(_Float*fresnel);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> half4(col,alpha);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="预先写深度"><a href="#预先写深度" class="headerlink" title="预先写深度"></a>预先写深度</h3><p><strong>修除内部透明小Bug，预先将前面的深度写入，但不写入颜色信息，用上面的pass第二遍时将后面的透明的给剔除掉，</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">Pass &#123;</span><br><span class="line">   	Cull Off </span><br><span class="line">   	ZWrite On <span class="comment">//深度写入</span></span><br><span class="line">   	ColorMask <span class="number">0</span><span class="comment">//不写颜色信息</span></span><br><span class="line">   	CGPROGRAM</span><br><span class="line">   	float4 _Color;</span><br><span class="line">   	<span class="meta">#<span class="meta-keyword">pragma</span> vertex vert </span></span><br><span class="line">   	<span class="meta">#<span class="meta-keyword">pragma</span> fragment frag</span></span><br><span class="line"></span><br><span class="line">   	<span class="function">float4 <span class="title">vert</span><span class="params">(float4 vertexPos : POSITION)</span> : SV_POSITION</span></span><br><span class="line"><span class="function">   	</span>&#123;</span><br><span class="line">   		<span class="keyword">return</span> UnityObjectToClipPos(vertexPos);</span><br><span class="line">   	&#125;</span><br><span class="line"></span><br><span class="line">   	<span class="function">float4 <span class="title">frag</span><span class="params">(<span class="keyword">void</span>)</span> : COLOR</span></span><br><span class="line"><span class="function">   	</span>&#123;</span><br><span class="line">   		<span class="keyword">return</span> _Color;</span><br><span class="line">   	&#125;</span><br><span class="line">   	ENDCG</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="/music/jucilang.mp3">
+            </audio>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+		data-enable='false'
+        data-ae='false'
+        data-ci=''
+        data-cs=''
+        data-r=''
+        data-o=''
+        data-a=''
+        data-d='false'
+    >查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>
