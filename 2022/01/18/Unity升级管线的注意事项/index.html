@@ -5,15 +5,17 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>OpenGL学习之路之光照贴图 - 浪子之心</title>
+    <title>Unity升级管线的注意事项 - 浪子之心</title>
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="google" content="notranslate" />
     <meta name="keywords" content="Blog,"> 
-    <meta name="description" content="MrChen Bolg,.
-冯光照模型效果混合相加：diffuse + ambient + specular
-图片混和相乘：(diffuse + ambient + specular) * objColor
-1FragCo,"> 
+    <meta name="description" content="MrChen Bolg,
+升级渲染管线在PM中下载 Universal RP
+材质记得替，不如会出现洋红色
+
+使用的简单的建模工具
+在pm包中有不错的东西在游戏中进行简单的建模可以用ProBuilder和Polybrush,"> 
     <meta name="author" content="Jack Chen"> 
     <link rel="alternative" href="atom.xml" title="浪子之心" type="application/atom+xml"> 
     <link rel="icon" href="/img/favicon.png"> 
@@ -33,7 +35,7 @@
     <div class="bar" style="width: 0;"></div>
     <a class="iconfont icon-home image-icon" href="javascript:;" data-url="https://mrchenlreanspace.github.io"></a>
     <div title="播放/暂停" class="iconfont icon-play"></div>
-    <h3 class="subtitle">OpenGL学习之路之光照贴图</h3>
+    <h3 class="subtitle">Unity升级管线的注意事项</h3>
     <div class="social">
         <div>
             <div class="share">
@@ -48,31 +50,21 @@
     <div class="section">
         <div class="article">
     <div class='main'>
-        <h1 class="title">OpenGL学习之路之光照贴图</h1>
+        <h1 class="title">Unity升级管线的注意事项</h1>
         <div class="stuff">
-            <span>十二月 07, 2021</span>
+            <span>一月 18, 2022</span>
             
-  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/OpenGL/" rel="tag">OpenGL</a></li></ul>
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/Unity/" rel="tag">Unity</a></li></ul>
 
 
         </div>
         <div class="content markdown">
-            <p>.</p>
-<h1 id="冯光照模型"><a href="#冯光照模型" class="headerlink" title="冯光照模型"></a>冯光照模型</h1><p>效果混合相加：diffuse + ambient + specular</p>
-<p>图片混和相乘：(diffuse + ambient + specular) * objColor</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">FragColor =vec4((diffuse + ambient + specular) * objColor,<span class="number">1.0f</span>);</span><br></pre></td></tr></table></figure>
-
-<h1 id="环境光–ambient"><a href="#环境光–ambient" class="headerlink" title="环境光–ambient"></a>环境光–ambient</h1><p>ambient具体能表现无光照区域的颜色，在物体较暗的部分加上漫反射贴图会更真实</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vec3 ambient=texture(material.diffuse, TexCoord).rgb * ambientColor;</span><br></pre></td></tr></table></figure>
-
-<h1 id="漫反射贴图—diffuse"><a href="#漫反射贴图—diffuse" class="headerlink" title="漫反射贴图—diffuse"></a>漫反射贴图—diffuse</h1><p>出现的大概像表面的纹理像木箱的表面，相当于简单反射到眼睛的获得的颜色</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vec3 diffuse=texture(material.diffuse,TexCoord).rgb * max( dot( lightDir, Normal), <span class="number">0</span>) * lightColor;</span><br><span class="line">    <span class="comment">//vec3 diffuse=texture(material.diffuse,TexCoord).rgb;</span></span><br></pre></td></tr></table></figure>
-<h1 id="镜面反射—specular"><a href="#镜面反射—specular" class="headerlink" title="镜面反射—specular"></a>镜面反射—specular</h1><p>可以将光照和高光进行反射，提高真实度</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">float</span> specularAmount=<span class="built_in">pow</span>(max(dot(reflectVec,cameraVec),<span class="number">0</span>),material.shininess); <span class="comment">//高光的集中度，倍数越高，同一视角高光点越小</span></span><br><span class="line">vec3 specular=texture(material.specular,TexCoord).rgb * specularAmount * lightColor;<span class="comment">//镜面反射图中为数值0或者为黑色表示不需要镜面反射，木块和铁最好对比</span></span><br></pre></td></tr></table></figure>
-
-<h1 id="发射光贴图—emission"><a href="#发射光贴图—emission" class="headerlink" title="发射光贴图—emission"></a>发射光贴图—emission</h1><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vec3 emission=texture(material.emission,TexCoord).rgb;</span><br></pre></td></tr></table></figure>
-
-
+            <blockquote>
+<h1 id="升级渲染管线在PM中下载-Universal-RP"><a href="#升级渲染管线在PM中下载-Universal-RP" class="headerlink" title="升级渲染管线在PM中下载 Universal RP"></a>升级渲染管线在PM中下载 Universal RP</h1></blockquote>
+<p>材质记得替，不如会出现洋红色</p>
+<blockquote>
+<h1 id="使用的简单的建模工具"><a href="#使用的简单的建模工具" class="headerlink" title="使用的简单的建模工具"></a>使用的简单的建模工具</h1></blockquote>
+<h3 id="在pm包中有不错的东西"><a href="#在pm包中有不错的东西" class="headerlink" title="在pm包中有不错的东西"></a>在pm包中有不错的东西</h3><h3 id="在游戏中进行简单的建模可以用ProBuilder和Polybrush这两个包进行修改地形的顶点"><a href="#在游戏中进行简单的建模可以用ProBuilder和Polybrush这两个包进行修改地形的顶点" class="headerlink" title="在游戏中进行简单的建模可以用ProBuilder和Polybrush这两个包进行修改地形的顶点"></a>在游戏中进行简单的建模可以用ProBuilder和Polybrush这两个包进行修改地形的顶点</h3><h3 id="ProGrids做方格的校准"><a href="#ProGrids做方格的校准" class="headerlink" title="ProGrids做方格的校准"></a>ProGrids做方格的校准</h3>
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
                 <source type="audio/mpeg" src="/music/jucilang.mp3">

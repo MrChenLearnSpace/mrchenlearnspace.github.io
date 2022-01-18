@@ -402,4 +402,21 @@
         <tag>Shader</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Unity升级管线的注意事项</title>
+    <url>/2022/01/18/Unity%E5%8D%87%E7%BA%A7%E7%AE%A1%E7%BA%BF%E7%9A%84%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/</url>
+    <content><![CDATA[<blockquote>
+<h1 id="升级渲染管线在PM中下载-Universal-RP"><a href="#升级渲染管线在PM中下载-Universal-RP" class="headerlink" title="升级渲染管线在PM中下载 Universal RP"></a>升级渲染管线在PM中下载 Universal RP</h1></blockquote>
+<p>材质记得替，不如会出现洋红色</p>
+<blockquote>
+<h1 id="使用的简单的建模工具"><a href="#使用的简单的建模工具" class="headerlink" title="使用的简单的建模工具"></a>使用的简单的建模工具</h1></blockquote>
+<h3 id="在pm包中有不错的东西"><a href="#在pm包中有不错的东西" class="headerlink" title="在pm包中有不错的东西"></a>在pm包中有不错的东西</h3><h3 id="在游戏中进行简单的建模可以用ProBuilder和Polybrush这两个包进行修改地形的顶点"><a href="#在游戏中进行简单的建模可以用ProBuilder和Polybrush这两个包进行修改地形的顶点" class="headerlink" title="在游戏中进行简单的建模可以用ProBuilder和Polybrush这两个包进行修改地形的顶点"></a>在游戏中进行简单的建模可以用ProBuilder和Polybrush这两个包进行修改地形的顶点</h3><h3 id="ProGrids做方格的校准"><a href="#ProGrids做方格的校准" class="headerlink" title="ProGrids做方格的校准"></a>ProGrids做方格的校准</h3>]]></content>
+      <categories>
+        <category>升级渲染管线</category>
+        <category>游戏</category>
+      </categories>
+      <tags>
+        <tag>Unity</tag>
+      </tags>
+  </entry>
 </search>
