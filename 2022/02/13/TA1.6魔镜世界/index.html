@@ -1,0 +1,196 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>TA1.6魔镜世界 - 浪子之心</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Blog,"> 
+    <meta name="description" content="MrChen Bolg,魔镜世界
+渲染队列和颜色遮罩Rendering Queue从小到大进行排序
+几何体 2000
+Alpha Test 2450
+Transparent 3000
+1&amp;quot;Queue&amp;quot; ,"> 
+    <meta name="author" content="Jack Chen"> 
+    <link rel="alternative" href="atom.xml" title="浪子之心" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">浪子之心</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="https://mrchenlreanspace.github.io"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">TA1.6魔镜世界</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">TA1.6魔镜世界</h1>
+        <div class="stuff">
+            <span>二月 13, 2022</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/Shader/" rel="tag">Shader</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h1 id="魔镜世界"><a href="#魔镜世界" class="headerlink" title="魔镜世界"></a>魔镜世界</h1><p><img src="https://img-blog.csdnimg.cn/708f8e4dc58e4eebb462a598386feb4b.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_12,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><img src="https://img-blog.csdnimg.cn/60384ee277de4032bb962961f62b6cce.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_11,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h2 id="渲染队列和颜色遮罩"><a href="#渲染队列和颜色遮罩" class="headerlink" title="渲染队列和颜色遮罩"></a>渲染队列和颜色遮罩</h2><h3 id="Rendering-Queue"><a href="#Rendering-Queue" class="headerlink" title="Rendering Queue"></a>Rendering Queue</h3><p>从小到大进行排序</p>
+<p>几何体 2000</p>
+<p>Alpha Test 2450</p>
+<p>Transparent 3000</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;Queue&quot;</span> = <span class="string">&quot;AlphaTest+10&quot;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="Color-Mask"><a href="#Color-Mask" class="headerlink" title="Color Mask"></a>Color Mask</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ColorMask <span class="number">0</span></span><br><span class="line">ColorMask 相应的颜色通道</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="模板测试（Stencil）"><a href="#模板测试（Stencil）" class="headerlink" title="模板测试（Stencil）"></a>模板测试（Stencil）</h2><p>Reference 参数便于判端和筛选</p>
+<p>Comparison 判断方式‘</p>
+<p>Pass 面 通过之后的进行操作，图中是替换的意思</p>
+<p>Fail 失败之后的操作</p>
+<p>ZFail 深度测试失败的操作</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Stencil</span><br><span class="line">&#123;</span><br><span class="line">	Ref <span class="number">1</span></span><br><span class="line">	Comp always</span><br><span class="line">	Pass Replace</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="深度测试（Depth）"><a href="#深度测试（Depth）" class="headerlink" title="深度测试（Depth）"></a>深度测试（Depth）</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">ZWrite Off<span class="comment">//深度测试的开关</span></span><br><span class="line">ZTest Less<span class="comment">//深度小于当前缓存则通过</span></span><br><span class="line">ZTest Greater<span class="comment">//深度大于当前缓存则通过</span></span><br><span class="line">ZTest LEqual<span class="comment">//深度小于等于当前缓存则通过</span></span><br><span class="line">ZTest GEqual<span class="comment">//深度大于等于当前缓存则通过</span></span><br><span class="line">ZTest Equal<span class="comment">//深度等于当前缓存则通过</span></span><br><span class="line">ZTest NotEqual<span class="comment">//深度不等于当前缓存则通过</span></span><br><span class="line">ZTest Always<span class="comment">//不论如何都通过</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="制作过程"><a href="#制作过程" class="headerlink" title="制作过程"></a>制作过程</h2><h3 id="将材质导入dome"><a href="#将材质导入dome" class="headerlink" title="将材质导入dome"></a>将材质导入dome</h3><p>课程材料略</p>
+<h3 id="制作镜子Shader"><a href="#制作镜子Shader" class="headerlink" title="制作镜子Shader"></a>制作镜子Shader</h3><h4 id="ASE图"><a href="#ASE图" class="headerlink" title="ASE图"></a>ASE图</h4><p><img src="https://img-blog.csdnimg.cn/24690538c7d74427947ec214b96eb3e9.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_11,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><img src="https://img-blog.csdnimg.cn/930c5704723d4d62824f52fb74543c7a.png" alt="在这里插入图片描述"></p>
+<h4 id="核心代码"><a href="#核心代码" class="headerlink" title="核心代码"></a>核心代码</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Tags &#123; <span class="string">&quot;Queue&quot;</span> = <span class="string">&quot;AlphaTest+10&quot;</span>  &#125;</span><br><span class="line">Pass</span><br><span class="line">&#123;</span><br><span class="line">    ColorMask <span class="number">0</span></span><br><span class="line">    Stencil&#123;</span><br><span class="line">    Ref <span class="number">1</span></span><br><span class="line">    Comp always</span><br><span class="line">    Pass Replace</span><br><span class="line">    &#125;</span><br><span class="line">    ZWrite Off</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="制作镜内世界"><a href="#制作镜内世界" class="headerlink" title="制作镜内世界"></a>制作镜内世界</h3><h4 id="ASE图-1"><a href="#ASE图-1" class="headerlink" title="ASE图"></a>ASE图</h4><p><img src="https://img-blog.csdnimg.cn/846f665faf02464f9294ff2fc1919ac4.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_10,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h4 id="核心代码-1"><a href="#核心代码-1" class="headerlink" title="核心代码"></a>核心代码</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Tags &#123; <span class="string">&quot;Queue&quot;</span> = <span class="string">&quot;AlphaTest+20&quot;</span> &#125;</span><br><span class="line">Stencil&#123;</span><br><span class="line">	Ref <span class="number">1</span></span><br><span class="line">	Comp equal</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="制作深度测试球"><a href="#制作深度测试球" class="headerlink" title="制作深度测试球"></a>制作深度测试球</h3><p>这一步是为了当模板测试未通过物体出现在魔镜后会出现在魔镜中的情况</p>
+<p><img src="https://img-blog.csdnimg.cn/dfa1f68f67744d619a251839ec766106.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_13,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h4 id="ASE图-2"><a href="#ASE图-2" class="headerlink" title="ASE图"></a>ASE图</h4><p><img src="https://img-blog.csdnimg.cn/61e98110db744bd2afe357319cde1f6a.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_11,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><img src="https://img-blog.csdnimg.cn/1e5541da483f41b592e50bd9957dc801.png" alt="在这里插入图片描述"></p>
+<h4 id="核心代码-2"><a href="#核心代码-2" class="headerlink" title="核心代码"></a>核心代码</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Tags &#123; <span class="string">&quot;Queue&quot;</span>=<span class="string">&quot;AlphaTest+15&quot;</span> &#125;</span><br><span class="line">	 LOD <span class="number">100</span></span><br><span class="line">	 Stencil&#123;</span><br><span class="line">	     Ref <span class="number">1</span></span><br><span class="line">	     Comp equal</span><br><span class="line">	 &#125;</span><br><span class="line">	 ZTest always</span><br></pre></td></tr></table></figure>
+
+<h2 id="完成效果"><a href="#完成效果" class="headerlink" title="完成效果"></a>完成效果</h2><p><img src="https://img-blog.csdnimg.cn/ae35f733fb66487d8d5cbf13168e3b6f.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="/music/jucilang.mp3">
+            </audio>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+		data-enable='true'
+        data-ae='false'
+        data-ci='35b8fbd0e6865c1adf60'
+        data-cs='6d2988de68c828bce78247ad604846cdc30e7ca3'
+        data-r='mrchenlreanspace.github.io'
+        data-o='MrChenLreanSpace'
+        data-a='MrChenLreanSpace'
+        data-d='false'
+    >查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>

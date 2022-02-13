@@ -507,4 +507,50 @@
         <tag>Shader</tag>
       </tags>
   </entry>
+  <entry>
+    <title>TA1.6魔镜世界</title>
+    <url>/2022/02/13/TA1.6%E9%AD%94%E9%95%9C%E4%B8%96%E7%95%8C/</url>
+    <content><![CDATA[<h1 id="魔镜世界"><a href="#魔镜世界" class="headerlink" title="魔镜世界"></a>魔镜世界</h1><p><img src="https://img-blog.csdnimg.cn/708f8e4dc58e4eebb462a598386feb4b.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_12,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><img src="https://img-blog.csdnimg.cn/60384ee277de4032bb962961f62b6cce.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_11,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h2 id="渲染队列和颜色遮罩"><a href="#渲染队列和颜色遮罩" class="headerlink" title="渲染队列和颜色遮罩"></a>渲染队列和颜色遮罩</h2><h3 id="Rendering-Queue"><a href="#Rendering-Queue" class="headerlink" title="Rendering Queue"></a>Rendering Queue</h3><p>从小到大进行排序</p>
+<p>几何体 2000</p>
+<p>Alpha Test 2450</p>
+<p>Transparent 3000</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="string">&quot;Queue&quot;</span> = <span class="string">&quot;AlphaTest+10&quot;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="Color-Mask"><a href="#Color-Mask" class="headerlink" title="Color Mask"></a>Color Mask</h3><figure class="highlight c"><table><tr><td class="code"><pre><span class="line">ColorMask <span class="number">0</span></span><br><span class="line">ColorMask 相应的颜色通道</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="模板测试（Stencil）"><a href="#模板测试（Stencil）" class="headerlink" title="模板测试（Stencil）"></a>模板测试（Stencil）</h2><p>Reference 参数便于判端和筛选</p>
+<p>Comparison 判断方式‘</p>
+<p>Pass 面 通过之后的进行操作，图中是替换的意思</p>
+<p>Fail 失败之后的操作</p>
+<p>ZFail 深度测试失败的操作</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">Stencil</span><br><span class="line">&#123;</span><br><span class="line">	Ref <span class="number">1</span></span><br><span class="line">	Comp always</span><br><span class="line">	Pass Replace</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="深度测试（Depth）"><a href="#深度测试（Depth）" class="headerlink" title="深度测试（Depth）"></a>深度测试（Depth）</h2><figure class="highlight c"><table><tr><td class="code"><pre><span class="line">ZWrite Off<span class="comment">//深度测试的开关</span></span><br><span class="line">ZTest Less<span class="comment">//深度小于当前缓存则通过</span></span><br><span class="line">ZTest Greater<span class="comment">//深度大于当前缓存则通过</span></span><br><span class="line">ZTest LEqual<span class="comment">//深度小于等于当前缓存则通过</span></span><br><span class="line">ZTest GEqual<span class="comment">//深度大于等于当前缓存则通过</span></span><br><span class="line">ZTest Equal<span class="comment">//深度等于当前缓存则通过</span></span><br><span class="line">ZTest NotEqual<span class="comment">//深度不等于当前缓存则通过</span></span><br><span class="line">ZTest Always<span class="comment">//不论如何都通过</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="制作过程"><a href="#制作过程" class="headerlink" title="制作过程"></a>制作过程</h2><h3 id="将材质导入dome"><a href="#将材质导入dome" class="headerlink" title="将材质导入dome"></a>将材质导入dome</h3><p>课程材料略</p>
+<h3 id="制作镜子Shader"><a href="#制作镜子Shader" class="headerlink" title="制作镜子Shader"></a>制作镜子Shader</h3><h4 id="ASE图"><a href="#ASE图" class="headerlink" title="ASE图"></a>ASE图</h4><p><img src="https://img-blog.csdnimg.cn/24690538c7d74427947ec214b96eb3e9.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_11,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><img src="https://img-blog.csdnimg.cn/930c5704723d4d62824f52fb74543c7a.png" alt="在这里插入图片描述"></p>
+<h4 id="核心代码"><a href="#核心代码" class="headerlink" title="核心代码"></a>核心代码</h4><figure class="highlight c"><table><tr><td class="code"><pre><span class="line">Tags &#123; <span class="string">&quot;Queue&quot;</span> = <span class="string">&quot;AlphaTest+10&quot;</span>  &#125;</span><br><span class="line">Pass</span><br><span class="line">&#123;</span><br><span class="line">    ColorMask <span class="number">0</span></span><br><span class="line">    Stencil&#123;</span><br><span class="line">    Ref <span class="number">1</span></span><br><span class="line">    Comp always</span><br><span class="line">    Pass Replace</span><br><span class="line">    &#125;</span><br><span class="line">    ZWrite Off</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="制作镜内世界"><a href="#制作镜内世界" class="headerlink" title="制作镜内世界"></a>制作镜内世界</h3><h4 id="ASE图-1"><a href="#ASE图-1" class="headerlink" title="ASE图"></a>ASE图</h4><p><img src="https://img-blog.csdnimg.cn/846f665faf02464f9294ff2fc1919ac4.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_10,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h4 id="核心代码-1"><a href="#核心代码-1" class="headerlink" title="核心代码"></a>核心代码</h4><figure class="highlight c"><table><tr><td class="code"><pre><span class="line">Tags &#123; <span class="string">&quot;Queue&quot;</span> = <span class="string">&quot;AlphaTest+20&quot;</span> &#125;</span><br><span class="line">Stencil&#123;</span><br><span class="line">	Ref <span class="number">1</span></span><br><span class="line">	Comp equal</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="制作深度测试球"><a href="#制作深度测试球" class="headerlink" title="制作深度测试球"></a>制作深度测试球</h3><p>这一步是为了当模板测试未通过物体出现在魔镜后会出现在魔镜中的情况</p>
+<p><img src="https://img-blog.csdnimg.cn/dfa1f68f67744d619a251839ec766106.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_13,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h4 id="ASE图-2"><a href="#ASE图-2" class="headerlink" title="ASE图"></a>ASE图</h4><p><img src="https://img-blog.csdnimg.cn/61e98110db744bd2afe357319cde1f6a.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_11,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><img src="https://img-blog.csdnimg.cn/1e5541da483f41b592e50bd9957dc801.png" alt="在这里插入图片描述"></p>
+<h4 id="核心代码-2"><a href="#核心代码-2" class="headerlink" title="核心代码"></a>核心代码</h4><figure class="highlight c"><table><tr><td class="code"><pre><span class="line">Tags &#123; <span class="string">&quot;Queue&quot;</span>=<span class="string">&quot;AlphaTest+15&quot;</span> &#125;</span><br><span class="line">	 LOD <span class="number">100</span></span><br><span class="line">	 Stencil&#123;</span><br><span class="line">	     Ref <span class="number">1</span></span><br><span class="line">	     Comp equal</span><br><span class="line">	 &#125;</span><br><span class="line">	 ZTest always</span><br></pre></td></tr></table></figure>
+
+<h2 id="完成效果"><a href="#完成效果" class="headerlink" title="完成效果"></a>完成效果</h2><p><img src="https://img-blog.csdnimg.cn/ae35f733fb66487d8d5cbf13168e3b6f.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+]]></content>
+      <categories>
+        <category>游戏</category>
+      </categories>
+      <tags>
+        <tag>Shader</tag>
+      </tags>
+  </entry>
 </search>
