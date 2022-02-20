@@ -1,0 +1,207 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title> - 浪子之心</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Blog,"> 
+    <meta name="description" content="MrChen Bolg,title: Shader的主要节点介绍date: 2022-2-20 15:38:45categories:    - 游戏tags:        - Shadermp3: /music/juc,"> 
+    <meta name="author" content="Jack Chen"> 
+    <link rel="alternative" href="atom.xml" title="浪子之心" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">浪子之心</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="https://mrchenlreanspace.github.io"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle"></h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title"></h1>
+        <div class="stuff">
+            <span>二月 20, 2022</span>
+            
+
+        </div>
+        <div class="content markdown">
+            <p>title: Shader的主要节点介绍<br>date: 2022-2-20 15:38:45<br>categories:<br>    - 游戏<br>tags:<br>        - Shader<br>mp3: /music/jucilang.mp3<br>cover: <a target="_blank" rel="noopener" href="https://q.130014.xyz/2021/11/02/09.png">https://q.130014.xyz/2021/11/02/09.png</a></p>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>虽然学习很久了，但没有好好总结过shader用到的数学，以至于在用的过程中总是忘记，然后花时间去找，裂开，没有搞完的发现后后续补充。</p>
+<h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><h2 id="长度length-a"><a href="#长度length-a" class="headerlink" title="长度length(a)"></a>长度length(a)</h2><p>简单的欧式距离，根号下平方的那个。</p>
+<h2 id="点乘dot（-a，b）"><a href="#点乘dot（-a，b）" class="headerlink" title="点乘dot（ a，b）"></a>点乘dot（ a，b）</h2><p>点乘是通过将对应分量逐个相乘，然后再把所得积相加来计算的。就是高中学的向量的乘法</p>
+<p>v¯⋅k¯=||v¯||⋅||k¯||⋅cosθ</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(a1,a2,a3)⋅(b1,b2,b3)=a1*b1+a2* b2+a3*b3</span><br></pre></td></tr></table></figure>
+
+<h3 id="用处"><a href="#用处" class="headerlink" title="用处"></a>用处</h3><p>当两个向量都是单位向量时就是两个向量的夹角的余弦值，常用于计算角度。</p>
+<h2 id="叉乘cross（Lhs，Rhs）"><a href="#叉乘cross（Lhs，Rhs）" class="headerlink" title="叉乘cross（Lhs，Rhs）"></a>叉乘cross（Lhs，Rhs）</h2><p>叉乘只在3D空间中有定义，它需要两个不平行向量作为输入，生成一个正交于两个输入向量的第三个向量。如果输入的两个向量也是正交的，那么叉乘之后将会产生3个互相正交的向量。接下来的教程中这会非常有用。下面的图片展示了3D空间中叉乘的样子    ：</p>
+<p><img src="https://learnopengl-cn.github.io/img/01/07/vectors_crossproduct.png" alt="叉乘图"></p>
+<p><strong>注意：</strong>顺序在此运算符上很重要，因为 <strong>AxB</strong> 输出的结果与 <strong>BxA</strong> 不同（其结果类似于 <strong>-AxB</strong> ）。</p>
+<p>c=cross（a,b）</p>
+<p>c1=a2b3-a3b2</p>
+<p>c2=a3b1-a1b3</p>
+<p>c3=a1b2-a2b1</p>
+<h3 id="用处-1"><a href="#用处-1" class="headerlink" title="用处"></a>用处</h3><p>得到两个向量做成平面的法向量；</p>
+<h2 id="Saturate"><a href="#Saturate" class="headerlink" title="Saturate"></a>Saturate</h2><p>饱和节点输出在其上设置的向量的值或单个分量饱和到[0 1]范围。</p>
+<ul>
+<li><p><strong>0：</strong>如果输入小于 0，则返回此值</p>
+</li>
+<li><p><strong>输入：</strong>如果值介于 0 和 1 之间，则返回此值</p>
+</li>
+<li><p><strong>1：</strong>如果值大于 1，则返回此值</p>
+<p><img src="http://amplify.pt/NodeDetail/SaturateGraphicNode.png"></p>
+</li>
+</ul>
+<h2 id="线性插值lerf（a-b-weight）"><a href="#线性插值lerf（a-b-weight）" class="headerlink" title="线性插值lerf（a,b,weight）"></a>线性插值lerf（a,b,weight）</h2><p>公式(1-weight)×a+weight×b比较均匀，比较生硬</p>
+<h2 id="clamp（input-min-max）"><a href="#clamp（input-min-max）" class="headerlink" title="clamp（input,min,max）"></a>clamp（input,min,max）</h2><p>Clamp 节点输出其输入值或夹紧在 Min， Max范围之间的矢量的各个分量。</p>
+<ul>
+<li><strong>最小值：</strong>如果输入值小于 Min，则返回此值</li>
+<li><em><strong>输入：</strong></em>如果输入值介于最小值和最大值之间，则返回此值</li>
+<li><strong>最大值：</strong>如果输入值大于 Max，则返回此值</li>
+</ul>
+<h2 id="平滑阶梯smoothstep-min-max-input"><a href="#平滑阶梯smoothstep-min-max-input" class="headerlink" title="平滑阶梯smoothstep(min,max,input)"></a>平滑阶梯smoothstep(min,max,input)</h2><p>Clamp 节点输出其输入值或夹紧在 Min， Max范围之间的矢量的各个分量。</p>
+<ul>
+<li><strong>最小值：</strong>如果输入值小于 Min，则返回0</li>
+<li><em><strong>输入：</strong></em>如果输入值介于最小值和最大值之间，则返回clamp（（input-min）/（max-min），0，1）</li>
+<li><strong>最大值：</strong>如果输入值大于 Max，则返回1</li>
+</ul>
+<p><img src="http://amplify.pt/NodeDetail/SmoothstepGraphicNode.png"></p>
+<h1 id="尾声"><a href="#尾声" class="headerlink" title="尾声"></a>尾声</h1><p>还在总结中</p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title='0' data-url='//music/jucilang.mp3'></li>
+                        
+                    
+                        
+                            <li title='1' data-url='//music/Wake.mp3'></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+		data-enable='true'
+        data-ae='false'
+        data-ci='35b8fbd0e6865c1adf60'
+        data-cs='6d2988de68c828bce78247ad604846cdc30e7ca3'
+        data-r='mrchenlreanspace.github.io'
+        data-o='MrChenLreanSpace'
+        data-a='MrChenLreanSpace'
+        data-d='false'
+    >查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>
