@@ -1,0 +1,198 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>后处理技术（下） - 浪子之心</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Blog,"> 
+    <meta name="description" content="MrChen Bolg,HDRBloom（光晕）取亮光部分，进行降采样，在升采样的过程中，叠加降采样对应尺寸的图片，合并效果图和源图片
+初处理如果放入的是HDR图片，可以在shader里面加float4 _MainTex_,"> 
+    <meta name="author" content="Jack Chen"> 
+    <link rel="alternative" href="atom.xml" title="浪子之心" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">浪子之心</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="https://mrchenlreanspace.github.io"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">后处理技术（下）</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">后处理技术（下）</h1>
+        <div class="stuff">
+            <span>二月 22, 2022</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/Shader/" rel="tag">Shader</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h1 id="HDRBloom（光晕）"><a href="#HDRBloom（光晕）" class="headerlink" title="HDRBloom（光晕）"></a>HDRBloom（光晕）</h1><p>取亮光部分，进行降采样，在升采样的过程中，叠加降采样对应尺寸的图片，合并效果图和源图片</p>
+<h2 id="初处理"><a href="#初处理" class="headerlink" title="初处理"></a>初处理</h2><p>如果放入的是HDR图片，可以在shader里面加float4 _MainTex_HDR;   col.rgb  = DecodeHDR(col,_MainTex_HDR);进行解码。</p>
+<h2 id="取光亮部分"><a href="#取光亮部分" class="headerlink" title="取光亮部分"></a>取光亮部分</h2><p>先进行均值模糊，取亮色部分。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">float intensity = Mathf.Exp(_Intensity / 10.0f * 0.693f) - 1.0f;</span><br><span class="line"></span><br><span class="line">mat.SetFloat(&quot;_Threshold&quot;, _Threshold);</span><br><span class="line">mat.SetFloat(&quot;_Intensity&quot;, intensity);</span><br><span class="line"></span><br><span class="line">//取亮色</span><br><span class="line">Graphics.Blit(source, RT_Down[0], mat, 0);</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">half4 <span class="title">frag_PreFilter</span><span class="params">(v2f_img i)</span> : SV_Target<span class="comment">//0</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    half4 col = tex2D(_MainTex, i.uv);</span><br><span class="line">    half4 d=_MainTex_TexelSize.xyxy*half4(<span class="number">1</span>,<span class="number">1</span>,<span class="number">-1</span>,<span class="number">-1</span>);</span><br><span class="line">    col.rgb+=tex2D(_MainTex,i.uv+d.xy).rgb;</span><br><span class="line">    col.rgb+=tex2D(_MainTex,i.uv+d.zy).rgb;</span><br><span class="line">    col.rgb+=tex2D(_MainTex,i.uv+d.xw).rgb;</span><br><span class="line">    col.rgb+=tex2D(_MainTex,i.uv+d.zw).rgb;</span><br><span class="line">    col.rgb*=<span class="number">0.25</span>;</span><br><span class="line">    <span class="keyword">float</span> br = max(max(col.r,col.g),col.b);</span><br><span class="line">    br =  max(<span class="number">0</span>,(br - _Threshold))/max(<span class="number">0.00001</span>,br);</span><br><span class="line">    col.rgb*=br;</span><br><span class="line">    <span class="keyword">return</span> col;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="降采样"><a href="#降采样" class="headerlink" title="降采样"></a>降采样</h2><p>用双重盒状模糊的降采样方式</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//降采样</span><br><span class="line">for(int i=0;i&lt;_Iteration;i++) &#123;//0-i-1</span><br><span class="line">    Graphics.Blit(RT_Down[i], RT_Down[i + 1], mat, 1);</span><br><span class="line">   // print(&quot;downcode &quot; + i );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">half4 <span class="title">frag_DownsampleBox</span><span class="params">(v2f_img i)</span> : SV_Target<span class="comment">//1</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    half4 col = tex2D(_MainTex, i.uv);</span><br><span class="line">    half4 d=_MainTex_TexelSize.xyxy*half4(<span class="number">1</span>,<span class="number">1</span>,<span class="number">-1</span>,<span class="number">-1</span>);</span><br><span class="line">    col.rgb+=tex2D(_MainTex,i.uv+d.xy).rgb;</span><br><span class="line">    col.rgb+=tex2D(_MainTex,i.uv+d.zy).rgb;</span><br><span class="line">    col.rgb+=tex2D(_MainTex,i.uv+d.xw).rgb;</span><br><span class="line">    col.rgb+=tex2D(_MainTex,i.uv+d.zw).rgb;</span><br><span class="line">    col.rgb*=<span class="number">0.25</span>;</span><br><span class="line">    <span class="keyword">return</span> col;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="升采样"><a href="#升采样" class="headerlink" title="升采样"></a>升采样</h2><p>升采样过程中加同尺寸的降采样贴图</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Graphics.Blit(RT_Down[_Iteration], RT_Up[_Iteration]);</span><br><span class="line">for(int i=_Iteration;i&gt;0;i--) &#123;</span><br><span class="line">    mat.SetTexture(&quot;_BloomTex&quot;, RT_Down[i-1]);</span><br><span class="line">    Graphics.Blit(RT_Up[i], RT_Up[i-1], mat, 2);</span><br><span class="line">    //print(&quot;upcode &quot; + i);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">half4 <span class="title">frag_UpsampleBox</span><span class="params">(v2f_img i)</span> : SV_Target<span class="comment">//2</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    half4 col = tex2D(_MainTex, i.uv);</span><br><span class="line">    half4 d=_MainTex_TexelSize.xyxy*half4(<span class="number">1</span>,<span class="number">1</span>,<span class="number">-1</span>,<span class="number">-1</span>);</span><br><span class="line">    col.rgb+=tex2D(_MainTex,i.uv+d.xy).rgb;</span><br><span class="line">    col.rgb+=tex2D(_MainTex,i.uv+d.zy).rgb;</span><br><span class="line">    col.rgb+=tex2D(_MainTex,i.uv+d.xw).rgb;</span><br><span class="line">    col.rgb+=tex2D(_MainTex,i.uv+d.zw).rgb;</span><br><span class="line">    col.rgb*=<span class="number">0.25</span>;</span><br><span class="line">    half4 color2 = tex2D(_BloomTex, i.uv);</span><br><span class="line">    <span class="keyword">return</span> col + color2;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="合并"><a href="#合并" class="headerlink" title="合并"></a>合并</h2><p>把升采样的最后一张图和原图合并,和释放贴图。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">mat.SetTexture(&quot;_BloomTex&quot;, RT_Up[0]);</span><br><span class="line">Graphics.Blit(source, destination, mat, 3);</span><br><span class="line">//Release</span><br><span class="line">//RenderTexture.ReleaseTemporary(RT1);</span><br><span class="line">for (int i = 0; i &lt; _Iteration+1; i++) &#123;</span><br><span class="line">   // print(&quot;Release &quot; + i);</span><br><span class="line"></span><br><span class="line">    RenderTexture.ReleaseTemporary(RT_Down[i]);</span><br><span class="line">    RenderTexture.ReleaseTemporary(RT_Up[i]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">half4 <span class="title">frag_Combine</span><span class="params">(v2f_img i)</span> : SV_Target<span class="comment">//3</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    half4 col = tex2D(_MainTex, i.uv);</span><br><span class="line">    half3 color1 = tex2D(_BloomTex, i.uv).rgb;</span><br><span class="line">    col.rgb+= color1.rgb*_Intensity;</span><br><span class="line">    <span class="keyword">return</span> col ;</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="最后小瑕疵"><a href="#最后小瑕疵" class="headerlink" title="最后小瑕疵"></a>最后小瑕疵</h2><p>在光晕的周围还有点不自然。可用如下解决方案。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">float3 <span class="title">ACES_Tonemapping</span><span class="params">(float3 x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">float</span> a = <span class="number">2.51f</span>;</span><br><span class="line">	<span class="keyword">float</span> b = <span class="number">0.03f</span>;</span><br><span class="line">	<span class="keyword">float</span> c = <span class="number">2.43f</span>;</span><br><span class="line">	<span class="keyword">float</span> d = <span class="number">0.59f</span>;</span><br><span class="line">	<span class="keyword">float</span> e = <span class="number">0.14f</span>;</span><br><span class="line">	float3 encode_color = saturate((x*(a*x + b)) / (x*(c*x + d) + e));</span><br><span class="line">	<span class="keyword">return</span> encode_color;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function">half4 <span class="title">frag</span> <span class="params">(v2f_img i)</span> : SV_Target</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	half4 col = tex2D(_MainTex, i.uv);</span><br><span class="line">	half3 linear_color = <span class="built_in">pow</span>(col.rgb, <span class="number">2.2</span>);</span><br><span class="line">	half3 encode_color = ACES_Tonemapping(linear_color);</span><br><span class="line">	half3 final_color = <span class="built_in">pow</span>(encode_color, <span class="number">1.0</span> / <span class="number">2.2</span>);</span><br><span class="line">	<span class="keyword">return</span> float4(final_color,col.a);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="后处理的顺序"><a href="#后处理的顺序" class="headerlink" title="后处理的顺序"></a>后处理的顺序</h1><p><img src="https://img-blog.csdnimg.cn/3c671e3fee7c4999bd942e25acf1ea62.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p>调整顺序：Bloom-&gt;Vignette-&gt;Tonemapping-&gt;ColorGrading</p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="/music/jucilang.mp3">
+            </audio>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+		data-enable='true'
+        data-ae='false'
+        data-ci='35b8fbd0e6865c1adf60'
+        data-cs='6d2988de68c828bce78247ad604846cdc30e7ca3'
+        data-r='mrchenlreanspace.github.io'
+        data-o='MrChenLreanSpace'
+        data-a='MrChenLreanSpace'
+        data-d='false'
+    >查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>
