@@ -719,7 +719,7 @@
   </entry>
   <entry>
     <title>后处理技术（下）</title>
-    <url>/2022/02/22/TA5%E5%90%8E%E5%A4%84%E7%90%86%E6%8A%80%E6%9C%AF3/</url>
+    <url>/2022/02/24/TA5%E5%90%8E%E5%A4%84%E7%90%86%E6%8A%80%E6%9C%AF3/</url>
     <content><![CDATA[<h1 id="HDRBloom（光晕）"><a href="#HDRBloom（光晕）" class="headerlink" title="HDRBloom（光晕）"></a>HDRBloom（光晕）</h1><p>取亮光部分，进行降采样，在升采样的过程中，叠加降采样对应尺寸的图片，合并效果图和源图片</p>
 <h2 id="初处理"><a href="#初处理" class="headerlink" title="初处理"></a>初处理</h2><p>如果放入的是HDR图片，可以在shader里面加float4 _MainTex_HDR;   col.rgb  = DecodeHDR(col,_MainTex_HDR);进行解码。</p>
 <h2 id="取光亮部分"><a href="#取光亮部分" class="headerlink" title="取光亮部分"></a>取光亮部分</h2><p>先进行均值模糊，取亮色部分。</p>
