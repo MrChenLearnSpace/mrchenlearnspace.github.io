@@ -75,7 +75,7 @@ ForwardBase在这个Pass里面，主方向灯以及超出范围的灯光作为�
         
     <div id='gitalk-container' class="comment link"
 		data-enable='true'
-        data-ae='false'
+        data-ae='true'
         data-ci='35b8fbd0e6865c1adf60'
         data-cs='6d2988de68c828bce78247ad604846cdc30e7ca3'
         data-r='mrchenlreanspace.github.io'
@@ -86,6 +86,10 @@ ForwardBase在这个Pass里面，主方向灯以及超出范围的灯光作为�
 
 
     </div>
+    
+        <div class='side'>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B8%B2%E6%9F%93%E8%B7%AF%E5%BE%84"><span class="toc-number">1.</span> <span class="toc-text">渲染路径</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E5%90%91%E6%B8%B2%E6%9F%93"><span class="toc-number">1.1.</span> <span class="toc-text">前向渲染</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ForwardBase"><span class="toc-number">1.1.1.</span> <span class="toc-text">ForwardBase</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ForwardAdd"><span class="toc-number">1.1.2.</span> <span class="toc-text">ForwardAdd</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BB%B6%E8%BF%9F%E6%B8%B2%E6%9F%93"><span class="toc-number">1.2.</span> <span class="toc-text">延迟渲染</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B3%95%E7%BA%BF%E8%B4%B4%E5%9B%BE"><span class="toc-number">2.</span> <span class="toc-text">法线贴图</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B3%95%E7%BA%BF"><span class="toc-number">2.1.</span> <span class="toc-text">法线</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%87%E7%BA%BF"><span class="toc-number">2.2.</span> <span class="toc-text">切线</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%AF%E5%88%87%E7%BA%BF"><span class="toc-number">2.3.</span> <span class="toc-text">副切线</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#unity%E7%9A%84%E6%97%A0%E5%85%89%E7%85%A7shader%E8%8E%B7%E5%BE%97%E5%85%89%E6%BA%90%E4%BF%A1%E6%81%AF%E5%AE%9E%E6%88%98"><span class="toc-number">3.</span> <span class="toc-text">unity的无光照shader获得光源信息实战</span></a></li></ol>	
+        </div>
     
 </div>
 
@@ -161,7 +165,38 @@ ForwardBase在这个Pass里面，主方向灯以及超出范围的灯光作为�
 
 
 
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"], linebreaks: { automatic:true }, EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50) },
+        tex2jax: { inlineMath: [ ["$", "$"], ["\\(","\\)"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno",skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']},
+        TeX: {  noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } }, Macros: { href: "{}" } },
+        messageStyle: "none"
+    });
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
 
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+<!-- Google Analytics -->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YMJ8CBH8F7"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-YMJ8CBH8F7');
+</script>
+<!-- End Google Analytics -->
 
 
 </html>

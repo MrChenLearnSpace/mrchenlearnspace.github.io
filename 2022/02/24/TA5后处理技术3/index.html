@@ -108,7 +108,7 @@ HDRBloom（光晕）取亮光部分，进行降采样，在升采样的过程中
         
     <div id='gitalk-container' class="comment link"
 		data-enable='true'
-        data-ae='false'
+        data-ae='true'
         data-ci='35b8fbd0e6865c1adf60'
         data-cs='6d2988de68c828bce78247ad604846cdc30e7ca3'
         data-r='mrchenlreanspace.github.io'
@@ -119,6 +119,10 @@ HDRBloom（光晕）取亮光部分，进行降采样，在升采样的过程中
 
 
     </div>
+    
+        <div class='side'>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#HDRBloom%EF%BC%88%E5%85%89%E6%99%95%EF%BC%89"><span class="toc-number">1.</span> <span class="toc-text">HDRBloom（光晕）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9D%E5%A4%84%E7%90%86"><span class="toc-number">1.1.</span> <span class="toc-text">初处理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%96%E5%85%89%E4%BA%AE%E9%83%A8%E5%88%86"><span class="toc-number">1.2.</span> <span class="toc-text">取光亮部分</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%99%8D%E9%87%87%E6%A0%B7"><span class="toc-number">1.3.</span> <span class="toc-text">降采样</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%87%E9%87%87%E6%A0%B7"><span class="toc-number">1.4.</span> <span class="toc-text">升采样</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%88%E5%B9%B6"><span class="toc-number">1.5.</span> <span class="toc-text">合并</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%80%E5%90%8E%E5%B0%8F%E7%91%95%E7%96%B5"><span class="toc-number">1.6.</span> <span class="toc-text">最后小瑕疵</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%90%8E%E5%A4%84%E7%90%86%E7%9A%84%E9%A1%BA%E5%BA%8F"><span class="toc-number">2.</span> <span class="toc-text">后处理的顺序</span></a></li></ol>	
+        </div>
     
 </div>
 
@@ -194,7 +198,38 @@ HDRBloom（光晕）取亮光部分，进行降采样，在升采样的过程中
 
 
 
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"], linebreaks: { automatic:true }, EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50) },
+        tex2jax: { inlineMath: [ ["$", "$"], ["\\(","\\)"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno",skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']},
+        TeX: {  noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } }, Macros: { href: "{}" } },
+        messageStyle: "none"
+    });
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
 
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+<!-- Google Analytics -->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YMJ8CBH8F7"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-YMJ8CBH8F7');
+</script>
+<!-- End Google Analytics -->
 
 
 </html>

@@ -107,7 +107,7 @@
         
     <div id='gitalk-container' class="comment link"
 		data-enable='true'
-        data-ae='false'
+        data-ae='true'
         data-ci='35b8fbd0e6865c1adf60'
         data-cs='6d2988de68c828bce78247ad604846cdc30e7ca3'
         data-r='mrchenlreanspace.github.io'
@@ -118,6 +118,10 @@
 
 
     </div>
+    
+        <div class='side'>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%AD%A3%E6%96%87"><span class="toc-number">2.</span> <span class="toc-text">正文</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%95%BF%E5%BA%A6length-a"><span class="toc-number">2.1.</span> <span class="toc-text">长度length(a)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%82%B9%E4%B9%98dot%EF%BC%88-a%EF%BC%8Cb%EF%BC%89"><span class="toc-number">2.2.</span> <span class="toc-text">点乘dot（ a，b）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%A8%E5%A4%84"><span class="toc-number">2.2.1.</span> <span class="toc-text">用处</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%89%E4%B9%98cross%EF%BC%88Lhs%EF%BC%8CRhs%EF%BC%89"><span class="toc-number">2.3.</span> <span class="toc-text">叉乘cross（Lhs，Rhs）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%A8%E5%A4%84-1"><span class="toc-number">2.3.1.</span> <span class="toc-text">用处</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Saturate"><span class="toc-number">2.4.</span> <span class="toc-text">Saturate</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BA%BF%E6%80%A7%E6%8F%92%E5%80%BClerf%EF%BC%88a-b-weight%EF%BC%89"><span class="toc-number">2.5.</span> <span class="toc-text">线性插值lerf（a,b,weight）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#clamp%EF%BC%88input-min-max%EF%BC%89"><span class="toc-number">2.6.</span> <span class="toc-text">clamp（input,min,max）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B9%B3%E6%BB%91%E9%98%B6%E6%A2%AFsmoothstep-min-max-input"><span class="toc-number">2.7.</span> <span class="toc-text">平滑阶梯smoothstep(min,max,input)</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B0%BE%E5%A3%B0"><span class="toc-number">3.</span> <span class="toc-text">尾声</span></a></li></ol>	
+        </div>
     
 </div>
 
@@ -193,7 +197,38 @@
 
 
 
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"], linebreaks: { automatic:true }, EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50) },
+        tex2jax: { inlineMath: [ ["$", "$"], ["\\(","\\)"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno",skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']},
+        TeX: {  noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } }, Macros: { href: "{}" } },
+        messageStyle: "none"
+    });
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
 
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+<!-- Google Analytics -->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YMJ8CBH8F7"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-YMJ8CBH8F7');
+</script>
+<!-- End Google Analytics -->
 
 
 </html>

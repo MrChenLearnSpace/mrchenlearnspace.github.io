@@ -77,7 +77,7 @@
         
     <div id='gitalk-container' class="comment link"
 		data-enable='true'
-        data-ae='false'
+        data-ae='true'
         data-ci='35b8fbd0e6865c1adf60'
         data-cs='6d2988de68c828bce78247ad604846cdc30e7ca3'
         data-r='mrchenlreanspace.github.io'
@@ -88,6 +88,10 @@
 
 
     </div>
+    
+        <div class='side'>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%A8%E6%99%AF%E5%9B%BE"><span class="toc-number">1.</span> <span class="toc-text">全景图</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B0%86%E5%85%A8%E6%99%AF%E5%9B%BE%E8%BD%AC%E5%8F%98%E4%B8%BAByte%E6%95%B0%E7%BB%84"><span class="toc-number">1.1.</span> <span class="toc-text">将全景图转变为Byte数组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B0%86Byte%E6%95%B0%E7%BB%84%E5%8F%98%E6%88%90%E5%85%A8%E6%99%AF%E5%9B%BE"><span class="toc-number">1.2.</span> <span class="toc-text">将Byte数组变成全景图</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E4%BC%A0%E8%BE%93"><span class="toc-number">2.</span> <span class="toc-text">网络传输</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86"><span class="toc-number">3.</span> <span class="toc-text">图像处理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8D%8F%E8%AE%AE%E5%A4%84%E7%90%86"><span class="toc-number">4.</span> <span class="toc-text">协议处理</span></a></li></ol>	
+        </div>
     
 </div>
 
@@ -163,7 +167,38 @@
 
 
 
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"], linebreaks: { automatic:true }, EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50) },
+        tex2jax: { inlineMath: [ ["$", "$"], ["\\(","\\)"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno",skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']},
+        TeX: {  noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } }, Macros: { href: "{}" } },
+        messageStyle: "none"
+    });
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
 
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+<!-- Google Analytics -->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YMJ8CBH8F7"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-YMJ8CBH8F7');
+</script>
+<!-- End Google Analytics -->
 
 
 </html>
