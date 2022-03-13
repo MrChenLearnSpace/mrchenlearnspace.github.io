@@ -835,17 +835,18 @@
 <h2 id="非线性滤波器"><a href="#非线性滤波器" class="headerlink" title="非线性滤波器"></a>非线性滤波器</h2><h3 id="中值滤波器"><a href="#中值滤波器" class="headerlink" title="中值滤波器"></a>中值滤波器</h3><p>去核范围的中值代替像素，去椒盐噪点的，还可以制作腐蚀或膨胀效果。</p>
 <h1 id="几何变换"><a href="#几何变换" class="headerlink" title="几何变换"></a>几何变换</h1><h2 id="平移旋转放缩"><a href="#平移旋转放缩" class="headerlink" title="平移旋转放缩"></a>平移旋转放缩</h2><p><a href="https://learnopengl-cn.github.io/01%20Getting%20started/07%20Transformations/">opengl</a>里面有 就不看了</p>
 <h2 id="透视变换"><a href="#透视变换" class="headerlink" title="透视变换"></a>透视变换</h2><p>裁剪距阵的推导</p>
-<p><img src="http://www.songho.ca/opengl/files/gl_projectionmatrix01.png"></p>
+<p><img src="https://img-blog.csdnimg.cn/c190892dadc14693a1333ea6a36d8882.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="请添加图片描述"></p>
 <p>取用这个坐标系，所以w是0 0 -1 0<br>$$<br>∠theta=fov/2 ,<br>A=  N * tan (theta),B=  F * tan (theta)<br>$$</p>
 <p>$$<br>A’=N=ACot(theta),B’=F=BCot(theta)<br>$$</p>
 <p>所以Y轴是 0 cot(theta) 0 0。</p>
-<p><img src="http://www.songho.ca/opengl/files/gl_projectionmatrix03.png"></p>
-<p>ASP是宽高比<br>$$<br>C=A<em>ASP,D=B</em>ASP<br>$$</p>
+<p><img src="https://img-blog.csdnimg.cn/882a9c5831444a61ab5f8edf4f74d502.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="请添加图片描述"></p>
+<p>ASP是宽高比</p>
+<p>$$<br>C=A<em>ASP,D=B</em>ASP<br>$$</p>
 <p>$$<br>C’=N=C<em>Cot(theta)/ASP,D’=F=D</em>Cot(theta)/ASP<br>$$</p>
 <p>所以x是=Cot(theta)/ASP 0 0 0。</p>
 <p>假设矩阵是线性的<br>$$<br>f(-N)=-N,f(-F)=F代入方程y=sx+o<br>$$<br>解方程组<br>$$<br>s=(f+n)/(n-f),o=2fn/(n-f)<br>$$<br>z是0 0 s o；</p>
 <p>得透视矩阵如下</p>
-<p><img src="http://www.songho.ca/opengl/files/gl_projectionmatrix_eq20.png"></p>
+<p> <img src="https://img-blog.csdnimg.cn/fc31696d20124d45ae3f5291895b5e7b.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_16,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 <h1 id="光照"><a href="#光照" class="headerlink" title="光照"></a>光照</h1>]]></content>
       <categories>
         <category>人工智能</category>
