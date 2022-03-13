@@ -10,10 +10,10 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="google" content="notranslate" />
     <meta name="keywords" content="Blog,"> 
-    <meta name="description" content="MrChen Bolg,.
+    <meta name="description" content="MrChen Bolg,[TOC]
 冯光照模型效果混合相加：diffuse + ambient + specular
 图片混和相乘：(diffuse + ambient + specular) * objColor
-1FragCo,"> 
+1Fr,"> 
     <meta name="author" content="Jack Chen"> 
     <link rel="alternative" href="atom.xml" title="浪子之心" type="application/atom+xml"> 
     <link rel="icon" href="/img/favicon.png"> 
@@ -57,7 +57,7 @@
 
         </div>
         <div class="content markdown">
-            <p>.</p>
+            <p>[TOC]</p>
 <h1 id="冯光照模型"><a href="#冯光照模型" class="headerlink" title="冯光照模型"></a>冯光照模型</h1><p>效果混合相加：diffuse + ambient + specular</p>
 <p>图片混和相乘：(diffuse + ambient + specular) * objColor</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">FragColor =vec4((diffuse + ambient + specular) * objColor,<span class="number">1.0f</span>);</span><br></pre></td></tr></table></figure>
@@ -68,7 +68,7 @@
 <h1 id="漫反射贴图—diffuse"><a href="#漫反射贴图—diffuse" class="headerlink" title="漫反射贴图—diffuse"></a>漫反射贴图—diffuse</h1><p>出现的大概像表面的纹理像木箱的表面，相当于简单反射到眼睛的获得的颜色</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vec3 diffuse=texture(material.diffuse,TexCoord).rgb * max( dot( lightDir, Normal), <span class="number">0</span>) * lightColor;</span><br><span class="line">    <span class="comment">//vec3 diffuse=texture(material.diffuse,TexCoord).rgb;</span></span><br></pre></td></tr></table></figure>
 <h1 id="镜面反射—specular"><a href="#镜面反射—specular" class="headerlink" title="镜面反射—specular"></a>镜面反射—specular</h1><p>可以将光照和高光进行反射，提高真实度</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">float</span> specularAmount=<span class="built_in">pow</span>(max(dot(reflectVec,cameraVec),<span class="number">0</span>),material.shininess); <span class="comment">//高光的集中度，倍数越高，同一视角高光点越小</span></span><br><span class="line">vec3 specular=texture(material.specular,TexCoord).rgb * specularAmount * lightColor;<span class="comment">//镜面反射图中为数值0或者为黑色表示不需要镜面反射，木块和铁最好对比</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vec3 reflectVec=reflect(-lightDir,Normal);</span><br><span class="line"><span class="keyword">float</span> specularAmount=<span class="built_in">pow</span>(max(dot(reflectVec,cameraVec),<span class="number">0</span>),material.shininess); <span class="comment">//高光的集中度，倍数越高，同一视角高光点越小</span></span><br><span class="line">vec3 specular=texture(material.specular,TexCoord).rgb * specularAmount * lightColor;<span class="comment">//镜面反射图中为数值0或者为黑色表示不需要镜面反射，木块和铁最好对比</span></span><br></pre></td></tr></table></figure>
 
 <h1 id="发射光贴图—emission"><a href="#发射光贴图—emission" class="headerlink" title="发射光贴图—emission"></a>发射光贴图—emission</h1><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vec3 emission=texture(material.emission,TexCoord).rgb;</span><br></pre></td></tr></table></figure>
 

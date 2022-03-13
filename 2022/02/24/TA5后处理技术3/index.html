@@ -10,8 +10,9 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="google" content="notranslate" />
     <meta name="keywords" content="Blog,"> 
-    <meta name="description" content="MrChen Bolg,HDRBloom（光晕）取亮光部分，进行降采样，在升采样的过程中，叠加降采样对应尺寸的图片，合并效果图和源图片
-初处理如果放入的是HDR图片，可以在shader里面加float4 _MainTex_,"> 
+    <meta name="description" content="MrChen Bolg,[TOC]
+HDRBloom（光晕）取亮光部分，进行降采样，在升采样的过程中，叠加降采样对应尺寸的图片，合并效果图和源图片
+初处理如果放入的是HDR图片，可以在shader里面加float4 _Ma,"> 
     <meta name="author" content="Jack Chen"> 
     <link rel="alternative" href="atom.xml" title="浪子之心" type="application/atom+xml"> 
     <link rel="icon" href="/img/favicon.png"> 
@@ -55,7 +56,8 @@
 
         </div>
         <div class="content markdown">
-            <h1 id="HDRBloom（光晕）"><a href="#HDRBloom（光晕）" class="headerlink" title="HDRBloom（光晕）"></a>HDRBloom（光晕）</h1><p>取亮光部分，进行降采样，在升采样的过程中，叠加降采样对应尺寸的图片，合并效果图和源图片</p>
+            <p>[TOC]</p>
+<h1 id="HDRBloom（光晕）"><a href="#HDRBloom（光晕）" class="headerlink" title="HDRBloom（光晕）"></a>HDRBloom（光晕）</h1><p>取亮光部分，进行降采样，在升采样的过程中，叠加降采样对应尺寸的图片，合并效果图和源图片</p>
 <h2 id="初处理"><a href="#初处理" class="headerlink" title="初处理"></a>初处理</h2><p>如果放入的是HDR图片，可以在shader里面加float4 _MainTex_HDR;   col.rgb  = DecodeHDR(col,_MainTex_HDR);进行解码。</p>
 <h2 id="取光亮部分"><a href="#取光亮部分" class="headerlink" title="取光亮部分"></a>取光亮部分</h2><p>先进行均值模糊，取亮色部分。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">float intensity = Mathf.Exp(_Intensity / 10.0f * 0.693f) - 1.0f;</span><br><span class="line"></span><br><span class="line">mat.SetFloat(&quot;_Threshold&quot;, _Threshold);</span><br><span class="line">mat.SetFloat(&quot;_Intensity&quot;, intensity);</span><br><span class="line"></span><br><span class="line">//取亮色</span><br><span class="line">Graphics.Blit(source, RT_Down[0], mat, 0);</span><br></pre></td></tr></table></figure>

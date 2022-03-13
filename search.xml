@@ -3,7 +3,8 @@
   <entry>
     <title>搭建博客</title>
     <url>/2021/11/01/Hollow/</url>
-    <content><![CDATA[<h1 id="博客搭建"><a href="#博客搭建" class="headerlink" title="博客搭建"></a>博客搭建</h1><p>文档格式<br><strong>需要git，Node.js，npm</strong></p>
+    <content><![CDATA[<p>[TOC]</p>
+<h1 id="博客搭建"><a href="#博客搭建" class="headerlink" title="博客搭建"></a>博客搭建</h1><p>文档格式<br><strong>需要git，Node.js，npm</strong></p>
 <h2 id="做好准备"><a href="#做好准备" class="headerlink" title="做好准备"></a>做好准备</h2><p>安装好软件，配置好相关的环境</p>
 <p>建立一个github仓库，由于在部署时未设置配置建议改成 用户名.github.io,方便网站进入导致只打开一个html，与整个页面脱节的情况</p>
 <h2 id="寻找材料"><a href="#寻找材料" class="headerlink" title="寻找材料"></a>寻找材料</h2><p>到Hexo中找相关喜欢的主题，并找到相应的开源的GitHub，先hexo init在空文件夹中初始化，导入相关主题，修改全局中的theme变量</p>
@@ -106,7 +107,8 @@
   <entry>
     <title>OpenGL学习之路之窗口的建立</title>
     <url>/2021/11/02/OpenGL%E5%AD%A6%E4%B9%A0%E4%B9%8B%E8%B7%AF%E4%B9%8B%E7%AA%97%E5%8F%A3%E7%9A%84%E5%BB%BA%E7%AB%8B/</url>
-    <content><![CDATA[<h1 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h1><p>先建立一个空项目，建立一个c++文件，然后设置解决方案的属性设置三个位置<br><strong>第一是c/c++\常规\附加包含目录加入include的文件夹，glfw和glew都需要，第二，链接器\常规\附加库目录，lib文件夹，第三，链接器\输入\附加依赖库，opengl32.lib glfw3.lib glew32s.lib</strong></p>
+    <content><![CDATA[<p>[TOC]</p>
+<h1 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h1><p>先建立一个空项目，建立一个c++文件，然后设置解决方案的属性设置三个位置<br><strong>第一是c/c++\常规\附加包含目录加入include的文件夹，glfw和glew都需要，第二，链接器\常规\附加库目录，lib文件夹，第三，链接器\输入\附加依赖库，opengl32.lib glfw3.lib glew32s.lib</strong></p>
 <h1 id="创建自己的引擎"><a href="#创建自己的引擎" class="headerlink" title="创建自己的引擎"></a>创建自己的引擎</h1><p>将文件修改为main作为主函数</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#define GLEW_STATIC</span><br></pre></td></tr></table></figure>
 <p>这个注意小心拼写错误，本人搞了几小时</p>
@@ -123,7 +125,6 @@
 <h3 id="输入"><a href="#输入" class="headerlink" title="输入"></a>输入</h3><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="built_in">processInput</span>(window)</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">processInput</span><span class="params">(GLFWwindow* window)</span> </span>&#123;</span><br><span class="line">	<span class="comment">//输入</span></span><br><span class="line">	<span class="keyword">if</span> (<span class="built_in">glfwGetKey</span>(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) &#123;</span><br><span class="line">		<span class="built_in">glfwSetWindowShouldClose</span>(window, GLFW_TRUE);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h1 id="代码如下"><a href="#代码如下" class="headerlink" title="代码如下"></a>代码如下</h1><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> GLEW_STATIC</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;GL/glew.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;GLFW/glfw3.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">framebuffer_size_callback</span><span class="params">(GLFWwindow* window, <span class="keyword">int</span> width, <span class="keyword">int</span> height)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">processInput</span><span class="params">(GLFWwindow* window)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">glfwInit</span>();</span><br><span class="line">	<span class="built_in">glfwWindowHint</span>(GLFW_CONTEXT_VERSION_MAJOR, <span class="number">3</span>);</span><br><span class="line">	<span class="built_in">glfwWindowHint</span>(GLFW_CONTEXT_VERSION_MINOR, <span class="number">3</span>);</span><br><span class="line">	<span class="built_in">glfwWindowHint</span>(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);</span><br><span class="line">	<span class="comment">//glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);MacOSX系统加上这一句</span></span><br><span class="line">	<span class="comment">//以上是初始化Glfw，说明我们要使用的OPENGL版本是3.3，我们同样明确告诉GLFW我们使用的是核心模式(Core-profile)。明确告诉GLFW我们需要使用核心模式意味着我们只能使用OpenGL功能的一个子集。</span></span><br><span class="line"></span><br><span class="line">	GLFWwindow* window = <span class="built_in">glfwCreateWindow</span>(<span class="number">800</span>, <span class="number">600</span>, <span class="string">&quot;LearnOPENGL&quot;</span>, <span class="literal">NULL</span>, <span class="literal">NULL</span>);<span class="comment">//前两个参数代表生成窗口大小</span></span><br><span class="line">	<span class="keyword">if</span> (window == <span class="literal">NULL</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		std::cout &lt;&lt; <span class="string">&quot;GLFW窗口初始化失败&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">		<span class="built_in">glfwTerminate</span>();<span class="comment">//程序终止函数</span></span><br><span class="line">		<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">glfwMakeContextCurrent</span>(window);</span><br><span class="line">	<span class="comment">//GLFW初始化</span></span><br><span class="line">	glewExperimental = GL_TRUE;</span><br><span class="line">	<span class="keyword">if</span> (<span class="built_in">glewInit</span>() != GLEW_OK)</span><br><span class="line">	&#123;</span><br><span class="line">		std::cout &lt;&lt; <span class="string">&quot;GLEW初始化失败&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//Glew的初始化</span></span><br><span class="line">	<span class="built_in">glViewport</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">800</span>, <span class="number">600</span>);<span class="comment">//渲染窗口大小</span></span><br><span class="line">	<span class="built_in">glfwSetFramebufferSizeCallback</span>(window,framebuffer_size_callback);<span class="comment">//注册函数</span></span><br><span class="line">	<span class="keyword">while</span>(!<span class="built_in">glfwWindowShouldClose</span>(window))</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">//输入</span></span><br><span class="line">		<span class="built_in">processInput</span>(window);</span><br><span class="line"></span><br><span class="line">		<span class="comment">//渲染指令</span></span><br><span class="line">		<span class="built_in">glClearColor</span>(<span class="number">0.2f</span>, <span class="number">0.3f</span>, <span class="number">0.3f</span>, <span class="number">1.0f</span>);<span class="comment">//来设置清空屏幕所用的颜色,表示清除板的颜色</span></span><br><span class="line">		<span class="built_in">glClear</span>(GL_COLOR_BUFFER_BIT);<span class="comment">//清除颜色缓冲之后</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">		<span class="comment">//检查并调用事件，交换缓冲</span></span><br><span class="line">		<span class="built_in">glfwSwapBuffers</span>(window);<span class="comment">//进行屏幕缓冲</span></span><br><span class="line">		<span class="built_in">glfwPollEvents</span>();<span class="comment">//检查函数有没有触发事件</span></span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">glfwTerminate</span>();</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">framebuffer_size_callback</span><span class="params">(GLFWwindow* window, <span class="keyword">int</span> width, <span class="keyword">int</span> height)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">glViewport</span>(<span class="number">0</span>, <span class="number">0</span>, width, height);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">processInput</span><span class="params">(GLFWwindow* window)</span> </span>&#123;</span><br><span class="line">	<span class="comment">//输入</span></span><br><span class="line">	<span class="keyword">if</span> (<span class="built_in">glfwGetKey</span>(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) &#123;</span><br><span class="line">		<span class="built_in">glfwSetWindowShouldClose</span>(window, GLFW_TRUE);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-
 ]]></content>
       <categories>
         <category>计算机图形学</category>
@@ -135,7 +136,8 @@
   <entry>
     <title>OpenGL学习之路之三角形绘制</title>
     <url>/2021/11/02/OpenGL%E5%AD%A6%E4%B9%A0%E4%B9%8B%E8%B7%AF%E4%B9%8B%E4%B8%89%E8%A7%92%E5%BD%A2%E7%BB%98%E5%88%B6/</url>
-    <content><![CDATA[<p><strong>先从几何阶段取出顶点转换成vbo转到vao如果有重复顶点可以转到EBo<br>openGL是一个状态机只能运行context的状态只能放一个vao<br>状态机中必须要一个vao</strong></p>
+    <content><![CDATA[<p>[TOC]</p>
+<p><strong>先从几何阶段取出顶点转换成vbo转到vao如果有重复顶点可以转到EBo<br>openGL是一个状态机只能运行context的状态只能放一个vao<br>状态机中必须要一个vao</strong></p>
 <h3 id="VAO"><a href="#VAO" class="headerlink" title="VAO"></a>VAO</h3><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">   <span class="keyword">unsigned</span> <span class="keyword">int</span> VAO;</span><br><span class="line"><span class="built_in">glGenVertexArrays</span>(<span class="number">1</span>, &amp;VAO);</span><br><span class="line"><span class="built_in">glBindVertexArray</span>(VAO);<span class="comment">//注意</span></span><br></pre></td></tr></table></figure>
 <h3 id="VBO"><a href="#VBO" class="headerlink" title="VBO"></a>VBO</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">unsigned int VBO;</span><br><span class="line">glGenBuffers(1, &amp;VBO);//一个缓冲ID生成一个VBO对象建立顶点缓冲对象</span><br><span class="line">glBindBuffer(GL_ARRAY_BUFFER, VBO);//新创建的缓冲绑定到GL_ARRAY_BUFFER目标</span><br><span class="line">glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);//它会把之前定义的顶点数据复制到缓冲的内存中</span><br></pre></td></tr></table></figure>
 <p>一定要绑定顶点数组</p>
@@ -168,7 +170,8 @@
   <entry>
     <title>Hello World</title>
     <url>/2021/11/01/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+    <content><![CDATA[<p>[TOC]</p>
+<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
 <h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
 
 <p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
@@ -186,7 +189,8 @@
   <entry>
     <title>全景图传输</title>
     <url>/2021/11/21/%E5%85%A8%E6%99%AF%E5%9B%BE%E4%BC%A0%E8%BE%93/</url>
-    <content><![CDATA[<h1 id="全景图"><a href="#全景图" class="headerlink" title="全景图"></a>全景图</h1><h2 id="将全景图转变为Byte数组"><a href="#将全景图转变为Byte数组" class="headerlink" title="将全景图转变为Byte数组"></a>将全景图转变为Byte数组</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Camera.main.RenderToCubemap(cm);</span><br><span class="line">texture2D = new Texture2D(width, hight);</span><br><span class="line">texture2D.SetPixels(cm.GetPixels(CubemapFace.NegativeZ));</span><br><span class="line">texture2D.Apply();</span><br><span class="line">byt = texture2D.EncodeToPNG();</span><br></pre></td></tr></table></figure>
+    <content><![CDATA[<p>[TOC]</p>
+<h1 id="全景图"><a href="#全景图" class="headerlink" title="全景图"></a>全景图</h1><h2 id="将全景图转变为Byte数组"><a href="#将全景图转变为Byte数组" class="headerlink" title="将全景图转变为Byte数组"></a>将全景图转变为Byte数组</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Camera.main.RenderToCubemap(cm);</span><br><span class="line">texture2D = new Texture2D(width, hight);</span><br><span class="line">texture2D.SetPixels(cm.GetPixels(CubemapFace.NegativeZ));</span><br><span class="line">texture2D.Apply();</span><br><span class="line">byt = texture2D.EncodeToPNG();</span><br></pre></td></tr></table></figure>
 
 <h2 id="将Byte数组变成全景图"><a href="#将Byte数组变成全景图" class="headerlink" title="将Byte数组变成全景图"></a>将Byte数组变成全景图</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">texture2DFix.LoadImage(byt);</span><br><span class="line">texture2DFix.Apply</span><br><span class="line">cm1.SetPixels(texture2DFix.GetPixels(), CubemapFace.PositiveZ);</span><br><span class="line">cm1.Apply();</span><br></pre></td></tr></table></figure>
 
@@ -209,7 +213,7 @@
   <entry>
     <title>OpenGL学习之路之光照贴图</title>
     <url>/2021/12/07/OpenGL%E5%AD%A6%E4%B9%A0%E4%B9%8B%E8%B7%AF%E4%B9%8B%E5%85%89%E7%85%A7%E8%B4%B4%E5%9B%BE/</url>
-    <content><![CDATA[<p>.</p>
+    <content><![CDATA[<p>[TOC]</p>
 <h1 id="冯光照模型"><a href="#冯光照模型" class="headerlink" title="冯光照模型"></a>冯光照模型</h1><p>效果混合相加：diffuse + ambient + specular</p>
 <p>图片混和相乘：(diffuse + ambient + specular) * objColor</p>
 <figure class="highlight c"><table><tr><td class="code"><pre><span class="line">FragColor =vec4((diffuse + ambient + specular) * objColor,<span class="number">1.0f</span>);</span><br></pre></td></tr></table></figure>
@@ -220,7 +224,7 @@
 <h1 id="漫反射贴图—diffuse"><a href="#漫反射贴图—diffuse" class="headerlink" title="漫反射贴图—diffuse"></a>漫反射贴图—diffuse</h1><p>出现的大概像表面的纹理像木箱的表面，相当于简单反射到眼睛的获得的颜色</p>
 <figure class="highlight c"><table><tr><td class="code"><pre><span class="line">vec3 diffuse=texture(material.diffuse,TexCoord).rgb * max( dot( lightDir, Normal), <span class="number">0</span>) * lightColor;</span><br><span class="line">    <span class="comment">//vec3 diffuse=texture(material.diffuse,TexCoord).rgb;</span></span><br></pre></td></tr></table></figure>
 <h1 id="镜面反射—specular"><a href="#镜面反射—specular" class="headerlink" title="镜面反射—specular"></a>镜面反射—specular</h1><p>可以将光照和高光进行反射，提高真实度</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">float</span> specularAmount=<span class="built_in">pow</span>(max(dot(reflectVec,cameraVec),<span class="number">0</span>),material.shininess); <span class="comment">//高光的集中度，倍数越高，同一视角高光点越小</span></span><br><span class="line">vec3 specular=texture(material.specular,TexCoord).rgb * specularAmount * lightColor;<span class="comment">//镜面反射图中为数值0或者为黑色表示不需要镜面反射，木块和铁最好对比</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">vec3 reflectVec=reflect(-lightDir,Normal);</span><br><span class="line"><span class="keyword">float</span> specularAmount=<span class="built_in">pow</span>(max(dot(reflectVec,cameraVec),<span class="number">0</span>),material.shininess); <span class="comment">//高光的集中度，倍数越高，同一视角高光点越小</span></span><br><span class="line">vec3 specular=texture(material.specular,TexCoord).rgb * specularAmount * lightColor;<span class="comment">//镜面反射图中为数值0或者为黑色表示不需要镜面反射，木块和铁最好对比</span></span><br></pre></td></tr></table></figure>
 
 <h1 id="发射光贴图—emission"><a href="#发射光贴图—emission" class="headerlink" title="发射光贴图—emission"></a>发射光贴图—emission</h1><figure class="highlight c"><table><tr><td class="code"><pre><span class="line">vec3 emission=texture(material.emission,TexCoord).rgb;</span><br></pre></td></tr></table></figure>
 
@@ -235,7 +239,8 @@
   <entry>
     <title>OpenGL学习之路之光源大总结</title>
     <url>/2021/12/19/OpenGL%E5%AD%A6%E4%B9%A0%E4%B9%8B%E8%B7%AF%E4%B9%8B%E5%85%89%E6%BA%90%E5%A4%A7%E6%80%BB%E7%BB%93/</url>
-    <content><![CDATA[<h1 id="光源所需条件"><a href="#光源所需条件" class="headerlink" title="光源所需条件"></a>光源所需条件</h1><h4 id="1-光照信息"><a href="#1-光照信息" class="headerlink" title="1.光照信息"></a>1.光照信息</h4><p>定向光 点光源 聚光灯的属性</p>
+    <content><![CDATA[<p>[TOC]</p>
+<h1 id="光源所需条件"><a href="#光源所需条件" class="headerlink" title="光源所需条件"></a>光源所需条件</h1><h4 id="1-光照信息"><a href="#1-光照信息" class="headerlink" title="1.光照信息"></a>1.光照信息</h4><p>定向光 点光源 聚光灯的属性</p>
 <h4 id="2-法线向量"><a href="#2-法线向量" class="headerlink" title="2.法线向量"></a>2.法线向量</h4><p>将顶点着色器的法线信息接收，并进行标准化</p>
 <figure class="highlight c"><table><tr><td class="code"><pre><span class="line">vec3 uNormal=normalize(Normal);</span><br></pre></td></tr></table></figure>
 
@@ -294,7 +299,8 @@
   <entry>
     <title>TA1.3人物扫光</title>
     <url>/2022/01/21/TA1.3%E4%BA%BA%E7%89%A9%E6%89%AB%E5%85%89/</url>
-    <content><![CDATA[<h1 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h1><h2 id="边缘光"><a href="#边缘光" class="headerlink" title="边缘光"></a>边缘光</h2><p><img src="https://img-blog.csdnimg.cn/ae5ddfb6e8464ec0aa7ffeb6c7f1bf90.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述">    </p>
+    <content><![CDATA[<p>[TOC]</p>
+<h1 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h1><h2 id="边缘光"><a href="#边缘光" class="headerlink" title="边缘光"></a>边缘光</h2><p><img src="https://img-blog.csdnimg.cn/ae5ddfb6e8464ec0aa7ffeb6c7f1bf90.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述">    </p>
 <h2 id="流光"><a href="#流光" class="headerlink" title="流光"></a>流光</h2><p><img src="https://img-blog.csdnimg.cn/1ee1c9a1e9ad45809bdd840452952c77.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>当一个三维向量补全为四维向量的时候，如果是点的话最后需要补成1.0，如果是向量的话需要补0.0</p>
 ]]></content>
@@ -308,7 +314,8 @@
   <entry>
     <title>TA1.2UnityShader入门</title>
     <url>/2022/01/10/TA1.2UnityShader%E5%85%A5%E9%97%A8/</url>
-    <content><![CDATA[<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><h2 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h2><h4 id="平铺和偏移"><a href="#平铺和偏移" class="headerlink" title="平铺和偏移"></a>平铺和偏移</h4><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">//properties</span></span><br><span class="line">_Texture(<span class="string">&quot;Texture&quot;</span>,<span class="number">2</span>D)=<span class="string">&quot;white&quot;</span>&#123;&#125;</span><br><span class="line"><span class="comment">//SubPass/Pass</span></span><br><span class="line">sampler2D _Texture;</span><br><span class="line">float4 _Texture_ST;	</span><br><span class="line">o.uv=v.uv*_Texture_ST.xy+_Texture_ST.zw;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+    <content><![CDATA[<p>[TOC]</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><h2 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h2><h4 id="平铺和偏移"><a href="#平铺和偏移" class="headerlink" title="平铺和偏移"></a>平铺和偏移</h4><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">//properties</span></span><br><span class="line">_Texture(<span class="string">&quot;Texture&quot;</span>,<span class="number">2</span>D)=<span class="string">&quot;white&quot;</span>&#123;&#125;</span><br><span class="line"><span class="comment">//SubPass/Pass</span></span><br><span class="line">sampler2D _Texture;</span><br><span class="line">float4 _Texture_ST;	</span><br><span class="line">o.uv=v.uv*_Texture_ST.xy+_Texture_ST.zw;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <h4 id="顶点坐标系MVP转换"><a href="#顶点坐标系MVP转换" class="headerlink" title="顶点坐标系MVP转换"></a>顶点坐标系MVP转换</h4><figure class="highlight c"><table><tr><td class="code"><pre><span class="line">float4 pos_world = mul(unity_ObjectToWorld, v.vertex);</span><br><span class="line">float4 pos_view = mul(UNITY_MATRIX_V,pos_world);</span><br><span class="line">float4 pos_clip = mul(UNITY_MATRIX_P,pos_view);</span><br><span class="line">o.pos=pos_clip;</span><br></pre></td></tr></table></figure>
 
@@ -424,7 +431,8 @@
   <entry>
     <title>TA1.4薄膜干涉效果</title>
     <url>/2022/01/22/TA1.4%E8%96%84%E8%86%9C%E5%B9%B2%E6%B6%89%E6%95%88%E6%9E%9C/</url>
-    <content><![CDATA[<blockquote>
+    <content><![CDATA[<p>[TOC]</p>
+<blockquote>
 <h1 id="薄膜干涉"><a href="#薄膜干涉" class="headerlink" title="薄膜干涉"></a>薄膜干涉</h1></blockquote>
 <h2 id="材质捕捉效果（Material-Capture）"><a href="#材质捕捉效果（Material-Capture）" class="headerlink" title="材质捕捉效果（Material Capture）"></a>材质捕捉效果（Material Capture）</h2><p><strong>预览效果</strong></p>
 <p><img src="https://img-blog.csdnimg.cn/56c243af89ed49898a5ee5130e2a0507.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_16,color_FFFFFF,t_70,g_se,x_16" alt="预览效果"></p>
@@ -481,7 +489,8 @@
   <entry>
     <title>TA1.5藤曼生长</title>
     <url>/2022/02/10/TA1.5%E8%97%A4%E6%9B%BC%E7%94%9F%E9%95%BF/</url>
-    <content><![CDATA[<h1 id="藤曼生长"><a href="#藤曼生长" class="headerlink" title="藤曼生长"></a>藤曼生长</h1><p><strong>预览视图</strong></p>
+    <content><![CDATA[<p>[TOC]</p>
+<h1 id="藤曼生长"><a href="#藤曼生长" class="headerlink" title="藤曼生长"></a>藤曼生长</h1><p><strong>预览视图</strong></p>
 <p><img src="https://img-blog.csdnimg.cn/239148c16c944873b02c02d3147cd67d.png" alt="在这里插入图片描述"><img src="https://img-blog.csdnimg.cn/4606bf1634494bfb9d0af5015ae90502.png" alt="在这里插入图片描述"></p>
 <p><strong>PBR材质下的效果</strong></p>
 <p>显示更好看上ASE</p>
@@ -510,7 +519,8 @@
   <entry>
     <title>TA1.6魔镜世界</title>
     <url>/2022/02/13/TA1.6%E9%AD%94%E9%95%9C%E4%B8%96%E7%95%8C/</url>
-    <content><![CDATA[<h1 id="魔镜世界"><a href="#魔镜世界" class="headerlink" title="魔镜世界"></a>魔镜世界</h1><p><img src="https://img-blog.csdnimg.cn/708f8e4dc58e4eebb462a598386feb4b.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_12,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><img src="https://img-blog.csdnimg.cn/60384ee277de4032bb962961f62b6cce.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_11,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+    <content><![CDATA[<p>[TOC]</p>
+<h1 id="魔镜世界"><a href="#魔镜世界" class="headerlink" title="魔镜世界"></a>魔镜世界</h1><p><img src="https://img-blog.csdnimg.cn/708f8e4dc58e4eebb462a598386feb4b.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_12,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><img src="https://img-blog.csdnimg.cn/60384ee277de4032bb962961f62b6cce.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_11,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 <h2 id="渲染队列和颜色遮罩"><a href="#渲染队列和颜色遮罩" class="headerlink" title="渲染队列和颜色遮罩"></a>渲染队列和颜色遮罩</h2><h3 id="Rendering-Queue"><a href="#Rendering-Queue" class="headerlink" title="Rendering Queue"></a>Rendering Queue</h3><p>从小到大进行排序</p>
 <p>几何体 2000</p>
 <p>Alpha Test 2450</p>
@@ -556,7 +566,8 @@
   <entry>
     <title>Shader的主要节点介绍</title>
     <url>/2022/02/20/Shader%E7%9A%84%E4%B8%BB%E8%A6%81%E8%8A%82%E7%82%B9%E4%BB%8B%E7%BB%8D/</url>
-    <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>虽然学习很久了，但没有好好总结过shader用到的数学，以至于在用的过程中总是忘记，然后花时间去找，裂开，没有搞完的发现后后续补充。</p>
+    <content><![CDATA[<p>[TOC]</p>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>虽然学习很久了，但没有好好总结过shader用到的数学，以至于在用的过程中总是忘记，然后花时间去找，裂开，没有搞完的发现后后续补充。</p>
 <h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><h2 id="长度length-a"><a href="#长度length-a" class="headerlink" title="长度length(a)"></a>长度length(a)</h2><p>简单的欧式距离，根号下平方的那个。</p>
 <h2 id="点乘dot（-a，b）"><a href="#点乘dot（-a，b）" class="headerlink" title="点乘dot（ a，b）"></a>点乘dot（ a，b）</h2><p>点乘是通过将对应分量逐个相乘，然后再把所得积相加来计算的。就是高中学的向量的乘法</p>
 <p>v¯⋅k¯=||v¯||⋅||k¯||⋅cosθ</p>
@@ -607,7 +618,8 @@
   <entry>
     <title>后处理技术（上）</title>
     <url>/2022/02/20/TA5%E5%90%8E%E5%A4%84%E7%90%86%E6%8A%80%E6%9C%AF1/</url>
-    <content><![CDATA[<h1 id="后处理（上）"><a href="#后处理（上）" class="headerlink" title="后处理（上）"></a>后处理（上）</h1><h2 id="启用后处理"><a href="#启用后处理" class="headerlink" title="启用后处理"></a>启用后处理</h2><p>在摄像头添加脚本</p>
+    <content><![CDATA[<p>[TOC]</p>
+<h1 id="后处理（上）"><a href="#后处理（上）" class="headerlink" title="后处理（上）"></a>后处理（上）</h1><h2 id="启用后处理"><a href="#启用后处理" class="headerlink" title="启用后处理"></a>启用后处理</h2><p>在摄像头添加脚本</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">using System.Collections;</span><br><span class="line">using System.Collections.Generic;</span><br><span class="line">using UnityEngine;</span><br><span class="line">[ExecuteInEditMode()]//编辑模式就能看到效果</span><br><span class="line">public class CameraPostPress : MonoBehaviour</span><br><span class="line">&#123;</span><br><span class="line">    public Material mat;</span><br><span class="line">    // Start is called before the first frame update</span><br><span class="line">    void Start()</span><br><span class="line">    &#123;</span><br><span class="line">        if(mat==null||SystemInfo.supportsImageEffects==false||mat.shader==null||mat.shader.isSupported==false) &#123;</span><br><span class="line">            enabled = false;</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    private void OnRenderImage(RenderTexture source, RenderTexture destination) &#123;</span><br><span class="line">        //当渲染图片启用   source是帧处理的图片 0是pass的顺序</span><br><span class="line">        Graphics.Blit(source,destination,mat, 0);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 
@@ -666,7 +678,8 @@
   <entry>
     <title>后处理技术（中）</title>
     <url>/2022/02/22/TA5%E5%90%8E%E5%A4%84%E7%90%86%E6%8A%80%E6%9C%AF2/</url>
-    <content><![CDATA[<h1 id="模糊处理"><a href="#模糊处理" class="headerlink" title="模糊处理"></a>模糊处理</h1><p>本文章参考<a href="https://zhuanlan.zhihu.com/p/125744132">毛星云大佬的文章</a>学习，十分推荐看大佬的原文<img src="https://pic3.zhimg.com/80/v2-c2a9906331826e66f66ffda71192411a_720w.jpg"></p>
+    <content><![CDATA[<p>[TOC]</p>
+<h1 id="模糊处理"><a href="#模糊处理" class="headerlink" title="模糊处理"></a>模糊处理</h1><p>本文章参考<a href="https://zhuanlan.zhihu.com/p/125744132">毛星云大佬的文章</a>学习，十分推荐看大佬的原文<img src="https://pic3.zhimg.com/80/v2-c2a9906331826e66f66ffda71192411a_720w.jpg"></p>
 <p><strong>降采样是常见的优化性能的方法减少中间贴图的尺寸大小</strong></p>
 <p><strong>产生的中间贴图一定要记得释放内存，否则造成内存泄漏</strong></p>
 <p><strong>在for循环的中间贴图也要记得释放内存</strong></p>
@@ -720,7 +733,8 @@
   <entry>
     <title>后处理技术（下）</title>
     <url>/2022/02/24/TA5%E5%90%8E%E5%A4%84%E7%90%86%E6%8A%80%E6%9C%AF3/</url>
-    <content><![CDATA[<h1 id="HDRBloom（光晕）"><a href="#HDRBloom（光晕）" class="headerlink" title="HDRBloom（光晕）"></a>HDRBloom（光晕）</h1><p>取亮光部分，进行降采样，在升采样的过程中，叠加降采样对应尺寸的图片，合并效果图和源图片</p>
+    <content><![CDATA[<p>[TOC]</p>
+<h1 id="HDRBloom（光晕）"><a href="#HDRBloom（光晕）" class="headerlink" title="HDRBloom（光晕）"></a>HDRBloom（光晕）</h1><p>取亮光部分，进行降采样，在升采样的过程中，叠加降采样对应尺寸的图片，合并效果图和源图片</p>
 <h2 id="初处理"><a href="#初处理" class="headerlink" title="初处理"></a>初处理</h2><p>如果放入的是HDR图片，可以在shader里面加float4 _MainTex_HDR;   col.rgb  = DecodeHDR(col,_MainTex_HDR);进行解码。</p>
 <h2 id="取光亮部分"><a href="#取光亮部分" class="headerlink" title="取光亮部分"></a>取光亮部分</h2><p>先进行均值模糊，取亮色部分。</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">float intensity = Mathf.Exp(_Intensity / 10.0f * 0.693f) - 1.0f;</span><br><span class="line"></span><br><span class="line">mat.SetFloat(&quot;_Threshold&quot;, _Threshold);</span><br><span class="line">mat.SetFloat(&quot;_Intensity&quot;, intensity);</span><br><span class="line"></span><br><span class="line">//取亮色</span><br><span class="line">Graphics.Blit(source, RT_Down[0], mat, 0);</span><br></pre></td></tr></table></figure>
@@ -767,6 +781,96 @@
       </categories>
       <tags>
         <tag>Shader</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>TA2.1光照模型与法线贴图</title>
+    <url>/2022/02/14/TA2.1%E5%85%89%E7%85%A7%E6%A8%A1%E5%9E%8B%E4%B8%8E%E6%B3%95%E7%BA%BF%E8%B4%B4%E5%9B%BE/</url>
+    <content><![CDATA[<p>[TOC]</p>
+<h1 id="渲染路径"><a href="#渲染路径" class="headerlink" title="渲染路径"></a>渲染路径</h1><h2 id="前向渲染"><a href="#前向渲染" class="headerlink" title="前向渲染"></a>前向渲染</h2><p>对每一个物体每一个光源进行渲染，超出范围的灯光以顶点灯光渲染，适用于灯光较少的情况</p>
+<h3 id="ForwardBase"><a href="#ForwardBase" class="headerlink" title="ForwardBase"></a>ForwardBase</h3><p>在这个Pass里面，主方向灯以及超出范围的灯光作为顶点灯光传入SH，   LightMap，Reflection， Probe等计算均在这个Pass里面完成。</p>
+<h3 id="ForwardAdd"><a href="#ForwardAdd" class="headerlink" title="ForwardAdd"></a>ForwardAdd</h3><p>数量范围内的灯光，每个灯光的计算，均会调用一次这个pass，计算的结果通过Blend one one 叠加起来。</p>
+<h2 id="延迟渲染"><a href="#延迟渲染" class="headerlink" title="延迟渲染"></a>延迟渲染</h2><p> 使用MRT技术 ，RT0是物体的颜色，RT1是金属反射的颜色，RT2是法线数据，RT4是深度信息。</p>
+<p>光源直接渲染一次。有带宽和设备支持的限制，ue4和HDRP默认。</p>
+<h1 id="法线贴图"><a href="#法线贴图" class="headerlink" title="法线贴图"></a>法线贴图</h1><h2 id="法线"><a href="#法线" class="headerlink" title="法线"></a>法线</h2><p>顶点垂直模型的线NORMAL</p>
+<h2 id="切线"><a href="#切线" class="headerlink" title="切线"></a>切线</h2><p>UV中u递增的线或者v递增的线，引擎帮我们生成的TANGENT</p>
+<h2 id="副切线"><a href="#副切线" class="headerlink" title="副切线"></a>副切线</h2><p> 法线叉乘切线得到的。</p>
+<h1 id="unity的无光照shader获得光源信息实战"><a href="#unity的无光照shader获得光源信息实战" class="headerlink" title="unity的无光照shader获得光源信息实战"></a>unity的无光照shader获得光源信息实战</h1>]]></content>
+      <categories>
+        <category>游戏</category>
+      </categories>
+      <tags>
+        <tag>Shader</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>TA6特效篇火焰</title>
+    <url>/2022/03/01/TA6%E7%89%B9%E6%95%88%E7%AF%87%E7%81%AB%E7%84%B0/</url>
+    <content><![CDATA[<p>[TOC]</p>
+<h1 id="火焰"><a href="#火焰" class="headerlink" title="火焰"></a>火焰</h1><h2 id="制作原理"><a href="#制作原理" class="headerlink" title="制作原理"></a>制作原理</h2><p>利用裁剪方程，将噪点图进行向上流动达到火焰往上升的效果，用一张渐变图和噪点图相乘把上半部分进行裁剪，将颜色的HDR效果打开，现在得到初步的火焰加一点点细节，让火的边缘柔和一点。让噪声图减去一个变量，并钳制在0到1之间，调大变量会使边缘柔和化，接下来是让火焰外焰和内焰效果</p>
+<h2 id="噪点值"><a href="#噪点值" class="headerlink" title="噪点值"></a>噪点值</h2><p><img src="https://img-blog.csdnimg.cn/a9f0ed3772e7465785f1f268de05ebd6.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p>噪点图往上移动取R通道</p>
+<h2 id="渐变值和内焰边界"><a href="#渐变值和内焰边界" class="headerlink" title="渐变值和内焰边界"></a>渐变值和内焰边界</h2><p><img src="https://img-blog.csdnimg.cn/a3ecd9c74d574044aed2fc070e609e02.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h2 id="火焰边缘柔和"><a href="#火焰边缘柔和" class="headerlink" title="火焰边缘柔和"></a>火焰边缘柔和</h2><p><img src="https://img-blog.csdnimg.cn/62b84b85d65440458541ed1d72f8b0e5.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p>当Softness变大边缘柔和，注意必须要clamp函数</p>
+<h2 id="外焰和内焰"><a href="#外焰和内焰" class="headerlink" title="外焰和内焰"></a>外焰和内焰</h2><p><img src="https://img-blog.csdnimg.cn/6533e690f9c94cdca1192da8e6e0e94f.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h2 id="火焰的形状"><a href="#火焰的形状" class="headerlink" title="火焰的形状"></a>火焰的形状</h2><p><img src="https://img-blog.csdnimg.cn/d483b0aebd7344f38b4a56ab74ab0838.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p><img src="https://img-blog.csdnimg.cn/4f00d42d98774071b79471a128aaf7f9.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+]]></content>
+      <categories>
+        <category>游戏</category>
+      </categories>
+      <tags>
+        <tag>Shader</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>视觉计算观后感</title>
+    <url>/2022/03/13/%E8%A7%86%E8%A7%89%E8%AE%A1%E7%AE%97%E8%A7%82%E5%90%8E%E6%84%9F/</url>
+    <content><![CDATA[<p>[TOC]</p>
+<h1 id="数据"><a href="#数据" class="headerlink" title="数据"></a>数据</h1><h2 id="采样"><a href="#采样" class="headerlink" title="采样"></a>采样</h2><p>从样本数据提取数据，等距提取就是均匀采样，不等距就是非均匀采样。</p>
+<h2 id="噪声"><a href="#噪声" class="headerlink" title="噪声"></a>噪声</h2><p>椒盐噪点可以用中值滤波器消除，有条纹状的噪声可以用陷波滤波器，比较细致模糊的噪点可以用低通滤波器</p>
+<h1 id="卷积"><a href="#卷积" class="headerlink" title="卷积"></a>卷积</h1><h2 id="线性滤波器"><a href="#线性滤波器" class="headerlink" title="线性滤波器"></a>线性滤波器</h2><h3 id="全通"><a href="#全通" class="headerlink" title="全通"></a>全通</h3><p>没有消除和阻止任何一个频率。作用未知。</p>
+<h3 id="低通"><a href="#低通" class="headerlink" title="低通"></a>低通</h3><p>使频率越来越宽，可以让图片变得模糊和达到消除噪点的作用</p>
+<h4 id="盒式滤波器"><a href="#盒式滤波器" class="headerlink" title="盒式滤波器"></a>盒式滤波器</h4><p>使用全为1的卷积核。</p>
+<h4 id="高斯滤波器"><a href="#高斯滤波器" class="headerlink" title="高斯滤波器"></a>高斯滤波器</h4><p>特定的权重，离像素点越远权重越小</p>
+<p>下图为高斯函数的3维图示：</p>
+<p><img src="https://pic4.zhimg.com/80/v2-d6af23aafa14caec06b3a1790b6d92e3_720w.jpg"></p>
+<p>0.05 0.25 0.40 0.25 0.05权值</p>
+<h4 id="降低频率采样"><a href="#降低频率采样" class="headerlink" title="降低频率采样"></a>降低频率采样</h4><p>n层：1 x 1</p>
+<p>···</p>
+<p>n-1层：pow(2,n-1) x pow(2,n-1)</p>
+<p>n层：pow(2,n) x pow(2,n)</p>
+<p>高斯金字塔</p>
+<p>n-1层的一个网格对应相应的n层的4个网格</p>
+<h4 id="卷积细节"><a href="#卷积细节" class="headerlink" title="卷积细节"></a>卷积细节</h4><ol>
+<li>将滤波器与图像进行卷积时，要每个像素对齐非常重要，每个卷积的结果要单独保存，否则会影响之后的卷积结果</li>
+<li>运算时先转化为浮点数再进行滤波最后滤波取整</li>
+<li>如果颜色超过0，255设定最大值和最小值s</li>
+</ol>
+<h3 id="高通"><a href="#高通" class="headerlink" title="高通"></a>高通</h3><p>留下高频去除低频，能得到图形边缘特征。</p>
+<p>如核为 -1/3 2/3 -1/3的卷积核。</p>
+<h3 id="带通"><a href="#带通" class="headerlink" title="带通"></a>带通</h3><p>指留下低频和高频之间的信号。</p>
+<h2 id="非线性滤波器"><a href="#非线性滤波器" class="headerlink" title="非线性滤波器"></a>非线性滤波器</h2><h3 id="中值滤波器"><a href="#中值滤波器" class="headerlink" title="中值滤波器"></a>中值滤波器</h3><p>去核范围的中值代替像素，去椒盐噪点的，还可以制作腐蚀或膨胀效果。</p>
+<h1 id="几何变换"><a href="#几何变换" class="headerlink" title="几何变换"></a>几何变换</h1><h2 id="平移旋转放缩"><a href="#平移旋转放缩" class="headerlink" title="平移旋转放缩"></a>平移旋转放缩</h2><p><a href="https://learnopengl-cn.github.io/01%20Getting%20started/07%20Transformations/">opengl</a>里面有 就不看了</p>
+<h2 id="透视变换"><a href="#透视变换" class="headerlink" title="透视变换"></a>透视变换</h2><p>裁剪距阵的推导</p>
+<p><img src="http://www.songho.ca/opengl/files/gl_projectionmatrix01.png"></p>
+<p>取用这个坐标系，所以w是0 0 -1 0<br>$$<br>∠theta=fov/2 ,<br>A=  N * tan (theta),B=  F * tan (theta)<br>$$</p>
+<p>$$<br>A’=N=ACot(theta),B’=F=BCot(theta)<br>$$</p>
+<p>所以Y轴是 0 cot(theta) 0 0。</p>
+<p><img src="http://www.songho.ca/opengl/files/gl_projectionmatrix03.png"></p>
+<p>ASP是宽高比<br>$$<br>C=A<em>ASP,D=B</em>ASP<br>$$</p>
+<p>$$<br>C’=N=C<em>Cot(theta)/ASP,D’=F=D</em>Cot(theta)/ASP<br>$$</p>
+<p>所以x是=Cot(theta)/ASP 0 0 0。</p>
+<p>假设矩阵是线性的<br>$$<br>f(-N)=-N,f(-F)=F代入方程y=sx+o<br>$$<br>解方程组<br>$$<br>s=(f+n)/(n-f),o=2fn/(n-f)<br>$$<br>z是0 0 s o；</p>
+<p>得透视矩阵如下</p>
+<p><img src="http://www.songho.ca/opengl/files/gl_projectionmatrix_eq20.png"></p>
+<h1 id="光照"><a href="#光照" class="headerlink" title="光照"></a>光照</h1>]]></content>
+      <categories>
+        <category>人工智能</category>
+      </categories>
+      <tags>
+        <tag>计算机视觉</tag>
       </tags>
   </entry>
 </search>

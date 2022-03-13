@@ -10,8 +10,9 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="google" content="notranslate" />
     <meta name="keywords" content="Blog,"> 
-    <meta name="description" content="MrChen Bolg,先从几何阶段取出顶点转换成vbo转到vao如果有重复顶点可以转到EBoopenGL是一个状态机只能运行context的状态只能放一个vao状态机中必须要一个vao
-VAO123   unsigned,"> 
+    <meta name="description" content="MrChen Bolg,[TOC]
+先从几何阶段取出顶点转换成vbo转到vao如果有重复顶点可以转到EBoopenGL是一个状态机只能运行context的状态只能放一个vao状态机中必须要一个vao
+VAO123   un,"> 
     <meta name="author" content="Jack Chen"> 
     <link rel="alternative" href="atom.xml" title="浪子之心" type="application/atom+xml"> 
     <link rel="icon" href="/img/favicon.png"> 
@@ -55,7 +56,8 @@ VAO123   unsigned,">
 
         </div>
         <div class="content markdown">
-            <p><strong>先从几何阶段取出顶点转换成vbo转到vao如果有重复顶点可以转到EBo<br>openGL是一个状态机只能运行context的状态只能放一个vao<br>状态机中必须要一个vao</strong></p>
+            <p>[TOC]</p>
+<p><strong>先从几何阶段取出顶点转换成vbo转到vao如果有重复顶点可以转到EBo<br>openGL是一个状态机只能运行context的状态只能放一个vao<br>状态机中必须要一个vao</strong></p>
 <h3 id="VAO"><a href="#VAO" class="headerlink" title="VAO"></a>VAO</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">   <span class="keyword">unsigned</span> <span class="keyword">int</span> VAO;</span><br><span class="line"><span class="built_in">glGenVertexArrays</span>(<span class="number">1</span>, &amp;VAO);</span><br><span class="line"><span class="built_in">glBindVertexArray</span>(VAO);<span class="comment">//注意</span></span><br></pre></td></tr></table></figure>
 <h3 id="VBO"><a href="#VBO" class="headerlink" title="VBO"></a>VBO</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">unsigned int VBO;</span><br><span class="line">glGenBuffers(1, &amp;VBO);//一个缓冲ID生成一个VBO对象建立顶点缓冲对象</span><br><span class="line">glBindBuffer(GL_ARRAY_BUFFER, VBO);//新创建的缓冲绑定到GL_ARRAY_BUFFER目标</span><br><span class="line">glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);//它会把之前定义的顶点数据复制到缓冲的内存中</span><br></pre></td></tr></table></figure>
 <p>一定要绑定顶点数组</p>

@@ -10,7 +10,8 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="google" content="notranslate" />
     <meta name="keywords" content="Blog,"> 
-    <meta name="description" content="MrChen Bolg,总结基本操作平铺和偏移1234567//properties_Texture(&amp;quot;Texture&amp;quot;,2D)=&amp;quot;white&amp;quot;&amp;#123;&amp;#125;//SubPa,"> 
+    <meta name="description" content="MrChen Bolg,[TOC]
+总结基本操作平铺和偏移1234567//properties_Texture(&amp;quot;Texture&amp;quot;,2D)=&amp;quot;white&amp;quot;&amp;#123;&amp;#125;/,"> 
     <meta name="author" content="Jack Chen"> 
     <link rel="alternative" href="atom.xml" title="浪子之心" type="application/atom+xml"> 
     <link rel="icon" href="/img/favicon.png"> 
@@ -54,7 +55,8 @@
 
         </div>
         <div class="content markdown">
-            <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><h2 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h2><h4 id="平铺和偏移"><a href="#平铺和偏移" class="headerlink" title="平铺和偏移"></a>平铺和偏移</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//properties</span></span><br><span class="line">_Texture(<span class="string">&quot;Texture&quot;</span>,<span class="number">2</span>D)=<span class="string">&quot;white&quot;</span>&#123;&#125;</span><br><span class="line"><span class="comment">//SubPass/Pass</span></span><br><span class="line">sampler2D _Texture;</span><br><span class="line">float4 _Texture_ST;	</span><br><span class="line">o.uv=v.uv*_Texture_ST.xy+_Texture_ST.zw;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+            <p>[TOC]</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><h2 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h2><h4 id="平铺和偏移"><a href="#平铺和偏移" class="headerlink" title="平铺和偏移"></a>平铺和偏移</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//properties</span></span><br><span class="line">_Texture(<span class="string">&quot;Texture&quot;</span>,<span class="number">2</span>D)=<span class="string">&quot;white&quot;</span>&#123;&#125;</span><br><span class="line"><span class="comment">//SubPass/Pass</span></span><br><span class="line">sampler2D _Texture;</span><br><span class="line">float4 _Texture_ST;	</span><br><span class="line">o.uv=v.uv*_Texture_ST.xy+_Texture_ST.zw;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <h4 id="顶点坐标系MVP转换"><a href="#顶点坐标系MVP转换" class="headerlink" title="顶点坐标系MVP转换"></a>顶点坐标系MVP转换</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">float4 pos_world = mul(unity_ObjectToWorld, v.vertex);</span><br><span class="line">float4 pos_view = mul(UNITY_MATRIX_V,pos_world);</span><br><span class="line">float4 pos_clip = mul(UNITY_MATRIX_P,pos_view);</span><br><span class="line">o.pos=pos_clip;</span><br></pre></td></tr></table></figure>
 

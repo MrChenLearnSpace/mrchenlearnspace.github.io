@@ -10,7 +10,8 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="google" content="notranslate" />
     <meta name="keywords" content="Blog,"> 
-    <meta name="description" content="MrChen Bolg,全景图将全景图转变为Byte数组12345Camera.main.RenderToCubemap(cm);texture2D = new Texture2D(width, hight);textur,"> 
+    <meta name="description" content="MrChen Bolg,[TOC]
+全景图将全景图转变为Byte数组12345Camera.main.RenderToCubemap(cm);texture2D = new Texture2D(width, hight);,"> 
     <meta name="author" content="Jack Chen"> 
     <link rel="alternative" href="atom.xml" title="浪子之心" type="application/atom+xml"> 
     <link rel="icon" href="/img/favicon.png"> 
@@ -54,7 +55,8 @@
 
         </div>
         <div class="content markdown">
-            <h1 id="全景图"><a href="#全景图" class="headerlink" title="全景图"></a>全景图</h1><h2 id="将全景图转变为Byte数组"><a href="#将全景图转变为Byte数组" class="headerlink" title="将全景图转变为Byte数组"></a>将全景图转变为Byte数组</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Camera.main.RenderToCubemap(cm);</span><br><span class="line">texture2D = new Texture2D(width, hight);</span><br><span class="line">texture2D.SetPixels(cm.GetPixels(CubemapFace.NegativeZ));</span><br><span class="line">texture2D.Apply();</span><br><span class="line">byt = texture2D.EncodeToPNG();</span><br></pre></td></tr></table></figure>
+            <p>[TOC]</p>
+<h1 id="全景图"><a href="#全景图" class="headerlink" title="全景图"></a>全景图</h1><h2 id="将全景图转变为Byte数组"><a href="#将全景图转变为Byte数组" class="headerlink" title="将全景图转变为Byte数组"></a>将全景图转变为Byte数组</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Camera.main.RenderToCubemap(cm);</span><br><span class="line">texture2D = new Texture2D(width, hight);</span><br><span class="line">texture2D.SetPixels(cm.GetPixels(CubemapFace.NegativeZ));</span><br><span class="line">texture2D.Apply();</span><br><span class="line">byt = texture2D.EncodeToPNG();</span><br></pre></td></tr></table></figure>
 
 <h2 id="将Byte数组变成全景图"><a href="#将Byte数组变成全景图" class="headerlink" title="将Byte数组变成全景图"></a>将Byte数组变成全景图</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">texture2DFix.LoadImage(byt);</span><br><span class="line">texture2DFix.Apply</span><br><span class="line">cm1.SetPixels(texture2DFix.GetPixels(), CubemapFace.PositiveZ);</span><br><span class="line">cm1.Apply();</span><br></pre></td></tr></table></figure>
 

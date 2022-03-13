@@ -10,8 +10,9 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="google" content="notranslate" />
     <meta name="keywords" content="Blog,"> 
-    <meta name="description" content="MrChen Bolg,后处理（上）启用后处理在摄像头添加脚本
-123456789101112131415161718192021using System.Collections;using System.Collecti,"> 
+    <meta name="description" content="MrChen Bolg,[TOC]
+后处理（上）启用后处理在摄像头添加脚本
+123456789101112131415161718192021using System.Collections;using System.Co,"> 
     <meta name="author" content="Jack Chen"> 
     <link rel="alternative" href="atom.xml" title="浪子之心" type="application/atom+xml"> 
     <link rel="icon" href="/img/favicon.png"> 
@@ -55,7 +56,8 @@
 
         </div>
         <div class="content markdown">
-            <h1 id="后处理（上）"><a href="#后处理（上）" class="headerlink" title="后处理（上）"></a>后处理（上）</h1><h2 id="启用后处理"><a href="#启用后处理" class="headerlink" title="启用后处理"></a>启用后处理</h2><p>在摄像头添加脚本</p>
+            <p>[TOC]</p>
+<h1 id="后处理（上）"><a href="#后处理（上）" class="headerlink" title="后处理（上）"></a>后处理（上）</h1><h2 id="启用后处理"><a href="#启用后处理" class="headerlink" title="启用后处理"></a>启用后处理</h2><p>在摄像头添加脚本</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">using System.Collections;</span><br><span class="line">using System.Collections.Generic;</span><br><span class="line">using UnityEngine;</span><br><span class="line">[ExecuteInEditMode()]//编辑模式就能看到效果</span><br><span class="line">public class CameraPostPress : MonoBehaviour</span><br><span class="line">&#123;</span><br><span class="line">    public Material mat;</span><br><span class="line">    // Start is called before the first frame update</span><br><span class="line">    void Start()</span><br><span class="line">    &#123;</span><br><span class="line">        if(mat==null||SystemInfo.supportsImageEffects==false||mat.shader==null||mat.shader.isSupported==false) &#123;</span><br><span class="line">            enabled = false;</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    private void OnRenderImage(RenderTexture source, RenderTexture destination) &#123;</span><br><span class="line">        //当渲染图片启用   source是帧处理的图片 0是pass的顺序</span><br><span class="line">        Graphics.Blit(source,destination,mat, 0);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 
