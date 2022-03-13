@@ -10,10 +10,9 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="google" content="notranslate" />
     <meta name="keywords" content="Blog,"> 
-    <meta name="description" content="MrChen Bolg,[TOC]
-冯光照模型效果混合相加：diffuse + ambient + specular
+    <meta name="description" content="MrChen Bolg,冯光照模型效果混合相加：diffuse + ambient + specular
 图片混和相乘：(diffuse + ambient + specular) * objColor
-1Fr,"> 
+1FragColo,"> 
     <meta name="author" content="Jack Chen"> 
     <link rel="alternative" href="atom.xml" title="浪子之心" type="application/atom+xml"> 
     <link rel="icon" href="/img/favicon.png"> 
@@ -57,8 +56,7 @@
 
         </div>
         <div class="content markdown">
-            <p>[TOC]</p>
-<h1 id="冯光照模型"><a href="#冯光照模型" class="headerlink" title="冯光照模型"></a>冯光照模型</h1><p>效果混合相加：diffuse + ambient + specular</p>
+            <h1 id="冯光照模型"><a href="#冯光照模型" class="headerlink" title="冯光照模型"></a>冯光照模型</h1><p>效果混合相加：diffuse + ambient + specular</p>
 <p>图片混和相乘：(diffuse + ambient + specular) * objColor</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">FragColor =vec4((diffuse + ambient + specular) * objColor,<span class="number">1.0f</span>);</span><br></pre></td></tr></table></figure>
 

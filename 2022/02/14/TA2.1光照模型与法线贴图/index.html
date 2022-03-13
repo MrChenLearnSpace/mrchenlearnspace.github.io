@@ -10,9 +10,8 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="google" content="notranslate" />
     <meta name="keywords" content="Blog,"> 
-    <meta name="description" content="MrChen Bolg,[TOC]
-渲染路径前向渲染对每一个物体每一个光源进行渲染，超出范围的灯光以顶点灯光渲染，适用于灯光较少的情况
-ForwardBase在这个Pass里面，主方向灯以及超出范围的灯光作为顶点灯光传入S,"> 
+    <meta name="description" content="MrChen Bolg,渲染路径前向渲染对每一个物体每一个光源进行渲染，超出范围的灯光以顶点灯光渲染，适用于灯光较少的情况
+ForwardBase在这个Pass里面，主方向灯以及超出范围的灯光作为顶点灯光传入SH，   L,"> 
     <meta name="author" content="Jack Chen"> 
     <link rel="alternative" href="atom.xml" title="浪子之心" type="application/atom+xml"> 
     <link rel="icon" href="/img/favicon.png"> 
@@ -56,8 +55,7 @@ ForwardBase在这个Pass里面，主方向灯以及超出范围的灯光作为�
 
         </div>
         <div class="content markdown">
-            <p>[TOC]</p>
-<h1 id="渲染路径"><a href="#渲染路径" class="headerlink" title="渲染路径"></a>渲染路径</h1><h2 id="前向渲染"><a href="#前向渲染" class="headerlink" title="前向渲染"></a>前向渲染</h2><p>对每一个物体每一个光源进行渲染，超出范围的灯光以顶点灯光渲染，适用于灯光较少的情况</p>
+            <h1 id="渲染路径"><a href="#渲染路径" class="headerlink" title="渲染路径"></a>渲染路径</h1><h2 id="前向渲染"><a href="#前向渲染" class="headerlink" title="前向渲染"></a>前向渲染</h2><p>对每一个物体每一个光源进行渲染，超出范围的灯光以顶点灯光渲染，适用于灯光较少的情况</p>
 <h3 id="ForwardBase"><a href="#ForwardBase" class="headerlink" title="ForwardBase"></a>ForwardBase</h3><p>在这个Pass里面，主方向灯以及超出范围的灯光作为顶点灯光传入SH，   LightMap，Reflection， Probe等计算均在这个Pass里面完成。</p>
 <h3 id="ForwardAdd"><a href="#ForwardAdd" class="headerlink" title="ForwardAdd"></a>ForwardAdd</h3><p>数量范围内的灯光，每个灯光的计算，均会调用一次这个pass，计算的结果通过Blend one one 叠加起来。</p>
 <h2 id="延迟渲染"><a href="#延迟渲染" class="headerlink" title="延迟渲染"></a>延迟渲染</h2><p> 使用MRT技术 ，RT0是物体的颜色，RT1是金属反射的颜色，RT2是法线数据，RT4是深度信息。</p>

@@ -10,8 +10,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="google" content="notranslate" />
     <meta name="keywords" content="Blog,"> 
-    <meta name="description" content="MrChen Bolg,[TOC]
-环境配置先建立一个空项目，建立一个c++文件，然后设置解决方案的属性设置三个位置第一是c/c++\常规\附加包含目录加入include的文件夹，glfw和glew都需要，第二，链接器\常,"> 
+    <meta name="description" content="MrChen Bolg,环境配置先建立一个空项目，建立一个c++文件，然后设置解决方案的属性设置三个位置第一是c/c++\常规\附加包含目录加入include的文件夹，glfw和glew都需要，第二，链接器\常规\附加库目,"> 
     <meta name="author" content="Jack Chen"> 
     <link rel="alternative" href="atom.xml" title="浪子之心" type="application/atom+xml"> 
     <link rel="icon" href="/img/favicon.png"> 
@@ -55,8 +54,7 @@
 
         </div>
         <div class="content markdown">
-            <p>[TOC]</p>
-<h1 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h1><p>先建立一个空项目，建立一个c++文件，然后设置解决方案的属性设置三个位置<br><strong>第一是c/c++\常规\附加包含目录加入include的文件夹，glfw和glew都需要，第二，链接器\常规\附加库目录，lib文件夹，第三，链接器\输入\附加依赖库，opengl32.lib glfw3.lib glew32s.lib</strong></p>
+            <h1 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h1><p>先建立一个空项目，建立一个c++文件，然后设置解决方案的属性设置三个位置<br><strong>第一是c/c++\常规\附加包含目录加入include的文件夹，glfw和glew都需要，第二，链接器\常规\附加库目录，lib文件夹，第三，链接器\输入\附加依赖库，opengl32.lib glfw3.lib glew32s.lib</strong></p>
 <h1 id="创建自己的引擎"><a href="#创建自己的引擎" class="headerlink" title="创建自己的引擎"></a>创建自己的引擎</h1><p>将文件修改为main作为主函数</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#define GLEW_STATIC</span><br></pre></td></tr></table></figure>
 <p>这个注意小心拼写错误，本人搞了几小时</p>

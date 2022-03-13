@@ -10,8 +10,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="google" content="notranslate" />
     <meta name="keywords" content="Blog,"> 
-    <meta name="description" content="MrChen Bolg,[TOC]
-火焰制作原理利用裁剪方程，将噪点图进行向上流动达到火焰往上升的效果，用一张渐变图和噪点图相乘把上半部分进行裁剪，将颜色的HDR效果打开，现在得到初步的火焰加一点点细节，让火的边缘柔和一点,"> 
+    <meta name="description" content="MrChen Bolg,火焰制作原理利用裁剪方程，将噪点图进行向上流动达到火焰往上升的效果，用一张渐变图和噪点图相乘把上半部分进行裁剪，将颜色的HDR效果打开，现在得到初步的火焰加一点点细节，让火的边缘柔和一点。让噪声图减,"> 
     <meta name="author" content="Jack Chen"> 
     <link rel="alternative" href="atom.xml" title="浪子之心" type="application/atom+xml"> 
     <link rel="icon" href="/img/favicon.png"> 
@@ -55,8 +54,7 @@
 
         </div>
         <div class="content markdown">
-            <p>[TOC]</p>
-<h1 id="火焰"><a href="#火焰" class="headerlink" title="火焰"></a>火焰</h1><h2 id="制作原理"><a href="#制作原理" class="headerlink" title="制作原理"></a>制作原理</h2><p>利用裁剪方程，将噪点图进行向上流动达到火焰往上升的效果，用一张渐变图和噪点图相乘把上半部分进行裁剪，将颜色的HDR效果打开，现在得到初步的火焰加一点点细节，让火的边缘柔和一点。让噪声图减去一个变量，并钳制在0到1之间，调大变量会使边缘柔和化，接下来是让火焰外焰和内焰效果</p>
+            <h1 id="火焰"><a href="#火焰" class="headerlink" title="火焰"></a>火焰</h1><h2 id="制作原理"><a href="#制作原理" class="headerlink" title="制作原理"></a>制作原理</h2><p>利用裁剪方程，将噪点图进行向上流动达到火焰往上升的效果，用一张渐变图和噪点图相乘把上半部分进行裁剪，将颜色的HDR效果打开，现在得到初步的火焰加一点点细节，让火的边缘柔和一点。让噪声图减去一个变量，并钳制在0到1之间，调大变量会使边缘柔和化，接下来是让火焰外焰和内焰效果</p>
 <h2 id="噪点值"><a href="#噪点值" class="headerlink" title="噪点值"></a>噪点值</h2><p><img src="https://img-blog.csdnimg.cn/a9f0ed3772e7465785f1f268de05ebd6.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 <p>噪点图往上移动取R通道</p>
 <h2 id="渐变值和内焰边界"><a href="#渐变值和内焰边界" class="headerlink" title="渐变值和内焰边界"></a>渐变值和内焰边界</h2><p><img src="https://img-blog.csdnimg.cn/a3ecd9c74d574044aed2fc070e609e02.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
