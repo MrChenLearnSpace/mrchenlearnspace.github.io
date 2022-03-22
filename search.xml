@@ -888,7 +888,7 @@
   </entry>
   <entry>
     <title>Games104第2节记录</title>
-    <url>/2022/03/22/Games104%E7%AC%AC2%E8%8A%82%E8%AE%B0%E5%BD%95%20/</url>
+    <url>/2022/03/22/Games104%E7%AC%AC2%E8%8A%82%E8%AE%B0%E5%BD%95/</url>
     <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>Tool Layer    给予开发者使用的工具</p>
 <p>Function Layer </p>
 <p>Resource Layer </p>
@@ -902,17 +902,17 @@
 <p>将文件全局资产编号GUID</p>
 <p>Handle管理所有的资源周期</p>
 <p>延迟加载</p>
-<h1 id="Function"><a href="#Function" class="headerlink" title="Function"></a>Function</h1><h3 id="Tick循环"><a href="#Tick循环" class="headerlink" title="Tick循环"></a>Tick循环</h3><p><img src="https://img-blog.csdnimg.cn/2dffc93fd10c4dfb9970d5078b6dac01.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
-<h3 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h3><p><img src="https://img-blog.csdnimg.cn/4d4628dbec9a431a8142490ebdedb01b.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
-<h1 id="核心层"><a href="#核心层" class="headerlink" title="核心层"></a>核心层</h1><p>数学库，基本线代，取决于你系统的效率。</p>
+<h1 id="Function"><a href="#Function" class="headerlink" title="Function"></a>Function</h1><h3 id="1-Tick循环"><a href="#1-Tick循环" class="headerlink" title="1.Tick循环"></a>1.Tick循环</h3><p><img src="https://img-blog.csdnimg.cn/2dffc93fd10c4dfb9970d5078b6dac01.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h3 id="2-多线程"><a href="#2-多线程" class="headerlink" title="2.多线程"></a>2.多线程</h3><p><img src="https://img-blog.csdnimg.cn/4d4628dbec9a431a8142490ebdedb01b.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h1 id="Core核心层"><a href="#Core核心层" class="headerlink" title="Core核心层"></a>Core核心层</h1><p>数学库，基本线代，取决于你系统的效率。</p>
 <p>simd，如下四个数据一次性处理。</p>
 <p><img src="https://img-blog.csdnimg.cn/722c5c5e526b4502908f0edbda47c868.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_13,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 <p>数据结构，无内存碎片，查找效率高</p>
 <p>Memory Management，有点像操作系统，进行更高效率的处理。</p>
 <p><img src="https://img-blog.csdnimg.cn/ca185ca9c61c45d8ae83704cefc2d4aa.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
-<h1 id="平台层"><a href="#平台层" class="headerlink" title="平台层"></a>平台层</h1><p>去除平台差异</p>
+<h1 id="Platforms平台层"><a href="#Platforms平台层" class="headerlink" title="Platforms平台层"></a>Platforms平台层</h1><p>去除平台差异</p>
 <p>比如将常用的GraphicsAPI抽象出来，用多态解决不同平台的问题。</p>
-<h1 id="工具层"><a href="#工具层" class="headerlink" title="工具层"></a>工具层</h1><p>允许任何人可以创造游戏，开发效率优先。</p>
+<h1 id="Tool工具层"><a href="#Tool工具层" class="headerlink" title="Tool工具层"></a>Tool工具层</h1><p>允许任何人可以创造游戏，开发效率优先。</p>
 <p>数据的导入器导出器，能支持其他的3d软件资产</p>
 <h1 id="简单ecs框架"><a href="#简单ecs框架" class="headerlink" title="简单ecs框架"></a>简单ecs框架</h1><p><img src="https://img-blog.csdnimg.cn/c9374d62177542dea5f17856cf4146df.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>引擎是分层架构的</p>
