@@ -1,0 +1,249 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>OpenCV的边缘计算 - 浪子之心</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Blog,"> 
+    <meta name="description" content="MrChen Bolg,基于梯度的检测器
+梯边缘，顶边缘，坡边缘
+有限差分最简单的梯度算子$$gx&amp;#x3D;f(x+1,y)-f(x,y) \gy&amp;#x3D;f(x,y+1)-f(x,y)$$
+Sobel算子对于具有噪声,"> 
+    <meta name="author" content="Jack Chen"> 
+    <link rel="alternative" href="atom.xml" title="浪子之心" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+<meta name="generator" content="Hexo 5.4.1"><link rel="stylesheet" href="/css/prism.css" type="text/css"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">浪子之心</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="https://mrchenlreanspace.github.io"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">OpenCV的边缘计算</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">OpenCV的边缘计算</h1>
+        <div class="stuff">
+            <span>三月 22, 2022</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/OpenCV/" rel="tag">OpenCV</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h1 id="基于梯度的检测器"><a href="#基于梯度的检测器" class="headerlink" title="基于梯度的检测器"></a>基于梯度的检测器</h1><p><img src="https://img-blog.csdn.net/20160911165855683?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center"></p>
+<p>梯边缘，顶边缘，坡边缘</p>
+<h2 id="有限差分"><a href="#有限差分" class="headerlink" title="有限差分"></a>有限差分</h2><p>最简单的梯度算子<br>$$<br>gx&#x3D;f(x+1,y)-f(x,y) \<br>gy&#x3D;f(x,y+1)-f(x,y)<br>$$</p>
+<h2 id="Sobel算子"><a href="#Sobel算子" class="headerlink" title="Sobel算子"></a>Sobel算子</h2><p>对于具有噪声的图有很好的效果<br>$$<br>gx&#x3D;\frac{1}{8}\left[ \begin{matrix} -1 &amp; 0 &amp; 1 \ -2 &amp; 0 &amp; 2 \ -1 &amp; 0 &amp; 1  \end{matrix} \right]\<br>gy&#x3D;\frac{1}{8}\left[ \begin{matrix} 1 &amp; 2 &amp; 1 \ 0 &amp; 0 &amp; 0 \ -1 &amp; -2 &amp; -1  \end{matrix} \right]<br>$$</p>
+<h1 id="基于曲率的检测器"><a href="#基于曲率的检测器" class="headerlink" title="基于曲率的检测器"></a>基于曲率的检测器</h1><p>缺点，对于薄边缘在精准定位边缘没有优势</p>
+<h2 id="Marr-Hildreth"><a href="#Marr-Hildreth" class="headerlink" title="Marr-Hildreth"></a>Marr-Hildreth</h2><p>$$<br>gx-g(x-1)&#x3D;f(x+1,y)-f(x,y) -(f(x,y)-f(x-1,y) )&#x3D;f(x+1,y)-f(x-1,y)-2f(x,y)<br>$$</p>
+<h2 id="高斯的拉普拉斯滤波器LoG"><a href="#高斯的拉普拉斯滤波器LoG" class="headerlink" title="高斯的拉普拉斯滤波器LoG"></a>高斯的拉普拉斯滤波器LoG</h2><p>考虑四边的核<br>$$<br>\frac{1}{8}\left[ \begin{matrix} 0 &amp; -1 &amp; 0 \ -1 &amp; 4 &amp; -1 \ 0 &amp; -1 &amp; 0  \end{matrix} \right]<br>$$<br>考虑全部八个方向<br>$$<br>\frac{1}{8}\left[ \begin{matrix} -1 &amp; -1 &amp; -1 \ -1 &amp; 8 &amp; -1 \ -1 &amp; -1 &amp; -1  \end{matrix} \right]<br>$$</p>
+<h1 id="Canny边缘检测"><a href="#Canny边缘检测" class="headerlink" title="Canny边缘检测"></a>Canny边缘检测</h1><p>canny的四步法</p>
+<ol>
+<li><p>使用低通滤波器抑制噪声</p>
+</li>
+<li><p>计算梯度幅度和方向图</p>
+</li>
+<li><p>对梯度幅度图使用非极大值抑制</p>
+</li>
+<li><p>运用迟滞和连通分析检测边缘</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;opencv2/core/core.hpp&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;opencv2/opencv.hpp&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;opencv2/highgui/highgui.hpp&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;opencv2/imgproc/imgproc.hpp&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> cv;</span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  Mat srcImage, grayImage;</span><br><span class="line"></span><br><span class="line">  srcImage = <span class="built_in">imread</span>(<span class="string">&quot;Lena.png&quot;</span>);</span><br><span class="line">  <span class="built_in">imshow</span>(<span class="string">&quot;Lena.png&quot;</span>, srcImage);</span><br><span class="line">  Mat srcImage1 = srcImage.<span class="built_in">clone</span>();</span><br><span class="line">  <span class="comment">//图形转换:</span></span><br><span class="line">  <span class="built_in">cvtColor</span>(srcImage, grayImage, COLOR_BGR2GRAY);</span><br><span class="line">  Mat dstImage, edge;</span><br><span class="line">  <span class="comment">//均值滤波</span></span><br><span class="line">  <span class="built_in">blur</span>(srcImage1, grayImage, <span class="built_in">Size</span>(<span class="number">3</span>, <span class="number">3</span>));</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  <span class="built_in">imshow</span>(<span class="string">&quot;grayImage.png&quot;</span>, grayImage);</span><br><span class="line"></span><br><span class="line">  <span class="built_in">GaussianBlur</span>(grayImage, grayImage, <span class="built_in">Size</span>(<span class="number">5</span>, <span class="number">5</span>), <span class="number">0.8</span>);</span><br><span class="line">  <span class="comment">/*</span></span><br><span class="line"><span class="comment">    边缘检测</span></span><br><span class="line"><span class="comment">    低于阈值1的像素点会被认为不是边缘；</span></span><br><span class="line"><span class="comment">    高于阈值2的像素点会被认为是边缘；</span></span><br><span class="line"><span class="comment">    在阈值1和阈值2之间的像素点,若与第2步得到的边缘像素点相邻，则被认为是边缘，否则被认为不是边缘。</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line">  <span class="built_in">Canny</span>(grayImage, edge, <span class="number">150</span>, <span class="number">100</span>, <span class="number">3</span>);</span><br><span class="line"></span><br><span class="line">  dstImage.<span class="built_in">create</span>(srcImage1.<span class="built_in">size</span>(), srcImage1.<span class="built_in">type</span>());</span><br><span class="line">  dstImage = Scalar::<span class="built_in">all</span>(<span class="number">0</span>);</span><br><span class="line">  <span class="comment">/*</span></span><br><span class="line"><span class="comment">  image.copyTo(imageROI)。作用是把image的内容复制粘贴到imageROI上；</span></span><br><span class="line"><span class="comment">  image.copyTo(imageROI，mask)。 作用是把mask和image重叠以后把mask中像素值为0（black）的点对应的image中的点变为透明，而保留其他点。</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line">  srcImage1.<span class="built_in">copyTo</span>(dstImage, edge);</span><br><span class="line">  <span class="built_in">imwrite</span>(<span class="string">&quot;canny.jpg&quot;</span>, dstImage);</span><br><span class="line">  <span class="built_in">imshow</span>(<span class="string">&quot;canny.jpg&quot;</span>, dstImage);</span><br><span class="line">  <span class="built_in">waitKey</span>(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h1 id="fast算子"><a href="#fast算子" class="headerlink" title="fast算子"></a>fast算子</h1><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/ssw_1990/article/details/70569871">参考这个代码</a></p>
+<p>计算步骤</p>
+<ol>
+<li><p>从图片中选取一个坐标点,获取该点的像素值,接下来判定该点是否为特征点.</p>
+</li>
+<li><p>选取一个以选取点坐标为圆心的半径等于三的Bresenham圆(一个计算圆的轨迹的离散算法,得到整数级的圆的轨迹点),一般来说,这个圆上有16个点</p>
+</li>
+<li><p>现在选取一个阈值,假设为t,关键步骤,假设这16个点中,有N个连续的像素点,他们的亮度值与中心点的像素值的差大于或者小于t,那么这个点就是一个特征点.(n的取值一般取值12或者9,实验证明9可以取得更好的效果,因为可以获取更多的特征点,后面进行处理时,数据样本额相对多一些).</p>
+</li>
+<li><p>加入每个轨迹点都需要遍历的话,那么需要的时间比较长,有一种比较简单的方法可以选择,那就是仅仅检查在位置1，9，5和13四个位置的像素，首先检测位置1和位置9，如果它们都比阈值暗或比阈值亮，再检测位置5和位置13,该满足判断条件。如果不满足中心点不可能是一个角点。对于所有点做上面这一部分初步的检测后，符合条件的将成为候选的角点，我们再对候选的角点，做完整的测试，即检测圆上的所有点.</p>
+</li>
+</ol>
+<p>但是,这种检测方法会带来一个问题,就是造成特征点的聚簇效应,多个特征点在图像的某一块重复高频率的出现,FAST算法提出了一种非极大值抑制的办法来消除这种情况,具体办法如下</p>
+<ol>
+<li><p>对所有检测到的角点构建一个打分函数。就是像素点与周围16个像素点差值的绝对值之和。</p>
+</li>
+<li><p>考虑两个相邻的角点，并比较它们的值。</p>
+</li>
+<li><p>值较低的角点将会被删除。</p>
+</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;opencv2/core/core.hpp&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;opencv2/opencv.hpp&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;opencv2/highgui/highgui.hpp&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;opencv2/imgproc/imgproc.hpp&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> cv;</span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  Mat srcImage, grayImage;</span><br><span class="line"></span><br><span class="line">  srcImage = <span class="built_in">imread</span>(<span class="string">&quot;Lena.png&quot;</span>);</span><br><span class="line">  <span class="built_in">imshow</span>(<span class="string">&quot;Lena.png&quot;</span>, srcImage);</span><br><span class="line"></span><br><span class="line">  Mat gray;</span><br><span class="line">  <span class="built_in">cvtColor</span>(srcImage, gray, COLOR_BGR2GRAY);</span><br><span class="line"></span><br><span class="line">  Mat LenaFast;</span><br><span class="line">  vector&lt;KeyPoint&gt;detectKeyPoint;</span><br><span class="line">  Mat keyPointImage1;</span><br><span class="line">  Ptr&lt;FastFeatureDetector&gt; fast = FastFeatureDetector::<span class="built_in">create</span>();</span><br><span class="line">  fast-&gt;<span class="built_in">detect</span>(gray, detectKeyPoint);</span><br><span class="line">  <span class="built_in">drawKeypoints</span>(srcImage, detectKeyPoint, keyPointImage1, <span class="built_in">Scalar</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">255</span>), DrawMatchesFlags::DRAW_RICH_KEYPOINTS);</span><br><span class="line">  <span class="built_in">imshow</span>(<span class="string">&quot;keyPoint image1&quot;</span>, keyPointImage1);</span><br><span class="line">  <span class="comment">//imshow(&quot;keyPoint image2&quot;, keyPointImage2);</span></span><br><span class="line">  <span class="built_in">waitKey</span>(<span class="number">0</span>);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">enum struct</span> <span class="title class_">DrawMatchesFlags</span></span><br><span class="line">&#123;</span><br><span class="line">  DEFAULT = <span class="number">0</span>, <span class="comment">//!&lt; 将创建输出图像矩阵(Mat::create),</span></span><br><span class="line">               <span class="comment">//!&lt; i.e. 输出图像的现有内存可以重用.</span></span><br><span class="line">               <span class="comment">//!&lt; 将绘制两个源图像，匹配和单个关键点.</span></span><br><span class="line">               <span class="comment">//!&lt; 对于每个关键点，只有中心点将被绘制(没有带关键点大小和方向的圆点)</span></span><br><span class="line">  DRAW_OVER_OUTIMG = <span class="number">1</span>, <span class="comment">//!&lt; 输出图像矩阵将不会被创建 (Mat::create).</span></span><br><span class="line">                        <span class="comment">//!&lt; 匹配将绘制在输出图像的现有内容上.</span></span><br><span class="line">  NOT_DRAW_SINGLE_POINTS = <span class="number">2</span>, <span class="comment">//!&lt; 不会绘制单个关键点。</span></span><br><span class="line">  DRAW_RICH_KEYPOINTS = <span class="number">4</span> <span class="comment">//!&lt; 对于每个关键点，将绘制具有关键点大小和方向的圆。</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h1 id="Harris算子"><a href="#Harris算子" class="headerlink" title="Harris算子"></a>Harris算子</h1><p>步骤如下：</p>
+<ol>
+<li><p>生成梯度图像gx，gy</p>
+</li>
+<li><p>一个颜色块A，A1到A9 3x3，一个颜色块B，B1到B9 3x3 w x（Ai-Bi）的平方。w是权值比如A5到Ai的距离。</p>
+</li>
+<li><p>得到两个特征值下x，y如果两个值都很小，没有特征。如果一个很大就存在一条边，都很大，这个点有一个角点。</p>
+</li>
+</ol>
+<p>c++的实现</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;opencv2/core/core.hpp&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;opencv2/opencv.hpp&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;opencv2/highgui/highgui.hpp&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;opencv2/imgproc/imgproc.hpp&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> cv;</span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  Mat srcImage, grayImage;</span><br><span class="line"></span><br><span class="line">  srcImage = <span class="built_in">imread</span>(<span class="string">&quot;Lena.png&quot;</span>);</span><br><span class="line">  <span class="built_in">imshow</span>(<span class="string">&quot;Lena.png&quot;</span>, srcImage);</span><br><span class="line"></span><br><span class="line">  Mat gray;</span><br><span class="line">  <span class="built_in">cvtColor</span>(srcImage, gray, COLOR_BGR2GRAY);</span><br><span class="line"></span><br><span class="line">  Mat LenaHarris;</span><br><span class="line">  <span class="built_in">cornerHarris</span>(gray, LenaHarris, <span class="number">7</span>,<span class="number">7</span>, <span class="number">0.1</span>);</span><br><span class="line">  <span class="built_in">imshow</span>(<span class="string">&quot;LenaHarris.jpg&quot;</span>, LenaHarris);</span><br><span class="line">  <span class="built_in">waitKey</span>(<span class="number">0</span>);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="/music/jucilang.mp3">
+            </audio>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+		data-enable='true'
+        data-ae='true'
+        data-ci='35b8fbd0e6865c1adf60'
+        data-cs='6d2988de68c828bce78247ad604846cdc30e7ca3'
+        data-r='mrchenlreanspace.github.io'
+        data-o='MrChenLreanSpace'
+        data-a='MrChenLreanSpace'
+        data-d='false'
+    >查看评论</div>
+
+
+    </div>
+    
+        <div class='side'>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9F%BA%E4%BA%8E%E6%A2%AF%E5%BA%A6%E7%9A%84%E6%A3%80%E6%B5%8B%E5%99%A8"><span class="toc-number">1.</span> <span class="toc-text">基于梯度的检测器</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%89%E9%99%90%E5%B7%AE%E5%88%86"><span class="toc-number">1.1.</span> <span class="toc-text">有限差分</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Sobel%E7%AE%97%E5%AD%90"><span class="toc-number">1.2.</span> <span class="toc-text">Sobel算子</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9F%BA%E4%BA%8E%E6%9B%B2%E7%8E%87%E7%9A%84%E6%A3%80%E6%B5%8B%E5%99%A8"><span class="toc-number">2.</span> <span class="toc-text">基于曲率的检测器</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Marr-Hildreth"><span class="toc-number">2.1.</span> <span class="toc-text">Marr-Hildreth</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%AB%98%E6%96%AF%E7%9A%84%E6%8B%89%E6%99%AE%E6%8B%89%E6%96%AF%E6%BB%A4%E6%B3%A2%E5%99%A8LoG"><span class="toc-number">2.2.</span> <span class="toc-text">高斯的拉普拉斯滤波器LoG</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Canny%E8%BE%B9%E7%BC%98%E6%A3%80%E6%B5%8B"><span class="toc-number">3.</span> <span class="toc-text">Canny边缘检测</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#fast%E7%AE%97%E5%AD%90"><span class="toc-number">4.</span> <span class="toc-text">fast算子</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Harris%E7%AE%97%E5%AD%90"><span class="toc-number">5.</span> <span class="toc-text">Harris算子</span></a></li></ol>	
+        </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"], linebreaks: { automatic:true }, EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50) },
+        tex2jax: { inlineMath: [ ["$", "$"], ["\\(","\\)"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno",skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']},
+        TeX: {  noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } }, Macros: { href: "{}" } },
+        messageStyle: "none"
+    });
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+<!-- Google Analytics -->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YMJ8CBH8F7"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-YMJ8CBH8F7');
+</script>
+<!-- End Google Analytics -->
+
+
+</html>
