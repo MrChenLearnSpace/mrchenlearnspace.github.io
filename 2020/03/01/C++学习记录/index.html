@@ -1,0 +1,274 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>C++学习记录 - 浪子之心</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Blog,"> 
+    <meta name="description" content="MrChen Bolg,第七章流操纵算子需要头文件#include整数dec10，oct8，hex16，setbase小数点setiosflags(ios::fixed)或fixed浮点精度precision，setpre,"> 
+    <meta name="author" content="Jack Chen"> 
+    <link rel="alternative" href="atom.xml" title="浪子之心" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+<meta name="generator" content="Hexo 5.4.1"><link rel="stylesheet" href="/css/prism.css" type="text/css"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">浪子之心</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="https://mrchenlreanspace.github.io"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">C++学习记录</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">C++学习记录</h1>
+        <div class="stuff">
+            <span>三月 01, 2020</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/C/" rel="tag">C++</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h1 id="第七章"><a href="#第七章" class="headerlink" title="第七章"></a>第七章</h1><h2 id="流操纵算子"><a href="#流操纵算子" class="headerlink" title="流操纵算子"></a>流操纵算子</h2><p>需要头文件<br>#include<iomanip><br>整数dec10，oct8，hex16，setbase<br>小数点setiosflags(ios::fixed)或fixed<br>浮点精度precision，setprecision<br>取消小数点resetiosflags(ios::fixed)<br>科学计数法scientific<br>设置宽域setw，width<br>非负数显示正号showpos()<br>非负数不显示正号noshowpos()<br>填充符号setfill(‘’)<br>数字的位置left，right</p>
+<h2 id="模板"><a href="#模板" class="headerlink" title="模板"></a>模板</h2><p>templatea<class T>&#x2F;&#x2F;T就变成了某个数据类型</p>
+<h1 id="第八章"><a href="#第八章" class="headerlink" title="第八章"></a>第八章</h1><h2 id="string类"><a href="#string类" class="headerlink" title="string类"></a>string类</h2><h3 id="赋值"><a href="#赋值" class="headerlink" title="赋值"></a>赋值</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">string <span class="title">s1</span><span class="params">(<span class="string">&quot;Hello&quot;</span>)</span></span>;</span><br><span class="line">cout &lt;&lt;s1.<span class="built_in">length</span>()&lt;&lt;endl;<span class="comment">//string类型长度输出</span></span><br><span class="line">cout&lt;&lt;s1&lt;&lt;endl;</span><br><span class="line"><span class="function">string <span class="title">s2</span><span class="params">(<span class="number">8</span>,<span class="string">&#x27;x&#x27;</span>)</span></span>;<span class="comment">//s2是8个x</span></span><br><span class="line">cout&lt;&lt;s2&lt;&lt;endl;</span><br><span class="line">string month=<span class="string">&quot;march&quot;</span>;<span class="comment">//直接赋值</span></span><br><span class="line">cout &lt;&lt; month&lt;&lt;endl;</span><br><span class="line">string s;</span><br><span class="line">s=<span class="string">&#x27;n&#x27;</span>;<span class="comment">//可以单个赋值</span></span><br><span class="line">cout&lt;&lt;s&lt;&lt;endl;</span><br></pre></td></tr></table></figure>
+
+<h3 id="string的复制"><a href="#string的复制" class="headerlink" title="string的复制"></a>string的复制</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">string <span class="title">s1</span><span class="params">(<span class="string">&quot;Hello&quot;</span>)</span>,s3</span>;<span class="comment">//直接复制</span></span><br><span class="line">  s3.<span class="built_in">assign</span>(s1);</span><br><span class="line">  cout&lt;&lt;s3&lt;&lt;endl;</span><br><span class="line">  <span class="function">string <span class="title">s1</span><span class="params">(<span class="string">&quot;Hello&quot;</span>)</span>,s2,s3</span>;</span><br><span class="line">  s3.<span class="built_in">assign</span>(s1,<span class="number">2</span>,<span class="number">3</span>);<span class="comment">//从s1的第2个复制3个字符，2形同下标</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="读取string的字符"><a href="#读取string的字符" class="headerlink" title="读取string的字符"></a>读取string的字符</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">s[<span class="number">0</span>]<span class="comment">//不会检测 ，可能会越界</span></span><br><span class="line">s.<span class="built_in">at</span>(<span class="number">0</span>)<span class="comment">//越界编译不会出错，但结果会提示出错</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="string连接"><a href="#string连接" class="headerlink" title="string连接"></a>string连接</h3><p>​    </p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">string <span class="title">s1</span><span class="params">(<span class="string">&quot;Hello&quot;</span>)</span>,<span class="title">s2</span><span class="params">(<span class="string">&quot;morning&quot;</span>)</span></span>;</span><br><span class="line">s1+=s2;<span class="comment">//直接连接</span></span><br><span class="line">cout&lt;&lt;s1&lt;&lt;endl;</span><br><span class="line">s1.<span class="built_in">append</span>(s2);<span class="comment">//append连接</span></span><br><span class="line">cout&lt;&lt;s1&lt;&lt;endl;</span><br><span class="line"></span><br><span class="line">s2.<span class="built_in">append</span>(s1,<span class="number">3</span>,s1.<span class="built_in">size</span>());<span class="comment">//从s1的第3个复制s1.size()在s2的尾部</span></span><br></pre></td></tr></table></figure>
+<h3 id="比较string"><a href="#比较string" class="headerlink" title="比较string"></a>比较string</h3><p>可以直接比较用bool类型记录结果</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">string <span class="title">s1</span><span class="params">(<span class="string">&quot;hello&quot;</span>)</span>,<span class="title">s2</span><span class="params">(<span class="string">&quot;hello&quot;</span>)</span>,<span class="title">s3</span><span class="params">(<span class="string">&quot;hell&quot;</span>)</span></span>;</span><br><span class="line">   <span class="type">int</span> f1=s1.<span class="built_in">compare</span>(s2);<span class="comment">//0   hello==hello</span></span><br><span class="line">   <span class="type">int</span> f2=s1.<span class="built_in">compare</span>(s3);<span class="comment">//1   hello&gt;hell</span></span><br><span class="line">   <span class="type">int</span> f3=s3.<span class="built_in">compare</span>(s1);<span class="comment">//-1 hell&lt;hello</span></span><br><span class="line">   <span class="type">int</span> f4=s1.<span class="built_in">compare</span>(<span class="number">1</span>,<span class="number">2</span>,s3,<span class="number">0</span>,<span class="number">3</span>);<span class="comment">//-1el&lt;hell   数字是代表下标</span></span><br><span class="line">   <span class="type">int</span> f5=s1.<span class="built_in">compare</span>(<span class="number">0</span>,s1.<span class="built_in">size</span>(),s3);<span class="comment">//1  hello&gt;hell第一个数是下标，第二个数字是s1比较的数量</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="子串"><a href="#子串" class="headerlink" title="子串"></a>子串</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">string <span class="title">s1</span><span class="params">(<span class="string">&quot;hello world&quot;</span>)</span>,s2</span>;</span><br><span class="line">s2=s1.<span class="built_in">substr</span>(<span class="number">4</span>,<span class="number">5</span>);<span class="comment">//下标4开始的5个字符</span></span><br><span class="line">cout&lt;&lt;s2&lt;&lt;endl;<span class="comment">//o wor</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="搜索find"><a href="#搜索find" class="headerlink" title="搜索find()"></a>搜索find()</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">string <span class="title">s1</span><span class="params">(<span class="string">&quot;hello worlld&quot;</span>)</span></span>;</span><br><span class="line">   cout&lt;&lt;s1.<span class="built_in">find</span>(<span class="string">&quot;ll&quot;</span>)&lt;&lt;endl;<span class="comment">//2</span></span><br><span class="line">   cout&lt;&lt;s1.<span class="built_in">find</span>(<span class="string">&quot;abc&quot;</span>)&lt;&lt;endl;<span class="comment">//4294967295正序查找没有的话出现一个很大的数</span></span><br><span class="line">   cout&lt;&lt;s1.<span class="built_in">rfind</span>(<span class="string">&quot;ll&quot;</span>)&lt;&lt;endl;<span class="comment">//9逆序查找</span></span><br><span class="line">   cout&lt;&lt;s1.<span class="built_in">find_first_of</span>(<span class="string">&quot;abcde&quot;</span>)&lt;&lt;endl;<span class="comment">//1  abcde中第一个字符的下标位置</span></span><br><span class="line">   cout&lt;&lt;s1.<span class="built_in">find_last_of</span>(<span class="string">&quot;abcde&quot;</span>)&lt;&lt;endl;<span class="comment">//11  abcde中最后一个字符下标位置</span></span><br><span class="line">   cout&lt;&lt;s1.<span class="built_in">find_first_not_of</span>(<span class="string">&quot;abcde&quot;</span>)&lt;&lt;endl;<span class="comment">//0在字符串中不是abcde的下标位置</span></span><br><span class="line">   cout&lt;&lt;s1.<span class="built_in">find_last_not_of</span>(<span class="string">&quot;abcde&quot;</span>)&lt;&lt;endl;<span class="comment">//10逆序在字符串中不是abcde的下标位置</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="删除string元素"><a href="#删除string元素" class="headerlink" title="删除string元素"></a>删除string元素</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">s1.<span class="built_in">erase</span>(<span class="number">5</span>)<span class="comment">//会去掉下标5之后的字符</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="替换string元素"><a href="#替换string元素" class="headerlink" title="替换string元素"></a>替换string元素</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">s1.<span class="built_in">replace</span>(<span class="number">2</span>,<span class="number">3</span>,<span class="string">&quot;hahah&quot;</span>)<span class="comment">//将s1下标为2到3的字符换成hahah</span></span><br><span class="line">s1.<span class="built_in">replace</span>(<span class="number">2</span>,<span class="number">3</span>,<span class="string">&quot;hahah&quot;</span>,<span class="number">1</span>,<span class="number">2</span>)<span class="comment">//将s1下标为2到3的字符换成hahah的下标1开始的2个字符</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="插入string元素"><a href="#插入string元素" class="headerlink" title="插入string元素"></a>插入string元素</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">s1.<span class="built_in">insert</span>(<span class="number">5</span>,s2)<span class="comment">//将s2插入下标5的位置</span></span><br><span class="line">s1.<span class="built_in">insert</span>(<span class="number">2</span>,s2,<span class="number">5</span>,<span class="number">3</span>)<span class="comment">//将s2中下标5开始的3个字符插入s1下标2的位置</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="成员函数"><a href="#成员函数" class="headerlink" title="成员函数"></a>成员函数</h3><h3 id="c-str"><a href="#c-str" class="headerlink" title="c_str()"></a>c_str()</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">string <span class="title">s1</span><span class="params">(<span class="string">&quot;hello world&quot;</span>)</span></span>;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%s\n&quot;</span>,s1.<span class="built_in">c_str</span>());<span class="comment">//s1.c_str()返回传统的const char*类型字符串，且该字符串以\0结尾</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="data"><a href="#data" class="headerlink" title="data()"></a>data()</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">string <span class="title">s1</span><span class="params">(<span class="string">&quot;hello world&quot;</span>)</span></span>;</span><br><span class="line"><span class="type">const</span> <span class="type">char</span>*p1=s1.<span class="built_in">data</span>();<span class="comment">//s1.data()返回char*类型的字符串，对s1的修改可能会使p1出错</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="STL库（一）"><a href="#STL库（一）" class="headerlink" title="STL库（一）"></a>STL库（一）</h2><p>容器：可容纳各种数据类型的通用数据结构，是类模板<br>迭代器：可用于依次存取容器中的元素，类似于指针<br>算法：用来操作容器中的元素的函数模板</p>
+<h3 id="容器"><a href="#容器" class="headerlink" title="容器"></a>容器</h3><p>1.顺序容器 vector动态数组 ，deque双向队列，list双向链表<br>2.关联容器set multset map multmap<br>3.容器适配器stack queue priority_queue</p>
+<h4 id="顺序容器"><a href="#顺序容器" class="headerlink" title="顺序容器"></a>顺序容器</h4><h5 id="vector动态数组"><a href="#vector动态数组" class="headerlink" title="vector动态数组"></a>vector动态数组</h5><p>头文件：<vector><br>常数时间尾部性能最佳</p>
+<h5 id="deque双向队列"><a href="#deque双向队列" class="headerlink" title="deque双向队列"></a>deque双向队列</h5><p>头文件：<deque><br>随机存取任何元素常数时间，但次于vector，两端删减性能最佳<br>head头  tail尾，空元素</p>
+<h5 id="list双向链表"><a href="#list双向链表" class="headerlink" title="list双向链表"></a>list双向链表</h5><p>头文件<list><br>元素不能在内存不连续存放，在任何位置都能常数时间，不支持随机存取</p>
+<h4 id="关联容器"><a href="#关联容器" class="headerlink" title="关联容器"></a>关联容器</h4><p>元素是排序的<br>插入任何元素，都是按相应的排序规则来确定其位置<br>在查找时具有非常好的性能<br>通常以平衡二叉树实现，时间logN</p>
+<h5 id="set-x2F-multiset"><a href="#set-x2F-multiset" class="headerlink" title="set&#x2F;multiset"></a>set&#x2F;multiset</h5><p>头文件<set><br>set不允许相同的元素，multiset允许相同的元素</p>
+<h5 id="map-x2F-multimap"><a href="#map-x2F-multimap" class="headerlink" title="map&#x2F;multimap"></a>map&#x2F;multimap</h5><p>头文件：<map><br>一个名为first另一个名为second，multimap允许相同的first值</p>
+<h4 id="容器适配器"><a href="#容器适配器" class="headerlink" title="容器适配器"></a>容器适配器</h4><h5 id="stack"><a href="#stack" class="headerlink" title="stack"></a>stack</h5><p>头文件：<stack><br>栈，是项的有限序列只能修改删除检索最佳插入的项后进后出</p>
+<h5 id="queue"><a href="#queue" class="headerlink" title="queue"></a>queue</h5><p>头文件<queue><br>队列，插入只能从尾部，删除修改检索只能在头部进行先进先出</p>
+<h5 id="priority-queue"><a href="#priority-queue" class="headerlink" title="priority_queue"></a>priority_queue</h5><p>头文件<queue><br>优先级队列，最高优先级的元素总是第一个出列</p>
+<p>顺序容器和关联容器中都有的成员函数<br>begin 返回指向容器中第一个元素的迭代器<br>end   返回指向容器中最后一个元素后面的位置的迭代器<br>rbegin返回指向容器中最后一个元素的迭代器<br>rend返回指向容器中第一个元素前面位置的迭代器<br>erase 从容器中删除一个或几个元素<br>clear 从容器中删除所有元素</p>
+<p>顺序容器的常用成员函数<br>front 返回容器中第一个元素的引用<br>back 返回容器中最后一个元素的引用<br>push_back 在容器末尾增加新元素<br>pop_back删除容器末尾的元素<br>erase 删除迭代器指向的元素（可能会使该迭代器失效），或删除一个区间，返回那个元素的迭代器</p>
+<h2 id="STL库（二）"><a href="#STL库（二）" class="headerlink" title="STL库（二）"></a>STL库（二）</h2><h3 id="迭代器"><a href="#迭代器" class="headerlink" title="迭代器"></a>迭代器</h3><p>用于指向顺序容器和关联容器的元素<br>迭代器的用法和指针类似<br>有const 和非const两种<br>通过迭代器可以读取它指向的元素<br>通过非const迭代器还能修改其指向的元素</p>
+<h3 id="定义迭代器"><a href="#定义迭代器" class="headerlink" title="定义迭代器"></a>定义迭代器</h3><p>容器类名::iterator  变量名;<br>容器类名::const_iterator  变量名;&#x2F;&#x2F;常量迭代器<br>访问迭代器指向的元素<br>*迭代器变量名<br>容器类名::reverse_iterator  变量;&#x2F;&#x2F;反向迭代器</p>
+<h2 id="STL库（三）"><a href="#STL库（三）" class="headerlink" title="STL库（三）"></a>STL库（三）</h2><p>所有的vector都适用于deque<br>list<br>特有的成员函数<br>push_front 在前面插入<br>pop_front删除前面的元素<br>sort 排序（list不支持stl的算法sort）<br>remove 删除和指定值相同的所有元素<br>unique 删除所有和前一个元素相同的元素（做到不重复需要unique之前需要sort）<br>merge合并两个链表，并清空被合并的那个<br>reverse 颠倒链表<br>splice在指定位置前面插入另一个链表中的一个或多个元素，并在另一个链表删除被插入的元素<br>lst1.splice(p1,lst2,p2,p3)&#x2F;&#x2F;将[p2,p3)插入p1之前，并从lst2中删除[p2,p3)</p>
+<h1 id="第九章"><a href="#第九章" class="headerlink" title="第九章"></a>第九章</h1><h2 id="set与multiset"><a href="#set与multiset" class="headerlink" title="set与multiset"></a>set与multiset</h2><p>iterator find:查找等于某个值的元素<br>iterator lower_bound:查找某个下界<br>iterator upper_bound:查找某个上界<br>equal_range: 同时查找上界和下界<br>int  count:计算等于某个值的元素个数<br>void insert：插入某个元素或某个区间</p>
+<h2 id="map与multimap"><a href="#map与multimap" class="headerlink" title="map与multimap"></a>map与multimap</h2><p>1直接赋值，例如 mp[“Tom”]&#x3D;0<br>2通过插入一个类型为 pair&lt;Key, T&gt; 的值，例如 mp.insert(pair&lt;string,int&gt;(“Alan”,100));<br>map&lt;string, int&gt;::iterator it;&#x2F;&#x2F;迭代器<br>cout &lt;&lt; iter-&gt;first &lt;&lt; “ “ &lt;&lt; iter-&gt;second &lt;&lt; endl;&#x2F;&#x2F;不能用iter.first<br>但是可以重载&lt;&lt;<br>template&lt;class Key,class Value&gt;<br>ostream&amp;operator&lt;&lt;(ostream&amp;o,const pair&lt;Key,Value&gt;&amp;p)<br>{<br>    o&lt;&lt;”(“&lt;&lt;p.first&lt;&lt;”,”&lt;&lt;p.second&lt;&lt;”)”;<br>}<br>cout&lt;&lt;*s;<br>&#x2F;&#x2F;map专用</p>
+<h2 id="Stack"><a href="#Stack" class="headerlink" title="Stack"></a>Stack</h2><p>push  插入元素<br>pop  弹出元素<br>top   返回栈顶的元素的引用<br>queue<br>push  插入元素发生在尾部<br>pop  弹出元素对头<br>top   返回栈顶的元素的引用对头<br>back  返回栈顶的元素的引用尾部<br>priority_queue<br>保证优先级最大的在前面，保证最大的在前面<br>size   还有多少数<br>empty   是否空</p>
+<h2 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h2><h3 id="1不变序列算法"><a href="#1不变序列算法" class="headerlink" title="1不变序列算法"></a>1不变序列算法</h3><p>min   求两个对象中较小的1<br>max   求两个对象较大的<br>min_element求区间最小的1<br>max_element求区间最大的&#x2F;&#x2F;1有点问题<br>for_each对区间每个元素都做这种操作<br>count计算区间等于某值的元素个数<br>count_if计算区间符合某种条件的元素个数<br>find在区间查找某值的元素<br>find_if区间符合某种条件的元素<br>find_end从区间查找另一个区间出现的最后一次位置<br>find_first_of从区间查找另一个区间出现的第一次的元素<br>adjacent_find从区间查找第一次出现连续两个相等元素的位置<br>search在区间查找另一个区间第一次出现的位置<br>search_n在区间查找第一次出现等于某值的连续n个元素<br>equal判断两个区间是否相等<br>mismatch逐个比较两个区间的元素，返回第一次发生不相等的位置<br>lexicographical_compare按字典比较两个区间的大小</p>
+<h3 id="2-变值算法"><a href="#2-变值算法" class="headerlink" title="2.变值算法"></a>2.变值算法</h3><p>for_each 对区间中的每个元素都做某种操作<br>copy复制一个区间到别处<br>copy_backward复制一个区间到别处但目标区前是从后往前被修改的<br>transform将一个区间的元素变形后拷贝到另一个区间&#x2F;&#x2F;迭代器<br>swap_ranges交换两个区间的内容<br>fill用某个值填充区间<br>fill_n用某个值代替区间的n个元素<br>generate用某个操作的结果填充区间<br>generate_n用某个操作的结果替换区间中的n个元素<br>replace将区间中某个值替换为另一个值<br>replace_if将区间中符合某种条件的值替换成另一个值<br>replace_copy将一个区间拷贝到另一个区间，拷贝时某个值要换成新值拷过去<br>replace_copy_if将一个区间拷贝到另一个区间，拷贝时符合某种条件的值要换成新值拷过去</p>
+<p>accumulate(first,last,累加的数);求和</p>
+<h3 id="3删除算法"><a href="#3删除算法" class="headerlink" title="3删除算法"></a>3删除算法</h3><p>remove 删除区间中等于某个值的元素<br>unique删除区间中连续相等的元素，只留下一个</p>
+<h3 id="4变序算法"><a href="#4变序算法" class="headerlink" title="4变序算法"></a>4变序算法</h3><p>random_shuffle(first,last);随机打乱<br>reverse 颠倒区间次序<br>next_permutation将区间改为下一个排列<br>prev_permutation将区间改为上一个排列&#x2F;&#x2F;可以list</p>
+<h3 id="5排序算法"><a href="#5排序算法" class="headerlink" title="5排序算法"></a>5排序算法</h3><p>随机访问迭代器 不支持关联容器和list<br>sort()从小到大排序</p>
+<h3 id="6有序区间算法"><a href="#6有序区间算法" class="headerlink" title="6有序区间算法"></a>6有序区间算法</h3><p>要求是从小到大排好的随机访问迭代器 不支持关联容器和list<br>binary_search判断区间是否又某个元素<br>lower_bound查找最后一个不小于某个值的元素的位置<br>upper_bound查找第一个大于某个值的元素位置<br>equal_range同时获取upper_bound，lower_bound</p>
+<h3 id="7bitset"><a href="#7bitset" class="headerlink" title="7bitset"></a>7bitset</h3><p>bitset<N>&amp;set();全部为1<br>bitset<N>&amp;set(size_t pos,bool val&#x3D;true);设置某位<br>bitset<N>&amp;reset();全部为0<br>bitset<N>&amp;reset(size_t pos);某位设为0<br>bitset<N>&amp;flip();全部翻转<br>bitset<N>&amp;flip(size_t pos)翻转某位</p>
+<h1 id="第十章"><a href="#第十章" class="headerlink" title="第十章"></a>第十章</h1><h2 id="c-11的新特性"><a href="#c-11的新特性" class="headerlink" title="c++11的新特性"></a>c++11的新特性</h2><ol>
+<li><p>数组，容器可以直接用花括号初始化.</p>
+</li>
+<li><p>auto关键字<br>迭代器的时候可以用auto</p>
+</li>
+<li><p>decltype关键字<br>返回数据类型</p>
+</li>
+<li><p>智能指针shared_ptr<br>头文件<memory><br>会自动delete，不能是指针数组</p>
+</li>
+<li><p>空指针nullpr<br>转化bool等于false</p>
+</li>
+<li><p>基于范围for循环<br>int ary[]&#x3D;{1,2,3,4,5};<br>for(int &amp;e:ary)<br>e*&#x3D;10&#x2F;&#x2F;输出10，20，30，40，50*</p>
+</li>
+<li><p>*右值引用<br>&amp;&amp;是右值引用<br>减少进行深拷贝的次数</p>
+</li>
+<li><p>无序容器（哈希表）<br>头文件<unordered_map><br>用法和map一样，效率更高</p>
+</li>
+<li><p>正则表达式</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">头文件&lt;regex&gt;</span><br><span class="line"><span class="function">regex <span class="title">reg</span><span class="params">(<span class="string">&quot;b.?p.*k&quot;</span>)</span></span></span><br><span class="line"><span class="function">regex_match<span class="comment">//匹配成功1匹配失败0</span></span></span><br><span class="line"><span class="function">10。lambda表达式</span></span><br><span class="line"><span class="function">[外部变量访问方式说明符]<span class="params">(参数表)</span>-&gt;返回值类型</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">        语句组</span><br><span class="line">&#125;</span><br><span class="line">[=]以传值的方式使用外部变量</span><br><span class="line">[]  不使用任何外部变量</span><br><span class="line">[&amp;]以引用的方式使用所有的外部变量</span><br><span class="line">[x,&amp;y]x传值，有引用</span><br><span class="line">[=,&amp;x,&amp;y]x，y引用，其他传值</span><br><span class="line">[&amp;,x,y]x，y传值，其他引用</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="强制转换"><a href="#强制转换" class="headerlink" title="强制转换"></a>强制转换</h2><p>static_cast  reinterpret_cast<br>const_cast  dynamic_cast<br>1.static_cast<br>用于整型，实数型，字符型<br>static_cast&lt;类型&gt;(数)<br>2.reinterpret_cast<br>不同类型的指针之间的转换，不同类型的引用之间的转换<br>3.const_cast<br>去除const的转换<br>4.dynamic_cast<br>将多态基类的指针或引用强制转换为派生类的指针和引用<br>必须是多态</p>
+<h2 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h2><p>try{throw 类型}处理<br>catch(参数){}<br>多个catch<br>如果程序异常没有被catch捕获，程序崩溃<br>catch(…){}属于任何异常<br>exception类<br>bad_typeid<br>转换异常<br>bad_cast<br>多态基类指针转换异常<br>bad_alloc<br>在用new运算符进行动态内存分配时，没有足够的内存<br>ios_base::failure</p>
+<p>bad_error–&gt;out_of_range<br>下标越界</p>
+<h1 id="易错点"><a href="#易错点" class="headerlink" title="易错点"></a>易错点</h1><h2 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h2><p>可以将子类赋值给父类，在继承时注意需要加public才能让子类继承父类，不然父类就成了私有类了</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">C</span> :<span class="keyword">public</span> A &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">Print</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;Class C&quot;</span> &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h2><p>override是在c++11的时候加的在c++中可以全用virtual也可以子类在函数名后加override</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"> <span class="keyword">class</span> <span class="title class_">B</span> :<span class="keyword">public</span> A &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">     <span class="function"><span class="type">void</span> <span class="title">Print</span><span class="params">()</span> <span class="keyword">override</span> </span>&#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;Class B&quot;</span> &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">C</span> :<span class="keyword">public</span> A &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">Print</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;Class C&quot;</span> &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="用子类指针调用基类"><a href="#用子类指针调用基类" class="headerlink" title="用子类指针调用基类"></a>用子类指针调用基类</h2><p>其一是强制转换但可以是不安全的</p>
+<p>个人觉得其二还是有很大局限性的，需要基类要虚函数<br>其二是用dynamic_cast<br>将多态基类的指针或引用强制转换为派生类的指针和引用<br>必须是多态</p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="/music/jucilang.mp3">
+            </audio>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+		data-enable='true'
+        data-ae='true'
+        data-ci='35b8fbd0e6865c1adf60'
+        data-cs='6d2988de68c828bce78247ad604846cdc30e7ca3'
+        data-r='mrchenlreanspace.github.io'
+        data-o='MrChenLreanSpace'
+        data-a='MrChenLreanSpace'
+        data-d='false'
+    >查看评论</div>
+
+
+    </div>
+    
+        <div class='side'>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC%E4%B8%83%E7%AB%A0"><span class="toc-number">1.</span> <span class="toc-text">第七章</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B5%81%E6%93%8D%E7%BA%B5%E7%AE%97%E5%AD%90"><span class="toc-number">1.1.</span> <span class="toc-text">流操纵算子</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A8%A1%E6%9D%BF"><span class="toc-number">1.2.</span> <span class="toc-text">模板</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC%E5%85%AB%E7%AB%A0"><span class="toc-number">2.</span> <span class="toc-text">第八章</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#string%E7%B1%BB"><span class="toc-number">2.1.</span> <span class="toc-text">string类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B5%8B%E5%80%BC"><span class="toc-number">2.1.1.</span> <span class="toc-text">赋值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#string%E7%9A%84%E5%A4%8D%E5%88%B6"><span class="toc-number">2.1.2.</span> <span class="toc-text">string的复制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%BB%E5%8F%96string%E7%9A%84%E5%AD%97%E7%AC%A6"><span class="toc-number">2.1.3.</span> <span class="toc-text">读取string的字符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#string%E8%BF%9E%E6%8E%A5"><span class="toc-number">2.1.4.</span> <span class="toc-text">string连接</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AF%94%E8%BE%83string"><span class="toc-number">2.1.5.</span> <span class="toc-text">比较string</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%90%E4%B8%B2"><span class="toc-number">2.1.6.</span> <span class="toc-text">子串</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%90%9C%E7%B4%A2find"><span class="toc-number">2.1.7.</span> <span class="toc-text">搜索find()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%A0%E9%99%A4string%E5%85%83%E7%B4%A0"><span class="toc-number">2.1.8.</span> <span class="toc-text">删除string元素</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9B%BF%E6%8D%A2string%E5%85%83%E7%B4%A0"><span class="toc-number">2.1.9.</span> <span class="toc-text">替换string元素</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8F%92%E5%85%A5string%E5%85%83%E7%B4%A0"><span class="toc-number">2.1.10.</span> <span class="toc-text">插入string元素</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0"><span class="toc-number">2.1.11.</span> <span class="toc-text">成员函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#c-str"><span class="toc-number">2.1.12.</span> <span class="toc-text">c_str()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#data"><span class="toc-number">2.1.13.</span> <span class="toc-text">data()</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#STL%E5%BA%93%EF%BC%88%E4%B8%80%EF%BC%89"><span class="toc-number">2.2.</span> <span class="toc-text">STL库（一）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%B9%E5%99%A8"><span class="toc-number">2.2.1.</span> <span class="toc-text">容器</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%A1%BA%E5%BA%8F%E5%AE%B9%E5%99%A8"><span class="toc-number">2.2.1.1.</span> <span class="toc-text">顺序容器</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#vector%E5%8A%A8%E6%80%81%E6%95%B0%E7%BB%84"><span class="toc-number">2.2.1.1.1.</span> <span class="toc-text">vector动态数组</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#deque%E5%8F%8C%E5%90%91%E9%98%9F%E5%88%97"><span class="toc-number">2.2.1.1.2.</span> <span class="toc-text">deque双向队列</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#list%E5%8F%8C%E5%90%91%E9%93%BE%E8%A1%A8"><span class="toc-number">2.2.1.1.3.</span> <span class="toc-text">list双向链表</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B3%E8%81%94%E5%AE%B9%E5%99%A8"><span class="toc-number">2.2.1.2.</span> <span class="toc-text">关联容器</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#set-x2F-multiset"><span class="toc-number">2.2.1.2.1.</span> <span class="toc-text">set&#x2F;multiset</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#map-x2F-multimap"><span class="toc-number">2.2.1.2.2.</span> <span class="toc-text">map&#x2F;multimap</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%B9%E5%99%A8%E9%80%82%E9%85%8D%E5%99%A8"><span class="toc-number">2.2.1.3.</span> <span class="toc-text">容器适配器</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#stack"><span class="toc-number">2.2.1.3.1.</span> <span class="toc-text">stack</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#queue"><span class="toc-number">2.2.1.3.2.</span> <span class="toc-text">queue</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#priority-queue"><span class="toc-number">2.2.1.3.3.</span> <span class="toc-text">priority_queue</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#STL%E5%BA%93%EF%BC%88%E4%BA%8C%EF%BC%89"><span class="toc-number">2.3.</span> <span class="toc-text">STL库（二）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%AD%E4%BB%A3%E5%99%A8"><span class="toc-number">2.3.1.</span> <span class="toc-text">迭代器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89%E8%BF%AD%E4%BB%A3%E5%99%A8"><span class="toc-number">2.3.2.</span> <span class="toc-text">定义迭代器</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#STL%E5%BA%93%EF%BC%88%E4%B8%89%EF%BC%89"><span class="toc-number">2.4.</span> <span class="toc-text">STL库（三）</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC%E4%B9%9D%E7%AB%A0"><span class="toc-number">3.</span> <span class="toc-text">第九章</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#set%E4%B8%8Emultiset"><span class="toc-number">3.1.</span> <span class="toc-text">set与multiset</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#map%E4%B8%8Emultimap"><span class="toc-number">3.2.</span> <span class="toc-text">map与multimap</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Stack"><span class="toc-number">3.3.</span> <span class="toc-text">Stack</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%97%E6%B3%95"><span class="toc-number">3.4.</span> <span class="toc-text">算法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E4%B8%8D%E5%8F%98%E5%BA%8F%E5%88%97%E7%AE%97%E6%B3%95"><span class="toc-number">3.4.1.</span> <span class="toc-text">1不变序列算法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%8F%98%E5%80%BC%E7%AE%97%E6%B3%95"><span class="toc-number">3.4.2.</span> <span class="toc-text">2.变值算法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E5%88%A0%E9%99%A4%E7%AE%97%E6%B3%95"><span class="toc-number">3.4.3.</span> <span class="toc-text">3删除算法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4%E5%8F%98%E5%BA%8F%E7%AE%97%E6%B3%95"><span class="toc-number">3.4.4.</span> <span class="toc-text">4变序算法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95"><span class="toc-number">3.4.5.</span> <span class="toc-text">5排序算法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6%E6%9C%89%E5%BA%8F%E5%8C%BA%E9%97%B4%E7%AE%97%E6%B3%95"><span class="toc-number">3.4.6.</span> <span class="toc-text">6有序区间算法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7bitset"><span class="toc-number">3.4.7.</span> <span class="toc-text">7bitset</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC%E5%8D%81%E7%AB%A0"><span class="toc-number">4.</span> <span class="toc-text">第十章</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#c-11%E7%9A%84%E6%96%B0%E7%89%B9%E6%80%A7"><span class="toc-number">4.1.</span> <span class="toc-text">c++11的新特性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%BA%E5%88%B6%E8%BD%AC%E6%8D%A2"><span class="toc-number">4.2.</span> <span class="toc-text">强制转换</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86"><span class="toc-number">4.3.</span> <span class="toc-text">异常处理</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%98%93%E9%94%99%E7%82%B9"><span class="toc-number">5.</span> <span class="toc-text">易错点</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%A7%E6%89%BF"><span class="toc-number">5.1.</span> <span class="toc-text">继承</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%9A%E6%80%81"><span class="toc-number">5.2.</span> <span class="toc-text">多态</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%A8%E5%AD%90%E7%B1%BB%E6%8C%87%E9%92%88%E8%B0%83%E7%94%A8%E5%9F%BA%E7%B1%BB"><span class="toc-number">5.3.</span> <span class="toc-text">用子类指针调用基类</span></a></li></ol></li></ol>	
+        </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"], linebreaks: { automatic:true }, EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50) },
+        tex2jax: { inlineMath: [ ["$", "$"], ["\\(","\\)"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno",skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']},
+        TeX: {  noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } }, Macros: { href: "{}" } },
+        messageStyle: "none"
+    });
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+<!-- Google Analytics -->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YMJ8CBH8F7"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-YMJ8CBH8F7');
+</script>
+<!-- End Google Analytics -->
+
+
+</html>
