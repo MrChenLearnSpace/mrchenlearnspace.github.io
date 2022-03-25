@@ -1127,4 +1127,53 @@
         <tag>C++</tag>
       </tags>
   </entry>
+  <entry>
+    <title>TA2.2色调映射视差偏移</title>
+    <url>/2022/03/26/TA2.2%E8%89%B2%E8%B0%83%E6%98%A0%E5%B0%84%E8%A7%86%E5%B7%AE%E5%81%8F%E7%A7%BB/</url>
+    <content><![CDATA[<h1 id="Blinn-Phong"><a href="#Blinn-Phong" class="headerlink" title="Blinn-Phong"></a>Blinn-Phong</h1><p>半角向量&#x3D;观察方向V+光照方向L；</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">half3 view_dir = <span class="built_in">normalize</span>(_WorldSpaceCameraPos.xyz - i.pos_world);</span><br><span class="line">                half3 light_dir =<span class="built_in">normalize</span>( _WorldSpaceLightPos0.xyz );</span><br><span class="line">                half3 half_dir  = <span class="built_in">normalize</span>(view_dir+light_dir);</span><br><span class="line">half NotH = <span class="built_in">max</span>(<span class="built_in">dot</span>(normal_dir,half_dir),<span class="number">0</span>);</span><br><span class="line">half3 specular =  <span class="built_in">pow</span>(<span class="built_in">max</span>(NotH,<span class="number">0</span>),_Shininess)* _LightColor0.xyz*_SpecularIntensity*spec_mask;</span><br></pre></td></tr></table></figure>
+
+<h1 id="色彩映射"><a href="#色彩映射" class="headerlink" title="色彩映射"></a>色彩映射</h1><p>高光部分过曝，使得颜色直接变白色为了体现更多细节，将色调重新映射,注意一般这个处理都在后处理完成。实现如下。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">float3 <span class="title">ACESFilm</span><span class="params">(float3 x)</span></span></span><br><span class="line"><span class="function">      </span>&#123;</span><br><span class="line">        <span class="type">float</span> a = <span class="number">2.51f</span>;</span><br><span class="line">        <span class="type">float</span> b = <span class="number">0.03f</span>;</span><br><span class="line">        <span class="type">float</span> c = <span class="number">2.43f</span>;</span><br><span class="line">        <span class="type">float</span> d = <span class="number">0.59f</span>;</span><br><span class="line">        <span class="type">float</span> e = <span class="number">0.14f</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">saturate</span>((x*(a*x + b)) / (x*(c*x + d) + e));</span><br><span class="line">      &#125;;</span><br><span class="line">base_color =<span class="built_in">pow</span>(base_color,<span class="number">2.2</span>);</span><br><span class="line">half3 tone_color = <span class="built_in">ACESFilm</span>(col.xyz);</span><br><span class="line">col.xyz=<span class="built_in">pow</span>(tone_color,<span class="number">1.0</span>/<span class="number">2.2</span>);</span><br></pre></td></tr></table></figure>
+
+<h1 id="视察偏移"><a href="#视察偏移" class="headerlink" title="视察偏移"></a>视察偏移</h1><p>用高度图模拟侧面的观察的遮挡问题</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">float3 view_tangentspace = <span class="built_in">normalize</span>(<span class="built_in">mul</span>(TBN,view_dir));</span><br><span class="line">                half2 uv_parallax = i.uv;</span><br><span class="line">                <span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">0</span>;j&lt;_HeightTime;j++)</span><br><span class="line">                &#123;</span><br><span class="line">                    half height = <span class="built_in">tex2D</span>(_Parallax,uv_parallax);</span><br><span class="line">                    uv_parallax = uv_parallax - (<span class="number">0.5</span> - height) * (view_tangentspace.xy/view_tangentspace.z+<span class="number">0.42</span>) *_ParallaxIntensity*<span class="number">0.01f</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                half3 base_color = <span class="built_in">tex2D</span>(_MainTex, uv_parallax).xyz;</span><br><span class="line">                base_color =<span class="built_in">pow</span>(base_color,<span class="number">2.2</span>);</span><br><span class="line">                half3 AO = <span class="built_in">tex2D</span>(_AOMap,uv_parallax).xyz;</span><br><span class="line">                half3 spec_mask = <span class="built_in">tex2D</span>(_SpecMask,uv_parallax).xyz;</span><br></pre></td></tr></table></figure>
+
+<h1 id="阴影"><a href="#阴影" class="headerlink" title="阴影"></a>阴影</h1><p><img src="https://img-blog.csdnimg.cn/b4e49300b10d4343bbb929c5b0bb7819.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h2 id="实时阴影"><a href="#实时阴影" class="headerlink" title="实时阴影"></a>实时阴影</h2><h3 id="传统实时阴影"><a href="#传统实时阴影" class="headerlink" title="传统实时阴影"></a>传统实时阴影</h3><p><img src="https://img-blog.csdnimg.cn/d4e54fe16d55458192dffc2201354366.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_19,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p>阴影距离决定定向光的拍摄位置位置大概是</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//摄像头的 forword 向量*阴影距离 向光照反方向 + 阴影距离</span></span><br></pre></td></tr></table></figure>
+
+<p>在光源位置做摄像机，拍摄一张深度图</p>
+<p><img src="https://img-blog.csdnimg.cn/399f4e8f6a9f4fb4844d403cb000798d.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p>将光源摄像头内的顶点转入光源相机空间用z坐标z1和shadowMap的灰度值z2进行比对，z1&lt;z2，则不再阴影区，最佳理解：就是单纯的摄像机深度剔除的部分，把光源看作摄像机，看到的就被照亮，没看到的就是阴影咯。</p>
+<h3 id="Unity屏幕空间阴影"><a href="#Unity屏幕空间阴影" class="headerlink" title="Unity屏幕空间阴影"></a>Unity屏幕空间阴影</h3><p>用摄像头view渲染深度图，渲染的深度图可以还原屏幕需要的片元的世界坐标空间进行优化</p>
+<p><img src="https://img-blog.csdnimg.cn/9346f44043224d33a328311423dcd20d.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/52f6b72858994de695791f6b5f9e249f.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p>然后从Camera直接转到光照摄像头坐标系下。</p>
+<h3 id="联级阴影-CSM"><a href="#联级阴影-CSM" class="headerlink" title="联级阴影 CSM"></a>联级阴影 CSM</h3><p>以下是个人通过unity猜测出来的，暂未找资料</p>
+<p>分成四个区域，越靠近物体联级越多，把所有得到的联级进行均值混合原理还是前两种方法</p>
+<p>证明</p>
+<p>无联级，阴影距离3.3</p>
+<p><img src="https://img-blog.csdnimg.cn/289b9b933af247808d08256809864b85.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p>两联级，阴影距离10</p>
+<p><img src="https://img-blog.csdnimg.cn/505e0a7663404e69abafbfecfb47481a.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p>得到的阴影效果会胡一点，可能是混合了</p>
+<h2 id="阴影相关的内置函数"><a href="#阴影相关的内置函数" class="headerlink" title="阴影相关的内置函数"></a>阴影相关的内置函数</h2><h3 id="只计算实时阴影"><a href="#只计算实时阴影" class="headerlink" title="只计算实时阴影"></a>只计算实时阴影</h3><p>记得把v2f结构体中的vertex改成pos。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="built_in">SHADOW_COORDS</span>(<span class="number">5</span>)</span><br><span class="line"><span class="built_in">TRANSFER_SHADOW</span>(o)</span><br><span class="line">half shadow = <span class="built_in">SHADOW_ATTENUATION</span>(i);</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+]]></content>
+      <categories>
+        <category>游戏</category>
+      </categories>
+      <tags>
+        <tag>Shader</tag>
+      </tags>
+  </entry>
 </search>

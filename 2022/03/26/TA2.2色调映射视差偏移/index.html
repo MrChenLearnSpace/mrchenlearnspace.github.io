@@ -1,0 +1,230 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>TA2.2色调映射视差偏移 - 浪子之心</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Blog,"> 
+    <meta name="description" content="MrChen Bolg,Blinn-Phong半角向量&amp;#x3D;观察方向V+光照方向L；
+12345half3 view_dir = normalize(_WorldSpaceCameraPos.xyz - i.pos_,"> 
+    <meta name="author" content="Jack Chen"> 
+    <link rel="alternative" href="atom.xml" title="浪子之心" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+<meta name="generator" content="Hexo 5.4.1"><link rel="stylesheet" href="/css/prism.css" type="text/css"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">浪子之心</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="https://mrchenlreanspace.github.io"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">TA2.2色调映射视差偏移</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">TA2.2色调映射视差偏移</h1>
+        <div class="stuff">
+            <span>三月 26, 2022</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/Shader/" rel="tag">Shader</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h1 id="Blinn-Phong"><a href="#Blinn-Phong" class="headerlink" title="Blinn-Phong"></a>Blinn-Phong</h1><p>半角向量&#x3D;观察方向V+光照方向L；</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">half3 view_dir = <span class="built_in">normalize</span>(_WorldSpaceCameraPos.xyz - i.pos_world);</span><br><span class="line">                half3 light_dir =<span class="built_in">normalize</span>( _WorldSpaceLightPos0.xyz );</span><br><span class="line">                half3 half_dir  = <span class="built_in">normalize</span>(view_dir+light_dir);</span><br><span class="line">half NotH = <span class="built_in">max</span>(<span class="built_in">dot</span>(normal_dir,half_dir),<span class="number">0</span>);</span><br><span class="line">half3 specular =  <span class="built_in">pow</span>(<span class="built_in">max</span>(NotH,<span class="number">0</span>),_Shininess)* _LightColor0.xyz*_SpecularIntensity*spec_mask;</span><br></pre></td></tr></table></figure>
+
+<h1 id="色彩映射"><a href="#色彩映射" class="headerlink" title="色彩映射"></a>色彩映射</h1><p>高光部分过曝，使得颜色直接变白色为了体现更多细节，将色调重新映射,注意一般这个处理都在后处理完成。实现如下。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">float3 <span class="title">ACESFilm</span><span class="params">(float3 x)</span></span></span><br><span class="line"><span class="function">      </span>&#123;</span><br><span class="line">        <span class="type">float</span> a = <span class="number">2.51f</span>;</span><br><span class="line">        <span class="type">float</span> b = <span class="number">0.03f</span>;</span><br><span class="line">        <span class="type">float</span> c = <span class="number">2.43f</span>;</span><br><span class="line">        <span class="type">float</span> d = <span class="number">0.59f</span>;</span><br><span class="line">        <span class="type">float</span> e = <span class="number">0.14f</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">saturate</span>((x*(a*x + b)) / (x*(c*x + d) + e));</span><br><span class="line">      &#125;;</span><br><span class="line">base_color =<span class="built_in">pow</span>(base_color,<span class="number">2.2</span>);</span><br><span class="line">half3 tone_color = <span class="built_in">ACESFilm</span>(col.xyz);</span><br><span class="line">col.xyz=<span class="built_in">pow</span>(tone_color,<span class="number">1.0</span>/<span class="number">2.2</span>);</span><br></pre></td></tr></table></figure>
+
+<h1 id="视察偏移"><a href="#视察偏移" class="headerlink" title="视察偏移"></a>视察偏移</h1><p>用高度图模拟侧面的观察的遮挡问题</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">float3 view_tangentspace = <span class="built_in">normalize</span>(<span class="built_in">mul</span>(TBN,view_dir));</span><br><span class="line">                half2 uv_parallax = i.uv;</span><br><span class="line">                <span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">0</span>;j&lt;_HeightTime;j++)</span><br><span class="line">                &#123;</span><br><span class="line">                    half height = <span class="built_in">tex2D</span>(_Parallax,uv_parallax);</span><br><span class="line">                    uv_parallax = uv_parallax - (<span class="number">0.5</span> - height) * (view_tangentspace.xy/view_tangentspace.z+<span class="number">0.42</span>) *_ParallaxIntensity*<span class="number">0.01f</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                half3 base_color = <span class="built_in">tex2D</span>(_MainTex, uv_parallax).xyz;</span><br><span class="line">                base_color =<span class="built_in">pow</span>(base_color,<span class="number">2.2</span>);</span><br><span class="line">                half3 AO = <span class="built_in">tex2D</span>(_AOMap,uv_parallax).xyz;</span><br><span class="line">                half3 spec_mask = <span class="built_in">tex2D</span>(_SpecMask,uv_parallax).xyz;</span><br></pre></td></tr></table></figure>
+
+<h1 id="阴影"><a href="#阴影" class="headerlink" title="阴影"></a>阴影</h1><p><img src="https://img-blog.csdnimg.cn/b4e49300b10d4343bbb929c5b0bb7819.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h2 id="实时阴影"><a href="#实时阴影" class="headerlink" title="实时阴影"></a>实时阴影</h2><h3 id="传统实时阴影"><a href="#传统实时阴影" class="headerlink" title="传统实时阴影"></a>传统实时阴影</h3><p><img src="https://img-blog.csdnimg.cn/d4e54fe16d55458192dffc2201354366.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_19,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p>阴影距离决定定向光的拍摄位置位置大概是</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//摄像头的 forword 向量*阴影距离 向光照反方向 + 阴影距离</span></span><br></pre></td></tr></table></figure>
+
+<p>在光源位置做摄像机，拍摄一张深度图</p>
+<p><img src="https://img-blog.csdnimg.cn/399f4e8f6a9f4fb4844d403cb000798d.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p>将光源摄像头内的顶点转入光源相机空间用z坐标z1和shadowMap的灰度值z2进行比对，z1&lt;z2，则不再阴影区，最佳理解：就是单纯的摄像机深度剔除的部分，把光源看作摄像机，看到的就被照亮，没看到的就是阴影咯。</p>
+<h3 id="Unity屏幕空间阴影"><a href="#Unity屏幕空间阴影" class="headerlink" title="Unity屏幕空间阴影"></a>Unity屏幕空间阴影</h3><p>用摄像头view渲染深度图，渲染的深度图可以还原屏幕需要的片元的世界坐标空间进行优化</p>
+<p><img src="https://img-blog.csdnimg.cn/9346f44043224d33a328311423dcd20d.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/52f6b72858994de695791f6b5f9e249f.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p>然后从Camera直接转到光照摄像头坐标系下。</p>
+<h3 id="联级阴影-CSM"><a href="#联级阴影-CSM" class="headerlink" title="联级阴影 CSM"></a>联级阴影 CSM</h3><p>以下是个人通过unity猜测出来的，暂未找资料</p>
+<p>分成四个区域，越靠近物体联级越多，把所有得到的联级进行均值混合原理还是前两种方法</p>
+<p>证明</p>
+<p>无联级，阴影距离3.3</p>
+<p><img src="https://img-blog.csdnimg.cn/289b9b933af247808d08256809864b85.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p>两联级，阴影距离10</p>
+<p><img src="https://img-blog.csdnimg.cn/505e0a7663404e69abafbfecfb47481a.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p>得到的阴影效果会胡一点，可能是混合了</p>
+<h2 id="阴影相关的内置函数"><a href="#阴影相关的内置函数" class="headerlink" title="阴影相关的内置函数"></a>阴影相关的内置函数</h2><h3 id="只计算实时阴影"><a href="#只计算实时阴影" class="headerlink" title="只计算实时阴影"></a>只计算实时阴影</h3><p>记得把v2f结构体中的vertex改成pos。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">SHADOW_COORDS</span>(<span class="number">5</span>)</span><br><span class="line"><span class="built_in">TRANSFER_SHADOW</span>(o)</span><br><span class="line">half shadow = <span class="built_in">SHADOW_ATTENUATION</span>(i);</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="/music/jucilang.mp3">
+            </audio>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+		data-enable='true'
+        data-ae='true'
+        data-ci='35b8fbd0e6865c1adf60'
+        data-cs='6d2988de68c828bce78247ad604846cdc30e7ca3'
+        data-r='mrchenlreanspace.github.io'
+        data-o='MrChenLreanSpace'
+        data-a='MrChenLreanSpace'
+        data-d='false'
+    >查看评论</div>
+
+
+    </div>
+    
+        <div class='side'>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Blinn-Phong"><span class="toc-number">1.</span> <span class="toc-text">Blinn-Phong</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%89%B2%E5%BD%A9%E6%98%A0%E5%B0%84"><span class="toc-number">2.</span> <span class="toc-text">色彩映射</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%A7%86%E5%AF%9F%E5%81%8F%E7%A7%BB"><span class="toc-number">3.</span> <span class="toc-text">视察偏移</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%98%B4%E5%BD%B1"><span class="toc-number">4.</span> <span class="toc-text">阴影</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E6%97%B6%E9%98%B4%E5%BD%B1"><span class="toc-number">4.1.</span> <span class="toc-text">实时阴影</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%A0%E7%BB%9F%E5%AE%9E%E6%97%B6%E9%98%B4%E5%BD%B1"><span class="toc-number">4.1.1.</span> <span class="toc-text">传统实时阴影</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Unity%E5%B1%8F%E5%B9%95%E7%A9%BA%E9%97%B4%E9%98%B4%E5%BD%B1"><span class="toc-number">4.1.2.</span> <span class="toc-text">Unity屏幕空间阴影</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%81%94%E7%BA%A7%E9%98%B4%E5%BD%B1-CSM"><span class="toc-number">4.1.3.</span> <span class="toc-text">联级阴影 CSM</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%98%B4%E5%BD%B1%E7%9B%B8%E5%85%B3%E7%9A%84%E5%86%85%E7%BD%AE%E5%87%BD%E6%95%B0"><span class="toc-number">4.2.</span> <span class="toc-text">阴影相关的内置函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%AA%E8%AE%A1%E7%AE%97%E5%AE%9E%E6%97%B6%E9%98%B4%E5%BD%B1"><span class="toc-number">4.2.1.</span> <span class="toc-text">只计算实时阴影</span></a></li></ol></li></ol></li></ol>	
+        </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"], linebreaks: { automatic:true }, EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50) },
+        tex2jax: { inlineMath: [ ["$", "$"], ["\\(","\\)"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno",skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']},
+        TeX: {  noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } }, Macros: { href: "{}" } },
+        messageStyle: "none"
+    });
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+<!-- Google Analytics -->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YMJ8CBH8F7"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-YMJ8CBH8F7');
+</script>
+<!-- End Google Analytics -->
+
+
+</html>
