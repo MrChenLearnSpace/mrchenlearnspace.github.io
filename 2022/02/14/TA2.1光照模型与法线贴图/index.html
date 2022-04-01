@@ -85,6 +85,9 @@ ForwardBase在这个Pass里面，主方向灯以及超出范围的灯光作为�
 <h2 id="ForwardAdd-Pass"><a href="#ForwardAdd-Pass" class="headerlink" title="ForwardAdd Pass"></a>ForwardAdd Pass</h2><h3 id="关键点-1"><a href="#关键点-1" class="headerlink" title="关键点"></a>关键点</h3><p>需要将光照模式调为ForwardAdd</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Tags &#123; <span class="string">&quot;LightMode&quot;</span> = <span class="string">&quot;ForwardAdd&quot;</span>&#125;</span><br></pre></td></tr></table></figure>
 
+<p>要加混合模式</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Blend One One</span><br></pre></td></tr></table></figure>
+
 <p>在编写时加入如下引用文件以方便获取光照参数</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">pragma</span> multi_compile_fwdadd</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;AutoLight.cginc&quot;</span></span></span><br></pre></td></tr></table></figure>
 

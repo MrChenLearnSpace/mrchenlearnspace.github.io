@@ -1,0 +1,240 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Games104第2节记录 - 浪子之心</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Blog,"> 
+    <meta name="description" content="MrChen Bolg,如何构建游戏世界如何让游戏世界活起来将物体变成GO（ Game Object）
+动态物体
+
+静态物体
+
+环境
+​    天空，地形，植被
+
+其他物体
+​    空气墙，规则
+
+如何去描述虚拟世界的物,"> 
+    <meta name="author" content="Jack Chen"> 
+    <link rel="alternative" href="atom.xml" title="浪子之心" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+<meta name="generator" content="Hexo 5.4.1"><link rel="stylesheet" href="/css/prism.css" type="text/css"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">浪子之心</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="https://mrchenlreanspace.github.io"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">Games104第2节记录</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">Games104第2节记录</h1>
+        <div class="stuff">
+            <span>三月 22, 2022</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E5%BC%95%E6%93%8E%E5%88%B6%E4%BD%9C/" rel="tag">引擎制作</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h1 id="如何构建游戏世界"><a href="#如何构建游戏世界" class="headerlink" title="如何构建游戏世界"></a>如何构建游戏世界</h1><h1 id="如何让游戏世界活起来"><a href="#如何让游戏世界活起来" class="headerlink" title="如何让游戏世界活起来"></a>如何让游戏世界活起来</h1><p>将物体变成GO（ Game Object）</p>
+<p>动态物体</p>
+<p><img src="https://img-blog.csdnimg.cn/ecc483da75994bb9a6fe64b7a709b970.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p>静态物体</p>
+<p><img src="https://img-blog.csdnimg.cn/0f44a362a514421287f5bb72021a117d.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p>环境</p>
+<p>​    天空，地形，植被</p>
+<p><img src="https://img-blog.csdnimg.cn/c65850254e2647f186d66c4bc77886d5.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p>其他物体</p>
+<p>​    空气墙，规则</p>
+<p><img src="C:\Users\27371\AppData\Roaming\Typora\typora-user-images\image-20220330164946213.png" alt="image-20220330164946213"></p>
+<h1 id="如何去描述虚拟世界的物体"><a href="#如何去描述虚拟世界的物体" class="headerlink" title="如何去描述虚拟世界的物体"></a>如何去描述虚拟世界的物体</h1><p>将物体的属性和行为封装在一起，成为一个对象。</p>
+<p>假如但有两个功能时我怎么处理</p>
+<h2 id="Component"><a href="#Component" class="headerlink" title="Component"></a>Component</h2><p>每一个Component类都需要一个tick()函数</p>
+<p>多功能物体我们用组合方法来解决。</p>
+<p><img src="https://img-blog.csdnimg.cn/ded04fd6b0544d6099e8575a3bdb44a6.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/c20590192bd44886b2a15c36a9906d04.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h1 id="怎么让游戏动起来"><a href="#怎么让游戏动起来" class="headerlink" title="怎么让游戏动起来"></a>怎么让游戏动起来</h1><p>进行单个系统进行tick()。</p>
+<p><img src="https://img-blog.csdnimg.cn/f62c230d4d0f4af28c6e47528f9b373c.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p>一个一个系统进行tick，而不是一个物体一个物体进行tick，这样的架构会更高效</p>
+<h1 id="如何在游戏引爆炸弹"><a href="#如何在游戏引爆炸弹" class="headerlink" title="如何在游戏引爆炸弹"></a>如何在游戏引爆炸弹</h1><h3 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h3><p>如果写在一个爆炸类里用switch判断，随着系统的复杂类会越来越大。变得不可调试。爆炸类只需要将这给消息传给其他组件让其他类添加相关方法。</p>
+<h1 id="如何管理Game-Object"><a href="#如何管理Game-Object" class="headerlink" title="如何管理Game Object"></a>如何管理Game Object</h1><h2 id="Scene-Management"><a href="#Scene-Management" class="headerlink" title="Scene Management"></a>Scene Management</h2><p>每一个物体都需要一个特别的UID</p>
+<p>每个物体都需要一个位置</p>
+<h3 id="简单的空间分割"><a href="#简单的空间分割" class="headerlink" title="简单的空间分割"></a>简单的空间分割</h3><h4 id="不需要划分"><a href="#不需要划分" class="headerlink" title="不需要划分"></a>不需要划分</h4><p>物体较少的情况下直接遍历</p>
+<p>优点：特别简单，无脑</p>
+<p>缺点：但物体多就效率低</p>
+<h4 id="进行网格划分"><a href="#进行网格划分" class="headerlink" title="进行网格划分"></a>进行网格划分</h4><p>对格子进行编号，发生事件找邻近格子的部分物体</p>
+<p>优点：对比上一种方法能减轻弊端</p>
+<p>缺点：对于空间不均匀不适用</p>
+<h4 id="四叉树"><a href="#四叉树" class="headerlink" title="四叉树"></a>四叉树</h4><p>对目标块不断的划分。</p>
+<p><img src="https://img-blog.csdnimg.cn/26e21d25bf784fca866a120365a6113c.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_14,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h3 id="空间数据管理"><a href="#空间数据管理" class="headerlink" title="空间数据管理"></a>空间数据管理</h3><p>最常用的是BVH方法。</p>
+<p><img src="https://img-blog.csdnimg.cn/59b9a5d92205484d98395d4e5c178e37.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>一切都是对象</p>
+<p>游戏对象可以用基于组件的方式来描述</p>
+<p>游戏对象的状态会在tick循环中更新</p>
+<p>游戏对象是通过有效的策略在场景中管理的</p>
+<h1 id="物体tick的先后顺序"><a href="#物体tick的先后顺序" class="headerlink" title="物体tick的先后顺序"></a>物体tick的先后顺序</h1><p>多线程通信问题，当你访问其他线程时先通过一个邮局，然后由邮局统一相互发送消息。保证时序一定一致。比如你的精彩时刻是记录玩家的输入，如果是多核执行可能导致结果不一样。</p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="/music/jucilang.mp3">
+            </audio>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+		data-enable='true'
+        data-ae='true'
+        data-ci='35b8fbd0e6865c1adf60'
+        data-cs='6d2988de68c828bce78247ad604846cdc30e7ca3'
+        data-r='mrchenlreanspace.github.io'
+        data-o='MrChenLreanSpace'
+        data-a='MrChenLreanSpace'
+        data-d='false'
+    >查看评论</div>
+
+
+    </div>
+    
+        <div class='side'>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E6%9E%84%E5%BB%BA%E6%B8%B8%E6%88%8F%E4%B8%96%E7%95%8C"><span class="toc-number">1.</span> <span class="toc-text">如何构建游戏世界</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E8%AE%A9%E6%B8%B8%E6%88%8F%E4%B8%96%E7%95%8C%E6%B4%BB%E8%B5%B7%E6%9D%A5"><span class="toc-number">2.</span> <span class="toc-text">如何让游戏世界活起来</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%8E%BB%E6%8F%8F%E8%BF%B0%E8%99%9A%E6%8B%9F%E4%B8%96%E7%95%8C%E7%9A%84%E7%89%A9%E4%BD%93"><span class="toc-number">3.</span> <span class="toc-text">如何去描述虚拟世界的物体</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Component"><span class="toc-number">3.1.</span> <span class="toc-text">Component</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%80%8E%E4%B9%88%E8%AE%A9%E6%B8%B8%E6%88%8F%E5%8A%A8%E8%B5%B7%E6%9D%A5"><span class="toc-number">4.</span> <span class="toc-text">怎么让游戏动起来</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%9C%A8%E6%B8%B8%E6%88%8F%E5%BC%95%E7%88%86%E7%82%B8%E5%BC%B9"><span class="toc-number">5.</span> <span class="toc-text">如何在游戏引爆炸弹</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6"><span class="toc-number">5.0.1.</span> <span class="toc-text">事件</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E7%AE%A1%E7%90%86Game-Object"><span class="toc-number">6.</span> <span class="toc-text">如何管理Game Object</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Scene-Management"><span class="toc-number">6.1.</span> <span class="toc-text">Scene Management</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AE%80%E5%8D%95%E7%9A%84%E7%A9%BA%E9%97%B4%E5%88%86%E5%89%B2"><span class="toc-number">6.1.1.</span> <span class="toc-text">简单的空间分割</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%8D%E9%9C%80%E8%A6%81%E5%88%92%E5%88%86"><span class="toc-number">6.1.1.1.</span> <span class="toc-text">不需要划分</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%9B%E8%A1%8C%E7%BD%91%E6%A0%BC%E5%88%92%E5%88%86"><span class="toc-number">6.1.1.2.</span> <span class="toc-text">进行网格划分</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9B%9B%E5%8F%89%E6%A0%91"><span class="toc-number">6.1.1.3.</span> <span class="toc-text">四叉树</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A9%BA%E9%97%B4%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86"><span class="toc-number">6.1.2.</span> <span class="toc-text">空间数据管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B0%8F%E7%BB%93"><span class="toc-number">6.1.3.</span> <span class="toc-text">小结</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%89%A9%E4%BD%93tick%E7%9A%84%E5%85%88%E5%90%8E%E9%A1%BA%E5%BA%8F"><span class="toc-number">7.</span> <span class="toc-text">物体tick的先后顺序</span></a></li></ol>	
+        </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"], linebreaks: { automatic:true }, EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50) },
+        tex2jax: { inlineMath: [ ["$", "$"], ["\\(","\\)"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno",skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']},
+        TeX: {  noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } }, Macros: { href: "{}" } },
+        messageStyle: "none"
+    });
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+<!-- Google Analytics -->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YMJ8CBH8F7"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-YMJ8CBH8F7');
+</script>
+<!-- End Google Analytics -->
+
+
+</html>
