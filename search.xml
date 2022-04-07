@@ -1281,4 +1281,227 @@
         <tag>Shader</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Games104第4节记录</title>
+    <url>/2022/04/04/Games104%E7%AC%AC4%E8%8A%82%E8%AE%B0%E5%BD%95/</url>
+    <content><![CDATA[<h1 id="游戏渲染的挑战"><a href="#游戏渲染的挑战" class="headerlink" title="游戏渲染的挑战"></a>游戏渲染的挑战</h1><p><img src="https://img-blog.csdnimg.cn/89157de1c7774ef1aa07522e078e9dad.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_17,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/23dfe2cb80ac45288e9f972fa8d0c9b1.png" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/c5076d29a380491493992c71ead34a7c.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_15,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p>渲染只能占最多20%</p>
+<h1 id="渲染在游戏引擎中"><a href="#渲染在游戏引擎中" class="headerlink" title="渲染在游戏引擎中"></a>渲染在游戏引擎中</h1><p><img src="https://img-blog.csdnimg.cn/864a17f45d4f40b6b7951841e767337e.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h1 id="GPU"><a href="#GPU" class="headerlink" title="GPU"></a>GPU</h1><h2 id="SIMD-and-SIMT"><a href="#SIMD-and-SIMT" class="headerlink" title="SIMD and SIMT"></a>SIMD and SIMT</h2><p><img src="https://img-blog.csdnimg.cn/7642173d71924ba189add8d655e916ad.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/253a2ce07ae944838a253c4e725c7ba5.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h2 id="数据从cpu到GPU"><a href="#数据从cpu到GPU" class="headerlink" title="数据从cpu到GPU"></a>数据从cpu到GPU</h2><p><img src="https://img-blog.csdnimg.cn/70216ab2815342018a2c2003cf095ec1.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h2 id="缓存的影响"><a href="#缓存的影响" class="headerlink" title="缓存的影响"></a>缓存的影响</h2><p><img src="https://img-blog.csdnimg.cn/3642871673eb444fa52cdf9247996a56.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/f526d65995164481b1be3f88ec161c2e.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h2 id="其他平台的显卡架构"><a href="#其他平台的显卡架构" class="headerlink" title="其他平台的显卡架构"></a>其他平台的显卡架构</h2><p><img src="https://img-blog.csdnimg.cn/0e790c8ca84342b28b908c5aa276d6b8.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h1 id="可绘制的"><a href="#可绘制的" class="headerlink" title="可绘制的"></a>可绘制的</h1><h2 id="网格渲染组件"><a href="#网格渲染组件" class="headerlink" title="网格渲染组件"></a>网格渲染组件</h2><p><img src="https://img-blog.csdnimg.cn/a164ee1a5c8d4bb3b81cf07ce3cb181f.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p><img src="C:\Users\27371\AppData\Roaming\Typora\typora-user-images\image-20220404203718480.png" alt="image-20220404203718480"></p>
+<h1 id="法线"><a href="#法线" class="headerlink" title="法线"></a>法线</h1><p>顶点存法线</p>
+<p>防止正方形的角部分的法线</p>
+<h1 id="材质"><a href="#材质" class="headerlink" title="材质"></a>材质</h1><h1 id="绘制物体在引擎中"><a href="#绘制物体在引擎中" class="headerlink" title="绘制物体在引擎中"></a>绘制物体在引擎中</h1><h2 id="坐标系统和转换"><a href="#坐标系统和转换" class="headerlink" title="坐标系统和转换"></a>坐标系统和转换</h2><p>MVP转化</p>
+<h2 id="提高性能"><a href="#提高性能" class="headerlink" title="提高性能"></a>提高性能</h2><p>实例化</p>
+<p>如果可以复用的化</p>
+<p><img src="https://img-blog.csdnimg.cn/1fc9d34fb69b45b0b61ce665c02b5631.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h2 id="材质排序"><a href="#材质排序" class="headerlink" title="材质排序"></a>材质排序</h2><p>哇，GPU：你他妈就这样换数据，到底烦不烦呀</p>
+<p><img src="https://img-blog.csdnimg.cn/a70c8d19e9eb4765a6f842c76232b9b3.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h2 id="GPU批处理渲染"><a href="#GPU批处理渲染" class="headerlink" title="GPU批处理渲染"></a>GPU批处理渲染</h2><p><img src="https://img-blog.csdnimg.cn/a46a1351fb894a2592f8f0b962addea5.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h2 id="使用包围盒裁剪"><a href="#使用包围盒裁剪" class="headerlink" title="使用包围盒裁剪"></a>使用包围盒裁剪</h2><p><img src="https://img-blog.csdnimg.cn/106511939432458597771d80305b6805.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h2 id="四叉树进行裁剪"><a href="#四叉树进行裁剪" class="headerlink" title="四叉树进行裁剪"></a>四叉树进行裁剪</h2><p><img src="https://img-blog.csdnimg.cn/6c61e38da9e54420b26a188cebec6ace.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h3 id="PVS"><a href="#PVS" class="headerlink" title="PVS"></a>PVS</h3><p><img src="https://img-blog.csdnimg.cn/aaef94f0698943bbb04cb280e42d10e1.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/e507aff76f8d4e98852bc465f6196067.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h2 id="GPU-Culling"><a href="#GPU-Culling" class="headerlink" title="GPU Culling"></a>GPU Culling</h2><p><img src="https://img-blog.csdnimg.cn/6d836e7b3b4d4a419a8a6f5a8b9fd591.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h1 id="纹理压缩"><a href="#纹理压缩" class="headerlink" title="纹理压缩"></a>纹理压缩</h1><p><img src="https://img-blog.csdnimg.cn/efda019f0d1b40908021735e87db6214.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/26ed47d54b7d4a83be7a2e94e9ccf0f5.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h1 id="美术工具"><a href="#美术工具" class="headerlink" title="美术工具"></a>美术工具</h1><p><img src="https://img-blog.csdnimg.cn/f9d3c48e556547bb93e171f3179cc031.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h1 id="网格管线"><a href="#网格管线" class="headerlink" title="网格管线"></a>网格管线</h1><p><img src="https://img-blog.csdnimg.cn/07815bc68a484e2c8f23d90c8e472e4f.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/0d86c673dc0c484f840e1741faa3344d.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/a4e82a9e71114b62babc725699a98831.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p><img src="https://img-blog.csdnimg.cn/48330c71f9c3424ea621d36015dc3223.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+]]></content>
+      <categories>
+        <category>计算机图形学</category>
+      </categories>
+      <tags>
+        <tag>引擎制作</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>TA移动端人物渲染</title>
+    <url>/2022/04/05/TA4%E7%A7%BB%E5%8A%A8%E7%AB%AF%E4%BA%BA%E7%89%A9%E6%B8%B2%E6%9F%93/</url>
+    <content><![CDATA[<p><img src="https://img-blog.csdnimg.cn/4250697856d343b7aa2732b5ae108ec8.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h1 id="模型与贴图分析"><a href="#模型与贴图分析" class="headerlink" title="模型与贴图分析"></a>模型与贴图分析</h1>]]></content>
+      <categories>
+        <category>游戏</category>
+      </categories>
+      <tags>
+        <tag>Shader</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>TA3.2透光效果模拟</title>
+    <url>/2022/04/03/TA3.2%E9%80%8F%E5%85%89%E6%95%88%E6%9E%9C%E6%A8%A1%E6%8B%9F/</url>
+    <content><![CDATA[<h1 id="向量"><a href="#向量" class="headerlink" title="向量"></a>向量</h1><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">float3 diffuse_color = _DiffuseColor;</span><br><span class="line">float3 normalDir = <span class="built_in">normalize</span>(i.normalDir);</span><br><span class="line">float3 viewDir = <span class="built_in">normalize</span>(_WorldSpaceCameraPos - i.posWorld.xyz);</span><br><span class="line">float3 lightDir = <span class="built_in">normalize</span>(_WorldSpaceLightPos0.xyz);</span><br></pre></td></tr></table></figure>
+
+<h1 id="漫反射"><a href="#漫反射" class="headerlink" title="漫反射"></a>漫反射</h1><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="type">float</span> diff_term = <span class="built_in">max</span>(<span class="number">0.0</span>, <span class="built_in">dot</span>(normalDir, lightDir));</span><br><span class="line">float3 diffuselight_color = diff_term * diffuse_color * _LightColor0.rgb;</span><br><span class="line"><span class="type">float</span> sky_sphere = (<span class="built_in">dot</span>(normalDir,<span class="built_in">float3</span>(<span class="number">0</span>,<span class="number">1</span>,<span class="number">0</span>)) + <span class="number">1.0</span>) * <span class="number">0.5</span>;</span><br><span class="line">float3 sky_light = sky_sphere * diffuse_color;</span><br><span class="line">float3 final_diffuse = diffuselight_color + sky_light * _Opacity + _AddColor.xyz;</span><br></pre></td></tr></table></figure>
+
+<h1 id="穿透光"><a href="#穿透光" class="headerlink" title="穿透光"></a>穿透光</h1><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">float3 back_dir = -<span class="built_in">normalize</span>(lightDir + normalDir * _BasePassDistortion);</span><br><span class="line"><span class="type">float</span> VdotB = <span class="built_in">max</span>(<span class="number">0.0</span>, <span class="built_in">dot</span>(viewDir, back_dir));</span><br><span class="line"><span class="type">float</span> backlight_term = <span class="built_in">max</span>(<span class="number">0.0</span>,<span class="built_in">pow</span>(VdotB, _BasePassPower)) * _BasePassScale;</span><br><span class="line"><span class="type">float</span> thickness = <span class="number">1.0</span> - <span class="built_in">tex2D</span>(_ThicknessMap, i.uv).r;</span><br><span class="line">float3 backlight = backlight_term * thickness *_LightColor0.xyz * _BasePassColor.xyz;</span><br></pre></td></tr></table></figure>
+
+<h1 id="环境光"><a href="#环境光" class="headerlink" title="环境光"></a>环境光</h1><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">float3 reflectDir = <span class="built_in">reflect</span>(-viewDir,normalDir);</span><br><span class="line"></span><br><span class="line">half theta = _EnvRotate * UNITY_PI / <span class="number">180.0f</span>;</span><br><span class="line">float2x2 m_rot = <span class="built_in">float2x2</span>(<span class="built_in">cos</span>(theta), -<span class="built_in">sin</span>(theta), <span class="built_in">sin</span>(theta),<span class="built_in">cos</span>(theta));</span><br><span class="line">float2 v_rot = <span class="built_in">mul</span>(m_rot, reflectDir.xz);</span><br><span class="line">reflectDir = <span class="built_in">half3</span>(v_rot.x, reflectDir.y, v_rot.y);</span><br><span class="line"></span><br><span class="line">float4 cubemap_color = <span class="built_in">texCUBE</span>(_EnvMap,reflectDir);</span><br><span class="line">half3 env_color = <span class="built_in">DecodeHDR</span>(cubemap_color, _EnvMap_HDR);</span><br><span class="line"></span><br><span class="line"><span class="comment">//菲尼尔效应</span></span><br><span class="line"><span class="type">float</span> fresnel = <span class="number">1.0</span> - <span class="built_in">saturate</span>(<span class="built_in">dot</span>(normalDir, viewDir));</span><br><span class="line">fresnel = <span class="built_in">smoothstep</span>(_FresnelMin, _FresnelMax, fresnel);</span><br><span class="line"></span><br><span class="line">float3 final_env = env_color * _EnvIntensity * fresnel;</span><br></pre></td></tr></table></figure>
+
+<h1 id="混合"><a href="#混合" class="headerlink" title="混合"></a>混合</h1><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">float3 combined_color = final_diffuse + final_env + backlight;</span><br><span class="line">float3 final_color = combined_color;</span><br><span class="line"><span class="keyword">return</span> <span class="built_in">float4</span>(final_color,<span class="number">1.0</span>);</span><br></pre></td></tr></table></figure>
+
+<h1 id="前向渲染叠加"><a href="#前向渲染叠加" class="headerlink" title="前向渲染叠加"></a>前向渲染叠加</h1><p>只需要将穿透光部分加过来就行。不需要加环境光之类的</p>
+]]></content>
+      <categories>
+        <category>游戏</category>
+      </categories>
+      <tags>
+        <tag>Shader</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Ubuntu系统和Ducker的奇妙故事</title>
+    <url>/2022/04/07/Ubuntu%E7%B3%BB%E7%BB%9F%E5%92%8CDucker%E7%9A%84%E5%A5%87%E5%A6%99%E6%95%85%E4%BA%8B/</url>
+    <content><![CDATA[<h1 id="装系统"><a href="#装系统" class="headerlink" title="装系统"></a>装系统</h1><p>下载镜像，制作</p>
+<p>跳过更新过程</p>
+<p>找到软件和更新</p>
+<p>寻找最佳镜像源</p>
+<p>设置好再更新镜像</p>
+<h1 id="内网穿透"><a href="#内网穿透" class="headerlink" title="内网穿透"></a>内网穿透</h1><p>用<a href="https://github.com/fatedier/frp/releases">frp</a>进行穿透</p>
+<h2 id="公网服务器"><a href="#公网服务器" class="headerlink" title="公网服务器"></a>公网服务器</h2><p>frps.ini</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">[common]</span><br><span class="line">bind_port = <span class="number">7000</span></span><br><span class="line">token =sss        密钥和客户端一样就行</span><br></pre></td></tr></table></figure>
+
+<h2 id="私有服务器"><a href="#私有服务器" class="headerlink" title="私有服务器"></a>私有服务器</h2><p>frpc.ini</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">[common]</span><br><span class="line">server_addr = 公网服务器ip</span><br><span class="line">server_port = <span class="number">7000</span></span><br><span class="line">token =sss</span><br><span class="line"></span><br><span class="line">[pve-web]</span><br><span class="line">type = tcp</span><br><span class="line">local_ip = <span class="number">192.168</span><span class="number">.50</span><span class="number">.200</span>   </span><br><span class="line">local_port = <span class="number">8888</span>           </span><br><span class="line">remote_port = <span class="number">8888</span>      </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">local_ip <span class="comment">//私有服务器地址</span></span><br><span class="line"></span><br><span class="line">local_port <span class="comment">//本地的应用端口</span></span><br><span class="line"></span><br><span class="line">remote_port <span class="comment">//映射到服务器的端口</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="linux"><a href="#linux" class="headerlink" title="linux"></a>linux</h2><h3 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h3><p>一定要下_linux_amd64.tar.gz的，架构可以选，其他的darwin_amd64.tar.gzUbuntu运行不了</p>
+<p>到相关文件夹下</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">sudo ./frps -c frps.ini</span><br></pre></td></tr></table></figure>
+
+<p>如果在其他用户群</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">su -l [user]</span><br></pre></td></tr></table></figure>
+
+<p>不加的话默认root权限管理员</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo ./frpc -c frpc.ini</span><br></pre></td></tr></table></figure>
+
+<h2 id="win"><a href="#win" class="headerlink" title="win"></a>win</h2><p>cmd指令相关文件夹下</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">frps.exe -c frps.ini</span><br><span class="line">frpc.exe -c frpc.ini</span><br></pre></td></tr></table></figure>
+
+<p>可以将此命令写出bat放进开始文件夹，变成开机启动项。</p>
+<h1 id="虚拟组网"><a href="#虚拟组网" class="headerlink" title="虚拟组网"></a>虚拟组网</h1><h3 id="zerotier-虚拟组网"><a href="#zerotier-虚拟组网" class="headerlink" title="zerotier 虚拟组网"></a>zerotier 虚拟组网</h3><p>原理就是先通过zerotier中继器进行联网，然后尝试让两者进行p2p连接。</p>
+<p>Linux麻烦一点</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">zerotier-cli join id<span class="comment">//加入并连接</span></span><br><span class="line">zerotier-cli leave id<span class="comment">//断开连接</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="转载自别人视频的东西c"><a href="#转载自别人视频的东西c" class="headerlink" title="转载自别人视频的东西c"></a>转载自别人视频的东西c</h1><h2 id="ducker镜像加速"><a href="#ducker镜像加速" class="headerlink" title="ducker镜像加速"></a>ducker镜像加速</h2><p>请把 docker 更换源工具解压至用户主目录</p>
+<p>打开终端运行</p>
+<p>ds.sh</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">#! /bin/bash</span><br><span class="line"></span><br><span class="line">date <span class="string">&quot;+%Y年%m月%d日 周%w %H:%M:%S&quot;</span></span><br><span class="line">echo <span class="string">&#x27;为 Docker 更换官方国内源加速下载&#x27;</span></span><br><span class="line">cat &gt; /etc/docker/daemon.json &lt;&lt; EOF</span><br><span class="line">&#123;</span><br><span class="line"> <span class="string">&quot;registry-mirrors&quot;</span>: [<span class="string">&quot;https://registry.docker-cn.com&quot;</span>]</span><br><span class="line">&#125;</span><br><span class="line">EOF</span><br><span class="line">service docker restart</span><br><span class="line">docker info|grep <span class="string">&quot;Registry Mirrors&quot;</span> -A <span class="number">1</span></span><br><span class="line">echo <span class="string">&#x27;显示 registry.docker-cn.com 即换源成功&#x27;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="更换-Docker-国内官方源"><a href="#更换-Docker-国内官方源" class="headerlink" title="更换 Docker 国内官方源"></a>更换 Docker 国内官方源</h3><p>sudo sh ds.sh</p>
+<h3 id="修复-Docker-无管理员权限运行失败的问题"><a href="#修复-Docker-无管理员权限运行失败的问题" class="headerlink" title="修复 Docker 无管理员权限运行失败的问题"></a>修复 Docker 无管理员权限运行失败的问题</h3><p>sudo gpasswd -a $USER docker</p>
+<p>newgrp docker</p>
+<p>service docker restart</p>
+<p><a href="https://www.bilibili.com/video/BV1Bh411s765?spm_id_from=333.1007.top_right_bar_window_custom_collection.content.click">来自科技宅小明的视频</a></p>
+<p><strong>一定要切换镜像源！！！一定要切换镜像源！！！一定要切换镜像源！！！一定要切换镜像源！！！一定要切换镜像源！！！一定要切换镜像源！！！一定要切换镜像源！！！一定要切换镜像源！！！一定要切换镜像源！！！一定要切换镜像源！！！</strong></p>
+<h2 id="装Docker"><a href="#装Docker" class="headerlink" title="装Docker"></a>装Docker</h2><p><a href="https://www.runoob.com/docker/docker-tutorial.html">也可以看菜鸟教程装Docker</a></p>
+<p><strong>更新 apt 工具及索引，以支持 https 存储库</strong></p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line"></span><br><span class="line">sudo apt-get install \</span><br><span class="line">    ca-certificates \</span><br><span class="line">    curl \</span><br><span class="line">    gnupg \</span><br><span class="line">    lsb-release</span><br></pre></td></tr></table></figure>
+
+<p><strong>添加 Docker 官方 GPG 密钥（用于签名&#x2F;验证、加密&#x2F;解密）</strong></p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">curl -fsSL https:<span class="comment">//download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>设置 stable 版稳定存储库（区别于夜间版&#x2F;测试版 nightly &#x2F; test ）</strong></p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">echo \</span><br><span class="line">  <span class="string">&quot;deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \</span></span><br><span class="line"><span class="string">  $(lsb_release -cs) stable&quot;</span> | sudo tee /etc/apt/sources.<span class="built_in">list</span>.d/docker.<span class="built_in">list</span> &gt; /dev/null</span><br></pre></td></tr></table></figure>
+
+<p><strong>更新 apt 工具及索引，并安装 Docker</strong></p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line"></span><br><span class="line">sudo apt-get install docker-ce docker-ce-cli containerd.io</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>验证 Docker Engine 是否正确安装（显示 “Hello from Docker!” 即为成功安装）</strong></p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">sudo docker run hello-world</span><br></pre></td></tr></table></figure>
+
+<h2 id="为-Docker-安装图形化操作界面-Portainer"><a href="#为-Docker-安装图形化操作界面-Portainer" class="headerlink" title="为 Docker 安装图形化操作界面 Portainer"></a>为 Docker 安装图形化操作界面 Portainer</h2><p><strong>创建 Portainer Server 存储数据库的卷</strong></p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">sudo docker volume create portainer_data</span><br></pre></td></tr></table></figure>
+
+<p><strong>下载并安装 Portainer Server 容器</strong></p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">sudo docker run -d -p <span class="number">8000</span>:<span class="number">8000</span> -p <span class="number">9443</span>:<span class="number">9443</span> --name portainer \</span><br><span class="line">    --restart=always \</span><br><span class="line">    -v /var/run/docker.sock:/var/run/docker.sock \</span><br><span class="line">    -v portainer_data:/data \</span><br><span class="line">    portainer/portainer-ce:latest</span><br></pre></td></tr></table></figure>
+
+<p><strong>查看 Docker 容器状态（NAMES 标签出现 portainer&#x2F;portainer-ce 则成功运行）</strong></p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">sudo docker ps</span><br></pre></td></tr></table></figure>
+
+<p><strong>使用 Ubuntu 自带的火狐浏览器访问（<a href="https://127.0.0.1:9443/%EF%BC%89">https://127.0.0.1:9443/）</a></strong><br><strong>或使用局域网内另一台计算机&#x2F;手机的浏览器访问（https:&#x2F;&#x2F;服务器的IP:9443&#x2F;）</strong></p>
+<p><strong>对 Portainer 初始设置</strong><br>设置用户名及密码（8位字符或数字），点击 Get Started，载入后点击 local 即可</p>
+<h2 id="启用-Web-个人导航页"><a href="#启用-Web-个人导航页" class="headerlink" title="启用 Web 个人导航页"></a>启用 Web 个人导航页</h2><p><strong>将 nginx 文件夹解压至 &#x2F;home&#x2F;你自己的用户名&#x2F; 之下</strong></p>
+<p><strong>下载 Nginx 镜像</strong></p>
+<p>Portainer 点击 Images 镜像，docker.io 右侧填入 nginx，点击 Pull the image 下载镜像</p>
+<p><strong>部署并运行 Nginx 容器（可以理解为把 Nginx 镜像作为小型虚拟机启动）</strong></p>
+<p>点击 Containers 标签，点击 Add Container 启动容器，名称填入Nginx，docker.io 右侧填入 nginx:latest（Images 标签页 Tags 标签选项）。</p>
+<p>Manual network port publishing 手动发布网口设置项，把本地80端口映射到容器80端口。</p>
+<p>在Advanced container settings高级容器设置中，点击map additional volume 映射附加卷，点击绑定文件夹及可读写，本地文件夹填入 &#x2F;home&#x2F;你自己的用户名&#x2F;nginx&#x2F; 容器文件夹填入 &#x2F;usr&#x2F;share&#x2F;nginx&#x2F;html</p>
+<p>Restart policy 重启策略调整为 Always 永远自动启动。</p>
+<p>最后点击 Deploy the container 部署容器</p>
+<p><strong>使用 Ubuntu 自带的火狐浏览器访问（<a href="http://127.0.0.1)/">http://127.0.0.1）</a></strong><br><strong>或使用局域网内另一台计算机&#x2F;手机的浏览器访问（http:&#x2F;&#x2F;服务器的IP）</strong></p>
+<h2 id="来自GitHub大佬的分享"><a href="#来自GitHub大佬的分享" class="headerlink" title="来自GitHub大佬的分享"></a>来自GitHub大佬的分享</h2><p>来自各种生活的容器服务，<a href="https://github.com/awesome-selfhosted/awesome-selfhosted">上链接</a></p>
+<h2 id="搭建-Mattermost-私人聊天室"><a href="#搭建-Mattermost-私人聊天室" class="headerlink" title="搭建 Mattermost 私人聊天室"></a>搭建 Mattermost 私人聊天室</h2><p><strong>命令方式安装 Docker 版 Mattermost</strong></p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">docker run \</span><br><span class="line">-d \</span><br><span class="line">--name mattermost-preview \</span><br><span class="line">--restart=always \</span><br><span class="line">--publish <span class="number">8065</span>:<span class="number">8065</span> \</span><br><span class="line">--add-host dockerhost:<span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span> \</span><br><span class="line">mattermost/mattermost-preview</span><br></pre></td></tr></table></figure>
+
+<h2 id="设置-Mattermost-私人聊天室"><a href="#设置-Mattermost-私人聊天室" class="headerlink" title="设置 Mattermost 私人聊天室"></a>设置 Mattermost 私人聊天室</h2><p><strong>访问 127.0.0.1:8065 网址，输入邮箱用户名及密码进行初始账户注册</strong><br><strong>选择第二项进入控制台，进入SITE CONFIGURATION - Localization更改语言为中文</strong><br><strong>保存返回上一步，新建群组PQMing（可以自行改名），点击Finish完成</strong><br><strong>新页面输入用户名，上传头像（可选）并保存，保存团队，不起用通知</strong><br><strong>复制邀请链接，之后可以分享给朋友，稍等一会就完成设置</strong><br><strong>默认的管理员账户仍然是英文，点击右上角设置，Display里改成中文即可</strong><br><strong>新用户入群后会自动进入公共和闲聊这两个频道，用户之间可以选择群聊或私信</strong></p>
+<h2 id="免费使用为知笔记"><a href="#免费使用为知笔记" class="headerlink" title="免费使用为知笔记"></a>免费使用为知笔记</h2><p><strong>访问用户主目录文件夹</strong></p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">cd ~</span><br></pre></td></tr></table></figure>
+
+<p><strong>在主目录新建 wizdata 文件夹用于存储笔记数据</strong></p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">mkdir wizdata</span><br></pre></td></tr></table></figure>
+
+<p><strong>命令方式安装 Docker 版为知笔记</strong></p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">docker run \</span><br><span class="line">-it \</span><br><span class="line">-d \</span><br><span class="line">--name wiz \</span><br><span class="line">--restart=always \</span><br><span class="line">-v ~/wizdata:/wiz/storage \</span><br><span class="line">-v /etc/localtime:/etc/localtime \</span><br><span class="line">-p <span class="number">8080</span>:<span class="number">80</span> \</span><br><span class="line">-p <span class="number">9269</span>:<span class="number">9269</span>/udp \</span><br><span class="line">wiznote/wizserver</span><br></pre></td></tr></table></figure>
+
+<h2 id="搭建个人博客-Wordpress"><a href="#搭建个人博客-Wordpress" class="headerlink" title="搭建个人博客 Wordpress"></a>搭建个人博客 Wordpress</h2><p><strong>安装 Docker 版 mariadb 数据库命令，可自行替换密码（默认为meimima）</strong></p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">docker run -d \</span><br><span class="line">  --name mariadb \</span><br><span class="line">  -p <span class="number">3306</span>:<span class="number">3306</span> \</span><br><span class="line">  -e MARIADB_ROOT_PASSWORD=meimima \</span><br><span class="line">  -e MARIADB_DATABASE=wordpress \</span><br><span class="line">  --restart=always \</span><br><span class="line">  mariadb:latest</span><br></pre></td></tr></table></figure>
+
+<p><strong>安装 Docker 版 Wordpress 命令，需要自行替换为本机 IP 地址（采用上一步数据库密码meimima）</strong></p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">docker run \</span><br><span class="line">  -d \</span><br><span class="line">  --name wordpress \</span><br><span class="line">  -e WORDPRESS_DB_HOST=服务器IP:<span class="number">3306</span> \</span><br><span class="line">  -e WORDPRESS_DB_USER=root \</span><br><span class="line">  -e WORDPRESS_DB_PASSWORD=meimima \</span><br><span class="line">  -e WORDPRESS_DB_NAME=wordpress \</span><br><span class="line">  -e WORDPRESS_TABLE_PREFIX=wp_ \</span><br><span class="line">  -p <span class="number">8081</span>:<span class="number">80</span> \</span><br><span class="line">  --restart=always \</span><br><span class="line">  wordpress</span><br></pre></td></tr></table></figure>
+
+<p><strong>使用浏览器登陆服务器 IP:8081（例：192.168.2.15:8081）访问博客</strong></p>
+<h2 id="可选-安装-mariadb-数据库控制面板-phpmyadmin-手动管理数据库"><a href="#可选-安装-mariadb-数据库控制面板-phpmyadmin-手动管理数据库" class="headerlink" title="可选 安装 mariadb 数据库控制面板 phpmyadmin 手动管理数据库"></a>可选 安装 mariadb 数据库控制面板 phpmyadmin 手动管理数据库</h2><p><strong>安装 Docker 版 phpmyadmin 数据库控制面板命令</strong></p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">docker run \</span><br><span class="line">  -d \</span><br><span class="line">  --name phpmyadmin \</span><br><span class="line">  --link mariadb \</span><br><span class="line">  -e PMA_HOST=<span class="string">&quot;mariadb&quot;</span> \</span><br><span class="line">  -p <span class="number">8082</span>:<span class="number">80</span> \</span><br><span class="line">  --restart=always \</span><br><span class="line">  phpmyadmin</span><br></pre></td></tr></table></figure>
+
+<p><strong>使用浏览器登陆服务器 IP:8082（例：192.168.2.15:8082）访问数据库控制面板</strong><br><strong>使用安装 phpmyadmin 命令中的密码（默认为meimima）及用户名 root 登陆数据库</strong><br><strong>点击控制面板左侧 新建 按钮，创建名为 wordpress 的数据库</strong></p>
+<h2 id="免费网盘-SeaFile-安装教程"><a href="#免费网盘-SeaFile-安装教程" class="headerlink" title="免费网盘 SeaFile 安装教程"></a>免费网盘 SeaFile 安装教程</h2><p>docker-compose.yml</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">version: <span class="string">&#x27;2.0&#x27;</span></span><br><span class="line">services:</span><br><span class="line">  db:</span><br><span class="line">    image: mariadb:<span class="number">10.5</span></span><br><span class="line">    container_name: seafile-mysql</span><br><span class="line">    restart: always</span><br><span class="line">    environment:</span><br><span class="line">      - MYSQL_ROOT_PASSWORD=db_dev  # 设置数据库根用户的密码</span><br><span class="line">      - MYSQL_LOG_CONSOLE=<span class="literal">true</span></span><br><span class="line">    volumes:</span><br><span class="line">      - /home/seafile-mysql/db:/var/lib/mysql  # 设置数据库存储位置</span><br><span class="line">    networks:</span><br><span class="line">      - seafile-net</span><br><span class="line"></span><br><span class="line">  memcached:</span><br><span class="line">    image: memcached:<span class="number">1.5</span><span class="number">.6</span></span><br><span class="line">    container_name: seafile-memcached</span><br><span class="line">    restart: always</span><br><span class="line">    entrypoint: memcached -m <span class="number">256</span></span><br><span class="line">    networks:</span><br><span class="line">      - seafile-net</span><br><span class="line"></span><br><span class="line">  seafile:</span><br><span class="line">    image: seafileltd/seafile-mc:latest</span><br><span class="line">    container_name: seafile</span><br><span class="line">    ports:</span><br><span class="line">      - <span class="string">&quot;81:80&quot;</span>  # 主机<span class="number">81</span>端口映射至容器<span class="number">80</span>端口http</span><br><span class="line">      - <span class="string">&quot;4433:443&quot;</span>  # 主机<span class="number">4433</span>端口映射至容器<span class="number">443</span>端口https</span><br><span class="line">      - <span class="string">&quot;8088:8080&quot;</span>  # 主机<span class="number">8088</span>端口映射至容器<span class="number">8080</span>端口webdav</span><br><span class="line">    volumes:</span><br><span class="line">      - /home/seafile-data:/shared   # 设置Seafile数据存储位置</span><br><span class="line">    restart: always</span><br><span class="line">    environment:</span><br><span class="line">      - DB_HOST=db</span><br><span class="line">      - DB_ROOT_PASSWD=db_dev  # 与第一条注释所设置密码相同</span><br><span class="line">      - TIME_ZONE=Asia/Shanghai # 设定时区为上海</span><br><span class="line">      - SEAFILE_ADMIN_EMAIL=me@example.com # 设置管理员账户，默认为 <span class="string">&#x27;me@example.com&#x27;</span></span><br><span class="line">      - SEAFILE_ADMIN_PASSWORD=asecret     # 设置管理员密码，默认为 <span class="string">&#x27;asecret&#x27;</span></span><br><span class="line">#      - SEAFILE_SERVER_LETSENCRYPT=<span class="literal">false</span>   # 是否启用LETSENCRYPT提供的https加密证书，默认为 <span class="string">&#x27;false&#x27;</span></span><br><span class="line">      - SEAFILE_SERVER_HOSTNAME=<span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">81</span> # 设置网盘域名地址</span><br><span class="line">    depends_on:</span><br><span class="line">      - db</span><br><span class="line">      - memcached</span><br><span class="line">    networks:</span><br><span class="line">      - seafile-net</span><br><span class="line"></span><br><span class="line">networks:</span><br><span class="line">  seafile-net:</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>docker-compose原版.yml</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">version: <span class="string">&#x27;2.0&#x27;</span></span><br><span class="line">services:</span><br><span class="line">  db:</span><br><span class="line">    image: mariadb:<span class="number">10.5</span></span><br><span class="line">    container_name: seafile-mysql</span><br><span class="line">    environment:</span><br><span class="line">      - MYSQL_ROOT_PASSWORD=db_dev  # Requested, <span class="built_in">set</span> the root<span class="number">&#x27;</span>s password of MySQL service.</span><br><span class="line">      - MYSQL_LOG_CONSOLE=<span class="literal">true</span></span><br><span class="line">    volumes:</span><br><span class="line">      - /opt/seafile-mysql/db:/var/lib/mysql  # Requested, specifies the path to MySQL data persistent store.</span><br><span class="line">    networks:</span><br><span class="line">      - seafile-net</span><br><span class="line"></span><br><span class="line">  memcached:</span><br><span class="line">    image: memcached:<span class="number">1.5</span><span class="number">.6</span></span><br><span class="line">    container_name: seafile-memcached</span><br><span class="line">    entrypoint: memcached -m <span class="number">256</span></span><br><span class="line">    networks:</span><br><span class="line">      - seafile-net</span><br><span class="line">          </span><br><span class="line">  seafile:</span><br><span class="line">    image: seafileltd/seafile-mc:latest</span><br><span class="line">    container_name: seafile</span><br><span class="line">    ports:</span><br><span class="line">      - <span class="string">&quot;80:80&quot;</span></span><br><span class="line">#      - <span class="string">&quot;443:443&quot;</span>  # If https is enabled, cancel the comment.</span><br><span class="line">    volumes:</span><br><span class="line">      - /opt/seafile-data:/shared   # Requested, specifies the path to Seafile data persistent store.</span><br><span class="line">    environment:</span><br><span class="line">      - DB_HOST=db</span><br><span class="line">      - DB_ROOT_PASSWD=db_dev  # Requested, the value shuold be root<span class="number">&#x27;</span>s password of MySQL service.</span><br><span class="line">#      - TIME_ZONE=Asia/Shanghai # Optional, <span class="keyword">default</span> is UTC. Should be uncomment and <span class="built_in">set</span> to your local time zone.</span><br><span class="line">      - SEAFILE_ADMIN_EMAIL=me@example.com # Specifies Seafile admin user, <span class="keyword">default</span> is <span class="string">&#x27;me@example.com&#x27;</span>.</span><br><span class="line">      - SEAFILE_ADMIN_PASSWORD=asecret     # Specifies Seafile admin password, <span class="keyword">default</span> is <span class="string">&#x27;asecret&#x27;</span>.</span><br><span class="line">      - SEAFILE_SERVER_LETSENCRYPT=<span class="literal">false</span>   # Whether use letsencrypt to generate cert.</span><br><span class="line">      - SEAFILE_SERVER_HOSTNAME=seafile.example.com # Specifies your host name.</span><br><span class="line">    depends_on:</span><br><span class="line">      - db</span><br><span class="line">      - memcached</span><br><span class="line">    networks:</span><br><span class="line">      - seafile-net</span><br><span class="line"></span><br><span class="line">networks:</span><br><span class="line">  seafile-net:</span><br></pre></td></tr></table></figure>
+
+<p><strong>打开终端运行以下命令（输入密码界面不会显示密码）</strong></p>
+<p>sudo apt-get update | sudo apt-get install docker-compose -y</p>
+<p><strong>将 docker-compose.yml 解压至用户主目录，并修改文件内邮箱密码</strong></p>
+<p><strong>访问用户主目录</strong></p>
+<p>cd ~</p>
+<p><strong>在终端运行以下命令</strong></p>
+<p>sudo docker-compose up -d</p>
+<p><strong>使用自带的火狐浏览器，访问 <a href="http://127.0.0.1:81/">http://127.0.0.1:81</a></strong></p>
+<p><strong>未更改 docker-compose.yml 文件内邮箱密码的话，默认用户名 <a href="mailto:&#109;&#x65;&#64;&#x65;&#x78;&#97;&#109;&#112;&#x6c;&#101;&#46;&#99;&#x6f;&#109;">&#109;&#x65;&#64;&#x65;&#x78;&#97;&#109;&#112;&#x6c;&#101;&#46;&#99;&#x6f;&#109;</a> 密码 asecret</strong></p>
+<p><strong>请在路由器转发 http 使用的 81 端口至服务器</strong></p>
+<p><strong>全平台客户端下载链接 <a href="https://www.seafile.com/download/">https://www.seafile.com/download/</a></strong></p>
+<h2 id="免费网盘-SeaFile-配置教程-https"><a href="#免费网盘-SeaFile-配置教程-https" class="headerlink" title="免费网盘 SeaFile 配置教程 (https)"></a>免费网盘 SeaFile 配置教程 (https)</h2><p><strong>于各个免费平台申请相应域名的 SSL 证书</strong></p>
+<p><strong>创建 &#x2F;home&#x2F;seafile-data&#x2F;ssl 目录，然后拷贝证书文件和密钥文件至 ssl 目录下</strong></p>
+<p><strong>如果网盘域名是 seafile.example.com，证书名称必须为 seafile.example.com.crt，密钥文件名称为 seafile.example.com.key</strong></p>
+<p><strong>请在路由器转发 https 使用的 4433 端口至服务器</strong></p>
+]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>Ubuntu</tag>
+        <tag>Ducker</tag>
+      </tags>
+  </entry>
 </search>

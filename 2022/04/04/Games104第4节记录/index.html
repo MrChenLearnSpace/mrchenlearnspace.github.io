@@ -1,0 +1,239 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Games104第4节记录 - 浪子之心</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Blog,"> 
+    <meta name="description" content="MrChen Bolg,游戏渲染的挑战
+
+
+渲染只能占最多20%
+渲染在游戏引擎中
+GPUSIMD and SIMT
+
+数据从cpu到GPU
+缓存的影响
+
+其他平台的显卡架构
+可绘制的网格渲染组件
+
+法线顶点存法线
+防止正,"> 
+    <meta name="author" content="Jack Chen"> 
+    <link rel="alternative" href="atom.xml" title="浪子之心" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+<meta name="generator" content="Hexo 5.4.1"><link rel="stylesheet" href="/css/prism.css" type="text/css"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">浪子之心</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="https://mrchenlreanspace.github.io"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">Games104第4节记录</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">Games104第4节记录</h1>
+        <div class="stuff">
+            <span>四月 04, 2022</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E5%BC%95%E6%93%8E%E5%88%B6%E4%BD%9C/" rel="tag">引擎制作</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h1 id="游戏渲染的挑战"><a href="#游戏渲染的挑战" class="headerlink" title="游戏渲染的挑战"></a>游戏渲染的挑战</h1><p><img src="https://img-blog.csdnimg.cn/89157de1c7774ef1aa07522e078e9dad.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_17,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/23dfe2cb80ac45288e9f972fa8d0c9b1.png" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/c5076d29a380491493992c71ead34a7c.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_15,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p>渲染只能占最多20%</p>
+<h1 id="渲染在游戏引擎中"><a href="#渲染在游戏引擎中" class="headerlink" title="渲染在游戏引擎中"></a>渲染在游戏引擎中</h1><p><img src="https://img-blog.csdnimg.cn/864a17f45d4f40b6b7951841e767337e.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h1 id="GPU"><a href="#GPU" class="headerlink" title="GPU"></a>GPU</h1><h2 id="SIMD-and-SIMT"><a href="#SIMD-and-SIMT" class="headerlink" title="SIMD and SIMT"></a>SIMD and SIMT</h2><p><img src="https://img-blog.csdnimg.cn/7642173d71924ba189add8d655e916ad.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/253a2ce07ae944838a253c4e725c7ba5.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h2 id="数据从cpu到GPU"><a href="#数据从cpu到GPU" class="headerlink" title="数据从cpu到GPU"></a>数据从cpu到GPU</h2><p><img src="https://img-blog.csdnimg.cn/70216ab2815342018a2c2003cf095ec1.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h2 id="缓存的影响"><a href="#缓存的影响" class="headerlink" title="缓存的影响"></a>缓存的影响</h2><p><img src="https://img-blog.csdnimg.cn/3642871673eb444fa52cdf9247996a56.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/f526d65995164481b1be3f88ec161c2e.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h2 id="其他平台的显卡架构"><a href="#其他平台的显卡架构" class="headerlink" title="其他平台的显卡架构"></a>其他平台的显卡架构</h2><p><img src="https://img-blog.csdnimg.cn/0e790c8ca84342b28b908c5aa276d6b8.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h1 id="可绘制的"><a href="#可绘制的" class="headerlink" title="可绘制的"></a>可绘制的</h1><h2 id="网格渲染组件"><a href="#网格渲染组件" class="headerlink" title="网格渲染组件"></a>网格渲染组件</h2><p><img src="https://img-blog.csdnimg.cn/a164ee1a5c8d4bb3b81cf07ce3cb181f.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p><img src="C:\Users\27371\AppData\Roaming\Typora\typora-user-images\image-20220404203718480.png" alt="image-20220404203718480"></p>
+<h1 id="法线"><a href="#法线" class="headerlink" title="法线"></a>法线</h1><p>顶点存法线</p>
+<p>防止正方形的角部分的法线</p>
+<h1 id="材质"><a href="#材质" class="headerlink" title="材质"></a>材质</h1><h1 id="绘制物体在引擎中"><a href="#绘制物体在引擎中" class="headerlink" title="绘制物体在引擎中"></a>绘制物体在引擎中</h1><h2 id="坐标系统和转换"><a href="#坐标系统和转换" class="headerlink" title="坐标系统和转换"></a>坐标系统和转换</h2><p>MVP转化</p>
+<h2 id="提高性能"><a href="#提高性能" class="headerlink" title="提高性能"></a>提高性能</h2><p>实例化</p>
+<p>如果可以复用的化</p>
+<p><img src="https://img-blog.csdnimg.cn/1fc9d34fb69b45b0b61ce665c02b5631.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h2 id="材质排序"><a href="#材质排序" class="headerlink" title="材质排序"></a>材质排序</h2><p>哇，GPU：你他妈就这样换数据，到底烦不烦呀</p>
+<p><img src="https://img-blog.csdnimg.cn/a70c8d19e9eb4765a6f842c76232b9b3.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h2 id="GPU批处理渲染"><a href="#GPU批处理渲染" class="headerlink" title="GPU批处理渲染"></a>GPU批处理渲染</h2><p><img src="https://img-blog.csdnimg.cn/a46a1351fb894a2592f8f0b962addea5.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h2 id="使用包围盒裁剪"><a href="#使用包围盒裁剪" class="headerlink" title="使用包围盒裁剪"></a>使用包围盒裁剪</h2><p><img src="https://img-blog.csdnimg.cn/106511939432458597771d80305b6805.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h2 id="四叉树进行裁剪"><a href="#四叉树进行裁剪" class="headerlink" title="四叉树进行裁剪"></a>四叉树进行裁剪</h2><p><img src="https://img-blog.csdnimg.cn/6c61e38da9e54420b26a188cebec6ace.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h3 id="PVS"><a href="#PVS" class="headerlink" title="PVS"></a>PVS</h3><p><img src="https://img-blog.csdnimg.cn/aaef94f0698943bbb04cb280e42d10e1.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/e507aff76f8d4e98852bc465f6196067.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h2 id="GPU-Culling"><a href="#GPU-Culling" class="headerlink" title="GPU Culling"></a>GPU Culling</h2><p><img src="https://img-blog.csdnimg.cn/6d836e7b3b4d4a419a8a6f5a8b9fd591.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h1 id="纹理压缩"><a href="#纹理压缩" class="headerlink" title="纹理压缩"></a>纹理压缩</h1><p><img src="https://img-blog.csdnimg.cn/efda019f0d1b40908021735e87db6214.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/26ed47d54b7d4a83be7a2e94e9ccf0f5.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h1 id="美术工具"><a href="#美术工具" class="headerlink" title="美术工具"></a>美术工具</h1><p><img src="https://img-blog.csdnimg.cn/f9d3c48e556547bb93e171f3179cc031.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h1 id="网格管线"><a href="#网格管线" class="headerlink" title="网格管线"></a>网格管线</h1><p><img src="https://img-blog.csdnimg.cn/07815bc68a484e2c8f23d90c8e472e4f.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/0d86c673dc0c484f840e1741faa3344d.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/a4e82a9e71114b62babc725699a98831.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p><img src="https://img-blog.csdnimg.cn/48330c71f9c3424ea621d36015dc3223.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="/music/jucilang.mp3">
+            </audio>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+		data-enable='true'
+        data-ae='true'
+        data-ci='35b8fbd0e6865c1adf60'
+        data-cs='6d2988de68c828bce78247ad604846cdc30e7ca3'
+        data-r='mrchenlreanspace.github.io'
+        data-o='MrChenLreanSpace'
+        data-a='MrChenLreanSpace'
+        data-d='false'
+    >查看评论</div>
+
+
+    </div>
+    
+        <div class='side'>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B8%B8%E6%88%8F%E6%B8%B2%E6%9F%93%E7%9A%84%E6%8C%91%E6%88%98"><span class="toc-number">1.</span> <span class="toc-text">游戏渲染的挑战</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B8%B2%E6%9F%93%E5%9C%A8%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E4%B8%AD"><span class="toc-number">2.</span> <span class="toc-text">渲染在游戏引擎中</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#GPU"><span class="toc-number">3.</span> <span class="toc-text">GPU</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#SIMD-and-SIMT"><span class="toc-number">3.1.</span> <span class="toc-text">SIMD and SIMT</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E4%BB%8Ecpu%E5%88%B0GPU"><span class="toc-number">3.2.</span> <span class="toc-text">数据从cpu到GPU</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%93%E5%AD%98%E7%9A%84%E5%BD%B1%E5%93%8D"><span class="toc-number">3.3.</span> <span class="toc-text">缓存的影响</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B6%E4%BB%96%E5%B9%B3%E5%8F%B0%E7%9A%84%E6%98%BE%E5%8D%A1%E6%9E%B6%E6%9E%84"><span class="toc-number">3.4.</span> <span class="toc-text">其他平台的显卡架构</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%AF%E7%BB%98%E5%88%B6%E7%9A%84"><span class="toc-number">4.</span> <span class="toc-text">可绘制的</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BD%91%E6%A0%BC%E6%B8%B2%E6%9F%93%E7%BB%84%E4%BB%B6"><span class="toc-number">4.1.</span> <span class="toc-text">网格渲染组件</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B3%95%E7%BA%BF"><span class="toc-number">5.</span> <span class="toc-text">法线</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9D%90%E8%B4%A8"><span class="toc-number">6.</span> <span class="toc-text">材质</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BB%98%E5%88%B6%E7%89%A9%E4%BD%93%E5%9C%A8%E5%BC%95%E6%93%8E%E4%B8%AD"><span class="toc-number">7.</span> <span class="toc-text">绘制物体在引擎中</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9D%90%E6%A0%87%E7%B3%BB%E7%BB%9F%E5%92%8C%E8%BD%AC%E6%8D%A2"><span class="toc-number">7.1.</span> <span class="toc-text">坐标系统和转换</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%90%E9%AB%98%E6%80%A7%E8%83%BD"><span class="toc-number">7.2.</span> <span class="toc-text">提高性能</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9D%90%E8%B4%A8%E6%8E%92%E5%BA%8F"><span class="toc-number">7.3.</span> <span class="toc-text">材质排序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GPU%E6%89%B9%E5%A4%84%E7%90%86%E6%B8%B2%E6%9F%93"><span class="toc-number">7.4.</span> <span class="toc-text">GPU批处理渲染</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E5%8C%85%E5%9B%B4%E7%9B%92%E8%A3%81%E5%89%AA"><span class="toc-number">7.5.</span> <span class="toc-text">使用包围盒裁剪</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E5%8F%89%E6%A0%91%E8%BF%9B%E8%A1%8C%E8%A3%81%E5%89%AA"><span class="toc-number">7.6.</span> <span class="toc-text">四叉树进行裁剪</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#PVS"><span class="toc-number">7.6.1.</span> <span class="toc-text">PVS</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GPU-Culling"><span class="toc-number">7.7.</span> <span class="toc-text">GPU Culling</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BA%B9%E7%90%86%E5%8E%8B%E7%BC%A9"><span class="toc-number">8.</span> <span class="toc-text">纹理压缩</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BE%8E%E6%9C%AF%E5%B7%A5%E5%85%B7"><span class="toc-number">9.</span> <span class="toc-text">美术工具</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BD%91%E6%A0%BC%E7%AE%A1%E7%BA%BF"><span class="toc-number">10.</span> <span class="toc-text">网格管线</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">11.</span> <span class="toc-text">总结</span></a></li></ol>	
+        </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"], linebreaks: { automatic:true }, EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50) },
+        tex2jax: { inlineMath: [ ["$", "$"], ["\\(","\\)"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno",skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']},
+        TeX: {  noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } }, Macros: { href: "{}" } },
+        messageStyle: "none"
+    });
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+<!-- Google Analytics -->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YMJ8CBH8F7"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-YMJ8CBH8F7');
+</script>
+<!-- End Google Analytics -->
+
+
+</html>

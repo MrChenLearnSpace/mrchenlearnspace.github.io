@@ -5,12 +5,13 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>浪子之心</title>
+    <title>TA移动端人物渲染 - 浪子之心</title>
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="google" content="notranslate" />
     <meta name="keywords" content="Blog,"> 
-    <meta name="description" content="MrChen Bolg,"> 
+    <meta name="description" content="MrChen Bolg,
+模型与贴图分析"> 
     <meta name="author" content="Jack Chen"> 
     <link rel="alternative" href="atom.xml" title="浪子之心" type="application/atom+xml"> 
     <link rel="icon" href="/img/favicon.png"> 
@@ -25,27 +26,67 @@
 <body class="loading">
     <span id="config-title" style="display:none">浪子之心</span>
     <div id="loader"></div>
-    <div id="single" class="page">
-    <div id="top">
-        <a class="iconfont icon-left image-icon" href="javascript:history.back()"></a>
-    </div>
-    <div class="section">
-        <div class="article">
-            <div class="main">
-                <div class="content">
-                
-                    <div class="set">		
-  <h2>标签</h2>
-  <a href="/tags/C/" style="font-size: 14px; color: #9e9e9e">C++</a> <a href="/tags/Ducker/" style="font-size: 14px; color: #9e9e9e">Ducker</a> <a href="/tags/OpenCV/" style="font-size: 14px; color: #9e9e9e">OpenCV</a> <a href="/tags/OpenGL/" style="font-size: 28.67px; color: #8a8a8a">OpenGL</a> <a href="/tags/Shader/" style="font-size: 36px; color: #808080">Shader</a> <a href="/tags/Ubuntu/" style="font-size: 14px; color: #9e9e9e">Ubuntu</a> <a href="/tags/Unity/" style="font-size: 14px; color: #9e9e9e">Unity</a> <a href="/tags/%E5%85%A8%E6%99%AF%E5%9B%BE/" style="font-size: 14px; color: #9e9e9e">全景图</a> <a href="/tags/%E5%BC%95%E6%93%8E%E5%88%B6%E4%BD%9C/" style="font-size: 21.33px; color: #949494">引擎制作</a> <a href="/tags/%E6%A0%87%E7%AD%BE%E5%92%8C%E5%88%86%E7%B1%BB%E5%8F%AF%E4%BB%A5%E5%A4%9A%E4%B8%AA/" style="font-size: 14px; color: #9e9e9e">标签和分类可以多个</a> <a href="/tags/%E7%BD%91%E7%BB%9C/" style="font-size: 14px; color: #9e9e9e">网络</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/" style="font-size: 14px; color: #9e9e9e">计算机视觉</a>
-</div>
-
-                
-                </div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="https://mrchenlreanspace.github.io"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">TA移动端人物渲染</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
             </div>
+            <div id="qr"></div>
         </div>
     </div>
+    <div class="scrollbar"></div>
 </div>
 
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">TA移动端人物渲染</h1>
+        <div class="stuff">
+            <span>四月 05, 2022</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/Shader/" rel="tag">Shader</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <p><img src="https://img-blog.csdnimg.cn/4250697856d343b7aa2732b5ae108ec8.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h1 id="模型与贴图分析"><a href="#模型与贴图分析" class="headerlink" title="模型与贴图分析"></a>模型与贴图分析</h1>
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="/music/jucilang.mp3">
+            </audio>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+		data-enable='true'
+        data-ae='true'
+        data-ci='35b8fbd0e6865c1adf60'
+        data-cs='6d2988de68c828bce78247ad604846cdc30e7ca3'
+        data-r='mrchenlreanspace.github.io'
+        data-o='MrChenLreanSpace'
+        data-a='MrChenLreanSpace'
+        data-d='false'
+    >查看评论</div>
+
+
+    </div>
+    
+        <div class='side'>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%A8%A1%E5%9E%8B%E4%B8%8E%E8%B4%B4%E5%9B%BE%E5%88%86%E6%9E%90"><span class="toc-number">1.</span> <span class="toc-text">模型与贴图分析</span></a></li></ol>	
+        </div>
+    
+</div>
+
+
+    </div>
+</div>
 </body>
 
 <script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
