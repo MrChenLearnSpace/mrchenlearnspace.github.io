@@ -1,0 +1,282 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Games104第5节记录 - 浪子之心</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Blog,"> 
+    <meta name="description" content="MrChen Bolg,光照，材质，着色
+光照第一个挑战多样的光
+复杂的光照信息
+第二个挑战半球光照和散射信息收集的困难
+第三个挑战任何物体会变成光源
+从简单开始简单的光照解决方案结果 &amp;#x3D; 环境光 + 单一光照
+,"> 
+    <meta name="author" content="Jack Chen"> 
+    <link rel="alternative" href="atom.xml" title="浪子之心" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+<meta name="generator" content="Hexo 5.4.1"><link rel="stylesheet" href="/css/prism.css" type="text/css"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">浪子之心</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="https://mrchenlreanspace.github.io"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">Games104第5节记录</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">Games104第5节记录</h1>
+        <div class="stuff">
+            <span>四月 11, 2022</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E5%BC%95%E6%93%8E%E5%88%B6%E4%BD%9C/" rel="tag">引擎制作</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h1 id="光照，材质，着色"><a href="#光照，材质，着色" class="headerlink" title="光照，材质，着色"></a>光照，材质，着色</h1><p><img src="https://img-blog.csdnimg.cn/6741651a20b34bf2bef50909951cc455.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h1 id="光照"><a href="#光照" class="headerlink" title="光照"></a>光照</h1><h2 id="第一个挑战"><a href="#第一个挑战" class="headerlink" title="第一个挑战"></a>第一个挑战</h2><p>多样的光</p>
+<p>复杂的光照信息</p>
+<h2 id="第二个挑战"><a href="#第二个挑战" class="headerlink" title="第二个挑战"></a>第二个挑战</h2><p>半球光照和散射信息收集的困难</p>
+<h2 id="第三个挑战"><a href="#第三个挑战" class="headerlink" title="第三个挑战"></a>第三个挑战</h2><p>任何物体会变成光源</p>
+<h1 id="从简单开始"><a href="#从简单开始" class="headerlink" title="从简单开始"></a>从简单开始</h1><h2 id="简单的光照解决方案"><a href="#简单的光照解决方案" class="headerlink" title="简单的光照解决方案"></a>简单的光照解决方案</h2><p>结果 &#x3D; 环境光 + 单一光照</p>
+<h2 id="环境反射贴图"><a href="#环境反射贴图" class="headerlink" title="环境反射贴图"></a>环境反射贴图</h2><p>结果 &#x3D; 主要光 + 环境光 +环境贴图</p>
+<p>Phong光照模型缺陷 </p>
+<p>能量不守恒</p>
+<p><img src="https://img-blog.csdnimg.cn/fe3dafdeb556433b9c8934ac5fdd7994.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p>Phone光照模型会有点像塑料</p>
+<h1 id="Shadow"><a href="#Shadow" class="headerlink" title="Shadow"></a>Shadow</h1><p><img src="https://img-blog.csdnimg.cn/b0b2458b0b0f4f1bbe44caf1ecff7844.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h1 id="shadow-map"><a href="#shadow-map" class="headerlink" title="shadow map"></a>shadow map</h1><p>问题</p>
+<p><img src="https://img-blog.csdnimg.cn/f2ad9befe50148ee8494c44b103568c6.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p>基础着色解决方案</p>
+<p><img src="C:\Users\27371\AppData\Roaming\Typora\typora-user-images\image-20220411203056074.png" alt="image-20220411203056074"></p>
+<h1 id="3A质量"><a href="#3A质量" class="headerlink" title="3A质量"></a>3A质量</h1><h2 id="预先计算全局照明"><a href="#预先计算全局照明" class="headerlink" title="预先计算全局照明"></a>预先计算全局照明</h2><p>直接光照加间接光照</p>
+<h2 id="傅里叶变化"><a href="#傅里叶变化" class="headerlink" title="傅里叶变化"></a>傅里叶变化</h2><p>能够提高卷积的效率</p>
+<h2 id="SH（球面谐波）"><a href="#SH（球面谐波）" class="headerlink" title="SH（球面谐波）"></a>SH（球面谐波）</h2><p>球面谐函数，一个数学系统，类似于傅里叶变换，但定义在球面上。SH函数通常是在虚数上定义的</p>
+<p><img src="https://img-blog.csdnimg.cn/41f77871571d4b4f8b56ddfe434af638.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p>将低频表示出来，一阶就够了</p>
+<p><img src="https://img-blog.csdnimg.cn/df7d5be03bfa409fbc34fb6adcb26853.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/c379c8ddc1bd49d98c85ad1e0ecbb46f.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h2 id="光照贴图优化"><a href="#光照贴图优化" class="headerlink" title="光照贴图优化"></a>光照贴图优化</h2><h3 id="UV-Atlas"><a href="#UV-Atlas" class="headerlink" title="UV Atlas"></a>UV Atlas</h3><p><img src="https://img-blog.csdnimg.cn/5b6b84084bdf4cc991d0865f3eefa11c.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h3 id="Lighting"><a href="#Lighting" class="headerlink" title="Lighting"></a>Lighting</h3><p><img src="C:\Users\27371\AppData\Roaming\Typora\typora-user-images\image-20220411205330810.png" alt="image-20220411205330810"></p>
+<h2 id="Lightmap"><a href="#Lightmap" class="headerlink" title="Lightmap"></a>Lightmap</h2><h3 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h3><p>运行时非常高效在环境上烘烤Gl的很多细节</p>
+<h3 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h3><p>长时间和昂贵的预计算(灯光地图农场)只能处理静态场景和静态灯光封装和GPU的存储成本</p>
+<h2 id="光照探针"><a href="#光照探针" class="headerlink" title="光照探针"></a>光照探针</h2><p><img src="https://img-blog.csdnimg.cn/81bb800a1c7543c082076f786fbdde39.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h3 id="光照点生成"><a href="#光照点生成" class="headerlink" title="光照点生成"></a>光照点生成</h3><p>尽量自动生成</p>
+<h2 id="反射探针"><a href="#反射探针" class="headerlink" title="反射探针"></a>反射探针</h2><p>高质量立体贴图</p>
+<h2 id="光探头-反射探头混合"><a href="#光探头-反射探头混合" class="headerlink" title="光探头+反射探头混合"></a>光探头+反射探头混合</h2><p>优点</p>
+<p>运行时非常高效可以应用于静态和动态对象吗处理漫反射和镜面阴影</p>
+<p>缺点</p>
+<p>一堆SH光探测器需要预先计算不能处理gl的细节，比如重叠结构上的软阴影</p>
+<h1 id="PBR"><a href="#PBR" class="headerlink" title="PBR"></a>PBR</h1><h2 id="微平面理论"><a href="#微平面理论" class="headerlink" title="微平面理论"></a>微平面理论</h2><p><img src="https://img-blog.csdnimg.cn/d515da23062d4913960d9a7e2fd08c5c.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h2 id="BRDF"><a href="#BRDF" class="headerlink" title="BRDF"></a>BRDF</h2><p><img src="https://img-blog.csdnimg.cn/1d613748bc65403fa137299ae018fa90.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h2 id="DFG"><a href="#DFG" class="headerlink" title="DFG"></a>DFG</h2><h3 id="D"><a href="#D" class="headerlink" title="D"></a>D</h3><p><img src="https://img-blog.csdnimg.cn/b3f6b32d45b34d93a9eedda8bdb1844a.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h3 id="G"><a href="#G" class="headerlink" title="G"></a>G</h3><p><img src="https://img-blog.csdnimg.cn/476531531130486f93f87cbbe9d3fb3a.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h3 id="F"><a href="#F" class="headerlink" title="F"></a>F</h3><p><img src="https://img-blog.csdnimg.cn/80ac8bec11674c04890038c1746d1225.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/bb52c7e0ca7a4dd9a54d9ef3b83e4ce8.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h2 id="迪士尼"><a href="#迪士尼" class="headerlink" title="迪士尼"></a>迪士尼</h2><p><img src="https://img-blog.csdnimg.cn/68989c7ed1684bd388f9ff4bd22d94ec.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p>Dinesy原则</p>
+<p>BRDF执行模型时应遵循的原则:</p>
+<p>•应使用直观而非物理参数</p>
+<p>•参数越少越好</p>
+<p>•参数应该在合理范围内为0到1</p>
+<p>•应该允许参数超出其合理范围</p>
+<p>•所有参数的组合应该尽可能地稳健和合理</p>
+<p>迪士尼材质参数</p>
+<h1 id="PBR镜面光泽"><a href="#PBR镜面光泽" class="headerlink" title="PBR镜面光泽"></a>PBR镜面光泽</h1><p><img src="https://img-blog.csdnimg.cn/4ce31f35d1f9487e84ba2456929d7da7.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/0ff28578fc4c49b59319399319d438fd.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p>非金属尽量不使用菲涅尔，金属用菲涅尔</p>
+<p><img src="https://img-blog.csdnimg.cn/5ff15209ea2a49beb2c049ac3bfd93ed.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p>MR会有白边</p>
+<p><img src="https://img-blog.csdnimg.cn/668dcac02ccf4bdc8d41d10d12afb6a5.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/9eb4249424b748fea69b6ffc424e151f.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p>《大世界》和《阶梯阴影》</p>
+<p>将截锥分割成多个截锥</p>
+<p>为每个子截锥渲染阴影地图</p>
+<p>然后像素着色器从最接近所需分辨率的地图中采样</p>
+<p><img src="https://img-blog.csdnimg.cn/5e71e258778e4de19ca09395e9cc5116.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p>级联层之间的混合1. 在级联重叠的地方可以看到可见的接缝2. 级联层之间，因为分辨率不匹配。3.然后着色器根据像素在混合带中的位置在这两个值之间线性插值。</p>
+<p><img src="https://img-blog.csdnimg.cn/e9a879de12624b2ba7db3897ef476609.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p>Cascade Shadow的利弊</p>
+<p>优点</p>
+<p>最好的方法与普遍的阴影错误</p>
+<p>:透视混叠快速生成深度图，3倍时，深度写入只能提供相当好的结果</p>
+<p>缺点</p>
+<p>几乎不可能产生高质量的区域阴影没有颜色的阴影。半透明的表面投射不透明的阴影</p>
+<p><img src="https://img-blog.csdnimg.cn/6ee78475120541aca0072ff9063bd788.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/47ca3771bbd64fd88ede4cbce667f6fe.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/3ac0349412e54b7db41b89bada0e8a89.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/b2258fa5556a42ccb062615cf3ea6786.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p>GPU的快速发展．</p>
+<p>更灵活的新着色器模型计算着色器网状材质．Ray-tracying材质</p>
+<p>高性能并行架构翘曲或波浪结构</p>
+<p>完全开放的图形API．DirectX 12和Vulkan</p>
+<h1 id="实时光追"><a href="#实时光追" class="headerlink" title="实时光追"></a>实时光追</h1><p><img src="https://img-blog.csdnimg.cn/21c364067b974556b3226ec83de6ae67.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h1 id="实时全局光照"><a href="#实时全局光照" class="headerlink" title="实时全局光照"></a>实时全局光照</h1><p><img src="https://img-blog.csdnimg.cn/1da2f07801504c3b97aa1d9bed146be6.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h1 id="更复杂的材质模型"><a href="#更复杂的材质模型" class="headerlink" title="更复杂的材质模型"></a>更复杂的材质模型</h1><p><img src="https://img-blog.csdnimg.cn/c1bd49ec81ef4eef9be60243f836ca7b.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h1 id="虚拟阴影图"><a href="#虚拟阴影图" class="headerlink" title="虚拟阴影图"></a>虚拟阴影图</h1><p><img src="https://img-blog.csdnimg.cn/0537f8c88672470daf415cd4dd2b84b9.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h1 id="shader管理"><a href="#shader管理" class="headerlink" title="shader管理"></a>shader管理</h1><p>优步着色器和变体</p>
+<p><img src="https://img-blog.csdnimg.cn/e499e3f8bd0e424fa05ec3d3f28f6337.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/a4475af0d8a54c7c8d1f3ecd63098676.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/1757c9d159c04cd3b82e88a04b8b12c8.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="/music/jucilang.mp3">
+            </audio>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+		data-enable='true'
+        data-ae='true'
+        data-ci='35b8fbd0e6865c1adf60'
+        data-cs='6d2988de68c828bce78247ad604846cdc30e7ca3'
+        data-r='mrchenlreanspace.github.io'
+        data-o='MrChenLreanSpace'
+        data-a='MrChenLreanSpace'
+        data-d='false'
+    >查看评论</div>
+
+
+    </div>
+    
+        <div class='side'>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%89%E7%85%A7%EF%BC%8C%E6%9D%90%E8%B4%A8%EF%BC%8C%E7%9D%80%E8%89%B2"><span class="toc-number">1.</span> <span class="toc-text">光照，材质，着色</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%89%E7%85%A7"><span class="toc-number">2.</span> <span class="toc-text">光照</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E4%B8%AA%E6%8C%91%E6%88%98"><span class="toc-number">2.1.</span> <span class="toc-text">第一个挑战</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E4%B8%AA%E6%8C%91%E6%88%98"><span class="toc-number">2.2.</span> <span class="toc-text">第二个挑战</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E4%B8%AA%E6%8C%91%E6%88%98"><span class="toc-number">2.3.</span> <span class="toc-text">第三个挑战</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BB%8E%E7%AE%80%E5%8D%95%E5%BC%80%E5%A7%8B"><span class="toc-number">3.</span> <span class="toc-text">从简单开始</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%80%E5%8D%95%E7%9A%84%E5%85%89%E7%85%A7%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="toc-number">3.1.</span> <span class="toc-text">简单的光照解决方案</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83%E5%8F%8D%E5%B0%84%E8%B4%B4%E5%9B%BE"><span class="toc-number">3.2.</span> <span class="toc-text">环境反射贴图</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Shadow"><span class="toc-number">4.</span> <span class="toc-text">Shadow</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#shadow-map"><span class="toc-number">5.</span> <span class="toc-text">shadow map</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3A%E8%B4%A8%E9%87%8F"><span class="toc-number">6.</span> <span class="toc-text">3A质量</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%84%E5%85%88%E8%AE%A1%E7%AE%97%E5%85%A8%E5%B1%80%E7%85%A7%E6%98%8E"><span class="toc-number">6.1.</span> <span class="toc-text">预先计算全局照明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E5%8C%96"><span class="toc-number">6.2.</span> <span class="toc-text">傅里叶变化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SH%EF%BC%88%E7%90%83%E9%9D%A2%E8%B0%90%E6%B3%A2%EF%BC%89"><span class="toc-number">6.3.</span> <span class="toc-text">SH（球面谐波）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%89%E7%85%A7%E8%B4%B4%E5%9B%BE%E4%BC%98%E5%8C%96"><span class="toc-number">6.4.</span> <span class="toc-text">光照贴图优化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#UV-Atlas"><span class="toc-number">6.4.1.</span> <span class="toc-text">UV Atlas</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Lighting"><span class="toc-number">6.4.2.</span> <span class="toc-text">Lighting</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Lightmap"><span class="toc-number">6.5.</span> <span class="toc-text">Lightmap</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%98%E7%82%B9"><span class="toc-number">6.5.1.</span> <span class="toc-text">优点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%BA%E7%82%B9"><span class="toc-number">6.5.2.</span> <span class="toc-text">缺点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%89%E7%85%A7%E6%8E%A2%E9%92%88"><span class="toc-number">6.6.</span> <span class="toc-text">光照探针</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%89%E7%85%A7%E7%82%B9%E7%94%9F%E6%88%90"><span class="toc-number">6.6.1.</span> <span class="toc-text">光照点生成</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%8D%E5%B0%84%E6%8E%A2%E9%92%88"><span class="toc-number">6.7.</span> <span class="toc-text">反射探针</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%89%E6%8E%A2%E5%A4%B4-%E5%8F%8D%E5%B0%84%E6%8E%A2%E5%A4%B4%E6%B7%B7%E5%90%88"><span class="toc-number">6.8.</span> <span class="toc-text">光探头+反射探头混合</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#PBR"><span class="toc-number">7.</span> <span class="toc-text">PBR</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BE%AE%E5%B9%B3%E9%9D%A2%E7%90%86%E8%AE%BA"><span class="toc-number">7.1.</span> <span class="toc-text">微平面理论</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#BRDF"><span class="toc-number">7.2.</span> <span class="toc-text">BRDF</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DFG"><span class="toc-number">7.3.</span> <span class="toc-text">DFG</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#D"><span class="toc-number">7.3.1.</span> <span class="toc-text">D</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#G"><span class="toc-number">7.3.2.</span> <span class="toc-text">G</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#F"><span class="toc-number">7.3.3.</span> <span class="toc-text">F</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%AA%E5%A3%AB%E5%B0%BC"><span class="toc-number">7.4.</span> <span class="toc-text">迪士尼</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#PBR%E9%95%9C%E9%9D%A2%E5%85%89%E6%B3%BD"><span class="toc-number">8.</span> <span class="toc-text">PBR镜面光泽</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%9E%E6%97%B6%E5%85%89%E8%BF%BD"><span class="toc-number">9.</span> <span class="toc-text">实时光追</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%9E%E6%97%B6%E5%85%A8%E5%B1%80%E5%85%89%E7%85%A7"><span class="toc-number">10.</span> <span class="toc-text">实时全局光照</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9B%B4%E5%A4%8D%E6%9D%82%E7%9A%84%E6%9D%90%E8%B4%A8%E6%A8%A1%E5%9E%8B"><span class="toc-number">11.</span> <span class="toc-text">更复杂的材质模型</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%99%9A%E6%8B%9F%E9%98%B4%E5%BD%B1%E5%9B%BE"><span class="toc-number">12.</span> <span class="toc-text">虚拟阴影图</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#shader%E7%AE%A1%E7%90%86"><span class="toc-number">13.</span> <span class="toc-text">shader管理</span></a></li></ol>	
+        </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"], linebreaks: { automatic:true }, EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50) },
+        tex2jax: { inlineMath: [ ["$", "$"], ["\\(","\\)"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno",skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']},
+        TeX: {  noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } }, Macros: { href: "{}" } },
+        messageStyle: "none"
+    });
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+<!-- Google Analytics -->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YMJ8CBH8F7"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-YMJ8CBH8F7');
+</script>
+<!-- End Google Analytics -->
+
+
+</html>
