@@ -1,0 +1,245 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>大话设计模式观后感(一) - 浪子之心</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Blog,"> 
+    <meta name="description" content="MrChen Bolg,单一职责原则就一个类而言，应该仅有一个引起它变化的原因
+一个类不应该搞得很复杂，当傅老师黑魂教程中处理玩家数据时新建一个ActorData来装载玩家数据，ActorController来改变数据。一,"> 
+    <meta name="author" content="Jack Chen"> 
+    <link rel="alternative" href="atom.xml" title="浪子之心" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+<meta name="generator" content="Hexo 5.4.1"><link rel="stylesheet" href="/css/prism.css" type="text/css"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">浪子之心</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="https://mrchenlreanspace.github.io"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">大话设计模式观后感(一)</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">大话设计模式观后感(一)</h1>
+        <div class="stuff">
+            <span>四月 18, 2022</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">设计模式</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h1 id="单一职责原则"><a href="#单一职责原则" class="headerlink" title="单一职责原则"></a>单一职责原则</h1><p><strong>就一个类而言，应该仅有一个引起它变化的原因</strong></p>
+<p>一个类不应该搞得很复杂，当傅老师黑魂教程中处理玩家数据时新建一个ActorData来装载玩家数据，ActorController来改变数据。一个类承担某种职责。</p>
+<h1 id="里氏替换原则"><a href="#里氏替换原则" class="headerlink" title="里氏替换原则"></a>里氏替换原则</h1><p><strong>子类型必须能够代替掉它们的父类型</strong></p>
+<p>可以理解为多态，只有子类可以替换掉父类，软件单位的功能不受到影响时，父类才能真正的被复用，而子类也能够在父类的基础上增加新行为。如果鸟类里面加入了飞的功能，那么企鹅类是不会飞的，所以不能继承。由于子类型的可替换性才使得使用父类类型的模块无需修改的情况下可以扩展</p>
+<p><img src="https://img-blog.csdnimg.cn/1a66f8085c694ae5a3461d73d0d931e1.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h1 id="开放封闭原则"><a href="#开放封闭原则" class="headerlink" title="开放封闭原则"></a>开放封闭原则</h1><p><strong>软件实体（类、模块、函数等）应该可以扩展，但是不可修改</strong></p>
+<p>原来的代码能跑就不要去动它，要修改可以将其组合或者继承变成新的类进行扩展，书上有一点说的很好，在最开始的时候假设程序不会发生变化，当变化发生时再去创建抽象隔离，以此简化发生的同类变化，emm，虽然重构麻烦，如果项目不是很大可以考虑，毕竟为了后面长期变化做准备，刚看完的时候就是想太多，设计来设计去根本没动手，不如先动手做一个原型以后再改</p>
+<h1 id="依赖倒置原则"><a href="#依赖倒置原则" class="headerlink" title="依赖倒置原则"></a>依赖倒置原则</h1><ol>
+<li><p><strong>高层模块不应该依赖低层模块，应该都依赖于抽象</strong></p>
+</li>
+<li><p><strong>抽象不应该依赖于细节，细节应该依赖于抽象</strong></p>
+</li>
+</ol>
+<p><img src="https://img-blog.csdnimg.cn/df184bf1522545cd93f707a36ae41786.png" alt="在这里插入图片描述"></p>
+<p>高层模块通过调用低层模块中的函数进行数据处理。</p>
+<p><img src="https://img-blog.csdnimg.cn/e42fbe4c143a43ac84a250da25209b85.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_12,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p>高层模块关联抽象，高层模块可以调用抽象类中的函数，而不同低层模块可以复用函数，只需要实例化不同的低层模块便能达到灵活切换不同的低层模块函数。</p>
+<p>也叫依赖倒转原则，依赖倒转是面向对象设计的标志，整个程序所有的依赖关系都应该是终止于抽象类或接口。</p>
+<h1 id="迪米特法则"><a href="#迪米特法则" class="headerlink" title="迪米特法则"></a>迪米特法则</h1><p><strong>如果两个类不必彼此直接通信，那么这两个类就不应当发生直接的相互作用，如果一个类需要调用另一个类的某一个方法的话，可以通过第三者转发这个调用。</strong></p>
+<p>也叫最少知识原则，就像mvc架构升级到mvp架构一样，取消了m到v的直接联系。在类的结构设计上，每一个类都应当尽量降低成员的访问权限。</p>
+<p>迪米特法则其根本思想，是强调了类之间的松耦合。我们在程序设计时，类之间的耦合越弱，越有利于复用，一个处在弱耦合的类被修改，不会对有关系的类造成波及。也就是说,信息的隐藏促进了软件的复用。”</p>
+<h1 id="合成-x2F-聚合复用原则"><a href="#合成-x2F-聚合复用原则" class="headerlink" title="合成&#x2F;聚合复用原则"></a>合成&#x2F;聚合复用原则</h1><p><strong>尽量使用合成&#x2F;聚合，尽量不要使用类继承</strong></p>
+<p>合成(Composition，也有翻译成组合）和聚合(Aggregation)都是关联的特殊种类。<strong>聚合</strong>表示一种<strong>弱的‘拥有’关系</strong>，体现的是A对象可以包含B对象，但B对象不是A对象的一部分;<strong>合成</strong>则是<strong>一种强的‘拥有’关系</strong>，体现了严格的部分和整体的关系，部分和整体的生命周期一样。优先使用对象的合成&#x2F;聚合将有助你保持每个类被封装，并集中在单个任务上。这样类和类继承层次会保持较小规模，并且不太可能增长为不可控制的庞然大物。</p>
+<p><img src="https://img-blog.csdnimg.cn/301f6b5c5831472ebfbf265c5245d7f3.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_13,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p>大雁有两个翅膀，翅膀与大雁是部分和整体的关系，并且它们的生命周期是相同的，于是大雁和翅膀就是合成关系。而大雁是群居动物，所以每只大雁都是属于一个雁群，一个雁群可以有多只大雁，所以大雁和雁群是聚合关系。”</p>
+<p><img src="https://img-blog.csdnimg.cn/b5d25abb73f649078c4d01c5620d5c58.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/eb3dfee399464d04b1f99aac7a2511fa.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h1 id="接口隔离原则"><a href="#接口隔离原则" class="headerlink" title="接口隔离原则"></a>接口隔离原则</h1><p>大话设计模式没讲此原则，个人猜测作者应该是认为和单一职责原则差不多吧</p>
+<p><strong>客户端不应该依赖它不需要的接口，即一个类对另一个类的依赖应该建立在最小的接口上。</strong></p>
+<p>将一个复杂且大的接口拆分成小的几个接口，是每一个接口的功能更单一。更灵活。</p>
+<h1 id="拓展"><a href="#拓展" class="headerlink" title="拓展"></a>拓展</h1><h2 id="MVC"><a href="#MVC" class="headerlink" title="MVC"></a>MVC</h2><p><img src="https://img-blog.csdnimg.cn/cc94713d128847099c666cfec66c7a30.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p>-Model(数据层):负责管理业务逻辑和处理网络或数据库API。<br>-View(视图层):让数据层的数据可视化。在Android中对应用户交互、UI绘制等。<br>-Controller (逻辑层)∶获得用户行为的通知，并根据需要更新Model。</p>
+<h3 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h3><p>Model类没有对Android类的任何引用，因此可以直接进行单元测试。Controller不会扩展或实现任何Android类，并且应该引用View的接口类。通过这种方式，也可以对控制器进行单元测试。如果View遵循单一责任原则，那么它们的角色就是为每个用户事件更新Controller，只显示Model中的数据，而不实现任何业务逻辑。在这种理想的作用下，UI测试应该足以覆盖所有的View的功能。<br>总结以上介绍我们发现，MVC模式高度支持职责的分离。这种优势不仅增加了代码的可测试性，而且使其更容易扩展，从而可以相当容易地实现新功能。</p>
+<h3 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h3><p>代码相对冗余。我们知道，MVC模式中View对Model是有着强依赖的。当View非常复杂的时候，为了最小化View中的逻辑，Model应该能够为要显示的每个视图提供可测试的方法——这将增加大量的类和方法。<br>灵活性较低。由于View依赖于Controller和TModel，Ul逻辑中的一个更改可能导致需要修改很多类，这降低了灵活性，并且导致UI难以测试。<br>可维护性低。Android的视图组件中，有着非常明显的生命周期，如Activity、Fragment等。对于MVC模式，我们有时不得不将处理视图逻辑的代码都写在这些组件中，造成它们十分臃肿。<br>所以,Android中最初的MVC架构问题显而易见:过于臃肿的<br>Controller层大大降低了工程的可维护性及可测试性。</p>
+<h2 id="MVP"><a href="#MVP" class="headerlink" title="MVP"></a>MVP</h2><p><img src="https://img-blog.csdnimg.cn/06817a26d2174c74b361f96eeb2f0d59.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p>Model(数据层)。负责管理业务逻辑和处理网络或数据库API。</p>
+<p>View(视图层)。显示数据并将用户操作的信息通知给Presenter。</p>
+<p>Presenter(逻辑层)。从Model中检索数据，应用UI逻辑并管理View的状态，决定显示什么，以及对View的事件做出响应。</p>
+<h3 id="优点-1"><a href="#优点-1" class="headerlink" title="优点"></a>优点</h3><p>相对于MVC，MVP模式设计思路的核心是提出了Presenter层，它是View层与Model层沟通的桥梁，对业务逻辑进行处理。这更符合了我们理想中的单一职责原则。</p>
+<h3 id="缺点-1"><a href="#缺点-1" class="headerlink" title="缺点"></a>缺点</h3><ol>
+<li><p>接口粒度难以掌控。MVP模式将模块职责进行了良好的分离。但在开发小规模App或原型时，这似乎增加了开销——对于每个业务场景，我们都要写Activity-View-Presenter-Contract这4个类。为了缓解这种情况，一些开发者删除了Contract接口类和Presenter的接口。另外，Presenter 与View的交互是通过接口实现的,如果接口粒度过大，解耦程度就不高，反之会造成接口数量暴增的情况。<br>从工程的严谨角度来说，这或许并不是缺点，只是创造一个良好工程架构带来的额外工作量。</p>
+</li>
+<li><p>Presenter逻辑容易过重。当我们将UI的逻辑移动到Presenter中时，Presenter变成了有数千行代码的类，或许会难以维护。要解决这个问题，我们只可能更多地拆分代码，创建便于单元测试的单一职责的类。</p>
+</li>
+<li><p>Presenter和View相互引用。我们在Presenter和View中都会保持一份对方的引用，所以需要用subscribe和unsubscribe来绑定和解除绑定。在操作UI的时候，我们需要判断UI生命周期，否则容易造成内存泄漏。</p>
+</li>
+</ol>
+<h2 id="MVVM"><a href="#MVVM" class="headerlink" title="MVVM"></a>MVVM</h2><p><img src="https://img-blog.csdnimg.cn/8ddd36092c1a43f6a7cc3bd2e47c8758.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p>Model(数据模型):与ViewModel配合，可以获取和保存数据。</p>
+<p>View(视图):即将用户的动作通知给ViewModel(视图模型)。</p>
+<p>ViewModel(视图模型):暴露公共属性与View相关的数据流，通常为Model和View的绑定关系。</p>
+<h3 id="优点-2"><a href="#优点-2" class="headerlink" title="优点"></a>优点</h3><p>如果MVP模式意味着Presenter直接告诉View要显示的内容，那么在MVVM中, ViewModel会公开Views可以绑定的事件流。这样ViewModel不再需要保持对View的引用，但发挥了Presenter一样的作用。这也意味着MVP模式所需的所有接口现在都被删除了。这对介意接口数量过多的开发者来说是个福音。<br>View还会通知ViewModel进行不同的操作。因此，MVM模式支持View和ViewModel之间的双向数据绑定，并且View和ViewModel之间存在多对一关系。View具有对ViewModel的引用，但ViewModel没有关于View的信息。因为数据的使用者应该知道生产者，但生产者ViewModel不需要知道，也不关心谁使用数据。</p>
+<h3 id="缺点-2"><a href="#缺点-2" class="headerlink" title="缺点"></a>缺点</h3><p>1）需要更多精力定位Bug。由于双向绑定，视图中的异常排查起来会比较麻烦，你需要检查View中的代码，还需要检查Model中的代码。另外你可能多处复用了Model，一个地方导致的异常可能会扩散到其他地方，定位错误源可能并不会太简单。<br>2）通用的View需要更好的设计。当一个View要变成通用组件时，该View对应的Model通常不能复用。在整体架构设计不够完善时，我们很容易创建一些冗余的Model。</p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="/music/jucilang.mp3">
+            </audio>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+		data-enable='true'
+        data-ae='true'
+        data-ci='35b8fbd0e6865c1adf60'
+        data-cs='6d2988de68c828bce78247ad604846cdc30e7ca3'
+        data-r='mrchenlreanspace.github.io'
+        data-o='MrChenLreanSpace'
+        data-a='MrChenLreanSpace'
+        data-d='false'
+    >查看评论</div>
+
+
+    </div>
+    
+        <div class='side'>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8D%95%E4%B8%80%E8%81%8C%E8%B4%A3%E5%8E%9F%E5%88%99"><span class="toc-number">1.</span> <span class="toc-text">单一职责原则</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%87%8C%E6%B0%8F%E6%9B%BF%E6%8D%A2%E5%8E%9F%E5%88%99"><span class="toc-number">2.</span> <span class="toc-text">里氏替换原则</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BC%80%E6%94%BE%E5%B0%81%E9%97%AD%E5%8E%9F%E5%88%99"><span class="toc-number">3.</span> <span class="toc-text">开放封闭原则</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BE%9D%E8%B5%96%E5%80%92%E7%BD%AE%E5%8E%9F%E5%88%99"><span class="toc-number">4.</span> <span class="toc-text">依赖倒置原则</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%BF%AA%E7%B1%B3%E7%89%B9%E6%B3%95%E5%88%99"><span class="toc-number">5.</span> <span class="toc-text">迪米特法则</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%90%88%E6%88%90-x2F-%E8%81%9A%E5%90%88%E5%A4%8D%E7%94%A8%E5%8E%9F%E5%88%99"><span class="toc-number">6.</span> <span class="toc-text">合成&#x2F;聚合复用原则</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%8E%A5%E5%8F%A3%E9%9A%94%E7%A6%BB%E5%8E%9F%E5%88%99"><span class="toc-number">7.</span> <span class="toc-text">接口隔离原则</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%8B%93%E5%B1%95"><span class="toc-number">8.</span> <span class="toc-text">拓展</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#MVC"><span class="toc-number">8.1.</span> <span class="toc-text">MVC</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%98%E7%82%B9"><span class="toc-number">8.1.1.</span> <span class="toc-text">优点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%BA%E7%82%B9"><span class="toc-number">8.1.2.</span> <span class="toc-text">缺点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MVP"><span class="toc-number">8.2.</span> <span class="toc-text">MVP</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%98%E7%82%B9-1"><span class="toc-number">8.2.1.</span> <span class="toc-text">优点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%BA%E7%82%B9-1"><span class="toc-number">8.2.2.</span> <span class="toc-text">缺点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MVVM"><span class="toc-number">8.3.</span> <span class="toc-text">MVVM</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%98%E7%82%B9-2"><span class="toc-number">8.3.1.</span> <span class="toc-text">优点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%BA%E7%82%B9-2"><span class="toc-number">8.3.2.</span> <span class="toc-text">缺点</span></a></li></ol></li></ol></li></ol>	
+        </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"], linebreaks: { automatic:true }, EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50) },
+        tex2jax: { inlineMath: [ ["$", "$"], ["\\(","\\)"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno",skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']},
+        TeX: {  noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } }, Macros: { href: "{}" } },
+        messageStyle: "none"
+    });
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+<!-- Google Analytics -->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YMJ8CBH8F7"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-YMJ8CBH8F7');
+</script>
+<!-- End Google Analytics -->
+
+
+</html>
