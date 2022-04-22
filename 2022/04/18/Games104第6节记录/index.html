@@ -1,0 +1,271 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Games104第6节记录 - 浪子之心</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Blog,"> 
+    <meta name="description" content="MrChen Bolg,地形渲染height field 高层图
+渲染地形高层图，地形分成不同的网格，通过高层图修改相关顶点。不适用于开饭大世界
+地形渲染的方法
+
+三角形剖分通过二叉树的结构
+
+通过四叉树的结构
+求解四边形,"> 
+    <meta name="author" content="Jack Chen"> 
+    <link rel="alternative" href="atom.xml" title="浪子之心" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+<meta name="generator" content="Hexo 5.4.1"><link rel="stylesheet" href="/css/prism.css" type="text/css"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">浪子之心</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="https://mrchenlreanspace.github.io"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">Games104第6节记录</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">Games104第6节记录</h1>
+        <div class="stuff">
+            <span>四月 18, 2022</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E5%BC%95%E6%93%8E%E5%88%B6%E4%BD%9C/" rel="tag">引擎制作</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h1 id="地形渲染"><a href="#地形渲染" class="headerlink" title="地形渲染"></a>地形渲染</h1><h1 id="height-field-高层图"><a href="#height-field-高层图" class="headerlink" title="height field 高层图"></a>height field 高层图</h1><p><img src="https://img-blog.csdnimg.cn/1f3a296315884eb2bebd6322557d20a4.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p>渲染地形高层图，地形分成不同的网格，通过高层图修改相关顶点。不适用于开饭大世界</p>
+<h1 id="地形渲染的方法"><a href="#地形渲染的方法" class="headerlink" title="地形渲染的方法"></a>地形渲染的方法</h1><p><img src="https://img-blog.csdnimg.cn/95f3dc406ae44389b2b7d03cb6c5ba27.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/9e3bbfc8f4754a57a3d50061e8743f46.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h1 id="三角形剖分"><a href="#三角形剖分" class="headerlink" title="三角形剖分"></a>三角形剖分</h1><h2 id="通过二叉树的结构"><a href="#通过二叉树的结构" class="headerlink" title="通过二叉树的结构"></a>通过二叉树的结构</h2><p><img src="C:\Users\27371\AppData\Roaming\Typora\typora-user-images\image-20220418201527934.png" alt="image-20220418201527934"></p>
+<p><img src="C:\Users\27371\AppData\Roaming\Typora\typora-user-images\image-20220418201604789.png" alt="image-20220418201604789"></p>
+<h2 id="通过四叉树的结构"><a href="#通过四叉树的结构" class="headerlink" title="通过四叉树的结构"></a>通过四叉树的结构</h2><p><img src="https://img-blog.csdnimg.cn/51c8a70b127f4ec7b9cd7de907f863cd.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h1 id="求解四边形网格中的t节点"><a href="#求解四边形网格中的t节点" class="headerlink" title="求解四边形网格中的t节点"></a>求解四边形网格中的t节点</h1><p><img src="https://img-blog.csdnimg.cn/b2772608d45748c8a0016e6d7152ef1b.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p>多出来的点吸附连接到相邻的点，形成没面积的三角形。</p>
+<h1 id="GPU表面细化"><a href="#GPU表面细化" class="headerlink" title="GPU表面细化"></a>GPU表面细化</h1><p><img src="https://img-blog.csdnimg.cn/b28bc10545384d10a5a28ff03703a71c.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/9973b7fe3f6944f0b2663f382bffb3d5.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h2 id="网格着色管线"><a href="#网格着色管线" class="headerlink" title="网格着色管线"></a>网格着色管线</h2><p><img src="https://img-blog.csdnimg.cn/ee1f4ad67da04b3db0d6bc5198f5c615.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h1 id="实时变化的地形"><a href="#实时变化的地形" class="headerlink" title="实时变化的地形"></a>实时变化的地形</h1><p><img src="https://img-blog.csdnimg.cn/f7b46ae2308942288b188d709b0ce8bf.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h1 id="静态地形"><a href="#静态地形" class="headerlink" title="静态地形"></a>静态地形</h1><p><img src="https://img-blog.csdnimg.cn/52c5c383a1a8484eac0b5f8afc158fa2.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h1 id="私货"><a href="#私货" class="headerlink" title="私货"></a>私货</h1><p><img src="https://img-blog.csdnimg.cn/4e62a23ac0574d4faea1895b691e0d57.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/80924f77f4ca481686b569caeb3e4303.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p>切片合成</p>
+<p><img src="https://img-blog.csdnimg.cn/c53e7148e90c4dbf88a5a95fd789a1e6.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h1 id="地表材质"><a href="#地表材质" class="headerlink" title="地表材质"></a>地表材质</h1><p>极大数量的材质处理</p>
+<p><img src="https://img-blog.csdnimg.cn/5ca01a86a19844acad4fc56ac26a7b57.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/b53d66dca6e043c68c82e0e44a832fdf.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/4d945a74fe41480d9bfcc12d6df121cd.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p>通过高度的权重进行插值。</p>
+<p><img src="https://img-blog.csdnimg.cn/eb0ec948ea7f44e48e9c6b48c1e614e2.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/c8cfcf51ef3c4457a095436796c1003c.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h1 id="视差贴图"><a href="#视差贴图" class="headerlink" title="视差贴图"></a>视差贴图</h1><p><img src="https://img-blog.csdnimg.cn/41e0bda072a24d1289c76b0be08705b5.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/5115f2f8430348c68dd910106bb04ee2.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h1 id="虚拟纹理"><a href="#虚拟纹理" class="headerlink" title="虚拟纹理"></a>虚拟纹理</h1><p><img src="https://img-blog.csdnimg.cn/5a030a524d1144bfae8f0909275172c4.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/c3b477b063e04b67805a380b4170c489.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h1 id="浮点数的精度溢出"><a href="#浮点数的精度溢出" class="headerlink" title="浮点数的精度溢出"></a>浮点数的精度溢出</h1><p><img src="https://img-blog.csdnimg.cn/712a7a7757c74c1ea8b14199f5698895.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p> <img src="https://img-blog.csdnimg.cn/ee8d19be7f4d4299bbcd34d0c5ebd713.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h1 id="树渲染"><a href="#树渲染" class="headerlink" title="树渲染"></a>树渲染</h1><p><img src="https://img-blog.csdnimg.cn/262589ac9e6d4371a3554433d6ab5fd4.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h1 id="装饰渲染"><a href="#装饰渲染" class="headerlink" title="装饰渲染"></a>装饰渲染</h1><p><img src="https://img-blog.csdnimg.cn/0959414e0e444fe1a145f87c193df974.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h1 id="道路系统和贴片系统"><a href="#道路系统和贴片系统" class="headerlink" title="道路系统和贴片系统"></a>道路系统和贴片系统</h1><p><img src="https://img-blog.csdnimg.cn/10d93029215c461b959eb59ba1f4add6.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h1 id="天空之神"><a href="#天空之神" class="headerlink" title="天空之神"></a>天空之神</h1><p><img src="https://img-blog.csdnimg.cn/87c63836742249bd938a4909ebf25827.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h1 id="大气"><a href="#大气" class="headerlink" title="大气"></a>大气</h1><p><img src="https://img-blog.csdnimg.cn/3bb850a1751043b6b51ab54be40f2237.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/854fe9d678a548da83d805afe396430d.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p>进入物体进行光源散射</p>
+<p><img src="https://img-blog.csdnimg.cn/c5ceb72545cc49c0b1da6ea57d91e80e.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/1713c46533144b7eb454870ed605e303.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/86b7a14d47e84564ba7ae43552ba9dd4.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/de0546578d844d95be9046335ba5761f.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/1808ff9b4dd841458005bdf98e9b8b8f.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/f39389db7e0b4573a67d31a3af6e9942.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p>h海拔高度，1+cos的平方是腰果状</p>
+<h2 id="米氏散射"><a href="#米氏散射" class="headerlink" title="米氏散射"></a>米氏散射</h2><p>气溶胶是米氏散射</p>
+<p><img src="https://img-blog.csdnimg.cn/d4283b7eac4d48c4806762f6699756ed.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/7e94e41425104bb6a0329a72c464ba18.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h1 id="能力的吸收"><a href="#能力的吸收" class="headerlink" title="能力的吸收"></a>能力的吸收</h1><p><img src="https://img-blog.csdnimg.cn/690abb6572d24dd2a1d5fd0a187c8bc5.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h1 id="单次散射和多次散射"><a href="#单次散射和多次散射" class="headerlink" title="单次散射和多次散射"></a>单次散射和多次散射</h1><p><img src="https://img-blog.csdnimg.cn/01b91e0debde4438a4837a4ee5c82b80.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p>对比</p>
+<p><img src="https://img-blog.csdnimg.cn/097ce9f8070e49498442952fd1cd0803.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h2 id="解决方案-1"><a href="#解决方案-1" class="headerlink" title="解决方案"></a>解决方案</h2><p><img src="https://img-blog.csdnimg.cn/8e98b05c9d2348aa8bf2fc2de088fea3.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h1 id="空气通透度"><a href="#空气通透度" class="headerlink" title="空气通透度"></a>空气通透度</h1><p><img src="https://img-blog.csdnimg.cn/53b71c9f42d84bcd85601340b61fba13.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/f6b3dd98eeec4af3aa5951ad119bfdac.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/31cd0e5e28ef44bea7453fc983271fa7.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p>预计算大气散射的挑战</p>
+<p>预先计算成本</p>
+<p>​    ．多次散射迭代是非常昂贵的</p>
+<p>难在低端设备上生成大气LUT移动)环境的创作和动态调整艺术家不能随意改变散射系数很难渲染像天气从阳光到雨雾，行星之间的太空旅行运行时渲染成本昂贵的逐像素多维高维纹理采样用于透光性LUT和多散射LUT(总是需要向下采样以提高效率)</p>
+<p><img src="https://img-blog.csdnimg.cn/e97186500fa04251a32fd4a548efb5eb.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/283cb8dab0924a3187f20c45654c70bf.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/6244c6d8142b4b5f80ef314513a95297.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h1 id="画云"><a href="#画云" class="headerlink" title="画云"></a>画云</h1><p><img src="https://img-blog.csdnimg.cn/0ead17ada0284ad3beb5c644f29904a8.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h2 id="用网格形成云"><a href="#用网格形成云" class="headerlink" title="用网格形成云"></a>用网格形成云</h2><p><img src="https://img-blog.csdnimg.cn/1247df66765e4c30928dc6378e5cab21.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h2 id="贴图"><a href="#贴图" class="headerlink" title="贴图"></a>贴图</h2><p><img src="https://img-blog.csdnimg.cn/b798204efc5c4c4d807c0c7d01ee5fa1.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h2 id="体积云"><a href="#体积云" class="headerlink" title="体积云"></a>体积云</h2><p><img src="https://img-blog.csdnimg.cn/2a15650d38f54599bea990859653a365.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p>优点．真实的云的形状可能出现大规模云支持动态天气动态体积照明和阴影</p>
+<p>缺点必须考虑效率</p>
+<h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p><img src="https://img-blog.csdnimg.cn/b2e765a167e5499f86102f8c001f0264.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/a990f509fefb431ea179c753a8e6cdc2.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/f4f2ae4748a54d5884ba5f9b53c3dc42.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/9a96e0497ecc4f9b807176f6449a78c4.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="/music/jucilang.mp3">
+            </audio>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+		data-enable='true'
+        data-ae='true'
+        data-ci='35b8fbd0e6865c1adf60'
+        data-cs='6d2988de68c828bce78247ad604846cdc30e7ca3'
+        data-r='mrchenlreanspace.github.io'
+        data-o='MrChenLreanSpace'
+        data-a='MrChenLreanSpace'
+        data-d='false'
+    >查看评论</div>
+
+
+    </div>
+    
+        <div class='side'>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9C%B0%E5%BD%A2%E6%B8%B2%E6%9F%93"><span class="toc-number">1.</span> <span class="toc-text">地形渲染</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#height-field-%E9%AB%98%E5%B1%82%E5%9B%BE"><span class="toc-number">2.</span> <span class="toc-text">height field 高层图</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9C%B0%E5%BD%A2%E6%B8%B2%E6%9F%93%E7%9A%84%E6%96%B9%E6%B3%95"><span class="toc-number">3.</span> <span class="toc-text">地形渲染的方法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%89%E8%A7%92%E5%BD%A2%E5%89%96%E5%88%86"><span class="toc-number">4.</span> <span class="toc-text">三角形剖分</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%9A%E8%BF%87%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E7%BB%93%E6%9E%84"><span class="toc-number">4.1.</span> <span class="toc-text">通过二叉树的结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%9A%E8%BF%87%E5%9B%9B%E5%8F%89%E6%A0%91%E7%9A%84%E7%BB%93%E6%9E%84"><span class="toc-number">4.2.</span> <span class="toc-text">通过四叉树的结构</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B1%82%E8%A7%A3%E5%9B%9B%E8%BE%B9%E5%BD%A2%E7%BD%91%E6%A0%BC%E4%B8%AD%E7%9A%84t%E8%8A%82%E7%82%B9"><span class="toc-number">5.</span> <span class="toc-text">求解四边形网格中的t节点</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#GPU%E8%A1%A8%E9%9D%A2%E7%BB%86%E5%8C%96"><span class="toc-number">6.</span> <span class="toc-text">GPU表面细化</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BD%91%E6%A0%BC%E7%9D%80%E8%89%B2%E7%AE%A1%E7%BA%BF"><span class="toc-number">6.1.</span> <span class="toc-text">网格着色管线</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%9E%E6%97%B6%E5%8F%98%E5%8C%96%E7%9A%84%E5%9C%B0%E5%BD%A2"><span class="toc-number">7.</span> <span class="toc-text">实时变化的地形</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%9D%99%E6%80%81%E5%9C%B0%E5%BD%A2"><span class="toc-number">8.</span> <span class="toc-text">静态地形</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%A7%81%E8%B4%A7"><span class="toc-number">9.</span> <span class="toc-text">私货</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9C%B0%E8%A1%A8%E6%9D%90%E8%B4%A8"><span class="toc-number">10.</span> <span class="toc-text">地表材质</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%A7%86%E5%B7%AE%E8%B4%B4%E5%9B%BE"><span class="toc-number">11.</span> <span class="toc-text">视差贴图</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%99%9A%E6%8B%9F%E7%BA%B9%E7%90%86"><span class="toc-number">12.</span> <span class="toc-text">虚拟纹理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B5%AE%E7%82%B9%E6%95%B0%E7%9A%84%E7%B2%BE%E5%BA%A6%E6%BA%A2%E5%87%BA"><span class="toc-number">13.</span> <span class="toc-text">浮点数的精度溢出</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="toc-number">13.1.</span> <span class="toc-text">解决方案</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%A0%91%E6%B8%B2%E6%9F%93"><span class="toc-number">14.</span> <span class="toc-text">树渲染</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%A3%85%E9%A5%B0%E6%B8%B2%E6%9F%93"><span class="toc-number">15.</span> <span class="toc-text">装饰渲染</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%81%93%E8%B7%AF%E7%B3%BB%E7%BB%9F%E5%92%8C%E8%B4%B4%E7%89%87%E7%B3%BB%E7%BB%9F"><span class="toc-number">16.</span> <span class="toc-text">道路系统和贴片系统</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%A4%A9%E7%A9%BA%E4%B9%8B%E7%A5%9E"><span class="toc-number">17.</span> <span class="toc-text">天空之神</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%A4%A7%E6%B0%94"><span class="toc-number">18.</span> <span class="toc-text">大气</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B1%B3%E6%B0%8F%E6%95%A3%E5%B0%84"><span class="toc-number">18.1.</span> <span class="toc-text">米氏散射</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%83%BD%E5%8A%9B%E7%9A%84%E5%90%B8%E6%94%B6"><span class="toc-number">19.</span> <span class="toc-text">能力的吸收</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8D%95%E6%AC%A1%E6%95%A3%E5%B0%84%E5%92%8C%E5%A4%9A%E6%AC%A1%E6%95%A3%E5%B0%84"><span class="toc-number">20.</span> <span class="toc-text">单次散射和多次散射</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88-1"><span class="toc-number">20.1.</span> <span class="toc-text">解决方案</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%A9%BA%E6%B0%94%E9%80%9A%E9%80%8F%E5%BA%A6"><span class="toc-number">21.</span> <span class="toc-text">空气通透度</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%94%BB%E4%BA%91"><span class="toc-number">22.</span> <span class="toc-text">画云</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%A8%E7%BD%91%E6%A0%BC%E5%BD%A2%E6%88%90%E4%BA%91"><span class="toc-number">22.1.</span> <span class="toc-text">用网格形成云</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B4%B4%E5%9B%BE"><span class="toc-number">22.2.</span> <span class="toc-text">贴图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%93%E7%A7%AF%E4%BA%91"><span class="toc-number">22.3.</span> <span class="toc-text">体积云</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8E%9F%E7%90%86"><span class="toc-number">22.3.1.</span> <span class="toc-text">原理</span></a></li></ol></li></ol></li></ol>	
+        </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"], linebreaks: { automatic:true }, EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50) },
+        tex2jax: { inlineMath: [ ["$", "$"], ["\\(","\\)"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno",skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']},
+        TeX: {  noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } }, Macros: { href: "{}" } },
+        messageStyle: "none"
+    });
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+<!-- Google Analytics -->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YMJ8CBH8F7"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-YMJ8CBH8F7');
+</script>
+<!-- End Google Analytics -->
+
+
+</html>

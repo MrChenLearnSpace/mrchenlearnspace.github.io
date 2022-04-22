@@ -1,0 +1,239 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>大话设计模式观后感之创建型模式 - 浪子之心</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Blog,"> 
+    <meta name="description" content="MrChen Bolg,创建型模式为什么我们需要创建型模式?创建型模式隐藏了这些类的实例是如何被创建和放在一起，整个系统关于这些对象所知道的是由抽象类所定义的接口。这样，创建型模式在创建了什么、谁创建它、它是怎么被创建的，,"> 
+    <meta name="author" content="Jack Chen"> 
+    <link rel="alternative" href="atom.xml" title="浪子之心" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+<meta name="generator" content="Hexo 5.4.1"><link rel="stylesheet" href="/css/prism.css" type="text/css"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">浪子之心</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="https://mrchenlreanspace.github.io"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">大话设计模式观后感之创建型模式</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">大话设计模式观后感之创建型模式</h1>
+        <div class="stuff">
+            <span>四月 22, 2022</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">设计模式</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h1 id="创建型模式"><a href="#创建型模式" class="headerlink" title="创建型模式"></a>创建型模式</h1><h2 id="为什么我们需要创建型模式"><a href="#为什么我们需要创建型模式" class="headerlink" title="为什么我们需要创建型模式?"></a>为什么我们需要创建型模式?</h2><p><strong>创建型模式隐藏了这些类的实例是如何被创建和放在一起，整个系统关于这些对象所知道的是由抽象类所定义的接口。这样，创建型模式在创建了什么、谁创建它、它是怎么被创建的，以及何时创建这些方面提供了很大的灵活性。</strong></p>
+<p>当一个系统应该独立于它的产品创建、构成和表示时，应该考虑用创建性模式。<strong>建立相应数目的原型并克隆它们通常比每次用合适的状态手工实例化该类更方便一些</strong></p>
+<h2 id="松耦合的理解"><a href="#松耦合的理解" class="headerlink" title="松耦合的理解"></a>松耦合的理解</h2><p>这个问题首先要谈谈<strong>内聚性与耦合性</strong><br><strong>内聚性</strong>描述的是一个例程内部组成部分之间相互联系的紧密程度。<br><strong>耦合性</strong>描述的是一个例程与其他例程之间联系的紧密程度。<br>软件开发的目标应该是创建这样的例程:<strong>内部完整，也就是高内聚</strong>，而与<strong>其他例程之间的联系则是小巧、直接、可见、灵活的，这就是松耦合</strong>。</p>
+<h2 id="如何理解创建型模式存在的意义"><a href="#如何理解创建型模式存在的意义" class="headerlink" title="如何理解创建型模式存在的意义?"></a>如何理解创建型模式存在的意义?</h2><p><strong>创建型模式抽象了实例化的过程</strong>。它们帮助一个系统独立于如何创建、组合和表示它的那些对象。创建型模式都会将关于该系统使用哪些具体的类的信息封装起来。<strong>允许客户用结构和功能差别很大的‘产品’对象配置一个系统</strong>。<strong>配置</strong>可以是静态的，即在编译时指定，也可以是动态的,就是运行时再指定。</p>
+<h2 id="工厂方法的优势"><a href="#工厂方法的优势" class="headerlink" title="工厂方法的优势"></a>工厂方法的优势</h2><p>我觉得她们几位都可能设计出比我更加灵活的代码，但她们的实现也相对就更加复杂。<strong>通常设计应该是从工厂方法开始</strong>，<strong>当设计者发现需要更大的灵活性时，设计便会向其他创建型模式演化。当设计者在设计标准之间进行权衡的时候,了解多个创建型模式可以给设计者更多的选择余地.</strong></p>
+<h1 id="简单工厂模式"><a href="#简单工厂模式" class="headerlink" title="简单工厂模式"></a>简单工厂模式</h1><p><strong>简单工厂模式是由一个工厂对象决定创建出哪一种产品类的实例。</strong><br>解决如何实例化对象的问题<br>不属于23种GOF设计模式之一，不符合开放封闭原则每一次都要修改类。<br><img src="https://img-blog.csdnimg.cn/c6b12a7fb0d74c63a771e811a73208db.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h1 id="工厂方法模式"><a href="#工厂方法模式" class="headerlink" title="工厂方法模式"></a>工厂方法模式</h1><p><strong>工厂方法模式，定义一个用于创建对象的接口，让子类决定实例化哪一个类。工厂方法使一个类的实例化延迟到其子类。</strong><br>将实例化方法写在concreteCreator类里面<br><strong>工厂方法模式和简单工厂的区别</strong>：简单工厂模式的最大优点在于工厂类中包含了必要的逻辑判断，根据客户端的选择条件动态实例化相关的类，对于客户端来说，去除了与具体产品的依赖。</p>
+<p><strong>缺点</strong>：由于每加一个产品，就需要加一个产品工厂的类，增加了额外的开发量。”<img src="https://img-blog.csdnimg.cn/80939d98d2f84c4aa4bcff62bed03321.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><br>通过加分工厂实例化加法运算类</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> <span class="title">IFactory</span>&#123;</span><br><span class="line">  <span class="function">Operation <span class="title">CreateOperation</span> ()</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title">AddFactory</span> : <span class="title">IFactory</span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> Operation <span class="title">Create0peration</span> ()</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> OperationAdd ();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/7e1c91e63d1d400fb705934cd6d1fcc4.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h1 id="抽象工厂模式"><a href="#抽象工厂模式" class="headerlink" title="抽象工厂模式"></a>抽象工厂模式</h1><h2 id="原版"><a href="#原版" class="headerlink" title="原版"></a>原版</h2><p><strong>抽象工厂模式是提供一个创建一系列相关或相互依赖对象的接口，而无需指定它们具体的类。</strong><br>多个产品有一个或多个实现方式，就把同产品系列的抽象。工厂和产品都进行抽象<br> <strong>优点</strong></p>
+<ol>
+<li>最大的好处便是易于交换产品系列，由于具体工厂类，例如IFactory factory &#x3D;new AccessFactory().在一个应用中只需要在初始化的时候出现一次，这就使得改变一个应用的具体工厂变得非常容易，它只需要改变具体工厂即可使用不同的产品配置。</li>
+<li>它让具体的创建实例过程与客户端分离，客户端是通过它们的抽象接口操纵实例，产品的具体类名也被具体工厂的实现分离，不会出现在客户代码中。</li>
+</ol>
+<p><strong>缺点</strong>修改时需要添加三个类，并需要修改抽象工厂类及抽象工厂子类。<br><img src="https://img-blog.csdnimg.cn/dad02109c712469195f3ce0e0f7cf5bf.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h2 id="简单工厂来改进"><a href="#简单工厂来改进" class="headerlink" title="简单工厂来改进"></a>简单工厂来改进</h2><p>与其用那么多工厂类，不如直接用一个简单工厂来实现，抛弃了IFactory、SqlserverFactory和 AccessFactory三个工厂类，取而代之的是DataAccess类，由于事先设置了db的值(Sqlserver或Access)，所以简单工厂的方法都不需要输入参数，这样在客户端就只需要 DataAccess.CreateUser()和 DataAccess.CreateDepartment()来生成具体的数据库访问类实例，客户端没有出现任何一个SOL Server或 Access的字样，达到了解耦的目的。这样就需要在 DataAccess类中每个方法的swicth 中加 case了。<br><img src="https://img-blog.csdnimg.cn/4a8bdc7ec84741f9a0c9a5365d62c2b0.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h2 id="男人的浪漫–反射"><a href="#男人的浪漫–反射" class="headerlink" title="男人的浪漫–反射"></a>男人的浪漫–反射</h2><p>Assembly.Load(“程序集名称”).CreateInstance(“命名空间.类名称”)<br><strong>所有在用简单工厂的地方，都可以考虑用反射技术来去除switch或 if，解除分支判断带来的耦合。</strong><br><img src="https://img-blog.csdnimg.cn/73e8c0b4d68f4590adbd43fd7cad44cf.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> Syetem.Reflection<span class="comment">//引入反射，必须要写</span></span><br><span class="line"><span class="keyword">class</span> <span class="title">DataAccess</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">readonly</span> <span class="built_in">string</span> AssemblyName = <span class="string">&quot;抽象工厂模式&quot;</span>;<span class="comment">//程序集名称</span></span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">readonly</span> <span class="built_in">string</span> db = <span class="string">&quot;Sqlserver&quot;</span>;<span class="comment">//数据库名称，可替换成Access</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> IUser <span class="title">CreateUser</span>()</span></span><br><span class="line">  &#123;</span><br><span class="line">    <span class="built_in">string</span> className = AssemblyName + <span class="string">&quot;.&quot;</span> +db +<span class="string">&quot;User&quot;</span>;</span><br><span class="line">    <span class="keyword">return</span> (IUser)Assembly.Load (AssemblyName).CreateInstance (className);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> IDepartment <span class="title">CreateDepartment</span>()</span></span><br><span class="line">  &#123;</span><br><span class="line">    <span class="built_in">string</span> className = AssemblyName + <span class="string">&quot;.&quot;</span> +db+ <span class="string">&quot;Department&quot;</span>;</span><br><span class="line">    <span class="keyword">return</span> (IDepartment)Assembly.Load (AssemblyName).CreateInstance (className) ;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h1><p><strong>单例模式（Singleton)，保证一个类仅有一个实例，并提供一个访问它的全局访问点。</strong><br>通常我们可以让一个全局变量使得一个对象被访问，但它不能防止你实例化多个对象。一个最好的办法就是，让类自身负责保存它的唯一实例。这个类可以保证没有其他实例可以被创建，并且它可以提供一个访问该实例的方法。<br><img src="https://img-blog.csdnimg.cn/e16551597fad446794fc216bf01469fe.png" alt="在这里插入图片描述"></p>
+<h2 id="单线程的实现"><a href="#单线程的实现" class="headerlink" title="单线程的实现"></a>单线程的实现</h2><p>Singleton类,定义一个GetInstance操作，允许客户访问它的唯一实例。GetInstance是一个静态方法，主要负责创建自己的唯一实例。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title">Singleton</span>&#123;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> singleton instance;</span><br><span class="line">  <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span> ()</span>&#123;<span class="comment">//构造方法让其private，这就堵死了外界利用</span></span><br><span class="line">            <span class="comment">//new创建此类实例的可能</span></span><br><span class="line">  )</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> singleton <span class="title">GetInstance</span> ()</span>&#123;</span><br><span class="line">  <span class="comment">//此方法是获得本类实例的唯一全局访问点</span></span><br><span class="line">    <span class="keyword">if</span> (instance == <span class="literal">null</span>)&#123;</span><br><span class="line">    <span class="comment">//若实例不存在，则new一个新实例，</span></span><br><span class="line">    <span class="comment">//否则返回已有的实例</span></span><br><span class="line">      instance =<span class="keyword">new</span> Singleton ();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> instance;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>客户端代码</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Main</span> (<span class="params"><span class="built_in">string</span>[] args</span>)</span></span><br><span class="line"><span class="function">Singleton s1</span> = Singleton.GetInstance();Singleton s2 -Singleton.GetInstance ();</span><br><span class="line"><span class="keyword">if</span> (s1 ==s2)</span><br><span class="line">&#123;</span><br><span class="line">Console.writeLine(<span class="string">&quot;两个对象是相同的实例。&quot;</span>);</span><br><span class="line">)</span><br><span class="line">Console.Read() ;</span><br></pre></td></tr></table></figure>
+<h2 id="多线程单例"><a href="#多线程单例" class="headerlink" title="多线程单例"></a>多线程单例</h2><p><strong>lock 是确保当一个线程位于代码的临界区时，另一个线程不进入临界区。如果其他线程试图进入锁定的代码，则它将一直等待(即被阻止)，直到该对象被释放。</strong><br>双重锁定</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title">singleton</span>&#123;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> singleton instance;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">readonly</span> <span class="built_in">object</span> syncRoot= <span class="keyword">new</span> <span class="built_in">object</span>();</span><br><span class="line">  <span class="function"><span class="keyword">private</span> <span class="title">singleton</span> ()</span>&#123;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> singleton <span class="title">GetInstance</span>()</span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (instance == <span class="literal">null</span>)&#123;<span class="comment">//先判断实例是否存在，不存在再加锁处理</span></span><br><span class="line">      <span class="keyword">lock</span> (syncRoot)&#123;</span><br><span class="line">        <span class="keyword">if</span> (instance == <span class="literal">null</span>)&#123;</span><br><span class="line">          instance = <span class="keyword">new</span> singleton ();</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> instance;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="建造者模式"><a href="#建造者模式" class="headerlink" title="建造者模式"></a>建造者模式</h1><p><strong>建造者模式（Builder)，将一个复杂对象的构建与它的表示分离，使得同样的构建过程可以创建不同的表示。</strong><br>如果我们用了建造者模式，那么用户就只需指定需要建造的类型就可以得到它们，而具体建造的过程和细节就不需知道了。<br><strong>用处</strong>创建一些复杂的对象，这些对象内部构建间的建造顺序通常是稳定的，但对象内部的构建通常面临着复杂的变化。<br>建造者模式是在当创建复杂对象的算法应该独立于该对象的组成部分以及它们的装配方式时适用的模式。<br><strong>好处</strong>就是使得建造代码与表示代码分离，由于建造者隐藏了该产品是如何组装的，所以若需要改变一个产品的内部表示，只需要再定义一个具体的建造者就可以了。<br><img src="https://img-blog.csdnimg.cn/2a78395f84ae4b99a70a8a9f2a816d88.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><br>Product类——产品类，由多个部件组成。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title">Product</span>&#123;</span><br><span class="line">  IList&lt;<span class="built_in">string</span>&gt; parts =<span class="keyword">new</span> List&lt;<span class="built_in">string</span>&gt;();</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Add</span> (<span class="params"><span class="built_in">string</span> part</span>)<span class="comment">//添加产品部件&#123;</span></span></span><br><span class="line"><span class="function">    parts. <span class="title">Add</span> (<span class="params">part</span>)</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Show</span> ()</span>&#123;</span><br><span class="line">    console.writeLine(<span class="string">&quot;\n产品创建―-—-&quot;</span>);<span class="comment">//列举所有的产品部件</span></span><br><span class="line">    <span class="keyword">foreach</span> (<span class="built_in">string</span> part <span class="keyword">in</span> parts)&#123;</span><br><span class="line">      Console.writeLine (part);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Builder类——抽象建造者类，确定产品由两个部件 PartA和PartB组成，并声明一个得到产品建造后结果的方法GetResult。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title">Builder</span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">BuildPartA</span> ()</span>;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">BuildPartB</span> ()</span>;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> Product <span class="title">GetResult</span>()</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>ConcreteBuilder1类——具体建造者类。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title">ConcreteBuilder1</span> : <span class="title">Builder</span>&#123;</span><br><span class="line">  <span class="keyword">private</span> Product product = <span class="keyword">new</span> Product ();</span><br><span class="line">  <span class="comment">//建造具体的两个部件是部件A和部件B</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="title">BuildPartA</span> ()</span>&#123;</span><br><span class="line">    product.Add(<span class="string">&quot;部件A&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="title">BuildPartB</span>()</span>&#123;</span><br><span class="line">    product. Add(<span class="string">&quot;部件B&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">override</span> Product <span class="title">GetResult</span>(<span class="params">o</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> product;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>ConcreteBuilder2类——具体建造者类。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title">ConcreteBuilder2</span> :<span class="title">Builder</span>&#123;</span><br><span class="line">  <span class="keyword">private</span> Product product = <span class="keyword">new</span> Product ();</span><br><span class="line">  <span class="comment">//建造具体的两个部件是部件X和部件Y</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="title">BuildPartA</span>()</span>&#123;</span><br><span class="line">    product. Add(<span class="string">&quot;部件x&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="title">BuildPartB</span>()</span>&#123;</span><br><span class="line">    product.Add(<span class="string">&quot;部件Y&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">override</span> Product <span class="title">GetResult</span>()</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> product;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Director类——指挥者类。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title">Director</span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Construct</span>(<span class="params">Builder builder</span>)</span>&#123;<span class="comment">//用来指挥建造过程</span></span><br><span class="line">    builder .BuildPartA ();</span><br><span class="line">    builder. BuildPartB();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>例子</strong><br><img src="https://img-blog.csdnimg.cn/a5801e7081774062bcb0c9fbc8366f13.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h1 id="原型模式"><a href="#原型模式" class="headerlink" title="原型模式"></a>原型模式</h1><p><strong>原型模式（Prototype)，用原型实例指定创建对象的种类，并且通过拷贝这些原型创建新的对象。</strong><br>“原型模式其实就是从一个对象再创建另外一个可定制的对象，而且不需知道任何创建的细节。</p>
+<h2 id="原版-1"><a href="#原版-1" class="headerlink" title="原版"></a>原版</h2><p><img src="https://img-blog.csdnimg.cn/c2b2dd35ce324cbcbaf37f8d69c08b8d.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><br>原型类</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title">Prototype</span>&#123;</span><br><span class="line">  <span class="keyword">private</span> <span class="built_in">string</span> id;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="title">Prototype</span> (<span class="params"><span class="built_in">string</span> id</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.id = id;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">public</span> <span class="built_in">string</span> Id&#123;</span><br><span class="line">    <span class="keyword">get</span> &#123; <span class="keyword">return</span> id; )</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> Prototype <span class="title">Clone</span> ()</span>; <span class="comment">//抽象类关键就是有这样一个Clone方法</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>具体原型类</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title">ConcretePrototypel</span> : <span class="title">Prototype</span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="title">ConcretePrototype1</span> (<span class="params"><span class="built_in">string</span> id</span>): <span class="title">base</span> (<span class="params">id</span>)</span>&#123;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">override</span> Prototype <span class="title">Clone</span> ()</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (Prototype)<span class="keyword">this</span>.MemberwiseClone() ;</span><br><span class="line">    <span class="comment">//创建当前对象的浅表副本。方法是创建一个新对象，然后将当前对象</span></span><br><span class="line">    <span class="comment">//的非静态字段复制到该新对象。如果字段是值类型的，则对该字段执</span></span><br><span class="line">    <span class="comment">//行逐位复制。如果字段是引用类型,则复制引用但不复制引用的对象;</span></span><br><span class="line">    <span class="comment">//因此,原始对象及其副本引用同对象[MSDN]</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>客户端代码</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Main</span> (<span class="params"><span class="built_in">string</span>[]args</span>)</span>&#123;</span><br><span class="line">ConcretePrototypel p1 = <span class="keyword">new</span> ConcretePrototype1(<span class="string">&quot;I&quot;</span>);</span><br><span class="line">ConcretePrototypel cl =(ConcretePrototype1)p1.clone() ;</span><br><span class="line">Console.writeLine ( <span class="string">&quot;cloned: &#123;0&#125;&quot;</span>, c1.Id);</span><br><span class="line">Console.Read() ;<span class="comment">//克隆类ConcretePrototype1的对象pl就能得到新的实例cl</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="浅复制和深复制"><a href="#浅复制和深复制" class="headerlink" title="浅复制和深复制"></a>浅复制和深复制</h2><p><strong>浅复制</strong>，被复制对象的所有变量都含有与原来的对象相同的值，而所有的对其他对象的引用都仍然指向原来的对象。<br><strong>深复制</strong>，深复制把引用对象的变量指向复制过的新对象，而不是原有的被引用的对象。</p>
+<h2 id="Csharp更新"><a href="#Csharp更新" class="headerlink" title="Csharp更新"></a>Csharp更新</h2><p>.NET在System命名空间中提供了ICloneable接口,其中就是唯一的一个方法Clone()，这样你就只需要实现这个接口就可以完成原型模式了。<br><img src="https://img-blog.csdnimg.cn/f85765cd1eff48dd939b77c297a1dfaf.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="/music/jucilang.mp3">
+            </audio>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+		data-enable='true'
+        data-ae='true'
+        data-ci='35b8fbd0e6865c1adf60'
+        data-cs='6d2988de68c828bce78247ad604846cdc30e7ca3'
+        data-r='mrchenlreanspace.github.io'
+        data-o='MrChenLreanSpace'
+        data-a='MrChenLreanSpace'
+        data-d='false'
+    >查看评论</div>
+
+
+    </div>
+    
+        <div class='side'>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E5%9E%8B%E6%A8%A1%E5%BC%8F"><span class="toc-number">1.</span> <span class="toc-text">创建型模式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E6%88%91%E4%BB%AC%E9%9C%80%E8%A6%81%E5%88%9B%E5%BB%BA%E5%9E%8B%E6%A8%A1%E5%BC%8F"><span class="toc-number">1.1.</span> <span class="toc-text">为什么我们需要创建型模式?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9D%BE%E8%80%A6%E5%90%88%E7%9A%84%E7%90%86%E8%A7%A3"><span class="toc-number">1.2.</span> <span class="toc-text">松耦合的理解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E5%88%9B%E5%BB%BA%E5%9E%8B%E6%A8%A1%E5%BC%8F%E5%AD%98%E5%9C%A8%E7%9A%84%E6%84%8F%E4%B9%89"><span class="toc-number">1.3.</span> <span class="toc-text">如何理解创建型模式存在的意义?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E7%9A%84%E4%BC%98%E5%8A%BF"><span class="toc-number">1.4.</span> <span class="toc-text">工厂方法的优势</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F"><span class="toc-number">2.</span> <span class="toc-text">简单工厂模式</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F"><span class="toc-number">3.</span> <span class="toc-text">工厂方法模式</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F"><span class="toc-number">4.</span> <span class="toc-text">抽象工厂模式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8E%9F%E7%89%88"><span class="toc-number">4.1.</span> <span class="toc-text">原版</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%9D%A5%E6%94%B9%E8%BF%9B"><span class="toc-number">4.2.</span> <span class="toc-text">简单工厂来改进</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%B7%E4%BA%BA%E7%9A%84%E6%B5%AA%E6%BC%AB%E2%80%93%E5%8F%8D%E5%B0%84"><span class="toc-number">4.3.</span> <span class="toc-text">男人的浪漫–反射</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F"><span class="toc-number">5.</span> <span class="toc-text">单例模式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%95%E7%BA%BF%E7%A8%8B%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-number">5.1.</span> <span class="toc-text">单线程的实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%8D%95%E4%BE%8B"><span class="toc-number">5.2.</span> <span class="toc-text">多线程单例</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BB%BA%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F"><span class="toc-number">6.</span> <span class="toc-text">建造者模式</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F"><span class="toc-number">7.</span> <span class="toc-text">原型模式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8E%9F%E7%89%88-1"><span class="toc-number">7.1.</span> <span class="toc-text">原版</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B5%85%E5%A4%8D%E5%88%B6%E5%92%8C%E6%B7%B1%E5%A4%8D%E5%88%B6"><span class="toc-number">7.2.</span> <span class="toc-text">浅复制和深复制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Csharp%E6%9B%B4%E6%96%B0"><span class="toc-number">7.3.</span> <span class="toc-text">Csharp更新</span></a></li></ol></li></ol>	
+        </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"], linebreaks: { automatic:true }, EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50) },
+        tex2jax: { inlineMath: [ ["$", "$"], ["\\(","\\)"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno",skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']},
+        TeX: {  noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } }, Macros: { href: "{}" } },
+        messageStyle: "none"
+    });
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+<!-- Google Analytics -->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YMJ8CBH8F7"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-YMJ8CBH8F7');
+</script>
+<!-- End Google Analytics -->
+
+
+</html>
