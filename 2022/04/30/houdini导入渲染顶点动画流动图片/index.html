@@ -1,0 +1,206 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>houdini导入渲染顶点动画流动图片 - 浪子之心</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Blog,"> 
+    <meta name="description" content="MrChen Bolg,VAT动画材料行代表顶点，列代表帧需要每个顶点从左到右循环偏移顶点即可
+时间推移
+合成流动的UV
+核心
+扩展：约数函数floor取小的那个数，floor(1.5)&amp;#x3D;1
+roundround,"> 
+    <meta name="author" content="Jack Chen"> 
+    <link rel="alternative" href="atom.xml" title="浪子之心" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+<meta name="generator" content="Hexo 5.4.1"><link rel="stylesheet" href="/css/prism.css" type="text/css"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">浪子之心</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="https://mrchenlreanspace.github.io"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">houdini导入渲染顶点动画流动图片</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">houdini导入渲染顶点动画流动图片</h1>
+        <div class="stuff">
+            <span>四月 30, 2022</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/Shader/" rel="tag">Shader</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h1 id="VAT动画"><a href="#VAT动画" class="headerlink" title="VAT动画"></a>VAT动画</h1><h2 id="材料"><a href="#材料" class="headerlink" title="材料"></a>材料</h2><p><img src="https://img-blog.csdnimg.cn/81a8e0ecbb5a43f29ec8f6743a211673.png#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/b45b4f80e3334f4c924528347c895065.png#pic_center" alt="在这里插入图片描述"><br>行代表顶点，列代表帧<br>需要每个顶点从左到右循环偏移顶点即可</p>
+<h2 id="时间推移"><a href="#时间推移" class="headerlink" title="时间推移"></a>时间推移</h2><p><img src="https://img-blog.csdnimg.cn/2f6448719b11418290d1b6bf5bbf03c8.png" alt="在这里插入图片描述"></p>
+<h2 id="合成流动的UV"><a href="#合成流动的UV" class="headerlink" title="合成流动的UV"></a>合成流动的UV</h2><p><img src="https://img-blog.csdnimg.cn/587bfd6898014048acfb1e23efff1731.png" alt="在这里插入图片描述"></p>
+<h2 id="核心"><a href="#核心" class="headerlink" title="核心"></a>核心</h2><p><img src="https://img-blog.csdnimg.cn/3da6f944d98a435bb9fd82572f65b31d.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/57576d56555b486e972fc9d7f882b674.png" alt="在这里插入图片描述"></p>
+<h2 id="扩展：约数函数"><a href="#扩展：约数函数" class="headerlink" title="扩展：约数函数"></a>扩展：约数函数</h2><h3 id="floor"><a href="#floor" class="headerlink" title="floor"></a>floor</h3><p>取小的那个数，floor(1.5)&#x3D;1</p>
+<h3 id="round"><a href="#round" class="headerlink" title="round"></a>round</h3><p>round是四舍五入</p>
+<h3 id="ceil"><a href="#ceil" class="headerlink" title="ceil"></a>ceil</h3><p>取大的那个数，ceil(1.1)&#x3D;2</p>
+<h1 id="FlowPicture"><a href="#FlowPicture" class="headerlink" title="FlowPicture"></a>FlowPicture</h1><p>扰动渐变参数&#x3D;abs(frac(x)*2-1)<br><img src="https://img-blog.csdnimg.cn/eb1a456347d64535a990369207a7e554.png" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/0e5fe59d242940408141de273bf47683.png" alt="在这里插入图片描述"></p>
+<h2 id="简略版"><a href="#简略版" class="headerlink" title="简略版"></a>简略版</h2><p><img src="https://img-blog.csdnimg.cn/212903f3e280489681a0dc6c27edac3f.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/ab2bd34ffd2a420f9c161f707a66dc65.png" alt="在这里插入图片描述"></p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="/music/jucilang.mp3">
+            </audio>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+		data-enable='true'
+        data-ae='true'
+        data-ci='35b8fbd0e6865c1adf60'
+        data-cs='6d2988de68c828bce78247ad604846cdc30e7ca3'
+        data-r='mrchenlreanspace.github.io'
+        data-o='MrChenLreanSpace'
+        data-a='MrChenLreanSpace'
+        data-d='false'
+    >查看评论</div>
+
+
+    </div>
+    
+        <div class='side'>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#VAT%E5%8A%A8%E7%94%BB"><span class="toc-number">1.</span> <span class="toc-text">VAT动画</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9D%90%E6%96%99"><span class="toc-number">1.1.</span> <span class="toc-text">材料</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%97%B6%E9%97%B4%E6%8E%A8%E7%A7%BB"><span class="toc-number">1.2.</span> <span class="toc-text">时间推移</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%88%E6%88%90%E6%B5%81%E5%8A%A8%E7%9A%84UV"><span class="toc-number">1.3.</span> <span class="toc-text">合成流动的UV</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83"><span class="toc-number">1.4.</span> <span class="toc-text">核心</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%A9%E5%B1%95%EF%BC%9A%E7%BA%A6%E6%95%B0%E5%87%BD%E6%95%B0"><span class="toc-number">1.5.</span> <span class="toc-text">扩展：约数函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#floor"><span class="toc-number">1.5.1.</span> <span class="toc-text">floor</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#round"><span class="toc-number">1.5.2.</span> <span class="toc-text">round</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ceil"><span class="toc-number">1.5.3.</span> <span class="toc-text">ceil</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#FlowPicture"><span class="toc-number">2.</span> <span class="toc-text">FlowPicture</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%80%E7%95%A5%E7%89%88"><span class="toc-number">2.1.</span> <span class="toc-text">简略版</span></a></li></ol></li></ol>	
+        </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"], linebreaks: { automatic:true }, EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50) },
+        tex2jax: { inlineMath: [ ["$", "$"], ["\\(","\\)"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno",skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']},
+        TeX: {  noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } }, Macros: { href: "{}" } },
+        messageStyle: "none"
+    });
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+<!-- Google Analytics -->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YMJ8CBH8F7"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-YMJ8CBH8F7');
+</script>
+<!-- End Google Analytics -->
+
+
+</html>

@@ -1,0 +1,242 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>光照模型与法线贴图 - 浪子之心</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Blog,"> 
+    <meta name="description" content="MrChen Bolg,渲染路径前向渲染对每一个物体每一个光源进行渲染，超出范围的灯光以顶点灯光渲染，适用于灯光较少的情况
+ForwardBase在这个Pass里面，主方向灯以及超出范围的灯光作为顶点灯光传入SH，   L,"> 
+    <meta name="author" content="Jack Chen"> 
+    <link rel="alternative" href="atom.xml" title="浪子之心" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+<meta name="generator" content="Hexo 5.4.1"><link rel="stylesheet" href="/css/prism.css" type="text/css"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">浪子之心</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="https://mrchenlreanspace.github.io"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">光照模型与法线贴图</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">光照模型与法线贴图</h1>
+        <div class="stuff">
+            <span>二月 14, 2022</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/Shader/" rel="tag">Shader</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h1 id="渲染路径"><a href="#渲染路径" class="headerlink" title="渲染路径"></a>渲染路径</h1><h2 id="前向渲染"><a href="#前向渲染" class="headerlink" title="前向渲染"></a>前向渲染</h2><p>对每一个物体每一个光源进行渲染，超出范围的灯光以顶点灯光渲染，适用于灯光较少的情况</p>
+<h3 id="ForwardBase"><a href="#ForwardBase" class="headerlink" title="ForwardBase"></a>ForwardBase</h3><p>在这个Pass里面，主方向灯以及超出范围的灯光作为顶点灯光传入SH，   LightMap，Reflection， Probe等计算均在这个Pass里面完成。</p>
+<h3 id="ForwardAdd"><a href="#ForwardAdd" class="headerlink" title="ForwardAdd"></a>ForwardAdd</h3><p>数量范围内的灯光，每个灯光的计算，均会调用一次这个pass，计算的结果通过Blend one one 叠加起来。</p>
+<h2 id="延迟渲染"><a href="#延迟渲染" class="headerlink" title="延迟渲染"></a>延迟渲染</h2><p> 使用MRT技术 ，RT0是物体的颜色，RT1是金属反射的颜色，RT2是法线数据，RT4是深度信息。</p>
+<p>光源直接渲染一次。有带宽和设备支持的限制，ue4和HDRP默认。</p>
+<h1 id="法线贴图"><a href="#法线贴图" class="headerlink" title="法线贴图"></a>法线贴图</h1><h2 id="法线"><a href="#法线" class="headerlink" title="法线"></a>法线</h2><p>顶点垂直模型的线NORMAL</p>
+<h2 id="切线"><a href="#切线" class="headerlink" title="切线"></a>切线</h2><p>UV中u递增的线或者v递增的线，引擎帮我们生成的TANGENT</p>
+<h2 id="副切线"><a href="#副切线" class="headerlink" title="副切线"></a>副切线</h2><p> 法线叉乘切线得到的。</p>
+<h1 id="unity的无光照shader获得光源信息实战"><a href="#unity的无光照shader获得光源信息实战" class="headerlink" title="unity的无光照shader获得光源信息实战"></a>unity的无光照shader获得光源信息实战</h1><h2 id="ForwardBase-Pass"><a href="#ForwardBase-Pass" class="headerlink" title="ForwardBase Pass"></a>ForwardBase Pass</h2><h3 id="关键点"><a href="#关键点" class="headerlink" title="关键点"></a>关键点</h3><p>需要将光照模式调为ForwardBase</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Tags &#123; <span class="string">&quot;LightMode&quot;</span> = <span class="string">&quot;ForwardBase&quot;</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在编写时加入如下引用文件以方便获取光照参数</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">pragma</span> multi_compile_fwdbase</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;AutoLight.cginc&quot;</span></span></span><br></pre></td></tr></table></figure>
+
+<p>appadata</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">appdata</span></span><br><span class="line">       &#123;</span><br><span class="line">           float4 vertex : POSITION;</span><br><span class="line">           float2 uv : TEXCOORD0;</span><br><span class="line">           float3 normal:NORMAL;<span class="comment">//法线</span></span><br><span class="line">           float4 tangent:TANGENT;<span class="comment">//切线注意是四维向量，w用来矫正平台的区别</span></span><br><span class="line">       &#125;;</span><br></pre></td></tr></table></figure>
+
+<p>片元数据</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">v2f</span></span><br><span class="line">       &#123;</span><br><span class="line">           float2 uv : TEXCOORD0;</span><br><span class="line">           float4 vertex : SV_POSITION;</span><br><span class="line">           float3 normali_dir:TEXCOORD1;</span><br><span class="line">           float3 tangent_dir:TEXCOORD2;</span><br><span class="line">           float3 binormal_dir:TEXCOORD3;</span><br><span class="line">           float3 pos_world:TEXCOORD4;</span><br><span class="line"></span><br><span class="line">       &#125;;</span><br></pre></td></tr></table></figure>
+
+<p>光源数据</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">half3 light_dir =<span class="built_in">normalize</span>( _WorldSpaceLightPos0.xyz );<span class="comment">//定向光位置无意义所以代表光照方向</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br></pre></td><td class="code"><pre><span class="line">Pass</span><br><span class="line">      &#123;</span><br><span class="line">          Tags &#123; <span class="string">&quot;LightMode&quot;</span> = <span class="string">&quot;ForwardBase&quot;</span>&#125;</span><br><span class="line">          </span><br><span class="line">          CGPROGRAM</span><br><span class="line">          <span class="meta">#<span class="keyword">pragma</span> vertex vert</span></span><br><span class="line">          <span class="meta">#<span class="keyword">pragma</span> fragment frag</span></span><br><span class="line">          <span class="meta">#<span class="keyword">pragma</span> multi_compile_fwdbase</span></span><br><span class="line">          <span class="meta">#<span class="keyword">include</span> <span class="string">&quot;UnityCG.cginc&quot;</span></span></span><br><span class="line">          <span class="meta">#<span class="keyword">include</span> <span class="string">&quot;AutoLight.cginc&quot;</span></span></span><br><span class="line"></span><br><span class="line">          <span class="keyword">struct</span> appdata</span><br><span class="line">          &#123;</span><br><span class="line">              float4 vertex : POSITION;</span><br><span class="line">              float2 uv : TEXCOORD0;</span><br><span class="line">              float3 normal:NORMAL;</span><br><span class="line">              float4 tangent:TANGENT;</span><br><span class="line">          &#125;;</span><br><span class="line"></span><br><span class="line">          <span class="keyword">struct</span> <span class="title class_">v2f</span></span><br><span class="line">          &#123;</span><br><span class="line">              float2 uv : TEXCOORD0;</span><br><span class="line">              float4 vertex : SV_POSITION;</span><br><span class="line">              float3 normali_dir:TEXCOORD1;</span><br><span class="line">              float3 tangent_dir:TEXCOORD2;</span><br><span class="line">              float3 binormal_dir:TEXCOORD3;</span><br><span class="line">              float3 pos_world:TEXCOORD4;</span><br><span class="line"></span><br><span class="line">          &#125;;</span><br><span class="line"></span><br><span class="line">          sampler2D _MainTex;</span><br><span class="line">          float4 _MainTex_ST;</span><br><span class="line">          sampler2D _AOMap;</span><br><span class="line">          float4 _AOMap_ST;</span><br><span class="line">          float4 _LightColor0;</span><br><span class="line">          <span class="type">float</span> _Shininess;</span><br><span class="line">          <span class="type">float</span> _SpecularIntensity;</span><br><span class="line">          float4 _AmbientColor; </span><br><span class="line">          sampler2D _SpecMask;</span><br><span class="line">          <span class="type">float</span> _SpecMask_ST; </span><br><span class="line">          sampler2D _NormalMap;</span><br><span class="line">          float4 _NormalMap_ST; </span><br><span class="line">          <span class="type">float</span> _NormalIntensity;</span><br><span class="line">          <span class="type">float</span> __AmbientIntensity;</span><br><span class="line"></span><br><span class="line">          <span class="function">float3 <span class="title">ACESFilm</span><span class="params">(float3 x)</span></span></span><br><span class="line"><span class="function">  </span>&#123;</span><br><span class="line">    <span class="type">float</span> a = <span class="number">2.51f</span>;</span><br><span class="line">    <span class="type">float</span> b = <span class="number">0.03f</span>;</span><br><span class="line">    <span class="type">float</span> c = <span class="number">2.43f</span>;</span><br><span class="line">    <span class="type">float</span> d = <span class="number">0.59f</span>;</span><br><span class="line">    <span class="type">float</span> e = <span class="number">0.14f</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">saturate</span>((x*(a*x + b)) / (x*(c*x + d) + e));</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">          <span class="function">v2f <span class="title">vert</span> <span class="params">(appdata v)</span></span></span><br><span class="line"><span class="function">          </span>&#123;</span><br><span class="line">              v2f o;</span><br><span class="line">              o.vertex = <span class="built_in">UnityObjectToClipPos</span>(v.vertex);</span><br><span class="line">              o.normali_dir = <span class="built_in">normalize</span>(<span class="built_in">mul</span>(<span class="built_in">float4</span>(v.normal,<span class="number">0.0</span>),unity_WorldToObject).xyz);</span><br><span class="line">              o.tangent_dir = <span class="built_in">normalize</span>(<span class="built_in">mul</span>(<span class="built_in">float4</span>(v.tangent.xyz,<span class="number">0.0</span>),unity_WorldToObject).xyz);</span><br><span class="line">              o.binormal_dir = <span class="built_in">normalize</span>(<span class="built_in">cross</span>(o.normali_dir,o.tangent_dir))* v.tangent.w;</span><br><span class="line">              o.pos_world = <span class="built_in">mul</span>(unity_ObjectToWorld,v.vertex).xyz;</span><br><span class="line">              o.uv = <span class="built_in">TRANSFORM_TEX</span>(v.uv, _MainTex);</span><br><span class="line">              <span class="keyword">return</span> o;</span><br><span class="line">          &#125;</span><br><span class="line"></span><br><span class="line">          <span class="function">fixed4 <span class="title">frag</span> <span class="params">(v2f i)</span> : SV_Target</span></span><br><span class="line"><span class="function">          &#123;</span></span><br><span class="line">              fixed4 col=<span class="built_in">fixed4</span>(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>);</span><br><span class="line">              half3 AO = <span class="built_in">tex2D</span>(_AOMap,i.uv).xyz;</span><br><span class="line">              half3 spec_mask = <span class="built_in">tex2D</span>(_SpecMask,i.uv).xyz;</span><br><span class="line">              half4 normalmap = <span class="built_in">tex2D</span>(_NormalMap,i.uv);</span><br><span class="line"></span><br><span class="line">              half3 view_dir = <span class="built_in">normalize</span>(_WorldSpaceCameraPos.xyz - i.pos_world);</span><br><span class="line">              half3 light_dir =<span class="built_in">normalize</span>( _WorldSpaceLightPos0.xyz );</span><br><span class="line"></span><br><span class="line">              <span class="comment">//Normal</span></span><br><span class="line">              half3 normal_dir  =<span class="built_in">normalize</span>(i.normali_dir);</span><br><span class="line">              half3 tangent_dir  =<span class="built_in">normalize</span>(i.tangent_dir)*_NormalIntensity;</span><br><span class="line">              half3 binormal_dir =<span class="built_in">normalize</span>(i.binormal_dir)*_NormalIntensity;</span><br><span class="line">              half3 normal_data = <span class="built_in">UnpackNormal</span>(normalmap);</span><br><span class="line">              float3x3 TBN = <span class="built_in">float3x3</span>(tangent_dir,binormal_dir,normal_dir);</span><br><span class="line">              normal_dir =<span class="built_in">normalize</span>(<span class="built_in">mul</span>(normal_data,TBN));</span><br><span class="line">              <span class="comment">//normal_dir=tangent_dir*normal_data.x*_NormalIntensity+binormal_dir*normal_data.y*_NormalIntensity+normal_dir*normal_data.z ;</span></span><br><span class="line">              </span><br><span class="line">              half NotL = <span class="built_in">max</span>(<span class="built_in">dot</span>(normal_dir,light_dir),<span class="number">0</span>);</span><br><span class="line">              half3 diffuse =  NotL*_LightColor0.xyz;</span><br><span class="line">              half3 specular =  <span class="built_in">pow</span>(<span class="built_in">max</span>(<span class="built_in">dot</span>(<span class="built_in">reflect</span>(-light_dir,normal_dir),view_dir),<span class="number">0</span>),_Shininess)* _LightColor0.xyz*_SpecularIntensity*spec_mask;</span><br><span class="line">              half3 ambient =  _AmbientColor.xyz*__AmbientIntensity;</span><br><span class="line">              </span><br><span class="line">              <span class="comment">//col.xyz+= AO;</span></span><br><span class="line"></span><br><span class="line">              col.xyz += diffuse;</span><br><span class="line">              col.xyz += specular;</span><br><span class="line">              col.xyz += ambient;</span><br><span class="line"></span><br><span class="line">               <span class="comment">// sample the texture</span></span><br><span class="line">              col.xyz *=<span class="built_in">tex2D</span>(_MainTex, i.uv).xyz;</span><br><span class="line">              col.xyz *=AO;</span><br><span class="line">              <span class="comment">// apply fog</span></span><br><span class="line">              <span class="keyword">return</span> col;</span><br><span class="line">          &#125;</span><br><span class="line">          ENDCG</span><br><span class="line">      &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="ForwardAdd-Pass"><a href="#ForwardAdd-Pass" class="headerlink" title="ForwardAdd Pass"></a>ForwardAdd Pass</h2><h3 id="关键点-1"><a href="#关键点-1" class="headerlink" title="关键点"></a>关键点</h3><p>需要将光照模式调为ForwardAdd</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Tags &#123; <span class="string">&quot;LightMode&quot;</span> = <span class="string">&quot;ForwardAdd&quot;</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<p>要加混合模式</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Blend One One</span><br></pre></td></tr></table></figure>
+
+<p>在编写时加入如下引用文件以方便获取光照参数</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">pragma</span> multi_compile_fwdadd</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;AutoLight.cginc&quot;</span></span></span><br></pre></td></tr></table></figure>
+
+<p>appadata</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">appdata</span></span><br><span class="line">       &#123;</span><br><span class="line">           float4 vertex : POSITION;</span><br><span class="line">           float2 uv : TEXCOORD0;</span><br><span class="line">           float3 normal:NORMAL;<span class="comment">//法线</span></span><br><span class="line">           float4 tangent:TANGENT;<span class="comment">//切线注意是四维向量，w用来矫正平台的区别</span></span><br><span class="line">       &#125;;</span><br></pre></td></tr></table></figure>
+
+<p>片元数据</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">v2f</span></span><br><span class="line">       &#123;</span><br><span class="line">           float2 uv : TEXCOORD0;</span><br><span class="line">           float4 vertex : SV_POSITION;</span><br><span class="line">           float3 normali_dir:TEXCOORD1;</span><br><span class="line">           float3 tangent_dir:TEXCOORD2;</span><br><span class="line">           float3 binormal_dir:TEXCOORD3;</span><br><span class="line">           float3 pos_world:TEXCOORD4;</span><br><span class="line"></span><br><span class="line">       &#125;;</span><br></pre></td></tr></table></figure>
+
+<p>光源数据</p>
+<p>如果是定向光的话和ForwardBase是一样的，但如果是点光源的话应考虑衰减量和光照方向</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">half3 light_dir =<span class="built_in">normalize</span>( _WorldSpaceLightPos0.xyz-i.pos_world.xyz ); </span><br><span class="line">            half distance=<span class="built_in">length</span>(_WorldSpaceLightPos0.xyz-i.pos_world.xyz);</span><br><span class="line">            <span class="type">float</span> range = <span class="number">1.0</span>/unity_WorldToLight[<span class="number">0</span>][<span class="number">0</span>];</span><br><span class="line"></span><br><span class="line">            half attuenation =<span class="built_in">saturate</span>((range-distance)/range);</span><br></pre></td></tr></table></figure>
+
+<h3 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br></pre></td><td class="code"><pre><span class="line">     Pass</span><br><span class="line">     &#123;</span><br><span class="line">         Tags &#123; <span class="string">&quot;LightMode&quot;</span> = <span class="string">&quot;ForwardAdd&quot;</span>&#125;</span><br><span class="line">         Blend One One</span><br><span class="line">         CGPROGRAM</span><br><span class="line">         <span class="meta">#<span class="keyword">pragma</span> vertex vert</span></span><br><span class="line">         <span class="meta">#<span class="keyword">pragma</span> fragment frag</span></span><br><span class="line">         <span class="meta">#<span class="keyword">pragma</span> multi_compile_fwdadd</span></span><br><span class="line">         <span class="meta">#<span class="keyword">include</span> <span class="string">&quot;UnityCG.cginc&quot;</span></span></span><br><span class="line">         <span class="meta">#<span class="keyword">include</span> <span class="string">&quot;AutoLight.cginc&quot;</span></span></span><br><span class="line"></span><br><span class="line">         <span class="keyword">struct</span> appdata</span><br><span class="line">         &#123;</span><br><span class="line">             float4 vertex : POSITION;</span><br><span class="line">             float2 uv : TEXCOORD0;</span><br><span class="line">             float3 normal:NORMAL;</span><br><span class="line">             float4 tangent:TANGENT;</span><br><span class="line">         &#125;;</span><br><span class="line"></span><br><span class="line">         <span class="keyword">struct</span> <span class="title class_">v2f</span></span><br><span class="line">         &#123;</span><br><span class="line">             float2 uv : TEXCOORD0;</span><br><span class="line">             float4 vertex : SV_POSITION;</span><br><span class="line">             float3 normali_dir:TEXCOORD1;</span><br><span class="line">             float3 tangent_dir:TEXCOORD2;</span><br><span class="line">             float3 binormal_dir:TEXCOORD3;</span><br><span class="line">             float3 pos_world:TEXCOORD4;</span><br><span class="line"></span><br><span class="line">         &#125;;</span><br><span class="line"></span><br><span class="line">         sampler2D _MainTex;</span><br><span class="line">         float4 _MainTex_ST;</span><br><span class="line">         sampler2D _AOMap;</span><br><span class="line">         float4 _AOMap_ST;</span><br><span class="line">         float4 _LightColor0;</span><br><span class="line">         <span class="type">float</span> _Shininess;</span><br><span class="line">         <span class="type">float</span> _SpecularIntensity;</span><br><span class="line">         float4 _AmbientColor; </span><br><span class="line">         sampler2D _SpecMask;</span><br><span class="line">         <span class="type">float</span> _SpecMask_ST; </span><br><span class="line">         sampler2D _NormalMap;</span><br><span class="line">         float4 _NormalMap_ST; </span><br><span class="line">         <span class="type">float</span> _NormalIntensity;</span><br><span class="line"></span><br><span class="line">         <span class="function">float3 <span class="title">ACESFilm</span><span class="params">(float3 x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="type">float</span> a = <span class="number">2.51f</span>;</span><br><span class="line">  <span class="type">float</span> b = <span class="number">0.03f</span>;</span><br><span class="line">  <span class="type">float</span> c = <span class="number">2.43f</span>;</span><br><span class="line">  <span class="type">float</span> d = <span class="number">0.59f</span>;</span><br><span class="line">  <span class="type">float</span> e = <span class="number">0.14f</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">saturate</span>((x*(a*x + b)) / (x*(c*x + d) + e));</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">         <span class="function">v2f <span class="title">vert</span> <span class="params">(appdata v)</span></span></span><br><span class="line"><span class="function">         </span>&#123;</span><br><span class="line">             v2f o;</span><br><span class="line">             o.vertex = <span class="built_in">UnityObjectToClipPos</span>(v.vertex);</span><br><span class="line">             o.normali_dir = <span class="built_in">normalize</span>(<span class="built_in">mul</span>(<span class="built_in">float4</span>(v.normal,<span class="number">0.0</span>),unity_WorldToObject).xyz);</span><br><span class="line">             o.tangent_dir = <span class="built_in">normalize</span>(<span class="built_in">mul</span>(<span class="built_in">float4</span>(v.tangent.xyz,<span class="number">0.0</span>),unity_WorldToObject).xyz);</span><br><span class="line">             o.binormal_dir = <span class="built_in">normalize</span>(<span class="built_in">cross</span>(o.normali_dir,o.tangent_dir))*v.tangent.w;</span><br><span class="line">             o.pos_world = <span class="built_in">mul</span>(unity_ObjectToWorld,v.vertex).xyz;</span><br><span class="line">             o.uv = <span class="built_in">TRANSFORM_TEX</span>(v.uv, _MainTex);</span><br><span class="line">             <span class="keyword">return</span> o;</span><br><span class="line">         &#125;</span><br><span class="line"></span><br><span class="line">         <span class="function">fixed4 <span class="title">frag</span> <span class="params">(v2f i)</span> : SV_Target</span></span><br><span class="line"><span class="function">         &#123;</span></span><br><span class="line">             fixed4 col=<span class="built_in">fixed4</span>(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>);</span><br><span class="line">             half3 spec_mask = <span class="built_in">tex2D</span>(_SpecMask,i.uv).xyz;</span><br><span class="line">             half4 normalmap = <span class="built_in">tex2D</span>(_NormalMap,i.uv);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">             half3 normal_dir  =<span class="built_in">normalize</span>(i.normali_dir);</span><br><span class="line">             half3 tangent_dir  =<span class="built_in">normalize</span>(i.tangent_dir);</span><br><span class="line">             half3 binormal_dir =<span class="built_in">normalize</span>(i.binormal_dir);</span><br><span class="line">             half3 normal_data = <span class="built_in">UnpackNormal</span>(normalmap);</span><br><span class="line">              normal_dir= tangent_dir*normal_data.x *_NormalIntensity+binormal_dir*normal_data.y*_NormalIntensity+normal_dir*normal_data.z ;</span><br><span class="line">             half3 view_dir = <span class="built_in">normalize</span>(_WorldSpaceCameraPos.xyz - i.pos_world);</span><br><span class="line">             <span class="meta">#<span class="keyword">if</span> defined (DIRECTIONAL)</span></span><br><span class="line">             half3 light_dir =<span class="built_in">normalize</span>( _WorldSpaceLightPos0.xyz );</span><br><span class="line">             half attuenation=<span class="number">1.0</span>;</span><br><span class="line">             <span class="meta">#<span class="keyword">elif</span> defined (POINT) </span></span><br><span class="line">             half3 light_dir =<span class="built_in">normalize</span>( _WorldSpaceLightPos0.xyz-i.pos_world.xyz ); </span><br><span class="line">             half distance=<span class="built_in">length</span>(_WorldSpaceLightPos0.xyz-i.pos_world.xyz);</span><br><span class="line">             <span class="type">float</span> range = <span class="number">1.0</span>/unity_WorldToLight[<span class="number">0</span>][<span class="number">0</span>];</span><br><span class="line"></span><br><span class="line">             half attuenation =<span class="built_in">saturate</span>((range-distance)/range);</span><br><span class="line">              </span><br><span class="line">             <span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line">             half NotL = <span class="built_in">max</span>(<span class="built_in">dot</span>(normal_dir,light_dir),<span class="number">0</span>);</span><br><span class="line">             half3 diffuse =  NotL*_LightColor0.xyz;</span><br><span class="line">             half3 specular =  <span class="built_in">pow</span>(<span class="built_in">max</span>(<span class="built_in">dot</span>(<span class="built_in">reflect</span>(-light_dir,normal_dir),view_dir),<span class="number">0</span>),_Shininess)* _LightColor0.xyz*_SpecularIntensity*spec_mask;</span><br><span class="line">             half3 AO = <span class="built_in">tex2D</span>(_AOMap,i.uv).xyz;</span><br><span class="line">             </span><br><span class="line">             <span class="comment">//col.xyz+= AO;</span></span><br><span class="line"></span><br><span class="line">             col.xyz += diffuse;</span><br><span class="line">             col.xyz += specular;</span><br><span class="line"></span><br><span class="line">              <span class="comment">// sample the texture</span></span><br><span class="line">             col.xyz *=<span class="built_in">tex2D</span>(_MainTex, i.uv).xyz;</span><br><span class="line">             col.xyz *=AO;</span><br><span class="line">             col.xyz *=attuenation;</span><br><span class="line">             <span class="comment">// apply fog</span></span><br><span class="line">             <span class="keyword">return</span> col;</span><br><span class="line"></span><br><span class="line">         &#125;</span><br><span class="line">         ENDCG</span><br><span class="line">     &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="/music/jucilang.mp3">
+            </audio>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+		data-enable='true'
+        data-ae='true'
+        data-ci='35b8fbd0e6865c1adf60'
+        data-cs='6d2988de68c828bce78247ad604846cdc30e7ca3'
+        data-r='mrchenlreanspace.github.io'
+        data-o='MrChenLreanSpace'
+        data-a='MrChenLreanSpace'
+        data-d='false'
+    >查看评论</div>
+
+
+    </div>
+    
+        <div class='side'>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B8%B2%E6%9F%93%E8%B7%AF%E5%BE%84"><span class="toc-number">1.</span> <span class="toc-text">渲染路径</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E5%90%91%E6%B8%B2%E6%9F%93"><span class="toc-number">1.1.</span> <span class="toc-text">前向渲染</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ForwardBase"><span class="toc-number">1.1.1.</span> <span class="toc-text">ForwardBase</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ForwardAdd"><span class="toc-number">1.1.2.</span> <span class="toc-text">ForwardAdd</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BB%B6%E8%BF%9F%E6%B8%B2%E6%9F%93"><span class="toc-number">1.2.</span> <span class="toc-text">延迟渲染</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B3%95%E7%BA%BF%E8%B4%B4%E5%9B%BE"><span class="toc-number">2.</span> <span class="toc-text">法线贴图</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B3%95%E7%BA%BF"><span class="toc-number">2.1.</span> <span class="toc-text">法线</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%87%E7%BA%BF"><span class="toc-number">2.2.</span> <span class="toc-text">切线</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%AF%E5%88%87%E7%BA%BF"><span class="toc-number">2.3.</span> <span class="toc-text">副切线</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#unity%E7%9A%84%E6%97%A0%E5%85%89%E7%85%A7shader%E8%8E%B7%E5%BE%97%E5%85%89%E6%BA%90%E4%BF%A1%E6%81%AF%E5%AE%9E%E6%88%98"><span class="toc-number">3.</span> <span class="toc-text">unity的无光照shader获得光源信息实战</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#ForwardBase-Pass"><span class="toc-number">3.1.</span> <span class="toc-text">ForwardBase Pass</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B3%E9%94%AE%E7%82%B9"><span class="toc-number">3.1.1.</span> <span class="toc-text">关键点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81"><span class="toc-number">3.1.2.</span> <span class="toc-text">代码</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ForwardAdd-Pass"><span class="toc-number">3.2.</span> <span class="toc-text">ForwardAdd Pass</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B3%E9%94%AE%E7%82%B9-1"><span class="toc-number">3.2.1.</span> <span class="toc-text">关键点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81-1"><span class="toc-number">3.2.2.</span> <span class="toc-text">代码</span></a></li></ol></li></ol></li></ol>	
+        </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"], linebreaks: { automatic:true }, EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50) },
+        tex2jax: { inlineMath: [ ["$", "$"], ["\\(","\\)"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno",skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']},
+        TeX: {  noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } }, Macros: { href: "{}" } },
+        messageStyle: "none"
+    });
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+<!-- Google Analytics -->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YMJ8CBH8F7"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-YMJ8CBH8F7');
+</script>
+<!-- End Google Analytics -->
+
+
+</html>

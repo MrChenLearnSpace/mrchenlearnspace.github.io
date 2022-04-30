@@ -1,0 +1,243 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>薄膜干涉效果 - 浪子之心</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Blog,"> 
+    <meta name="description" content="MrChen Bolg,
+薄膜干涉
+材质捕捉效果（Material Capture）预览效果
+
+ASE图
+
+原理将观察坐标系的顶点法线xy当作材质的uv，将材质图片根据坐标平埔视角坐标系下的模型上，缺点当模型处于视野边缘时,"> 
+    <meta name="author" content="Jack Chen"> 
+    <link rel="alternative" href="atom.xml" title="浪子之心" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+<meta name="generator" content="Hexo 5.4.1"><link rel="stylesheet" href="/css/prism.css" type="text/css"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">浪子之心</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="https://mrchenlreanspace.github.io"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">薄膜干涉效果</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">薄膜干涉效果</h1>
+        <div class="stuff">
+            <span>一月 22, 2022</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/Shader/" rel="tag">Shader</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <blockquote>
+<h1 id="薄膜干涉"><a href="#薄膜干涉" class="headerlink" title="薄膜干涉"></a>薄膜干涉</h1></blockquote>
+<h2 id="材质捕捉效果（Material-Capture）"><a href="#材质捕捉效果（Material-Capture）" class="headerlink" title="材质捕捉效果（Material Capture）"></a>材质捕捉效果（Material Capture）</h2><p><strong>预览效果</strong></p>
+<p><img src="https://img-blog.csdnimg.cn/56c243af89ed49898a5ee5130e2a0507.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_16,color_FFFFFF,t_70,g_se,x_16" alt="预览效果"></p>
+<p><strong>ASE图</strong></p>
+<p><img src="https://img-blog.csdnimg.cn/d923225abd084649b13c00901cb87279.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p>将观察坐标系的顶点法线xy当作材质的uv，将材质图片根据坐标平埔视角坐标系下的模型上，缺点当模型处于视野边缘时会有破绽。</p>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><p>Properties</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">_MainTex (<span class="string">&quot;diffuse&quot;</span>, <span class="number">2</span>D) = <span class="string">&quot;white&quot;</span> &#123;&#125;</span><br><span class="line">  _MatCatAddTex (<span class="string">&quot;MatCatAdd&quot;</span>, <span class="number">2</span>D) = <span class="string">&quot;white&quot;</span> &#123;&#125;</span><br><span class="line">  _MatCatAddIntensity (<span class="string">&quot;MatCatAddIntensity&quot;</span>, Float) = <span class="number">0.35</span></span><br><span class="line"></span><br><span class="line">  _MatCatTex (<span class="string">&quot;MatCat&quot;</span>, <span class="number">2</span>D) = <span class="string">&quot;white&quot;</span> &#123;&#125;</span><br><span class="line">  _MatCatIntensity (<span class="string">&quot;MatCatIntensity&quot;</span>, Float) = <span class="number">5.0</span></span><br></pre></td></tr></table></figure>
+
+<p>Pass</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">sampler2D _MatCatAddTex;</span><br><span class="line">float4 _MatCatAddTex_ST;</span><br><span class="line"><span class="type">float</span> _MatCatAddIntensity;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">sampler2D _MatCatTex;</span><br><span class="line">float4 _MatCatTex_ST;</span><br><span class="line"><span class="type">float</span> _MatCatIntensity;</span><br></pre></td></tr></table></figure>
+
+<p>vert</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">o.normal_world = mul(float4(v.normal,<span class="number">0.0</span>) ,unity_WorldToObject);<span class="comment">//获取worldnormal</span></span><br></pre></td></tr></table></figure>
+
+<p>frag</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">fixed4 col_diffuse = tex2D(_MainTex, i.uv);</span><br><span class="line">half2 MatCat_uv = (mul(UNITY_MATRIX_V, half4(normal_world, <span class="number">0.0</span>)).xy + <span class="number">1.0f</span>) * <span class="number">0.5f</span>;</span><br><span class="line">fixed4 col_MatCatAdd = tex2D(_MatCatAddTex, MatCat_uv) * _MatCatAddIntensity;</span><br><span class="line">fixed4 col_MatCat = tex2D(_MatCatTex, MatCat_uv) * _MatCatIntensity;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Ramp填充里面的颜色"><a href="#Ramp填充里面的颜色" class="headerlink" title="Ramp填充里面的颜色"></a>Ramp填充里面的颜色</h2><p><strong>预览效果</strong></p>
+<p><img src="https://img-blog.csdnimg.cn/4de55293ebc148d28909c8690ad9a1a9.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_18,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p><strong>过度颜色图</strong></p>
+<p><img src="https://img-blog.csdnimg.cn/1e311d3cf2474411a1c39505009b610d.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_17,color_FFFFFF,t_70,g_se,x_16#pic_center" alt="在这里插入图片描述"></p>
+<p><strong>ASE图</strong></p>
+<p><img src="https://img-blog.csdnimg.cn/7d0955cba77744b8be275fa6c1b9f080.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h3 id="原理-1"><a href="#原理-1" class="headerlink" title="原理"></a>原理</h3><p>利用菲涅尔方程的经验，1.0f - saturate(dot(normal_world, view_dir))在x和y上得到的是单调连续数值</p>
+<h3 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h3><p>Properties</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">_RampTex(<span class="string">&quot;Ramp&quot;</span>, <span class="number">2</span>D) = <span class="string">&quot;white&quot;</span> &#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>vart</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">float3 pos_world = mul(unity_ObjectToWorld, v.vertex);</span><br><span class="line">o.view_world = normalize( _WorldSpaceCameraPos - pos_world );</span><br></pre></td></tr></table></figure>
+
+
+
+<p>frag</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">half3 view_dir = normalize(i.view_world);</span><br><span class="line">half fresnel = <span class="number">1.0f</span> - saturate(dot(normal_world, view_dir));</span><br><span class="line">fixed4 col_Ramp = tex2D(_RampTex, half2(fresnel, <span class="number">0.5f</span>));</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="合并效果"><a href="#合并效果" class="headerlink" title="合并效果"></a>合并效果</h2><h3 id="最终效果"><a href="#最终效果" class="headerlink" title="最终效果"></a>最终效果</h3><p><img src="https://img-blog.csdnimg.cn/6683c0fd1e1d4027be543f06e8e47de8.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_14,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/89d2e4d09575407c9e6ea4d33677e259.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_15,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h3 id="ASE图"><a href="#ASE图" class="headerlink" title="ASE图"></a>ASE图</h3><p><img src="https://img-blog.csdnimg.cn/dc3628555216403f82d24ccc9a88feb6.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h3 id="总代码"><a href="#总代码" class="headerlink" title="总代码"></a>总代码</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br></pre></td><td class="code"><pre><span class="line">Shader <span class="string">&quot;Unlit/MatCat1_Code&quot;</span></span><br><span class="line">&#123;</span><br><span class="line">    Properties</span><br><span class="line">    &#123;</span><br><span class="line">        _MainTex (<span class="string">&quot;diffuse&quot;</span>, <span class="number">2</span>D) = <span class="string">&quot;white&quot;</span> &#123;&#125;</span><br><span class="line">        _MatCatAddTex (<span class="string">&quot;MatCatAdd&quot;</span>, <span class="number">2</span>D) = <span class="string">&quot;white&quot;</span> &#123;&#125;</span><br><span class="line">        _MatCatAddIntensity (<span class="string">&quot;MatCatAddIntensity&quot;</span>, Float) = <span class="number">0.35</span></span><br><span class="line"></span><br><span class="line">        _MatCatTex (<span class="string">&quot;MatCat&quot;</span>, <span class="number">2</span>D) = <span class="string">&quot;white&quot;</span> &#123;&#125;</span><br><span class="line">        _MatCatIntensity (<span class="string">&quot;MatCatIntensity&quot;</span>, Float) = <span class="number">5.0</span></span><br><span class="line">        _RampTex(<span class="string">&quot;Ramp&quot;</span>, <span class="number">2</span>D) = <span class="string">&quot;white&quot;</span> &#123;&#125;</span><br><span class="line">    &#125;</span><br><span class="line">    SubShader</span><br><span class="line">    &#123;</span><br><span class="line">        Tags &#123; <span class="string">&quot;RenderType&quot;</span>=<span class="string">&quot;Opaque&quot;</span> &#125;</span><br><span class="line">        LOD <span class="number">100</span></span><br><span class="line"></span><br><span class="line">        Pass</span><br><span class="line">        &#123;</span><br><span class="line">            CGPROGRAM</span><br><span class="line">            <span class="meta">#<span class="keyword">pragma</span> vertex vert</span></span><br><span class="line">            <span class="meta">#<span class="keyword">pragma</span> fragment frag</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">            <span class="meta">#<span class="keyword">include</span> <span class="string">&quot;UnityCG.cginc&quot;</span></span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">struct</span> appdata</span><br><span class="line">            &#123;</span><br><span class="line">                float4 vertex : POSITION;</span><br><span class="line">                float2 uv : TEXCOORD0;</span><br><span class="line">                float3 normal : NORMAL;</span><br><span class="line">            &#125;;</span><br><span class="line"></span><br><span class="line">            <span class="class"><span class="keyword">struct</span> <span class="title">v2f</span></span></span><br><span class="line"><span class="class">            &#123;</span></span><br><span class="line">                float2 uv : TEXCOORD0;</span><br><span class="line">                float3 normal_world : TEXCOORD1;</span><br><span class="line">                float3 view_world : TEXCOORD2;</span><br><span class="line">                float4 vertex : SV_POSITION;</span><br><span class="line">            &#125;;</span><br><span class="line"></span><br><span class="line">            sampler2D _MainTex;</span><br><span class="line">            float4 _MainTex_ST;</span><br><span class="line"></span><br><span class="line">            sampler2D _MatCatAddTex;</span><br><span class="line">            float4 _MatCatAddTex_ST;</span><br><span class="line">            <span class="type">float</span> _MatCatAddIntensity;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">            sampler2D _MatCatTex;</span><br><span class="line">            float4 _MatCatTex_ST;</span><br><span class="line">            <span class="type">float</span> _MatCatIntensity;</span><br><span class="line">            </span><br><span class="line">            sampler2D _RampTex;</span><br><span class="line">            float4 _RampTex_ST;</span><br><span class="line">            </span><br><span class="line"></span><br><span class="line">            v2f <span class="title function_">vert</span> <span class="params">(appdata v)</span></span><br><span class="line">            &#123;</span><br><span class="line">                v2f o;</span><br><span class="line">                o.vertex = UnityObjectToClipPos(v.vertex);</span><br><span class="line"></span><br><span class="line">                o.uv = TRANSFORM_TEX(v.uv, _MainTex);</span><br><span class="line">                o.normal_world = mul(float4(v.normal,<span class="number">0.0</span>) ,unity_WorldToObject);</span><br><span class="line">                float3 pos_world = mul(unity_ObjectToWorld, v.vertex);</span><br><span class="line">                o.view_world = normalize( _WorldSpaceCameraPos - pos_world );</span><br><span class="line">                <span class="keyword">return</span> o;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            fixed4 <span class="title function_">frag</span><span class="params">(v2f i)</span> : SV_Target</span><br><span class="line">            &#123;</span><br><span class="line">                half3 normal_world = normalize(i.normal_world);</span><br><span class="line">                fixed4 col;</span><br><span class="line">                <span class="comment">// MatCap</span></span><br><span class="line">                fixed4 col_diffuse = tex2D(_MainTex, i.uv);</span><br><span class="line">                half2 MatCat_uv = (mul(UNITY_MATRIX_V, half4(normal_world, <span class="number">0.0</span>)).xy + <span class="number">1.0f</span>) * <span class="number">0.5f</span>;</span><br><span class="line">                fixed4 col_MatCatAdd = tex2D(_MatCatAddTex, MatCat_uv) * _MatCatAddIntensity;</span><br><span class="line">                fixed4 col_MatCat = tex2D(_MatCatTex, MatCat_uv) * _MatCatIntensity;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">                <span class="comment">//Ramp</span></span><br><span class="line">                half3 view_dir = normalize(i.view_world);</span><br><span class="line">                half fresnel = <span class="number">1.0f</span> - saturate(dot(normal_world, view_dir));</span><br><span class="line">                fixed4 col_Ramp = tex2D(_RampTex, half2(fresnel, <span class="number">0.5f</span>));</span><br><span class="line"></span><br><span class="line">                col = col_diffuse * col_MatCat * col_Ramp;</span><br><span class="line">                col += col_MatCatAdd ;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">               <span class="comment">// return fixed4(i.normal_world,0.0);</span></span><br><span class="line">                <span class="keyword">return</span> col;</span><br><span class="line">            &#125;</span><br><span class="line">            ENDCG</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="/music/jucilang.mp3">
+            </audio>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+		data-enable='true'
+        data-ae='true'
+        data-ci='35b8fbd0e6865c1adf60'
+        data-cs='6d2988de68c828bce78247ad604846cdc30e7ca3'
+        data-r='mrchenlreanspace.github.io'
+        data-o='MrChenLreanSpace'
+        data-a='MrChenLreanSpace'
+        data-d='false'
+    >查看评论</div>
+
+
+    </div>
+    
+        <div class='side'>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%96%84%E8%86%9C%E5%B9%B2%E6%B6%89"><span class="toc-number">1.</span> <span class="toc-text">薄膜干涉</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9D%90%E8%B4%A8%E6%8D%95%E6%8D%89%E6%95%88%E6%9E%9C%EF%BC%88Material-Capture%EF%BC%89"><span class="toc-number">1.1.</span> <span class="toc-text">材质捕捉效果（Material Capture）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8E%9F%E7%90%86"><span class="toc-number">1.1.1.</span> <span class="toc-text">原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81"><span class="toc-number">1.1.2.</span> <span class="toc-text">代码</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Ramp%E5%A1%AB%E5%85%85%E9%87%8C%E9%9D%A2%E7%9A%84%E9%A2%9C%E8%89%B2"><span class="toc-number">1.2.</span> <span class="toc-text">Ramp填充里面的颜色</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8E%9F%E7%90%86-1"><span class="toc-number">1.2.1.</span> <span class="toc-text">原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81-1"><span class="toc-number">1.2.2.</span> <span class="toc-text">代码</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%88%E5%B9%B6%E6%95%88%E6%9E%9C"><span class="toc-number">1.3.</span> <span class="toc-text">合并效果</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%80%E7%BB%88%E6%95%88%E6%9E%9C"><span class="toc-number">1.3.1.</span> <span class="toc-text">最终效果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ASE%E5%9B%BE"><span class="toc-number">1.3.2.</span> <span class="toc-text">ASE图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E4%BB%A3%E7%A0%81"><span class="toc-number">1.3.3.</span> <span class="toc-text">总代码</span></a></li></ol></li></ol></li></ol>	
+        </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"], linebreaks: { automatic:true }, EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50) },
+        tex2jax: { inlineMath: [ ["$", "$"], ["\\(","\\)"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno",skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']},
+        TeX: {  noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } }, Macros: { href: "{}" } },
+        messageStyle: "none"
+    });
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+<!-- Google Analytics -->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YMJ8CBH8F7"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-YMJ8CBH8F7');
+</script>
+<!-- End Google Analytics -->
+
+
+</html>

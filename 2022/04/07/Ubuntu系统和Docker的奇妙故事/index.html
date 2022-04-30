@@ -1,0 +1,331 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Ubuntu系统和Docker的奇妙故事 - 浪子之心</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Blog,"> 
+    <meta name="description" content="MrChen Bolg,装系统下载镜像，制作
+跳过更新过程
+找到软件和更新
+寻找最佳镜像源
+设置好再更新镜像
+内网穿透用frp进行穿透
+公网服务器frps.ini
+123[common]bind_port = 7000to,"> 
+    <meta name="author" content="Jack Chen"> 
+    <link rel="alternative" href="atom.xml" title="浪子之心" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+<meta name="generator" content="Hexo 5.4.1"><link rel="stylesheet" href="/css/prism.css" type="text/css"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">浪子之心</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="https://mrchenlreanspace.github.io"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">Ubuntu系统和Docker的奇妙故事</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">Ubuntu系统和Docker的奇妙故事</h1>
+        <div class="stuff">
+            <span>四月 07, 2022</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/Ducker/" rel="tag">Ducker</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/Ubuntu/" rel="tag">Ubuntu</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h1 id="装系统"><a href="#装系统" class="headerlink" title="装系统"></a>装系统</h1><p>下载镜像，制作</p>
+<p>跳过更新过程</p>
+<p>找到软件和更新</p>
+<p>寻找最佳镜像源</p>
+<p>设置好再更新镜像</p>
+<h1 id="内网穿透"><a href="#内网穿透" class="headerlink" title="内网穿透"></a>内网穿透</h1><p>用<a target="_blank" rel="noopener" href="https://github.com/fatedier/frp/releases">frp</a>进行穿透</p>
+<h2 id="公网服务器"><a href="#公网服务器" class="headerlink" title="公网服务器"></a>公网服务器</h2><p>frps.ini</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[common]</span><br><span class="line">bind_port = <span class="number">7000</span></span><br><span class="line">token =sss        密钥和客户端一样就行</span><br></pre></td></tr></table></figure>
+
+<h2 id="私有服务器"><a href="#私有服务器" class="headerlink" title="私有服务器"></a>私有服务器</h2><p>frpc.ini</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[common]</span><br><span class="line">server_addr = 公网服务器ip</span><br><span class="line">server_port = <span class="number">7000</span></span><br><span class="line">token =sss</span><br><span class="line"></span><br><span class="line">[pve-web]</span><br><span class="line">type = tcp</span><br><span class="line">local_ip = <span class="number">192.168</span><span class="number">.50</span><span class="number">.200</span>   </span><br><span class="line">local_port = <span class="number">8888</span>           </span><br><span class="line">remote_port = <span class="number">8888</span>      </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">local_ip <span class="comment">//私有服务器地址</span></span><br><span class="line"></span><br><span class="line">local_port <span class="comment">//本地的应用端口</span></span><br><span class="line"></span><br><span class="line">remote_port <span class="comment">//映射到服务器的端口</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="linux"><a href="#linux" class="headerlink" title="linux"></a>linux</h2><h3 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h3><p>一定要下_linux_amd64.tar.gz的，架构可以选，其他的darwin_amd64.tar.gzUbuntu运行不了</p>
+<p>到相关文件夹下</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ./frps -c frps.ini</span><br></pre></td></tr></table></figure>
+
+<p>如果在其他用户群</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">su -l [user]</span><br></pre></td></tr></table></figure>
+
+<p>不加的话默认root权限管理员</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ./frpc -c frpc.ini</span><br></pre></td></tr></table></figure>
+
+<h2 id="win"><a href="#win" class="headerlink" title="win"></a>win</h2><p>cmd指令相关文件夹下</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">frps.exe -c frps.ini</span><br><span class="line">frpc.exe -c frpc.ini</span><br></pre></td></tr></table></figure>
+
+<p>可以将此命令写出bat放进开始文件夹，变成开机启动项。</p>
+<h1 id="虚拟组网"><a href="#虚拟组网" class="headerlink" title="虚拟组网"></a>虚拟组网</h1><p>zerotier 虚拟组网</p>
+<p>原理就是先通过zerotier中继器进行联网，然后尝试让两者进行p2p连接。</p>
+<p>Linux麻烦一点</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">zerotier-cli join id<span class="comment">//加入并连接</span></span><br><span class="line">zerotier-cli leave id<span class="comment">//断开连接</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="转载自别人视频的东西"><a href="#转载自别人视频的东西" class="headerlink" title="转载自别人视频的东西"></a>转载自别人视频的东西</h1><h2 id="docker镜像加速"><a href="#docker镜像加速" class="headerlink" title="docker镜像加速"></a>docker镜像加速</h2><p>请把 docker 更换源工具解压至用户主目录</p>
+<p>打开终端运行</p>
+<p>ds.sh</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">#! /bin/bash</span><br><span class="line"></span><br><span class="line">date <span class="string">&quot;+%Y年%m月%d日 周%w %H:%M:%S&quot;</span></span><br><span class="line">echo <span class="string">&#x27;为 Docker 更换官方国内源加速下载&#x27;</span></span><br><span class="line">cat &gt; /etc/docker/daemon.json &lt;&lt; EOF</span><br><span class="line">&#123;</span><br><span class="line"> <span class="string">&quot;registry-mirrors&quot;</span>: [<span class="string">&quot;https://registry.docker-cn.com&quot;</span>]</span><br><span class="line">&#125;</span><br><span class="line">EOF</span><br><span class="line">service docker restart</span><br><span class="line">docker info|grep <span class="string">&quot;Registry Mirrors&quot;</span> -A <span class="number">1</span></span><br><span class="line">echo <span class="string">&#x27;显示 registry.docker-cn.com 即换源成功&#x27;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="更换-Docker-国内官方源"><a href="#更换-Docker-国内官方源" class="headerlink" title="更换 Docker 国内官方源"></a>更换 Docker 国内官方源</h3><p>sudo sh ds.sh</p>
+<h3 id="修复-Docker-无管理员权限运行失败的问题"><a href="#修复-Docker-无管理员权限运行失败的问题" class="headerlink" title="修复 Docker 无管理员权限运行失败的问题"></a>修复 Docker 无管理员权限运行失败的问题</h3><p>sudo gpasswd -a $USER docker</p>
+<p>newgrp docker</p>
+<p>service docker restart</p>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Bh411s765?spm_id_from=333.1007.top_right_bar_window_custom_collection.content.click">来自科技宅小明的视频</a></p>
+<p><strong>一定要切换镜像源！！！一定要切换镜像源！！！一定要切换镜像源！！！一定要切换镜像源！！！一定要切换镜像源！！！一定要切换镜像源！！！一定要切换镜像源！！！一定要切换镜像源！！！一定要切换镜像源！！！一定要切换镜像源！！！</strong></p>
+<h2 id="装Docker"><a href="#装Docker" class="headerlink" title="装Docker"></a>装Docker</h2><p><a target="_blank" rel="noopener" href="https://www.runoob.com/docker/docker-tutorial.html">也可以看菜鸟教程装Docker</a></p>
+<p><strong>更新 apt 工具及索引，以支持 https 存储库</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line"></span><br><span class="line">sudo apt-get install \</span><br><span class="line">    ca-certificates \</span><br><span class="line">    curl \</span><br><span class="line">    gnupg \</span><br><span class="line">    lsb-release</span><br></pre></td></tr></table></figure>
+
+<p><strong>添加 Docker 官方 GPG 密钥（用于签名&#x2F;验证、加密&#x2F;解密）</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -fsSL https:<span class="comment">//download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>设置 stable 版稳定存储库（区别于夜间版&#x2F;测试版 nightly &#x2F; test ）</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">echo \</span><br><span class="line">  <span class="string">&quot;deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \</span></span><br><span class="line"><span class="string">  $(lsb_release -cs) stable&quot;</span> | sudo tee /etc/apt/sources.<span class="built_in">list</span>.d/docker.<span class="built_in">list</span> &gt; /dev/null</span><br></pre></td></tr></table></figure>
+
+<p><strong>更新 apt 工具及索引，并安装 Docker</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line"></span><br><span class="line">sudo apt-get install docker-ce docker-ce-cli containerd.io</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>验证 Docker Engine 是否正确安装（显示 “Hello from Docker!” 即为成功安装）</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker run hello-world</span><br></pre></td></tr></table></figure>
+
+<h2 id="为-Docker-安装图形化操作界面-Portainer"><a href="#为-Docker-安装图形化操作界面-Portainer" class="headerlink" title="为 Docker 安装图形化操作界面 Portainer"></a>为 Docker 安装图形化操作界面 Portainer</h2><p><strong>创建 Portainer Server 存储数据库的卷</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker volume create portainer_data</span><br></pre></td></tr></table></figure>
+
+<p><strong>下载并安装 Portainer Server 容器</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sudo docker run -d -p <span class="number">8000</span>:<span class="number">8000</span> -p <span class="number">9443</span>:<span class="number">9443</span> --name portainer \</span><br><span class="line">    --restart=always \</span><br><span class="line">    -v /var/run/docker.sock:/var/run/docker.sock \</span><br><span class="line">    -v portainer_data:/data \</span><br><span class="line">    portainer/portainer-ce:latest</span><br></pre></td></tr></table></figure>
+
+<p><strong>查看 Docker 容器状态（NAMES 标签出现 portainer&#x2F;portainer-ce 则成功运行）</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker ps</span><br></pre></td></tr></table></figure>
+
+<p><strong>使用 Ubuntu 自带的火狐浏览器访问（<a target="_blank" rel="noopener" href="https://127.0.0.1:9443/%EF%BC%89">https://127.0.0.1:9443/）</a></strong><br><strong>或使用局域网内另一台计算机&#x2F;手机的浏览器访问（https:&#x2F;&#x2F;服务器的IP:9443&#x2F;）</strong></p>
+<p><strong>对 Portainer 初始设置</strong><br>设置用户名及密码（8位字符或数字），点击 Get Started，载入后点击 local 即可</p>
+<h2 id="启用-Web-个人导航页"><a href="#启用-Web-个人导航页" class="headerlink" title="启用 Web 个人导航页"></a>启用 Web 个人导航页</h2><p><strong>将 nginx 文件夹解压至 &#x2F;home&#x2F;你自己的用户名&#x2F; 之下</strong></p>
+<p><strong>下载 Nginx 镜像</strong></p>
+<p>Portainer 点击 Images 镜像，docker.io 右侧填入 nginx，点击 Pull the image 下载镜像</p>
+<p><strong>部署并运行 Nginx 容器（可以理解为把 Nginx 镜像作为小型虚拟机启动）</strong></p>
+<p>点击 Containers 标签，点击 Add Container 启动容器，名称填入Nginx，docker.io 右侧填入 nginx:latest（Images 标签页 Tags 标签选项）。</p>
+<p>Manual network port publishing 手动发布网口设置项，把本地80端口映射到容器80端口。</p>
+<p>在Advanced container settings高级容器设置中，点击map additional volume 映射附加卷，点击绑定文件夹及可读写，本地文件夹填入 &#x2F;home&#x2F;你自己的用户名&#x2F;nginx&#x2F; 容器文件夹填入 &#x2F;usr&#x2F;share&#x2F;nginx&#x2F;html</p>
+<p>Restart policy 重启策略调整为 Always 永远自动启动。</p>
+<p>最后点击 Deploy the container 部署容器</p>
+<p><strong>使用 Ubuntu 自带的火狐浏览器访问（<a target="_blank" rel="noopener" href="http://127.0.0.1)/">http://127.0.0.1）</a></strong><br><strong>或使用局域网内另一台计算机&#x2F;手机的浏览器访问（http:&#x2F;&#x2F;服务器的IP）</strong></p>
+<h2 id="来自GitHub大佬的分享"><a href="#来自GitHub大佬的分享" class="headerlink" title="来自GitHub大佬的分享"></a>来自GitHub大佬的分享</h2><p>来自各种生活的容器服务，<a target="_blank" rel="noopener" href="https://github.com/awesome-selfhosted/awesome-selfhosted">上链接</a></p>
+<h2 id="搭建-Mattermost-私人聊天室"><a href="#搭建-Mattermost-私人聊天室" class="headerlink" title="搭建 Mattermost 私人聊天室"></a>搭建 Mattermost 私人聊天室</h2><p><strong>命令方式安装 Docker 版 Mattermost</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">docker run \</span><br><span class="line">-d \</span><br><span class="line">--name mattermost-preview \</span><br><span class="line">--restart=always \</span><br><span class="line">--publish <span class="number">8065</span>:<span class="number">8065</span> \</span><br><span class="line">--add-host dockerhost:<span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span> \</span><br><span class="line">mattermost/mattermost-preview</span><br></pre></td></tr></table></figure>
+
+<h2 id="设置-Mattermost-私人聊天室"><a href="#设置-Mattermost-私人聊天室" class="headerlink" title="设置 Mattermost 私人聊天室"></a>设置 Mattermost 私人聊天室</h2><p><strong>访问 127.0.0.1:8065 网址，输入邮箱用户名及密码进行初始账户注册</strong><br><strong>选择第二项进入控制台，进入SITE CONFIGURATION - Localization更改语言为中文</strong><br><strong>保存返回上一步，新建群组PQMing（可以自行改名），点击Finish完成</strong><br><strong>新页面输入用户名，上传头像（可选）并保存，保存团队，不起用通知</strong><br><strong>复制邀请链接，之后可以分享给朋友，稍等一会就完成设置</strong><br><strong>默认的管理员账户仍然是英文，点击右上角设置，Display里改成中文即可</strong><br><strong>新用户入群后会自动进入公共和闲聊这两个频道，用户之间可以选择群聊或私信</strong></p>
+<h2 id="免费使用为知笔记"><a href="#免费使用为知笔记" class="headerlink" title="免费使用为知笔记"></a>免费使用为知笔记</h2><p><strong>访问用户主目录文件夹</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd ~</span><br></pre></td></tr></table></figure>
+
+<p><strong>在主目录新建 wizdata 文件夹用于存储笔记数据</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir wizdata</span><br></pre></td></tr></table></figure>
+
+<p><strong>命令方式安装 Docker 版为知笔记</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">docker run \</span><br><span class="line">-it \</span><br><span class="line">-d \</span><br><span class="line">--name wiz \</span><br><span class="line">--restart=always \</span><br><span class="line">-v ~/wizdata:/wiz/storage \</span><br><span class="line">-v /etc/localtime:/etc/localtime \</span><br><span class="line">-p <span class="number">8080</span>:<span class="number">80</span> \</span><br><span class="line">-p <span class="number">9269</span>:<span class="number">9269</span>/udp \</span><br><span class="line">wiznote/wizserver</span><br></pre></td></tr></table></figure>
+
+<h2 id="搭建个人博客-Wordpress"><a href="#搭建个人博客-Wordpress" class="headerlink" title="搭建个人博客 Wordpress"></a>搭建个人博客 Wordpress</h2><p><strong>安装 Docker 版 mariadb 数据库命令，可自行替换密码（默认为meimima）</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">docker run -d \</span><br><span class="line">  --name mariadb \</span><br><span class="line">  -p <span class="number">3306</span>:<span class="number">3306</span> \</span><br><span class="line">  -e MARIADB_ROOT_PASSWORD=meimima \</span><br><span class="line">  -e MARIADB_DATABASE=wordpress \</span><br><span class="line">  --restart=always \</span><br><span class="line">  mariadb:latest</span><br></pre></td></tr></table></figure>
+
+<p><strong>安装 Docker 版 Wordpress 命令，需要自行替换为本机 IP 地址（采用上一步数据库密码meimima）</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">docker run \</span><br><span class="line">  -d \</span><br><span class="line">  --name wordpress \</span><br><span class="line">  -e WORDPRESS_DB_HOST=服务器IP:<span class="number">3306</span> \</span><br><span class="line">  -e WORDPRESS_DB_USER=root \</span><br><span class="line">  -e WORDPRESS_DB_PASSWORD=meimima \</span><br><span class="line">  -e WORDPRESS_DB_NAME=wordpress \</span><br><span class="line">  -e WORDPRESS_TABLE_PREFIX=wp_ \</span><br><span class="line">  -p <span class="number">8081</span>:<span class="number">80</span> \</span><br><span class="line">  --restart=always \</span><br><span class="line">  wordpress</span><br></pre></td></tr></table></figure>
+
+<p><strong>使用浏览器登陆服务器 IP:8081（例：192.168.2.15:8081）访问博客</strong></p>
+<h2 id="可选-安装-mariadb-数据库控制面板-phpmyadmin-手动管理数据库"><a href="#可选-安装-mariadb-数据库控制面板-phpmyadmin-手动管理数据库" class="headerlink" title="可选 安装 mariadb 数据库控制面板 phpmyadmin 手动管理数据库"></a>可选 安装 mariadb 数据库控制面板 phpmyadmin 手动管理数据库</h2><p><strong>安装 Docker 版 phpmyadmin 数据库控制面板命令</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">docker run \</span><br><span class="line">  -d \</span><br><span class="line">  --name phpmyadmin \</span><br><span class="line">  --link mariadb \</span><br><span class="line">  -e PMA_HOST=<span class="string">&quot;mariadb&quot;</span> \</span><br><span class="line">  -p <span class="number">8082</span>:<span class="number">80</span> \</span><br><span class="line">  --restart=always \</span><br><span class="line">  phpmyadmin</span><br></pre></td></tr></table></figure>
+
+<p><strong>使用浏览器登陆服务器 IP:8082（例：192.168.2.15:8082）访问数据库控制面板</strong><br><strong>使用安装 phpmyadmin 命令中的密码（默认为meimima）及用户名 root 登陆数据库</strong><br><strong>点击控制面板左侧 新建 按钮，创建名为 wordpress 的数据库</strong></p>
+<h2 id="免费网盘-SeaFile-安装教程"><a href="#免费网盘-SeaFile-安装教程" class="headerlink" title="免费网盘 SeaFile 安装教程"></a>免费网盘 SeaFile 安装教程</h2><p>docker-compose.yml</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">version: <span class="string">&#x27;2.0&#x27;</span></span><br><span class="line">services:</span><br><span class="line">  db:</span><br><span class="line">    image: mariadb:<span class="number">10.5</span></span><br><span class="line">    container_name: seafile-mysql</span><br><span class="line">    restart: always</span><br><span class="line">    environment:</span><br><span class="line">      - MYSQL_ROOT_PASSWORD=db_dev  # 设置数据库根用户的密码</span><br><span class="line">      - MYSQL_LOG_CONSOLE=<span class="literal">true</span></span><br><span class="line">    volumes:</span><br><span class="line">      - /home/seafile-mysql/db:/var/lib/mysql  # 设置数据库存储位置</span><br><span class="line">    networks:</span><br><span class="line">      - seafile-net</span><br><span class="line"></span><br><span class="line">  memcached:</span><br><span class="line">    image: memcached:<span class="number">1.5</span><span class="number">.6</span></span><br><span class="line">    container_name: seafile-memcached</span><br><span class="line">    restart: always</span><br><span class="line">    entrypoint: memcached -m <span class="number">256</span></span><br><span class="line">    networks:</span><br><span class="line">      - seafile-net</span><br><span class="line"></span><br><span class="line">  seafile:</span><br><span class="line">    image: seafileltd/seafile-mc:latest</span><br><span class="line">    container_name: seafile</span><br><span class="line">    ports:</span><br><span class="line">      - <span class="string">&quot;81:80&quot;</span>  # 主机<span class="number">81</span>端口映射至容器<span class="number">80</span>端口http</span><br><span class="line">      - <span class="string">&quot;4433:443&quot;</span>  # 主机<span class="number">4433</span>端口映射至容器<span class="number">443</span>端口https</span><br><span class="line">      - <span class="string">&quot;8088:8080&quot;</span>  # 主机<span class="number">8088</span>端口映射至容器<span class="number">8080</span>端口webdav</span><br><span class="line">    volumes:</span><br><span class="line">      - /home/seafile-data:/shared   # 设置Seafile数据存储位置</span><br><span class="line">    restart: always</span><br><span class="line">    environment:</span><br><span class="line">      - DB_HOST=db</span><br><span class="line">      - DB_ROOT_PASSWD=db_dev  # 与第一条注释所设置密码相同</span><br><span class="line">      - TIME_ZONE=Asia/Shanghai # 设定时区为上海</span><br><span class="line">      - SEAFILE_ADMIN_EMAIL=me@example.com # 设置管理员账户，默认为 <span class="string">&#x27;me@example.com&#x27;</span></span><br><span class="line">      - SEAFILE_ADMIN_PASSWORD=asecret     # 设置管理员密码，默认为 <span class="string">&#x27;asecret&#x27;</span></span><br><span class="line">#      - SEAFILE_SERVER_LETSENCRYPT=<span class="literal">false</span>   # 是否启用LETSENCRYPT提供的https加密证书，默认为 <span class="string">&#x27;false&#x27;</span></span><br><span class="line">      - SEAFILE_SERVER_HOSTNAME=<span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">81</span> # 设置网盘域名地址</span><br><span class="line">    depends_on:</span><br><span class="line">      - db</span><br><span class="line">      - memcached</span><br><span class="line">    networks:</span><br><span class="line">      - seafile-net</span><br><span class="line"></span><br><span class="line">networks:</span><br><span class="line">  seafile-net:</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>docker-compose原版.yml</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">version: <span class="string">&#x27;2.0&#x27;</span></span><br><span class="line">services:</span><br><span class="line">  db:</span><br><span class="line">    image: mariadb:<span class="number">10.5</span></span><br><span class="line">    container_name: seafile-mysql</span><br><span class="line">    environment:</span><br><span class="line">      - MYSQL_ROOT_PASSWORD=db_dev  # Requested, <span class="built_in">set</span> the root<span class="number">&#x27;</span>s password of MySQL service.</span><br><span class="line">      - MYSQL_LOG_CONSOLE=<span class="literal">true</span></span><br><span class="line">    volumes:</span><br><span class="line">      - /opt/seafile-mysql/db:/var/lib/mysql  # Requested, specifies the path to MySQL data persistent store.</span><br><span class="line">    networks:</span><br><span class="line">      - seafile-net</span><br><span class="line"></span><br><span class="line">  memcached:</span><br><span class="line">    image: memcached:<span class="number">1.5</span><span class="number">.6</span></span><br><span class="line">    container_name: seafile-memcached</span><br><span class="line">    entrypoint: memcached -m <span class="number">256</span></span><br><span class="line">    networks:</span><br><span class="line">      - seafile-net</span><br><span class="line">          </span><br><span class="line">  seafile:</span><br><span class="line">    image: seafileltd/seafile-mc:latest</span><br><span class="line">    container_name: seafile</span><br><span class="line">    ports:</span><br><span class="line">      - <span class="string">&quot;80:80&quot;</span></span><br><span class="line">#      - <span class="string">&quot;443:443&quot;</span>  # If https is enabled, cancel the comment.</span><br><span class="line">    volumes:</span><br><span class="line">      - /opt/seafile-data:/shared   # Requested, specifies the path to Seafile data persistent store.</span><br><span class="line">    environment:</span><br><span class="line">      - DB_HOST=db</span><br><span class="line">      - DB_ROOT_PASSWD=db_dev  # Requested, the value shuold be root<span class="number">&#x27;</span>s password of MySQL service.</span><br><span class="line">#      - TIME_ZONE=Asia/Shanghai # Optional, <span class="keyword">default</span> is UTC. Should be uncomment and <span class="built_in">set</span> to your local time zone.</span><br><span class="line">      - SEAFILE_ADMIN_EMAIL=me@example.com # Specifies Seafile admin user, <span class="keyword">default</span> is <span class="string">&#x27;me@example.com&#x27;</span>.</span><br><span class="line">      - SEAFILE_ADMIN_PASSWORD=asecret     # Specifies Seafile admin password, <span class="keyword">default</span> is <span class="string">&#x27;asecret&#x27;</span>.</span><br><span class="line">      - SEAFILE_SERVER_LETSENCRYPT=<span class="literal">false</span>   # Whether use letsencrypt to generate cert.</span><br><span class="line">      - SEAFILE_SERVER_HOSTNAME=seafile.example.com # Specifies your host name.</span><br><span class="line">    depends_on:</span><br><span class="line">      - db</span><br><span class="line">      - memcached</span><br><span class="line">    networks:</span><br><span class="line">      - seafile-net</span><br><span class="line"></span><br><span class="line">networks:</span><br><span class="line">  seafile-net:</span><br></pre></td></tr></table></figure>
+
+<p><strong>打开终端运行以下命令（输入密码界面不会显示密码）</strong></p>
+<p>sudo apt-get update | sudo apt-get install docker-compose -y</p>
+<p><strong>将 docker-compose.yml 解压至用户主目录，并修改文件内邮箱密码</strong></p>
+<p><strong>访问用户主目录</strong></p>
+<p>cd ~</p>
+<p><strong>在终端运行以下命令</strong></p>
+<p>sudo docker-compose up -d</p>
+<p><strong>使用自带的火狐浏览器，访问 <a target="_blank" rel="noopener" href="http://127.0.0.1:81/">http://127.0.0.1:81</a></strong></p>
+<p><strong>未更改 docker-compose.yml 文件内邮箱密码的话，默认用户名 <a href="mailto:&#109;&#x65;&#x40;&#101;&#120;&#97;&#109;&#x70;&#108;&#x65;&#46;&#x63;&#x6f;&#x6d;">&#109;&#x65;&#x40;&#101;&#120;&#97;&#109;&#x70;&#108;&#x65;&#46;&#x63;&#x6f;&#x6d;</a> 密码 asecret</strong></p>
+<p><strong>请在路由器转发 http 使用的 81 端口至服务器</strong></p>
+<p><strong>全平台客户端下载链接 <a target="_blank" rel="noopener" href="https://www.seafile.com/download/">https://www.seafile.com/download/</a></strong></p>
+<h2 id="免费网盘-SeaFile-配置教程-https"><a href="#免费网盘-SeaFile-配置教程-https" class="headerlink" title="免费网盘 SeaFile 配置教程 (https)"></a>免费网盘 SeaFile 配置教程 (https)</h2><p><strong>于各个免费平台申请相应域名的 SSL 证书</strong></p>
+<p><strong>创建 &#x2F;home&#x2F;seafile-data&#x2F;ssl 目录，然后拷贝证书文件和密钥文件至 ssl 目录下</strong></p>
+<p><strong>如果网盘域名是 seafile.example.com，证书名称必须为 seafile.example.com.crt，密钥文件名称为 seafile.example.com.key</strong></p>
+<p><strong>请在路由器转发 https 使用的 4433 端口至服务器</strong></p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="/music/jucilang.mp3">
+            </audio>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+		data-enable='true'
+        data-ae='true'
+        data-ci='35b8fbd0e6865c1adf60'
+        data-cs='6d2988de68c828bce78247ad604846cdc30e7ca3'
+        data-r='mrchenlreanspace.github.io'
+        data-o='MrChenLreanSpace'
+        data-a='MrChenLreanSpace'
+        data-d='false'
+    >查看评论</div>
+
+
+    </div>
+    
+        <div class='side'>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%A3%85%E7%B3%BB%E7%BB%9F"><span class="toc-number">1.</span> <span class="toc-text">装系统</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F"><span class="toc-number">2.</span> <span class="toc-text">内网穿透</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AC%E7%BD%91%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="toc-number">2.1.</span> <span class="toc-text">公网服务器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A7%81%E6%9C%89%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="toc-number">2.2.</span> <span class="toc-text">私有服务器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#linux"><span class="toc-number">2.3.</span> <span class="toc-text">linux</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BD"><span class="toc-number">2.3.1.</span> <span class="toc-text">下载</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#win"><span class="toc-number">2.4.</span> <span class="toc-text">win</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%99%9A%E6%8B%9F%E7%BB%84%E7%BD%91"><span class="toc-number">3.</span> <span class="toc-text">虚拟组网</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%BD%AC%E8%BD%BD%E8%87%AA%E5%88%AB%E4%BA%BA%E8%A7%86%E9%A2%91%E7%9A%84%E4%B8%9C%E8%A5%BF"><span class="toc-number">4.</span> <span class="toc-text">转载自别人视频的东西</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#docker%E9%95%9C%E5%83%8F%E5%8A%A0%E9%80%9F"><span class="toc-number">4.1.</span> <span class="toc-text">docker镜像加速</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9B%B4%E6%8D%A2-Docker-%E5%9B%BD%E5%86%85%E5%AE%98%E6%96%B9%E6%BA%90"><span class="toc-number">4.1.1.</span> <span class="toc-text">更换 Docker 国内官方源</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%AE%E5%A4%8D-Docker-%E6%97%A0%E7%AE%A1%E7%90%86%E5%91%98%E6%9D%83%E9%99%90%E8%BF%90%E8%A1%8C%E5%A4%B1%E8%B4%A5%E7%9A%84%E9%97%AE%E9%A2%98"><span class="toc-number">4.1.2.</span> <span class="toc-text">修复 Docker 无管理员权限运行失败的问题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A3%85Docker"><span class="toc-number">4.2.</span> <span class="toc-text">装Docker</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BA-Docker-%E5%AE%89%E8%A3%85%E5%9B%BE%E5%BD%A2%E5%8C%96%E6%93%8D%E4%BD%9C%E7%95%8C%E9%9D%A2-Portainer"><span class="toc-number">4.3.</span> <span class="toc-text">为 Docker 安装图形化操作界面 Portainer</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%AF%E7%94%A8-Web-%E4%B8%AA%E4%BA%BA%E5%AF%BC%E8%88%AA%E9%A1%B5"><span class="toc-number">4.4.</span> <span class="toc-text">启用 Web 个人导航页</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9D%A5%E8%87%AAGitHub%E5%A4%A7%E4%BD%AC%E7%9A%84%E5%88%86%E4%BA%AB"><span class="toc-number">4.5.</span> <span class="toc-text">来自GitHub大佬的分享</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%90%AD%E5%BB%BA-Mattermost-%E7%A7%81%E4%BA%BA%E8%81%8A%E5%A4%A9%E5%AE%A4"><span class="toc-number">4.6.</span> <span class="toc-text">搭建 Mattermost 私人聊天室</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%BE%E7%BD%AE-Mattermost-%E7%A7%81%E4%BA%BA%E8%81%8A%E5%A4%A9%E5%AE%A4"><span class="toc-number">4.7.</span> <span class="toc-text">设置 Mattermost 私人聊天室</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%8D%E8%B4%B9%E4%BD%BF%E7%94%A8%E4%B8%BA%E7%9F%A5%E7%AC%94%E8%AE%B0"><span class="toc-number">4.8.</span> <span class="toc-text">免费使用为知笔记</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2-Wordpress"><span class="toc-number">4.9.</span> <span class="toc-text">搭建个人博客 Wordpress</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%AF%E9%80%89-%E5%AE%89%E8%A3%85-mariadb-%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8E%A7%E5%88%B6%E9%9D%A2%E6%9D%BF-phpmyadmin-%E6%89%8B%E5%8A%A8%E7%AE%A1%E7%90%86%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="toc-number">4.10.</span> <span class="toc-text">可选 安装 mariadb 数据库控制面板 phpmyadmin 手动管理数据库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%8D%E8%B4%B9%E7%BD%91%E7%9B%98-SeaFile-%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B"><span class="toc-number">4.11.</span> <span class="toc-text">免费网盘 SeaFile 安装教程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%8D%E8%B4%B9%E7%BD%91%E7%9B%98-SeaFile-%E9%85%8D%E7%BD%AE%E6%95%99%E7%A8%8B-https"><span class="toc-number">4.12.</span> <span class="toc-text">免费网盘 SeaFile 配置教程 (https)</span></a></li></ol></li></ol>	
+        </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"], linebreaks: { automatic:true }, EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50) },
+        tex2jax: { inlineMath: [ ["$", "$"], ["\\(","\\)"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno",skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']},
+        TeX: {  noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } }, Macros: { href: "{}" } },
+        messageStyle: "none"
+    });
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+<!-- Google Analytics -->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YMJ8CBH8F7"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-YMJ8CBH8F7');
+</script>
+<!-- End Google Analytics -->
+
+
+</html>

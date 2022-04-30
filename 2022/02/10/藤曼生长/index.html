@@ -1,0 +1,216 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>藤曼生长 - 浪子之心</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Blog,"> 
+    <meta name="description" content="MrChen Bolg,藤曼生长预览视图
+
+PBR材质下的效果
+显示更好看上ASE
+
+简化版可以乘以顶点法线向量可以实现物体的缩放，用一个UV图的权重控制不同位置缩放部分，可以形成藤曼的样子
+ASE
+代码Propertie,"> 
+    <meta name="author" content="Jack Chen"> 
+    <link rel="alternative" href="atom.xml" title="浪子之心" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+<meta name="generator" content="Hexo 5.4.1"><link rel="stylesheet" href="/css/prism.css" type="text/css"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">浪子之心</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="https://mrchenlreanspace.github.io"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">藤曼生长</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">藤曼生长</h1>
+        <div class="stuff">
+            <span>二月 10, 2022</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/Shader/" rel="tag">Shader</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h1 id="藤曼生长"><a href="#藤曼生长" class="headerlink" title="藤曼生长"></a>藤曼生长</h1><p><strong>预览视图</strong></p>
+<p><img src="https://img-blog.csdnimg.cn/239148c16c944873b02c02d3147cd67d.png" alt="在这里插入图片描述"><img src="https://img-blog.csdnimg.cn/4606bf1634494bfb9d0af5015ae90502.png" alt="在这里插入图片描述"></p>
+<p><strong>PBR材质下的效果</strong></p>
+<p>显示更好看上ASE</p>
+<p><img src="https://img-blog.csdnimg.cn/ba9a3e2dbcfc4bfdbb6771696810b7e0.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><img src="https://img-blog.csdnimg.cn/d1ea5f1eab5a4091b0baf36a3495df95.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><img src="https://img-blog.csdnimg.cn/34ccd229561748c192f020f3b60c88c8.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h2 id="简化版"><a href="#简化版" class="headerlink" title="简化版"></a>简化版</h2><p>可以乘以顶点法线向量可以实现物体的缩放，用一个UV图的权重控制不同位置缩放部分，可以形成藤曼的样子</p>
+<h3 id="ASE"><a href="#ASE" class="headerlink" title="ASE"></a>ASE</h3><p><img src="https://img-blog.csdnimg.cn/cd32f8d0755c44bcb1671ecc6d91b26b.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><h4 id="Properties"><a href="#Properties" class="headerlink" title="Properties"></a>Properties</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">_MainTex (<span class="string">&quot;Texture&quot;</span>, <span class="number">2</span>D) = <span class="string">&quot;white&quot;</span> &#123;&#125;</span><br><span class="line">_Grow(<span class="string">&quot;Grow&quot;</span>,Range(<span class="number">-1.0</span>,<span class="number">1.0</span>)) = <span class="number">0.0</span></span><br><span class="line">_Expend(<span class="string">&quot;Expend&quot;</span>,Float) = <span class="number">0.0</span></span><br><span class="line">_Scale(<span class="string">&quot;Scale&quot;</span>,Float) = <span class="number">0.0</span></span><br><span class="line">_GrowMin(<span class="string">&quot;GrowMin&quot;</span>, Range(<span class="number">0</span>,<span class="number">1.0</span>)) = <span class="number">0.6</span></span><br><span class="line">_GrowMax(<span class="string">&quot;GrowMax&quot;</span>, Range(<span class="number">0</span>,<span class="number">1.5</span>)) = <span class="number">1.0</span></span><br><span class="line">_EndMin(<span class="string">&quot;EndMin&quot;</span>, Range(<span class="number">0</span>,<span class="number">1.0</span>)) = <span class="number">0.6</span></span><br><span class="line">_EndMax(<span class="string">&quot;EndMax&quot;</span>, Range(<span class="number">0</span>,<span class="number">1.5</span>)) = <span class="number">1.0</span> </span><br></pre></td></tr></table></figure>
+
+<h4 id="appdata"><a href="#appdata" class="headerlink" title="appdata"></a>appdata</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">appdata</span></span></span><br><span class="line"><span class="class">            &#123;</span></span><br><span class="line">                float4 vertex : POSITION;</span><br><span class="line">                float2 uv : TEXCOORD0;</span><br><span class="line">                float3 normal:NORMAL;</span><br><span class="line">            &#125;;</span><br></pre></td></tr></table></figure>
+
+<h4 id="vert"><a href="#vert" class="headerlink" title="vert"></a>vert</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">v2f <span class="title function_">vert</span> <span class="params">(appdata v)</span></span><br><span class="line">&#123;</span><br><span class="line">    v2f o;</span><br><span class="line">    half weight = max(smoothstep( _GrowMin, _GrowMax, v.uv.y - _Grow), smoothstep(_EndMin, _EndMax,v.uv.y ));</span><br><span class="line">    half3 weight_combine = weight * _Expend * <span class="number">0.01f</span>*v.normal;</span><br><span class="line">    half3 scale_combine = _Scale * <span class="number">0.01f</span> * v.normal;</span><br><span class="line">    half3 normal_combine = weight_combine + scale_combine;</span><br><span class="line">    v.vertex.xyz = v.vertex.xyz+ normal_combine;</span><br><span class="line">    o.vertex = UnityObjectToClipPos(v.vertex);</span><br><span class="line">    o.uv = TRANSFORM_TEX(v.uv, _MainTex);</span><br><span class="line">    <span class="keyword">return</span> o;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="frag"><a href="#frag" class="headerlink" title="frag"></a>frag</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">fixed4 <span class="title function_">frag</span><span class="params">(v2f i)</span> : SV_Target</span><br><span class="line">&#123;</span><br><span class="line">    clip(<span class="number">1</span> - (i.uv.y - _Grow));</span><br><span class="line">    <span class="comment">// sample the texture</span></span><br><span class="line">    fixed4 col = tex2D(_MainTex, i.uv);</span><br><span class="line">    <span class="keyword">return</span> col;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="总代码"><a href="#总代码" class="headerlink" title="总代码"></a>总代码</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line">Shader <span class="string">&quot;Unlit/Vice1_Code&quot;</span></span><br><span class="line">&#123;</span><br><span class="line">    Properties</span><br><span class="line">    &#123;</span><br><span class="line">        _MainTex (<span class="string">&quot;Texture&quot;</span>, <span class="number">2</span>D) = <span class="string">&quot;white&quot;</span> &#123;&#125;</span><br><span class="line">        _Grow(<span class="string">&quot;Grow&quot;</span>,Range(<span class="number">-1.0</span>,<span class="number">1.0</span>)) = <span class="number">0.0</span></span><br><span class="line">        _Expend(<span class="string">&quot;Expend&quot;</span>,Float) = <span class="number">0.0</span></span><br><span class="line">        _Scale(<span class="string">&quot;Scale&quot;</span>,Float) = <span class="number">0.0</span></span><br><span class="line">        _GrowMin(<span class="string">&quot;GrowMin&quot;</span>, Range(<span class="number">0</span>,<span class="number">1.0</span>)) = <span class="number">0.6</span></span><br><span class="line">        _GrowMax(<span class="string">&quot;GrowMax&quot;</span>, Range(<span class="number">0</span>,<span class="number">1.5</span>)) = <span class="number">1.0</span></span><br><span class="line">        _EndMin(<span class="string">&quot;EndMin&quot;</span>, Range(<span class="number">0</span>,<span class="number">1.0</span>)) = <span class="number">0.6</span></span><br><span class="line">        _EndMax(<span class="string">&quot;EndMax&quot;</span>, Range(<span class="number">0</span>,<span class="number">1.5</span>)) = <span class="number">1.0</span> </span><br><span class="line">    &#125;</span><br><span class="line">    SubShader</span><br><span class="line">    &#123;</span><br><span class="line">        Tags &#123; <span class="string">&quot;RenderType&quot;</span>=<span class="string">&quot;Opaque&quot;</span> &#125;</span><br><span class="line">        LOD <span class="number">100</span></span><br><span class="line"></span><br><span class="line">        Pass</span><br><span class="line">        &#123;</span><br><span class="line">            CGPROGRAM</span><br><span class="line">            <span class="meta">#<span class="keyword">pragma</span> vertex vert</span></span><br><span class="line">            <span class="meta">#<span class="keyword">pragma</span> fragment frag</span></span><br><span class="line">            <span class="comment">// make fog work</span></span><br><span class="line">           </span><br><span class="line"></span><br><span class="line">            <span class="meta">#<span class="keyword">include</span> <span class="string">&quot;UnityCG.cginc&quot;</span></span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">struct</span> appdata</span><br><span class="line">            &#123;</span><br><span class="line">                float4 vertex : POSITION;</span><br><span class="line">                float2 uv : TEXCOORD0;</span><br><span class="line">                float3 normal:NORMAL;</span><br><span class="line">            &#125;;</span><br><span class="line"></span><br><span class="line">            <span class="class"><span class="keyword">struct</span> <span class="title">v2f</span></span></span><br><span class="line"><span class="class">            &#123;</span></span><br><span class="line">                float2 uv : TEXCOORD0; </span><br><span class="line">                float4 vertex : SV_POSITION;</span><br><span class="line">            &#125;;</span><br><span class="line"></span><br><span class="line">            sampler2D _MainTex;</span><br><span class="line">            float4 _MainTex_ST;</span><br><span class="line">            <span class="type">float</span> _Grow;</span><br><span class="line">            <span class="type">float</span> _Expend;</span><br><span class="line">            <span class="type">float</span> _GrowMin;</span><br><span class="line">            <span class="type">float</span> _GrowMax;</span><br><span class="line">            <span class="type">float</span> _EndMin;</span><br><span class="line">            <span class="type">float</span> _EndMax;</span><br><span class="line">            <span class="type">float</span> _Scale;</span><br><span class="line">            v2f <span class="title function_">vert</span> <span class="params">(appdata v)</span></span><br><span class="line">            &#123;</span><br><span class="line">                v2f o;</span><br><span class="line">                half weight = max(smoothstep( _GrowMin, _GrowMax, v.uv.y - _Grow), smoothstep(_EndMin, _EndMax,v.uv.y ));</span><br><span class="line">                half3 weight_combine = weight * _Expend * <span class="number">0.01f</span>*v.normal;</span><br><span class="line">                half3 scale_combine = _Scale * <span class="number">0.01f</span> * v.normal;</span><br><span class="line">                half3 normal_combine = weight_combine + scale_combine;</span><br><span class="line">                v.vertex.xyz = v.vertex.xyz+ normal_combine;</span><br><span class="line">                o.vertex = UnityObjectToClipPos(v.vertex);</span><br><span class="line">                o.uv = TRANSFORM_TEX(v.uv, _MainTex);</span><br><span class="line">                <span class="keyword">return</span> o;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            fixed4 <span class="title function_">frag</span><span class="params">(v2f i)</span> : SV_Target</span><br><span class="line">            &#123;</span><br><span class="line">                clip(<span class="number">1</span> - (i.uv.y - _Grow));</span><br><span class="line">                <span class="comment">// sample the texture</span></span><br><span class="line">                fixed4 col = tex2D(_MainTex, i.uv);</span><br><span class="line">                <span class="keyword">return</span> col;</span><br><span class="line">            &#125;</span><br><span class="line">            ENDCG</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>最近有一点偷懒，更新有点慢，新年快乐，新的一年，冲冲冲；</p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="/music/jucilang.mp3">
+            </audio>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+		data-enable='true'
+        data-ae='true'
+        data-ci='35b8fbd0e6865c1adf60'
+        data-cs='6d2988de68c828bce78247ad604846cdc30e7ca3'
+        data-r='mrchenlreanspace.github.io'
+        data-o='MrChenLreanSpace'
+        data-a='MrChenLreanSpace'
+        data-d='false'
+    >查看评论</div>
+
+
+    </div>
+    
+        <div class='side'>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%97%A4%E6%9B%BC%E7%94%9F%E9%95%BF"><span class="toc-number">1.</span> <span class="toc-text">藤曼生长</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%80%E5%8C%96%E7%89%88"><span class="toc-number">1.1.</span> <span class="toc-text">简化版</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ASE"><span class="toc-number">1.1.1.</span> <span class="toc-text">ASE</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81"><span class="toc-number">1.1.2.</span> <span class="toc-text">代码</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Properties"><span class="toc-number">1.1.2.1.</span> <span class="toc-text">Properties</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#appdata"><span class="toc-number">1.1.2.2.</span> <span class="toc-text">appdata</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#vert"><span class="toc-number">1.1.2.3.</span> <span class="toc-text">vert</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#frag"><span class="toc-number">1.1.2.4.</span> <span class="toc-text">frag</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E4%BB%A3%E7%A0%81"><span class="toc-number">1.2.</span> <span class="toc-text">总代码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">1.3.</span> <span class="toc-text">总结</span></a></li></ol></li></ol>	
+        </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"], linebreaks: { automatic:true }, EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50) },
+        tex2jax: { inlineMath: [ ["$", "$"], ["\\(","\\)"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno",skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']},
+        TeX: {  noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } }, Macros: { href: "{}" } },
+        messageStyle: "none"
+    });
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+<!-- Google Analytics -->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YMJ8CBH8F7"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-YMJ8CBH8F7');
+</script>
+<!-- End Google Analytics -->
+
+
+</html>

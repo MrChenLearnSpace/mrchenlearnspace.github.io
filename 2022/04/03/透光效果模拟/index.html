@@ -1,0 +1,202 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>透光效果模拟 - 浪子之心</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Blog,"> 
+    <meta name="description" content="MrChen Bolg,向量1234float3 diffuse_color = _DiffuseColor;float3 normalDir = normalize(i.normalDir);float3 viewDir,"> 
+    <meta name="author" content="Jack Chen"> 
+    <link rel="alternative" href="atom.xml" title="浪子之心" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+<meta name="generator" content="Hexo 5.4.1"><link rel="stylesheet" href="/css/prism.css" type="text/css"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">浪子之心</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="https://mrchenlreanspace.github.io"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">透光效果模拟</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">透光效果模拟</h1>
+        <div class="stuff">
+            <span>四月 03, 2022</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/Shader/" rel="tag">Shader</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h1 id="向量"><a href="#向量" class="headerlink" title="向量"></a>向量</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">float3 diffuse_color = _DiffuseColor;</span><br><span class="line">float3 normalDir = <span class="built_in">normalize</span>(i.normalDir);</span><br><span class="line">float3 viewDir = <span class="built_in">normalize</span>(_WorldSpaceCameraPos - i.posWorld.xyz);</span><br><span class="line">float3 lightDir = <span class="built_in">normalize</span>(_WorldSpaceLightPos0.xyz);</span><br></pre></td></tr></table></figure>
+
+<h1 id="漫反射"><a href="#漫反射" class="headerlink" title="漫反射"></a>漫反射</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">float</span> diff_term = <span class="built_in">max</span>(<span class="number">0.0</span>, <span class="built_in">dot</span>(normalDir, lightDir));</span><br><span class="line">float3 diffuselight_color = diff_term * diffuse_color * _LightColor0.rgb;</span><br><span class="line"><span class="type">float</span> sky_sphere = (<span class="built_in">dot</span>(normalDir,<span class="built_in">float3</span>(<span class="number">0</span>,<span class="number">1</span>,<span class="number">0</span>)) + <span class="number">1.0</span>) * <span class="number">0.5</span>;</span><br><span class="line">float3 sky_light = sky_sphere * diffuse_color;</span><br><span class="line">float3 final_diffuse = diffuselight_color + sky_light * _Opacity + _AddColor.xyz;</span><br></pre></td></tr></table></figure>
+
+<h1 id="穿透光"><a href="#穿透光" class="headerlink" title="穿透光"></a>穿透光</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">float3 back_dir = -<span class="built_in">normalize</span>(lightDir + normalDir * _BasePassDistortion);</span><br><span class="line"><span class="type">float</span> VdotB = <span class="built_in">max</span>(<span class="number">0.0</span>, <span class="built_in">dot</span>(viewDir, back_dir));</span><br><span class="line"><span class="type">float</span> backlight_term = <span class="built_in">max</span>(<span class="number">0.0</span>,<span class="built_in">pow</span>(VdotB, _BasePassPower)) * _BasePassScale;</span><br><span class="line"><span class="type">float</span> thickness = <span class="number">1.0</span> - <span class="built_in">tex2D</span>(_ThicknessMap, i.uv).r;</span><br><span class="line">float3 backlight = backlight_term * thickness *_LightColor0.xyz * _BasePassColor.xyz;</span><br></pre></td></tr></table></figure>
+
+<h1 id="环境光"><a href="#环境光" class="headerlink" title="环境光"></a>环境光</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">float3 reflectDir = <span class="built_in">reflect</span>(-viewDir,normalDir);</span><br><span class="line"></span><br><span class="line">half theta = _EnvRotate * UNITY_PI / <span class="number">180.0f</span>;</span><br><span class="line">float2x2 m_rot = <span class="built_in">float2x2</span>(<span class="built_in">cos</span>(theta), -<span class="built_in">sin</span>(theta), <span class="built_in">sin</span>(theta),<span class="built_in">cos</span>(theta));</span><br><span class="line">float2 v_rot = <span class="built_in">mul</span>(m_rot, reflectDir.xz);</span><br><span class="line">reflectDir = <span class="built_in">half3</span>(v_rot.x, reflectDir.y, v_rot.y);</span><br><span class="line"></span><br><span class="line">float4 cubemap_color = <span class="built_in">texCUBE</span>(_EnvMap,reflectDir);</span><br><span class="line">half3 env_color = <span class="built_in">DecodeHDR</span>(cubemap_color, _EnvMap_HDR);</span><br><span class="line"></span><br><span class="line"><span class="comment">//菲尼尔效应</span></span><br><span class="line"><span class="type">float</span> fresnel = <span class="number">1.0</span> - <span class="built_in">saturate</span>(<span class="built_in">dot</span>(normalDir, viewDir));</span><br><span class="line">fresnel = <span class="built_in">smoothstep</span>(_FresnelMin, _FresnelMax, fresnel);</span><br><span class="line"></span><br><span class="line">float3 final_env = env_color * _EnvIntensity * fresnel;</span><br></pre></td></tr></table></figure>
+
+<h1 id="混合"><a href="#混合" class="headerlink" title="混合"></a>混合</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">float3 combined_color = final_diffuse + final_env + backlight;</span><br><span class="line">float3 final_color = combined_color;</span><br><span class="line"><span class="keyword">return</span> <span class="built_in">float4</span>(final_color,<span class="number">1.0</span>);</span><br></pre></td></tr></table></figure>
+
+<h1 id="前向渲染叠加"><a href="#前向渲染叠加" class="headerlink" title="前向渲染叠加"></a>前向渲染叠加</h1><p>只需要将穿透光部分加过来就行。不需要加环境光之类的</p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="/music/jucilang.mp3">
+            </audio>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+		data-enable='true'
+        data-ae='true'
+        data-ci='35b8fbd0e6865c1adf60'
+        data-cs='6d2988de68c828bce78247ad604846cdc30e7ca3'
+        data-r='mrchenlreanspace.github.io'
+        data-o='MrChenLreanSpace'
+        data-a='MrChenLreanSpace'
+        data-d='false'
+    >查看评论</div>
+
+
+    </div>
+    
+        <div class='side'>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%90%91%E9%87%8F"><span class="toc-number">1.</span> <span class="toc-text">向量</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%BC%AB%E5%8F%8D%E5%B0%84"><span class="toc-number">2.</span> <span class="toc-text">漫反射</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%A9%BF%E9%80%8F%E5%85%89"><span class="toc-number">3.</span> <span class="toc-text">穿透光</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83%E5%85%89"><span class="toc-number">4.</span> <span class="toc-text">环境光</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B7%B7%E5%90%88"><span class="toc-number">5.</span> <span class="toc-text">混合</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E5%90%91%E6%B8%B2%E6%9F%93%E5%8F%A0%E5%8A%A0"><span class="toc-number">6.</span> <span class="toc-text">前向渲染叠加</span></a></li></ol>	
+        </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"], linebreaks: { automatic:true }, EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50) },
+        tex2jax: { inlineMath: [ ["$", "$"], ["\\(","\\)"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno",skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']},
+        TeX: {  noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } }, Macros: { href: "{}" } },
+        messageStyle: "none"
+    });
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+<!-- Google Analytics -->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YMJ8CBH8F7"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-YMJ8CBH8F7');
+</script>
+<!-- End Google Analytics -->
+
+
+</html>

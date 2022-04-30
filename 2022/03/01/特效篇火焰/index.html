@@ -1,0 +1,201 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>特效篇火焰 - 浪子之心</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Blog,"> 
+    <meta name="description" content="MrChen Bolg,火焰制作原理利用裁剪方程，将噪点图进行向上流动达到火焰往上升的效果，用一张渐变图和噪点图相乘把上半部分进行裁剪，将颜色的HDR效果打开，现在得到初步的火焰加一点点细节，让火的边缘柔和一点。让噪声图减,"> 
+    <meta name="author" content="Jack Chen"> 
+    <link rel="alternative" href="atom.xml" title="浪子之心" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+<meta name="generator" content="Hexo 5.4.1"><link rel="stylesheet" href="/css/prism.css" type="text/css"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">浪子之心</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="https://mrchenlreanspace.github.io"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">特效篇火焰</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">特效篇火焰</h1>
+        <div class="stuff">
+            <span>三月 01, 2022</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/Shader/" rel="tag">Shader</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h1 id="火焰"><a href="#火焰" class="headerlink" title="火焰"></a>火焰</h1><h2 id="制作原理"><a href="#制作原理" class="headerlink" title="制作原理"></a>制作原理</h2><p>利用裁剪方程，将噪点图进行向上流动达到火焰往上升的效果，用一张渐变图和噪点图相乘把上半部分进行裁剪，将颜色的HDR效果打开，现在得到初步的火焰加一点点细节，让火的边缘柔和一点。让噪声图减去一个变量，并钳制在0到1之间，调大变量会使边缘柔和化，接下来是让火焰外焰和内焰效果</p>
+<h2 id="透明度"><a href="#透明度" class="headerlink" title="透明度"></a>透明度</h2><p><img src="https://img-blog.csdnimg.cn/b18d6793b8d14c4dbc1549b8e17d6b16.png" alt="在这里插入图片描述"></p>
+<h2 id="噪点值"><a href="#噪点值" class="headerlink" title="噪点值"></a>噪点值</h2><p><img src="https://img-blog.csdnimg.cn/a9f0ed3772e7465785f1f268de05ebd6.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p>噪点图往上移动取R通道</p>
+<h2 id="渐变值和内焰边界"><a href="#渐变值和内焰边界" class="headerlink" title="渐变值和内焰边界"></a>渐变值和内焰边界</h2><p><img src="https://img-blog.csdnimg.cn/a3ecd9c74d574044aed2fc070e609e02.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h2 id="火焰边缘柔和"><a href="#火焰边缘柔和" class="headerlink" title="火焰边缘柔和"></a>火焰边缘柔和</h2><p><img src="https://img-blog.csdnimg.cn/62b84b85d65440458541ed1d72f8b0e5.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p>当Softness变大边缘柔和，注意必须要clamp函数</p>
+<h2 id="外焰和内焰"><a href="#外焰和内焰" class="headerlink" title="外焰和内焰"></a>外焰和内焰</h2><p><img src="https://img-blog.csdnimg.cn/6533e690f9c94cdca1192da8e6e0e94f.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h2 id="火焰的形状"><a href="#火焰的形状" class="headerlink" title="火焰的形状"></a>火焰的形状</h2><p><img src="https://img-blog.csdnimg.cn/ab2c4b373bd14b8d8cd4dd0d099d9826.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p><img src="https://img-blog.csdnimg.cn/4f00d42d98774071b79471a128aaf7f9.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="/music/jucilang.mp3">
+            </audio>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+		data-enable='true'
+        data-ae='true'
+        data-ci='35b8fbd0e6865c1adf60'
+        data-cs='6d2988de68c828bce78247ad604846cdc30e7ca3'
+        data-r='mrchenlreanspace.github.io'
+        data-o='MrChenLreanSpace'
+        data-a='MrChenLreanSpace'
+        data-d='false'
+    >查看评论</div>
+
+
+    </div>
+    
+        <div class='side'>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%81%AB%E7%84%B0"><span class="toc-number">1.</span> <span class="toc-text">火焰</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%B6%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="toc-number">1.1.</span> <span class="toc-text">制作原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%8F%E6%98%8E%E5%BA%A6"><span class="toc-number">1.2.</span> <span class="toc-text">透明度</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%99%AA%E7%82%B9%E5%80%BC"><span class="toc-number">1.3.</span> <span class="toc-text">噪点值</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B8%90%E5%8F%98%E5%80%BC%E5%92%8C%E5%86%85%E7%84%B0%E8%BE%B9%E7%95%8C"><span class="toc-number">1.4.</span> <span class="toc-text">渐变值和内焰边界</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%81%AB%E7%84%B0%E8%BE%B9%E7%BC%98%E6%9F%94%E5%92%8C"><span class="toc-number">1.5.</span> <span class="toc-text">火焰边缘柔和</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%96%E7%84%B0%E5%92%8C%E5%86%85%E7%84%B0"><span class="toc-number">1.6.</span> <span class="toc-text">外焰和内焰</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%81%AB%E7%84%B0%E7%9A%84%E5%BD%A2%E7%8A%B6"><span class="toc-number">1.7.</span> <span class="toc-text">火焰的形状</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%80%E5%90%8E"><span class="toc-number">1.8.</span> <span class="toc-text">最后</span></a></li></ol></li></ol>	
+        </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"], linebreaks: { automatic:true }, EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50) },
+        tex2jax: { inlineMath: [ ["$", "$"], ["\\(","\\)"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno",skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']},
+        TeX: {  noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } }, Macros: { href: "{}" } },
+        messageStyle: "none"
+    });
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+<!-- Google Analytics -->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YMJ8CBH8F7"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-YMJ8CBH8F7');
+</script>
+<!-- End Google Analytics -->
+
+
+</html>
