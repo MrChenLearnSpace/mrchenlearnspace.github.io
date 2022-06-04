@@ -1,0 +1,210 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>大话设计模式观后感之行为型设计模式 - 浪子之心</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Blog,"> 
+    <meta name="description" content="MrChen Bolg,观察者模式观察者模式定义了一种一对多的依赖关系，让多个观察者对象同时监听某一个主题对象。这个主题对象在状态发生变化时，会通知所有观察者对象，使它们能够自动更新自己。
+例子
+抽象通知接口
+Boss实例,"> 
+    <meta name="author" content="Jack Chen"> 
+    <link rel="alternative" href="atom.xml" title="浪子之心" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+<meta name="generator" content="Hexo 5.4.1"><link rel="stylesheet" href="/css/prism.css" type="text/css"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">浪子之心</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="https://mrchenlreanspace.github.io"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">大话设计模式观后感之行为型设计模式</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">大话设计模式观后感之行为型设计模式</h1>
+        <div class="stuff">
+            <span>六月 02, 2022</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">设计模式</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h1 id="观察者模式"><a href="#观察者模式" class="headerlink" title="观察者模式"></a>观察者模式</h1><p><strong>观察者模式定义了一种一对多的依赖关系，让多个观察者对象<br>同时监听某一个主题对象。这个主题对象在状态发生变化时，<br>会通知所有观察者对象，使它们能够自动更新自己。</strong><br><img src="https://img-blog.csdnimg.cn/a08843640baf483fa713240efd659f61.png" alt="在这里插入图片描述"></p>
+<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><p><img src="https://img-blog.csdnimg.cn/62404e611632437897269a8ff0d5fc87.png" alt="在这里插入图片描述"></p>
+<h3 id="抽象通知接口"><a href="#抽象通知接口" class="headerlink" title="抽象通知接口"></a>抽象通知接口</h3><p><img src="https://img-blog.csdnimg.cn/2c0d5364de8d4218aed872c8aa633979.png" alt="在这里插入图片描述"></p>
+<h3 id="Boss实例"><a href="#Boss实例" class="headerlink" title="Boss实例"></a>Boss实例</h3><p><img src="https://img-blog.csdnimg.cn/8168378ed6a341ae80919a8d78a96bf6.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/a1ffd7d32ed24b79bbf86b55b5761113.png" alt="在这里插入图片描述"></p>
+<h3 id="抽象观察者"><a href="#抽象观察者" class="headerlink" title="抽象观察者"></a>抽象观察者</h3><p><img src="https://img-blog.csdnimg.cn/f8919fb5f3a249edb87faaac5ed1b77d.png" alt="在这里插入图片描述"></p>
+<h3 id="具体观察者的实现"><a href="#具体观察者的实现" class="headerlink" title="具体观察者的实现"></a>具体观察者的实现</h3><p><img src="https://img-blog.csdnimg.cn/1fc07910893c4749889b6cf8282b16dc.png" alt="在这里插入图片描述"></p>
+<h2 id="观察者缺点"><a href="#观察者缺点" class="headerlink" title="观察者缺点"></a>观察者缺点</h2><p>尽管已经用了依赖倒转原则，但是. 抽象通知者’还是依赖. 抽象观察<br>者’，也就是说，万一没有了抽象观察者这样的接口，我这通知的功能就完不成了。另外就是每个具体观察者，它不-定是‘更新’的方法要调用呀，就像刚才说的，我希望的是‘工具箱’是隐藏，. 自动窗口’<br>是打开，这根本就不是同名的方法。这应该就是不足的地方吧。</p>
+<h2 id="解决方案–事件委托"><a href="#解决方案–事件委托" class="headerlink" title="解决方案–事件委托"></a>解决方案–事件委托</h2><p><strong>委托就是一种引用方法的类型。-旦为委托分配了方法，.委托将与该方法具有完全相同的行为。委托方法的使用可以像其他任何方法一样，具有参数和返回值。</strong><br><strong>委托可以看作是对函数的抽象，是函数的‘类’， 委托的实例将代表一个具体的函数。</strong><br><strong>一个委托可以搭载多个方法，所有方法被依次唤起</strong> 更重要的是，<strong>它可以使得委托对象所搭载的方法并不需要属于同一个类。</strong><br><strong>但委托也是有前提的，那就是委托对象所搭载的所有方法必须具有相同的原形和形式，也就是拥有相同的参数列表和返回值类型。</strong><br>消除了观察者抽象类，在客户端进行灵活的调用不同类的相关具有相同参数和返回值的不同名函数，实现解耦。</p>
+<h3 id="观察者的具体实现"><a href="#观察者的具体实现" class="headerlink" title="观察者的具体实现"></a>观察者的具体实现</h3><p><img src="https://img-blog.csdnimg.cn/3e28d4304a5b4db59a23f99d4f138c8c.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/2f48bda779094c69a410a41b5bec5f5e.png" alt="在这里插入图片描述"></p>
+<h3 id="通知者接口"><a href="#通知者接口" class="headerlink" title="通知者接口"></a>通知者接口</h3><p><img src="https://img-blog.csdnimg.cn/537e07e3304940d5ae39efaf39d61d8e.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/26ae09418f234920825fb4a95f094a64.png" alt="在这里插入图片描述"></p>
+<h3 id="声明委托"><a href="#声明委托" class="headerlink" title="声明委托"></a>声明委托</h3><p>委托可以定义在类里面，类外面，也可以在命名空间下，根据不同的需要来确定委托方法的使用范围。<br><img src="https://img-blog.csdnimg.cn/fe7fc9acff79421b82a609e43f0b40e1.png" alt="在这里插入图片描述"></p>
+<h3 id="通知者的实现"><a href="#通知者的实现" class="headerlink" title="通知者的实现"></a>通知者的实现</h3><p><img src="https://img-blog.csdnimg.cn/0033e37a5de641fb9be786e407a6d73a.png" alt="在这里插入图片描述"></p>
+<h3 id="客户端灵活调用"><a href="#客户端灵活调用" class="headerlink" title="客户端灵活调用"></a>客户端灵活调用</h3><p><img src="https://img-blog.csdnimg.cn/c6b00b85c55c4ea2aa6d511ae54c0592.png" alt="在这里插入图片描述"></p>
+<h3 id="事件关键字的使用"><a href="#事件关键字的使用" class="headerlink" title="事件关键字的使用"></a>事件关键字的使用</h3><p>在委托类型前加上event 代表声明事件。否则是声明委托。<br>事件只能对委托进行加减不能进行赋值</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="built_in">delegate</span> <span class="keyword">void</span> <span class="title">EventHandle</span>()</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">event</span> EventHandle MyEvent</span>;<span class="comment">//事件</span></span><br><span class="line"><span class="keyword">public</span> EventHandle MyDelegate ;<span class="comment">//委托</span></span><br></pre></td></tr></table></figure>
+<h3 id="对于接口和抽象类"><a href="#对于接口和抽象类" class="headerlink" title="对于接口和抽象类"></a>对于接口和抽象类</h3><p>接口成员<br><strong>属性、方法、索引指示器和事件</strong>，但不能包含常量、域、操作符、构造函数和析构函数，而且也不能包含任何静态成员<br>C# 接口的成员不能有 public、protected、internal、private 等修饰符。原因很简单，接口里面的方法都需要由外面接口实现去实现方法体，那么其修饰符必然是 public。<strong>C# 接口中的成员默认是 public 的</strong>，java 中是可以加 public 的。</p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="/music/jucilang.mp3">
+            </audio>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+		data-enable='true'
+        data-ae='true'
+        data-ci='35b8fbd0e6865c1adf60'
+        data-cs='6d2988de68c828bce78247ad604846cdc30e7ca3'
+        data-r='mrchenlreanspace.github.io'
+        data-o='MrChenLreanSpace'
+        data-a='MrChenLreanSpace'
+        data-d='false'
+    >查看评论</div>
+
+
+    </div>
+    
+        <div class='side'>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F"><span class="toc-number">1.</span> <span class="toc-text">观察者模式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BE%8B%E5%AD%90"><span class="toc-number">1.1.</span> <span class="toc-text">例子</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8A%BD%E8%B1%A1%E9%80%9A%E7%9F%A5%E6%8E%A5%E5%8F%A3"><span class="toc-number">1.1.1.</span> <span class="toc-text">抽象通知接口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Boss%E5%AE%9E%E4%BE%8B"><span class="toc-number">1.1.2.</span> <span class="toc-text">Boss实例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8A%BD%E8%B1%A1%E8%A7%82%E5%AF%9F%E8%80%85"><span class="toc-number">1.1.3.</span> <span class="toc-text">抽象观察者</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B7%E4%BD%93%E8%A7%82%E5%AF%9F%E8%80%85%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-number">1.1.4.</span> <span class="toc-text">具体观察者的实现</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%82%E5%AF%9F%E8%80%85%E7%BC%BA%E7%82%B9"><span class="toc-number">1.2.</span> <span class="toc-text">观察者缺点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E2%80%93%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98"><span class="toc-number">1.3.</span> <span class="toc-text">解决方案–事件委托</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%82%E5%AF%9F%E8%80%85%E7%9A%84%E5%85%B7%E4%BD%93%E5%AE%9E%E7%8E%B0"><span class="toc-number">1.3.1.</span> <span class="toc-text">观察者的具体实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%9A%E7%9F%A5%E8%80%85%E6%8E%A5%E5%8F%A3"><span class="toc-number">1.3.2.</span> <span class="toc-text">通知者接口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A3%B0%E6%98%8E%E5%A7%94%E6%89%98"><span class="toc-number">1.3.3.</span> <span class="toc-text">声明委托</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%9A%E7%9F%A5%E8%80%85%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-number">1.3.4.</span> <span class="toc-text">通知者的实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%A2%E6%88%B7%E7%AB%AF%E7%81%B5%E6%B4%BB%E8%B0%83%E7%94%A8"><span class="toc-number">1.3.5.</span> <span class="toc-text">客户端灵活调用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6%E5%85%B3%E9%94%AE%E5%AD%97%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-number">1.3.6.</span> <span class="toc-text">事件关键字的使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%B9%E4%BA%8E%E6%8E%A5%E5%8F%A3%E5%92%8C%E6%8A%BD%E8%B1%A1%E7%B1%BB"><span class="toc-number">1.3.7.</span> <span class="toc-text">对于接口和抽象类</span></a></li></ol></li></ol></li></ol>	
+        </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"], linebreaks: { automatic:true }, EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50) },
+        tex2jax: { inlineMath: [ ["$", "$"], ["\\(","\\)"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno",skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']},
+        TeX: {  noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } }, Macros: { href: "{}" } },
+        messageStyle: "none"
+    });
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+<!-- Google Analytics -->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YMJ8CBH8F7"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-YMJ8CBH8F7');
+</script>
+<!-- End Google Analytics -->
+
+
+</html>

@@ -2065,4 +2065,97 @@
         <tag>Shader</tag>
       </tags>
   </entry>
+  <entry>
+    <title>大话设计模式观后感之结构型设计模式</title>
+    <url>/2022/06/02/%E5%A4%A7%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E8%A7%82%E5%90%8E%E6%84%9F%E4%B9%8B%E7%BB%93%E6%9E%84%E5%9E%8B%E6%A8%A1%E5%BC%8F/</url>
+    <content><![CDATA[<h1 id="外观模式"><a href="#外观模式" class="headerlink" title="外观模式"></a>外观模式</h1><p><strong>外观模式(Facade)，为子系统中的一组接口提供一个一致的界面，此模式定义了一个高层接口，这个接口使得这一子系统更加容易使用。</strong></p>
+<p>在原子系统加一层封装，提供系统相关功能完成分层。</p>
+<p><img src="https://img-blog.csdnimg.cn/49b062f2726c41299f755c6146eb5dfc.png" alt="在这里插入图片描述"></p>
+<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><p><img src="https://img-blog.csdnimg.cn/a4e1c24dad9c41b3a91512756995ad08.png" alt="在这里插入图片描述"></p>
+<p>修改后</p>
+<p><img src="https://img-blog.csdnimg.cn/496ea3029356465aa5535ec74882a6e2.png" alt="在这里插入图片描述"></p>
+<p>将子系统功能聚合起来</p>
+<h2 id="适用场景"><a href="#适用场景" class="headerlink" title="适用场景"></a>适用场景</h2><ol>
+<li><p><strong>在设计初期阶段，应该要有意识的将不同的两个层分离</strong></p>
+</li>
+<li><p><strong>在开发阶段，子系统往往因为不断的重构演化而变得越来越复杂，大多数的模式使用时也都会产生很多很小的类，这本是好事，但也给外部调用它们的用户程序带来了使用上的困难，增加外观 Facade可以提供一个简单的接口，减少它们之间的依赖。</strong></p>
+</li>
+<li><p><strong>在维护一个遗留的大型系统时，可能这个系统已经非常难以维护和扩展了，但因为它包含非常重要的功能，新的需求开发必须要依赖于它。此时用外观模式Facade也是非常合适的。你可以为新系统开发一个外观 Facade类，来提供设计粗糙或高度复杂的遗留代码的比较清晰简单的接口，让新系统与Facade对象交互，Facade 与遗留代码交互所有复杂的工作。</strong></p>
+</li>
+</ol>
+<h2 id="信息的隐藏促进了软件的复用"><a href="#信息的隐藏促进了软件的复用" class="headerlink" title="信息的隐藏促进了软件的复用"></a>信息的隐藏促进了软件的复用</h2><p>迪米特原则</p>
+<p><strong>应该让一个软件中的子系统间的通信和相互依赖关系达到最小，而具体办法就是引入一个外观对象，它为子系统间提供了一个单一而简单的屏障。</strong></p>
+<h1 id="适配器模式"><a href="#适配器模式" class="headerlink" title="适配器模式"></a>适配器模式</h1><p><strong>适配器模式(Adapter)，将一个类的接口转换成客户希望的另外一个接口。Adapter模式使得原本由于接口不兼容而不能一起工作的那些类可以一起工作。</strong></p>
+<p><img src="https://img-blog.csdnimg.cn/24654bb8164041048248c68fbf1da7e4.png" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/b2d25f72586e4076ad069f8bfc306286.png" alt="在这里插入图片描述"></p>
+<p>个人理解：这只是一个亡羊补牢的办法，到项目后期时，因为无法修改整个系统，才使用这个方法来统一接口。</p>
+<h2 id="例子-1"><a href="#例子-1" class="headerlink" title="例子"></a>例子</h2><p><img src="https://img-blog.csdnimg.cn/74cfe84194594f3285c40d5c1618e019.png" alt="在这里插入图片描述"></p>
+<p>把中文的进攻方法修改成英文。</p>
+<h2 id="适用场景-1"><a href="#适用场景-1" class="headerlink" title="适用场景"></a>适用场景</h2><p>此方法适合用于开发后期，前期更应统一接口，切记。</p>
+<ol>
+<li>使用一个已经存在的类，但如果它的接口，也就是它的方法和你的要求不相同时，就应该考虑用适配器模式。</li>
+<li>两个类所做的事情相同或相似，但是具有不同的接口时要使用它。</li>
+<li>在双方都不太容易修改的时候再使用适配器模式适配。</li>
+</ol>
+<h2 id="适配器模式与-NET应用"><a href="#适配器模式与-NET应用" class="headerlink" title="适配器模式与.NET应用"></a>适配器模式与.NET应用</h2><p>在.NET 中有一个类库已经实现的、非常重要的适配器,那就是<strong>DataAdapter</strong>. <strong>DataAdapter</strong> 用作<strong>DataSet</strong>和数据源之间的适配器以便检索和保存数据。<strong>DataAdapter</strong>通过映射<strong>FilI</strong>(这更改了<strong>DataSet</strong>中的数据以便与数据源中的数据相匹配）和<strong>Update</strong>(这更改了数据源中的数据以便与<strong>DataSet</strong>中的数据相匹配）来提供这一适配器[MSDN]。由于数据源可能是来自<strong>SQL Server</strong>，可能来自<strong>Oracle</strong>，也可能来自<strong>Access、DB2</strong>，这些数据在组织上可能有不同之处，但我们希望得到统一的<strong>DataSet</strong>(实质是XML 数据)，此时用<strong>DataAdapter</strong>就是非常好的手段，我们不必关注不同数据库的数据细节，就可以灵活的使用数据。</p>
+<h1 id="桥接模式"><a href="#桥接模式" class="headerlink" title="桥接模式"></a>桥接模式</h1><p><strong>桥接模式(Bridge)，将抽象部分与它的实现部分分离，使它们都可以独立地变化。</strong></p>
+<p>常用于项目设计初期。我觉得桥接模式所说的<strong>‘将抽象部分与它的实现部分分离</strong>，还是不好理解，我的理解就是<strong>实现系统可能有多角度分类，每一种分类都有可能变化，那么就把这种多角度分离出来让它们独立变化，减少它们之间的耦合</strong>。</p>
+<p><strong>解耦这些不同方向的变化，通过对象组合的方式，把两个角色之间的继承关系改为了组合的关系，从而使这两者可以应对各自独立的变化</strong>。</p>
+<p>面对变化，<strong>找出变化并封装之</strong>。</p>
+<p><img src="https://img-blog.csdnimg.cn/023c6d3b0cb4484799498f8f317118b4.png" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/59f31a88a2024aefaa235b53bbbd74e8.png" alt="在这里插入图片描述"></p>
+<h2 id="例子-2"><a href="#例子-2" class="headerlink" title="例子"></a>例子</h2><p> <img src="https://img-blog.csdnimg.cn/3be43faf7e274255a2eb65fe122466ed.png" alt="在这里插入图片描述"></p>
+<p>修改后<br><img src="https://img-blog.csdnimg.cn/9c7c7a865a5b4efcb6609deb1104334a.png#pic_center" alt="在这里插入图片描述"></p>
+<h2 id="适用场景-2"><a href="#适用场景-2" class="headerlink" title="适用场景"></a>适用场景</h2><p>适用于项目开发前期设计好</p>
+<h1 id="组合模式"><a href="#组合模式" class="headerlink" title="组合模式"></a>组合模式</h1><p><strong>组合模式(Composite)，将对象组合成树形结构以表示‘部分-整体’的层次结构。组合模式使得用户对单个对象和组合对象的使用具有一致性。</strong><br>做一个抽象的类，叶子节点主要是对于本节点的处理，composite更多的是对于之下的节点的管理。</p>
+<p><img src="https://img-blog.csdnimg.cn/6cb1f782e2d04e71b80ebf93ab2105ab.png" alt="在这里插入图片描述"></p>
+<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><h3 id="Component"><a href="#Component" class="headerlink" title="Component"></a>Component</h3><p><img src="https://img-blog.csdnimg.cn/a60eddbfea8049be9bdf3d204a58bf9d.png" alt="在这里插入图片描述"></p>
+<h3 id="Leaf"><a href="#Leaf" class="headerlink" title="Leaf"></a>Leaf</h3><p><img src="https://img-blog.csdnimg.cn/1e6a5a7194024ce2b0e677df68064a7e.png" alt="在这里插入图片描述"></p>
+<h3 id="Composite"><a href="#Composite" class="headerlink" title="Composite"></a>Composite</h3><p><img src="https://img-blog.csdnimg.cn/3e8b79ed0d5b47049275c7f80fa5f15f.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/cb76b2b10f2f4976abde5ed84e715096.png" alt="在这里插入图片描述"></p>
+<h2 id="例子-3"><a href="#例子-3" class="headerlink" title="例子"></a>例子</h2><p><img src="https://img-blog.csdnimg.cn/9413106950fe4d188fe33fdb6ad7578d.png" alt="在这里插入图片描述"></p>
+<h2 id="透明方式与安全模式"><a href="#透明方式与安全模式" class="headerlink" title="透明方式与安全模式"></a>透明方式与安全模式</h2><p><strong>Component中声明所有用来管理子对象的方法，其中包括Add、Remove等。这样实现Component 接口的所有子类都具备了Add和Remove。这样做的好处就是叶节点和枝节点对于外界没有区别，它们具备完全一致的行为接口</strong>叫做透明方式。<strong>但问题也很明显</strong>，因为 Leaf类本身不具备Add(、Remove0方法的功能，<strong>所以实现它是没有意义的</strong><br><strong>Leaf类当中不用Add和Remove方法是安全方式，也就是在Component 接口中不去声明Add和Remove方法，那么子类的Leaf也就不需要去实现它，而是在Composite声明所有用来管理子类对象的方法</strong>，这样做就不会出现刚才提到的<strong>问题</strong>，不过由于不够透明，所以树叶和树枝类将不具有相同的接口，<strong>客户端的调用需要做相应的判断,带来了不便</strong>。”</p>
+<h2 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h2><p>当你发现<strong>需求中是体现部分与整体层次的结构时</strong>，以及<strong>你希望用户可以忽略组合对象与单个对象的不同，统一地使用组合结构中的所有对象时</strong>，就应该考虑用组合模式了。</p>
+<h2 id="好处"><a href="#好处" class="headerlink" title="好处"></a>好处</h2><p><strong>组合模式</strong>这样就<strong>定义了</strong>包含人力资源部和财务部这些基本对象和分公司、办事处<strong>等组合对象的类层次结构。基本对象可以被组合成更复杂的组合对象，而这个组合对象又可以被组合，这样不断地递归下去，客户代码中，任何用到基本对象的地方都可以使用组合对象了。</strong><br><strong>用户是不用关心到底是处理一个叶节点还是处理一个组合组件，也就用不着为定义组合而写一些选择判断语句了。</strong><br><strong>组合模式让客户可以一致地使用组合结构和单个对象。任何用到基本对象的地方都可以使用组合对象。</strong></p>
+<h1 id="装饰模式"><a href="#装饰模式" class="headerlink" title="装饰模式"></a>装饰模式</h1><p><strong>装饰模式（Decorator)，动态地给一个对象添加一些额外的职责，就增加功能来说，装饰模式比生成子类更为灵活。</strong><br>装饰模式顺序很重要。<strong>装饰模式是为已有功能动态地添加更多功能的一种方式。</strong><br><img src="https://img-blog.csdnimg.cn/43e8108ef8614eae9823d69dda48bed0.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/d59751ef71d543ceb79505c32806db30.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/d52f6ce5b70649b2b319f02947adf9ad.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/0b7a90ad8b494cf59916df2cfb947ef5.png" alt="在这里插入图片描述"></p>
+<h2 id="例子-4"><a href="#例子-4" class="headerlink" title="例子"></a>例子</h2><p><img src="https://img-blog.csdnimg.cn/1dc383a7722140c19bb2adfcfc1b5084.png" alt="在这里插入图片描述"><br>实现过程有点套娃<br><img src="https://img-blog.csdnimg.cn/cda1b9e9d2004901a33302e5269d3f6a.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/5b98fc19587247c793aefffbd0d7a806.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/f6bd7fac85eb4469a5302efeb48740f4.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/c3604e5e0d29459990db982bf1a67ccb.png" alt="在这里插入图片描述"></p>
+<h2 id="使用场景-1"><a href="#使用场景-1" class="headerlink" title="使用场景"></a>使用场景</h2><p><strong>当系统需要新功能的时候，是向旧的类中添加新的代码。这些新加的代码通常装饰了原有类的核心职责或主要行为</strong>。<br><strong>在主类中加入了新的字段，新的方法和新的逻辑，从而增加了主类的复杂度，就像你起初的那个‘人’类，而这些新加入的东西仅仅是为了满足一些只在某种特定情况下才会执行的特殊行为的需要。而装饰模式却提供了一个非常好的解决方案，它把每个要装饰的功能放在单独的类中，并让这个类包装它所要装饰的对象，因此，当需要执行特殊行为时，客户代码就可以在运行时根据需要有选择地、按顺序地使用装饰功能包装对象了</strong></p>
+<h2 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h2><p>装饰模式的优点，<strong>把类中的装饰功能从类中搬移去除，这样可以简化原有的类</strong><br><strong>这样做更大的好处就是有效地把类的核心职责和装饰功能区分开了。而且可以去除相关类中重复的装饰逻辑。</strong></p>
+<h1 id="享元模式"><a href="#享元模式" class="headerlink" title="享元模式"></a>享元模式</h1><h1 id="代理模式"><a href="#代理模式" class="headerlink" title="代理模式"></a>代理模式</h1><h1 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h1><h2 id="外观模式，适配器模式和桥接模式"><a href="#外观模式，适配器模式和桥接模式" class="headerlink" title="外观模式，适配器模式和桥接模式"></a>外观模式，适配器模式和桥接模式</h2><p><strong>外观模式和适配器</strong></p>
+<p><strong>都是对现存系统的封装，有人说外观模式其实就是另外一组对象的适配器，这种说法是不准确的，因为外观定义的是一个新的接口，而适配器则是复用一个原有的接口，适配器是使两个已有的接口协同工作，而外观则是为现存系统提供一个更为方便的访问接口。如果硬要说外观模式是适配，那么适配器是用来适配对象的，而外观模式则是用来适配整个子系统的。也就是说，外观模式所针对的对象的粒度更大。</strong></p>
+<p>个人理解：外观模式是新建一个类对原有的类进行封装功能，提供统一的接口，而适配器模式是对于原来的类进行继承，对相关类进行重写，并统一接口。</p>
+<h2 id="代理模式和外观模式"><a href="#代理模式和外观模式" class="headerlink" title="代理模式和外观模式"></a>代理模式和外观模式</h2><h2 id="代理模式和适配器模式"><a href="#代理模式和适配器模式" class="headerlink" title="代理模式和适配器模式"></a>代理模式和适配器模式</h2>]]></content>
+      <categories>
+        <category>编程</category>
+      </categories>
+      <tags>
+        <tag>设计模式</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>大话设计模式观后感之行为型设计模式</title>
+    <url>/2022/06/02/%E5%A4%A7%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E8%A7%82%E5%90%8E%E6%84%9F%E4%B9%8B%E8%A1%8C%E4%B8%BA%E5%9E%8B%E6%A8%A1%E5%BC%8F/</url>
+    <content><![CDATA[<h1 id="观察者模式"><a href="#观察者模式" class="headerlink" title="观察者模式"></a>观察者模式</h1><p><strong>观察者模式定义了一种一对多的依赖关系，让多个观察者对象<br>同时监听某一个主题对象。这个主题对象在状态发生变化时，<br>会通知所有观察者对象，使它们能够自动更新自己。</strong><br><img src="https://img-blog.csdnimg.cn/a08843640baf483fa713240efd659f61.png" alt="在这里插入图片描述"></p>
+<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><p><img src="https://img-blog.csdnimg.cn/62404e611632437897269a8ff0d5fc87.png" alt="在这里插入图片描述"></p>
+<h3 id="抽象通知接口"><a href="#抽象通知接口" class="headerlink" title="抽象通知接口"></a>抽象通知接口</h3><p><img src="https://img-blog.csdnimg.cn/2c0d5364de8d4218aed872c8aa633979.png" alt="在这里插入图片描述"></p>
+<h3 id="Boss实例"><a href="#Boss实例" class="headerlink" title="Boss实例"></a>Boss实例</h3><p><img src="https://img-blog.csdnimg.cn/8168378ed6a341ae80919a8d78a96bf6.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/a1ffd7d32ed24b79bbf86b55b5761113.png" alt="在这里插入图片描述"></p>
+<h3 id="抽象观察者"><a href="#抽象观察者" class="headerlink" title="抽象观察者"></a>抽象观察者</h3><p><img src="https://img-blog.csdnimg.cn/f8919fb5f3a249edb87faaac5ed1b77d.png" alt="在这里插入图片描述"></p>
+<h3 id="具体观察者的实现"><a href="#具体观察者的实现" class="headerlink" title="具体观察者的实现"></a>具体观察者的实现</h3><p><img src="https://img-blog.csdnimg.cn/1fc07910893c4749889b6cf8282b16dc.png" alt="在这里插入图片描述"></p>
+<h2 id="观察者缺点"><a href="#观察者缺点" class="headerlink" title="观察者缺点"></a>观察者缺点</h2><p>尽管已经用了依赖倒转原则，但是. 抽象通知者’还是依赖. 抽象观察<br>者’，也就是说，万一没有了抽象观察者这样的接口，我这通知的功能就完不成了。另外就是每个具体观察者，它不-定是‘更新’的方法要调用呀，就像刚才说的，我希望的是‘工具箱’是隐藏，. 自动窗口’<br>是打开，这根本就不是同名的方法。这应该就是不足的地方吧。</p>
+<h2 id="解决方案–事件委托"><a href="#解决方案–事件委托" class="headerlink" title="解决方案–事件委托"></a>解决方案–事件委托</h2><p><strong>委托就是一种引用方法的类型。-旦为委托分配了方法，.委托将与该方法具有完全相同的行为。委托方法的使用可以像其他任何方法一样，具有参数和返回值。</strong><br><strong>委托可以看作是对函数的抽象，是函数的‘类’， 委托的实例将代表一个具体的函数。</strong><br><strong>一个委托可以搭载多个方法，所有方法被依次唤起</strong> 更重要的是，<strong>它可以使得委托对象所搭载的方法并不需要属于同一个类。</strong><br><strong>但委托也是有前提的，那就是委托对象所搭载的所有方法必须具有相同的原形和形式，也就是拥有相同的参数列表和返回值类型。</strong><br>消除了观察者抽象类，在客户端进行灵活的调用不同类的相关具有相同参数和返回值的不同名函数，实现解耦。</p>
+<h3 id="观察者的具体实现"><a href="#观察者的具体实现" class="headerlink" title="观察者的具体实现"></a>观察者的具体实现</h3><p><img src="https://img-blog.csdnimg.cn/3e28d4304a5b4db59a23f99d4f138c8c.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/2f48bda779094c69a410a41b5bec5f5e.png" alt="在这里插入图片描述"></p>
+<h3 id="通知者接口"><a href="#通知者接口" class="headerlink" title="通知者接口"></a>通知者接口</h3><p><img src="https://img-blog.csdnimg.cn/537e07e3304940d5ae39efaf39d61d8e.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/26ae09418f234920825fb4a95f094a64.png" alt="在这里插入图片描述"></p>
+<h3 id="声明委托"><a href="#声明委托" class="headerlink" title="声明委托"></a>声明委托</h3><p>委托可以定义在类里面，类外面，也可以在命名空间下，根据不同的需要来确定委托方法的使用范围。<br><img src="https://img-blog.csdnimg.cn/fe7fc9acff79421b82a609e43f0b40e1.png" alt="在这里插入图片描述"></p>
+<h3 id="通知者的实现"><a href="#通知者的实现" class="headerlink" title="通知者的实现"></a>通知者的实现</h3><p><img src="https://img-blog.csdnimg.cn/0033e37a5de641fb9be786e407a6d73a.png" alt="在这里插入图片描述"></p>
+<h3 id="客户端灵活调用"><a href="#客户端灵活调用" class="headerlink" title="客户端灵活调用"></a>客户端灵活调用</h3><p><img src="https://img-blog.csdnimg.cn/c6b00b85c55c4ea2aa6d511ae54c0592.png" alt="在这里插入图片描述"></p>
+<h3 id="事件关键字的使用"><a href="#事件关键字的使用" class="headerlink" title="事件关键字的使用"></a>事件关键字的使用</h3><p>在委托类型前加上event 代表声明事件。否则是声明委托。<br>事件只能对委托进行加减不能进行赋值</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="built_in">delegate</span> <span class="keyword">void</span> <span class="title">EventHandle</span>()</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">event</span> EventHandle MyEvent</span>;<span class="comment">//事件</span></span><br><span class="line"><span class="keyword">public</span> EventHandle MyDelegate ;<span class="comment">//委托</span></span><br></pre></td></tr></table></figure>
+<h3 id="对于接口和抽象类"><a href="#对于接口和抽象类" class="headerlink" title="对于接口和抽象类"></a>对于接口和抽象类</h3><p>接口成员<br><strong>属性、方法、索引指示器和事件</strong>，但不能包含常量、域、操作符、构造函数和析构函数，而且也不能包含任何静态成员<br>C# 接口的成员不能有 public、protected、internal、private 等修饰符。原因很简单，接口里面的方法都需要由外面接口实现去实现方法体，那么其修饰符必然是 public。<strong>C# 接口中的成员默认是 public 的</strong>，java 中是可以加 public 的。</p>
+]]></content>
+      <categories>
+        <category>编程</category>
+      </categories>
+      <tags>
+        <tag>设计模式</tag>
+      </tags>
+  </entry>
 </search>
