@@ -1,0 +1,207 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>UI背包系统 - 浪子之心</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Blog,"> 
+    <meta name="description" content="MrChen Bolg,项目练习链接
+关闭打开菜单栏123456public void OpenMyBag() &amp;#123;    if(Input.GetKeyDown(KeyCode.O)) &amp;#123;       ,"> 
+    <meta name="author" content="Jack Chen"> 
+    <link rel="alternative" href="atom.xml" title="浪子之心" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+<meta name="generator" content="Hexo 5.4.1"><link rel="stylesheet" href="/css/prism.css" type="text/css"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">浪子之心</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="https://mrchenlreanspace.github.io"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">UI背包系统</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">UI背包系统</h1>
+        <div class="stuff">
+            <span>六月 04, 2022</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E6%B8%B8%E6%88%8F/" rel="tag">游戏</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <p><a target="_blank" rel="noopener" href="https://github.com/MrChenLreanSpace/InventroyTutorial">项目练习链接</a></p>
+<h1 id="关闭打开菜单栏"><a href="#关闭打开菜单栏" class="headerlink" title="关闭打开菜单栏"></a>关闭打开菜单栏</h1><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">OpenMyBag</span>()</span> &#123;</span><br><span class="line">    <span class="keyword">if</span>(Input.GetKeyDown(KeyCode.O)) &#123;</span><br><span class="line">        isOpen = !bag.activeSelf;</span><br><span class="line">        bag.SetActive(isOpen);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="Grid-Layerout-Group"><a href="#Grid-Layerout-Group" class="headerlink" title="Grid Layerout Group"></a>Grid Layerout Group</h1><p>他的子节点将会被填充到格子中<br><img src="https://img-blog.csdnimg.cn/e227c959129845a683ee99e438c7c781.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/5a272dde12874ca2a4bed287c0ae725d.png" alt="在这里插入图片描述"></p>
+<h1 id="UI栏-的初始化"><a href="#UI栏-的初始化" class="headerlink" title="UI栏 的初始化"></a>UI栏 的初始化</h1><p>如果游戏默认开始物品栏是关闭的一定要记住先要初始化。</p>
+<h1 id="ScriptableObject"><a href="#ScriptableObject" class="headerlink" title="ScriptableObject"></a>ScriptableObject</h1><p>经常配合CreateAssetMenu使用</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> System.Collections;</span><br><span class="line"><span class="keyword">using</span> System.Collections.Generic;</span><br><span class="line"><span class="keyword">using</span> UnityEngine;</span><br><span class="line">[<span class="meta">CreateAssetMenu(fileName = <span class="string">&quot;New Bag&quot;</span>,menuName = <span class="string">&quot;Inventory/New Bag&quot;</span>)</span>]</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">CreateBag</span> : <span class="title">ScriptableObject</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// Start is called before the first frame update</span></span><br><span class="line">    <span class="keyword">public</span> List&lt;CreateItem&gt; items = <span class="keyword">new</span> List&lt;CreateItem&gt;();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="显示物品栏物体"><a href="#显示物品栏物体" class="headerlink" title="显示物品栏物体"></a>显示物品栏物体</h1><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> System.Collections;</span><br><span class="line"><span class="keyword">using</span> System.Collections.Generic;</span><br><span class="line"><span class="keyword">using</span> UnityEngine;</span><br><span class="line"><span class="keyword">using</span> UnityEngine.UI;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">InventoryManager</span> : <span class="title">MonoBehaviour</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> InventoryManager instance;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> CreateBag myBag;</span><br><span class="line">    <span class="keyword">public</span> GameObject slotGrid;</span><br><span class="line">    <span class="comment">// public Slot slotPrefab;</span></span><br><span class="line">    <span class="keyword">public</span> GameObject emptySlot;</span><br><span class="line">    <span class="keyword">public</span> Text itemInfromation;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> List&lt;GameObject&gt; slots = <span class="keyword">new</span> List&lt;GameObject&gt;();<span class="comment">//管理生成的18个slots</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Awake</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (instance != <span class="literal">null</span>)</span><br><span class="line">            Destroy(<span class="keyword">this</span>);</span><br><span class="line">        instance = <span class="keyword">this</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">OnEnable</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        RefreshItem();</span><br><span class="line">        instance.itemInfromation.text = <span class="string">&quot;&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">UpdateItemInfo</span>(<span class="params"><span class="built_in">string</span> itemDescription</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        instance.itemInfromation.text = itemDescription;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/*public static void CreateNewItem(Item item)</span></span><br><span class="line"><span class="comment">    &#123;</span></span><br><span class="line"><span class="comment">        Slot newItem = Instantiate(instance.slotPrefab, instance.slotGrid.transform.position, Quaternion.identity);</span></span><br><span class="line"><span class="comment">        newItem.gameObject.transform.SetParent(instance.slotGrid.transform);</span></span><br><span class="line"><span class="comment">        newItem.slotItem = item;</span></span><br><span class="line"><span class="comment">        newItem.slotImage.sprite = item.itemImage;</span></span><br><span class="line"><span class="comment">        newItem.slotNum.text = item.itemHeld.ToString();</span></span><br><span class="line"><span class="comment">    &#125;*/</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">RefreshItem</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">//循环删除slotGrid下的子集物体</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; instance.slotGrid.transform.childCount; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (instance.slotGrid.transform.childCount == <span class="number">0</span>)</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            Destroy(instance.slotGrid.transform.GetChild(i).gameObject);</span><br><span class="line">            instance.slots.Clear();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//重新生成对应myBag里面的物品的slot</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; instance.myBag.items.Count; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">// CreateNewItem(instance.myBag.itemList[i]);</span></span><br><span class="line">            instance.slots.Add(Instantiate(instance.emptySlot));</span><br><span class="line">            instance.slots[i].transform.SetParent(instance.slotGrid.transform);</span><br><span class="line">            instance.slots[i].GetComponent&lt;Slot&gt;().slotID = i;</span><br><span class="line">            instance.slots[i].GetComponent&lt;Slot&gt;().SetupSlot(instance.myBag.items[i]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="拖拽物品"><a href="#拖拽物品" class="headerlink" title="拖拽物品"></a>拖拽物品</h1><h2 id="CanvasGroup"><a href="#CanvasGroup" class="headerlink" title="CanvasGroup"></a>CanvasGroup</h2><p><img src="https://img-blog.csdnimg.cn/bb302968f8ff488cb7a63fd22eb3cb28.png" alt="在这里插入图片描述"></p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GetComponent&lt;CanvasGroup&gt;().blocksRaycasts = <span class="literal">false</span>;</span><br></pre></td></tr></table></figure>
+<p>射线阻挡关闭，开启对ui面板的碰撞</p>
+<h2 id="事件系统的接口"><a href="#事件系统的接口" class="headerlink" title="事件系统的接口"></a>事件系统的接口</h2><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">IBeginDragHandler, IDragHandler, IEndDragHandler<span class="comment">//接口</span></span><br><span class="line"><span class="comment">//接口提供的方法</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">OnBeginDrag</span>(<span class="params">PointerEventData eventData</span>)</span>;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">OnDrag</span>(<span class="params">PointerEventData eventData</span>)</span>;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">OnEndDrag</span>(<span class="params">PointerEventData eventData</span>)</span>;</span><br></pre></td></tr></table></figure>
+<p> 在OnEndDrag方法最后一定要射线阻挡开启，不然无法再次选中移动的物品<br>ItemOnDrag的代码</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> System.Collections;</span><br><span class="line"><span class="keyword">using</span> System.Collections.Generic;</span><br><span class="line"><span class="keyword">using</span> UnityEngine;</span><br><span class="line"><span class="keyword">using</span> UnityEngine.EventSystems;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">ItemOnDrag</span> : <span class="title">MonoBehaviour</span>, <span class="title">IBeginDragHandler</span>, <span class="title">IDragHandler</span>, <span class="title">IEndDragHandler</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> Transform originalParent;</span><br><span class="line">    <span class="keyword">public</span> CreateBag myBag;</span><br><span class="line">    <span class="keyword">private</span> <span class="built_in">int</span> currentItemID;<span class="comment">//当前物品ID</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">OnBeginDrag</span>(<span class="params">PointerEventData eventData</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        originalParent = transform.parent;</span><br><span class="line">        currentItemID = originalParent.GetComponent&lt;Slot&gt;().slotID;</span><br><span class="line">        transform.SetParent(transform.parent.parent);</span><br><span class="line">        transform.position = eventData.position;</span><br><span class="line">        GetComponent&lt;CanvasGroup&gt;().blocksRaycasts = <span class="literal">false</span>;<span class="comment">//射线阻挡关闭</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">OnDrag</span>(<span class="params">PointerEventData eventData</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        transform.position = eventData.position;</span><br><span class="line">        <span class="comment">//Debug.Log(eventData.pointerCurrentRaycast.gameObject.name);//输出鼠标当前位置下到第一个碰到到物体名字</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">OnEndDrag</span>(<span class="params">PointerEventData eventData</span>)</span> &#123;</span><br><span class="line"></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span>(eventData.pointerCurrentRaycast.gameObject==<span class="literal">null</span>) &#123;</span><br><span class="line">            transform.SetParent(originalParent.transform);</span><br><span class="line">            transform.position = originalParent.transform.position;</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span> (eventData.pointerCurrentRaycast.gameObject.name == <span class="string">&quot;Item Image&quot;</span>)<span class="comment">//判断下面物体名字是：Item Image 那么互换位置</span></span><br><span class="line">        &#123;</span><br><span class="line">            transform.SetParent(eventData.pointerCurrentRaycast.gameObject.transform.parent.parent);</span><br><span class="line">            transform.position = eventData.pointerCurrentRaycast.gameObject.transform.parent.parent.position;</span><br><span class="line">            <span class="comment">//itemList的物品存储位置改变</span></span><br><span class="line">            <span class="keyword">var</span> temp = myBag.items[currentItemID];</span><br><span class="line">            myBag.items[currentItemID] = myBag.items[eventData.pointerCurrentRaycast.gameObject.GetComponentInParent&lt;Slot&gt;().slotID];</span><br><span class="line">            myBag.items[eventData.pointerCurrentRaycast.gameObject.GetComponentInParent&lt;Slot&gt;().slotID] = temp;</span><br><span class="line"></span><br><span class="line">            eventData.pointerCurrentRaycast.gameObject.transform.parent.position = originalParent.position;</span><br><span class="line">            eventData.pointerCurrentRaycast.gameObject.transform.parent.SetParent(originalParent);     </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (eventData.pointerCurrentRaycast.gameObject.name == <span class="string">&quot;slot(Clone)&quot;</span>) &#123;</span><br><span class="line">            <span class="comment">//否则直接挂在检测到到Slot下面</span></span><br><span class="line">            transform.SetParent(eventData.pointerCurrentRaycast.gameObject.transform);</span><br><span class="line">            transform.position = eventData.pointerCurrentRaycast.gameObject.transform.position;</span><br><span class="line"></span><br><span class="line">            <span class="comment">//itemList的物品存储位置改变</span></span><br><span class="line">            myBag.items[eventData.pointerCurrentRaycast.gameObject.GetComponentInParent&lt;Slot&gt;().slotID] = myBag.items[currentItemID];</span><br><span class="line">            myBag.items[currentItemID] = <span class="literal">null</span>;</span><br><span class="line">        </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line"></span><br><span class="line">            transform.SetParent(originalParent.transform);</span><br><span class="line">            transform.position = originalParent.transform.position;</span><br><span class="line">        &#125;</span><br><span class="line">        GetComponent&lt;CanvasGroup&gt;().blocksRaycasts = <span class="literal">true</span>;<span class="comment">//射线阻挡开启，不然无法再次选中移动的物品</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>详情见项目</p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="/music/jucilang.mp3">
+            </audio>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+		data-enable='true'
+        data-ae='true'
+        data-ci='35b8fbd0e6865c1adf60'
+        data-cs='6d2988de68c828bce78247ad604846cdc30e7ca3'
+        data-r='mrchenlreanspace.github.io'
+        data-o='MrChenLreanSpace'
+        data-a='MrChenLreanSpace'
+        data-d='false'
+    >查看评论</div>
+
+
+    </div>
+    
+        <div class='side'>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%B3%E9%97%AD%E6%89%93%E5%BC%80%E8%8F%9C%E5%8D%95%E6%A0%8F"><span class="toc-number">1.</span> <span class="toc-text">关闭打开菜单栏</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Grid-Layerout-Group"><span class="toc-number">2.</span> <span class="toc-text">Grid Layerout Group</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#UI%E6%A0%8F-%E7%9A%84%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="toc-number">3.</span> <span class="toc-text">UI栏 的初始化</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ScriptableObject"><span class="toc-number">4.</span> <span class="toc-text">ScriptableObject</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%98%BE%E7%A4%BA%E7%89%A9%E5%93%81%E6%A0%8F%E7%89%A9%E4%BD%93"><span class="toc-number">5.</span> <span class="toc-text">显示物品栏物体</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%8B%96%E6%8B%BD%E7%89%A9%E5%93%81"><span class="toc-number">6.</span> <span class="toc-text">拖拽物品</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#CanvasGroup"><span class="toc-number">6.1.</span> <span class="toc-text">CanvasGroup</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6%E7%B3%BB%E7%BB%9F%E7%9A%84%E6%8E%A5%E5%8F%A3"><span class="toc-number">6.2.</span> <span class="toc-text">事件系统的接口</span></a></li></ol></li></ol>	
+        </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"], linebreaks: { automatic:true }, EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50) },
+        tex2jax: { inlineMath: [ ["$", "$"], ["\\(","\\)"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno",skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']},
+        TeX: {  noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } }, Macros: { href: "{}" } },
+        messageStyle: "none"
+    });
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+<!-- Google Analytics -->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YMJ8CBH8F7"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-YMJ8CBH8F7');
+</script>
+<!-- End Google Analytics -->
+
+
+</html>
