@@ -2218,4 +2218,19 @@
         <tag>Shader</tag>
       </tags>
   </entry>
+  <entry>
+    <title>雾效</title>
+    <url>/2022/07/04/%E9%9B%BE%E6%95%88/</url>
+    <content><![CDATA[<h1 id="距离雾"><a href="#距离雾" class="headerlink" title="距离雾"></a>距离雾</h1><p>计算出顶点与摄像机的距离将范围映射到雾效范围中。<br><img src="https://img-blog.csdnimg.cn/0a9d486e997541a6bacc2dac2fe7a939.png" alt="在这里插入图片描述"></p>
+<h1 id="高度雾"><a href="#高度雾" class="headerlink" title="高度雾"></a>高度雾</h1><p>将距离雾中的距离改变为顶点坐标的y坐标。<br><img src="https://img-blog.csdnimg.cn/486ff6ddaae2435380b01d259181591f.png" alt="在这里插入图片描述"></p>
+<h1 id="太阳光对雾效的影响"><a href="#太阳光对雾效的影响" class="headerlink" title="太阳光对雾效的影响"></a>太阳光对雾效的影响</h1><p><img src="https://img-blog.csdnimg.cn/b36f512a792e4025bec56c7242450009.png" alt="在这里插入图片描述"></p>
+<h1 id="全局雾效"><a href="#全局雾效" class="headerlink" title="全局雾效"></a>全局雾效</h1><p> 通过深度图进行后处理雾效，获取相机的深度图，通过深度图进行世界坐标还原，将之前的的世界坐标替换掉，因为天空球和地形的高度雾效不同，所以用一个阈值区分，lerp 天空球 地形 阈值。可能会有锯齿，可以通过缩小天空球大小降低锯齿，或者关闭抗锯齿效果，产生原因是因为山脉边缘与天空球颜色采样差距较大。</p>
+]]></content>
+      <categories>
+        <category>游戏</category>
+      </categories>
+      <tags>
+        <tag>Shader</tag>
+      </tags>
+  </entry>
 </search>

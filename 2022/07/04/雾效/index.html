@@ -5,12 +5,15 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>浪子之心</title>
+    <title>雾效 - 浪子之心</title>
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="google" content="notranslate" />
     <meta name="keywords" content="Blog,"> 
-    <meta name="description" content="MrChen Bolg,"> 
+    <meta name="description" content="MrChen Bolg,距离雾计算出顶点与摄像机的距离将范围映射到雾效范围中。
+高度雾将距离雾中的距离改变为顶点坐标的y坐标。
+太阳光对雾效的影响
+全局雾效 通过深度图进行后处理雾效，获取相机的深度图，通过深度图进行世界坐,"> 
     <meta name="author" content="Jack Chen"> 
     <link rel="alternative" href="atom.xml" title="浪子之心" type="application/atom+xml"> 
     <link rel="icon" href="/img/favicon.png"> 
@@ -25,27 +28,70 @@
 <body class="loading">
     <span id="config-title" style="display:none">浪子之心</span>
     <div id="loader"></div>
-    <div id="single" class="page">
-    <div id="top">
-        <a class="iconfont icon-left image-icon" href="javascript:history.back()"></a>
-    </div>
-    <div class="section">
-        <div class="article">
-            <div class="main">
-                <div class="content">
-                
-                    <div class="set">
-  <h2>分类</h2>
-  <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B8%B8%E6%88%8F/">游戏</a><span class="category-list-count">19</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/">计算机图形学</a><span class="category-list-count">12</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/Unity/">Unity</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/Unity/%E6%B8%B8%E6%88%8F/">游戏</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B/">编程</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/">人工智能</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8D%9A%E5%AE%A2%E5%BC%80%E5%A7%8B/">博客开始</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Unity/">Unity</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8D%87%E7%BA%A7%E6%B8%B2%E6%9F%93%E7%AE%A1%E7%BA%BF/">升级渲染管线</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8D%87%E7%BA%A7%E6%B8%B2%E6%9F%93%E7%AE%A1%E7%BA%BF/%E6%B8%B8%E6%88%8F/">游戏</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">1</span></li></ul>
-</div>
-
-                
-                </div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="https://mrchenlreanspace.github.io"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">雾效</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
             </div>
+            <div id="qr"></div>
         </div>
     </div>
+    <div class="scrollbar"></div>
 </div>
 
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">雾效</h1>
+        <div class="stuff">
+            <span>七月 04, 2022</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/Shader/" rel="tag">Shader</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h1 id="距离雾"><a href="#距离雾" class="headerlink" title="距离雾"></a>距离雾</h1><p>计算出顶点与摄像机的距离将范围映射到雾效范围中。<br><img src="https://img-blog.csdnimg.cn/0a9d486e997541a6bacc2dac2fe7a939.png" alt="在这里插入图片描述"></p>
+<h1 id="高度雾"><a href="#高度雾" class="headerlink" title="高度雾"></a>高度雾</h1><p>将距离雾中的距离改变为顶点坐标的y坐标。<br><img src="https://img-blog.csdnimg.cn/486ff6ddaae2435380b01d259181591f.png" alt="在这里插入图片描述"></p>
+<h1 id="太阳光对雾效的影响"><a href="#太阳光对雾效的影响" class="headerlink" title="太阳光对雾效的影响"></a>太阳光对雾效的影响</h1><p><img src="https://img-blog.csdnimg.cn/b36f512a792e4025bec56c7242450009.png" alt="在这里插入图片描述"></p>
+<h1 id="全局雾效"><a href="#全局雾效" class="headerlink" title="全局雾效"></a>全局雾效</h1><p> 通过深度图进行后处理雾效，获取相机的深度图，通过深度图进行世界坐标还原，将之前的的世界坐标替换掉，因为天空球和地形的高度雾效不同，所以用一个阈值区分，lerp 天空球 地形 阈值。可能会有锯齿，可以通过缩小天空球大小降低锯齿，或者关闭抗锯齿效果，产生原因是因为山脉边缘与天空球颜色采样差距较大。</p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="/music/jucilang.mp3">
+            </audio>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+		data-enable='true'
+        data-ae='true'
+        data-ci='35b8fbd0e6865c1adf60'
+        data-cs='6d2988de68c828bce78247ad604846cdc30e7ca3'
+        data-r='mrchenlreanspace.github.io'
+        data-o='MrChenLreanSpace'
+        data-a='MrChenLreanSpace'
+        data-d='false'
+    >查看评论</div>
+
+
+    </div>
+    
+        <div class='side'>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%B7%9D%E7%A6%BB%E9%9B%BE"><span class="toc-number">1.</span> <span class="toc-text">距离雾</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%AB%98%E5%BA%A6%E9%9B%BE"><span class="toc-number">2.</span> <span class="toc-text">高度雾</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%A4%AA%E9%98%B3%E5%85%89%E5%AF%B9%E9%9B%BE%E6%95%88%E7%9A%84%E5%BD%B1%E5%93%8D"><span class="toc-number">3.</span> <span class="toc-text">太阳光对雾效的影响</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%A8%E5%B1%80%E9%9B%BE%E6%95%88"><span class="toc-number">4.</span> <span class="toc-text">全局雾效</span></a></li></ol>	
+        </div>
+    
+</div>
+
+
+    </div>
+</div>
 </body>
 
 <script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
