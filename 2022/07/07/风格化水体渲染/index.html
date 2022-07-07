@@ -1,0 +1,202 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>风格化水体渲染 - 浪子之心</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Blog,"> 
+    <meta name="description" content="MrChen Bolg,水体属性水体深度从深度图获取水下顶点的世界坐标，与水面顶点坐标相减得到当前顶点的水深度。
+水体颜色当深水区时使用较深的颜色且透明的调为不透明，浅水区可以浅一点，透明度透明一点如图，使用lerp深度作,"> 
+    <meta name="author" content="Jack Chen"> 
+    <link rel="alternative" href="atom.xml" title="浪子之心" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+<meta name="generator" content="Hexo 5.4.1"><link rel="stylesheet" href="/css/prism.css" type="text/css"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">浪子之心</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="https://mrchenlreanspace.github.io"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">风格化水体渲染</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">风格化水体渲染</h1>
+        <div class="stuff">
+            <span>七月 07, 2022</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/Shader/" rel="tag">Shader</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h1 id="水体属性"><a href="#水体属性" class="headerlink" title="水体属性"></a>水体属性</h1><h2 id="水体深度"><a href="#水体深度" class="headerlink" title="水体深度"></a>水体深度</h2><p>从深度图获取水下顶点的世界坐标，与水面顶点坐标相减得到当前顶点的水深度。<br><img src="https://img-blog.csdnimg.cn/20bb4693fa9e441eb7497313a8030069.png" alt="在这里插入图片描述"></p>
+<h1 id="水体颜色"><a href="#水体颜色" class="headerlink" title="水体颜色"></a>水体颜色</h1><p>当深水区时使用较深的颜色且透明的调为不透明，浅水区可以浅一点，透明度透明一点<br>如图，使用lerp深度作为权重。<br><img src="https://img-blog.csdnimg.cn/a5cbb87ed14c461ea0dfd478ed7154eb.png" alt="在这里插入图片描述"></p>
+<h1 id="水体表面扰动"><a href="#水体表面扰动" class="headerlink" title="水体表面扰动"></a>水体表面扰动</h1><p><a href="https://mrchenlreanspace.github.io/2022/07/04/%E5%A4%A9%E7%A9%BA%E7%9B%92%E5%92%8C%E6%B0%B4%E9%9D%A2%E6%B8%B2%E6%9F%93/">参考之前的水面渲染</a></p>
+<p><img src="https://img-blog.csdnimg.cn/83790ad88c224e46a707ebef868c6cef.png" alt="在这里插入图片描述"></p>
+<h1 id="反射"><a href="#反射" class="headerlink" title="反射"></a>反射</h1><p><a href="https://mrchenlreanspace.github.io/2022/07/04/%E5%A4%A9%E7%A9%BA%E7%9B%92%E5%92%8C%E6%B0%B4%E9%9D%A2%E6%B8%B2%E6%9F%93/">参考之前的水面渲染</a><br>通过PlanarReflection.cs获得反射图，如果觉得性能消耗大，可以采用sspr或者反射探针得到。<br><img src="https://img-blog.csdnimg.cn/35b9495d0972413fa17b662ca8f2e3f7.png" alt="在这里插入图片描述"></p>
+<h1 id="折射-x2F-水底"><a href="#折射-x2F-水底" class="headerlink" title="折射&#x2F;水底"></a>折射&#x2F;水底</h1><p>使这是也会受到水面扰动的影响。<br><img src="https://img-blog.csdnimg.cn/ec3555bc21034e8d9465c5fa192aa7f4.png" alt="在这里插入图片描述"></p>
+<h1 id="焦散"><a href="#焦散" class="headerlink" title="焦散"></a>焦散</h1><p><img src="https://img-blog.csdnimg.cn/2de56dd3565d4cfeb3996c7530587752.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/299a2c3267cf482688d7143d1c655815.png#pic_center" alt="在这里插入图片描述"></p>
+<h1 id="岸边泡沫"><a href="#岸边泡沫" class="headerlink" title="岸边泡沫"></a>岸边泡沫</h1><p><img src="https://img-blog.csdnimg.cn/2faf04d11105454ab955ac93d07b70a2.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/d67c7401ffb04a9f94ad01c4d2ceb801.png" alt="在这里插入图片描述"></p>
+<h1 id="水体运动"><a href="#水体运动" class="headerlink" title="水体运动"></a>水体运动</h1><p><a target="_blank" rel="noopener" href="https://catlikecoding.com/unity/tutorials/flow/waves/">参考这篇文章</a><br><img src="https://img-blog.csdnimg.cn/a643c5bad69b473da7e1182fb113fc95.png" alt="在这里插入图片描述"></p>
+<h1 id="效果Combine"><a href="#效果Combine" class="headerlink" title="效果Combine"></a>效果Combine</h1><p><img src="https://img-blog.csdnimg.cn/5214da87ce604945a6c251eb115346b4.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/d3ceda6552ff44918a6a47d9c460457b.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/0075849d838c4e9980b3c12a3a1bcc76.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/a40baaeaac1f4c52a6c5f843fe9a2089.png" alt="在这里插入图片描述"></p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="/music/jucilang.mp3">
+            </audio>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+		data-enable='true'
+        data-ae='true'
+        data-ci='35b8fbd0e6865c1adf60'
+        data-cs='6d2988de68c828bce78247ad604846cdc30e7ca3'
+        data-r='mrchenlreanspace.github.io'
+        data-o='MrChenLreanSpace'
+        data-a='MrChenLreanSpace'
+        data-d='false'
+    >查看评论</div>
+
+
+    </div>
+    
+        <div class='side'>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B0%B4%E4%BD%93%E5%B1%9E%E6%80%A7"><span class="toc-number">1.</span> <span class="toc-text">水体属性</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B0%B4%E4%BD%93%E6%B7%B1%E5%BA%A6"><span class="toc-number">1.1.</span> <span class="toc-text">水体深度</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B0%B4%E4%BD%93%E9%A2%9C%E8%89%B2"><span class="toc-number">2.</span> <span class="toc-text">水体颜色</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B0%B4%E4%BD%93%E8%A1%A8%E9%9D%A2%E6%89%B0%E5%8A%A8"><span class="toc-number">3.</span> <span class="toc-text">水体表面扰动</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%8D%E5%B0%84"><span class="toc-number">4.</span> <span class="toc-text">反射</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%8A%98%E5%B0%84-x2F-%E6%B0%B4%E5%BA%95"><span class="toc-number">5.</span> <span class="toc-text">折射&#x2F;水底</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%84%A6%E6%95%A3"><span class="toc-number">6.</span> <span class="toc-text">焦散</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B2%B8%E8%BE%B9%E6%B3%A1%E6%B2%AB"><span class="toc-number">7.</span> <span class="toc-text">岸边泡沫</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B0%B4%E4%BD%93%E8%BF%90%E5%8A%A8"><span class="toc-number">8.</span> <span class="toc-text">水体运动</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%95%88%E6%9E%9CCombine"><span class="toc-number">9.</span> <span class="toc-text">效果Combine</span></a></li></ol>	
+        </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"], linebreaks: { automatic:true }, EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50) },
+        tex2jax: { inlineMath: [ ["$", "$"], ["\\(","\\)"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno",skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']},
+        TeX: {  noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } }, Macros: { href: "{}" } },
+        messageStyle: "none"
+    });
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+<!-- Google Analytics -->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YMJ8CBH8F7"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-YMJ8CBH8F7');
+</script>
+<!-- End Google Analytics -->
+
+
+</html>
