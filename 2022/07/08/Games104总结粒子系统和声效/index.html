@@ -1,0 +1,232 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Games104总结粒子系统和声效 - 浪子之心</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Blog,"> 
+    <meta name="description" content="MrChen Bolg,粒子系统属性坐标，初速度，大小，颜色，生命周期，…
+粒子的生命周期
+如果控制失败就会出现粒子越来越多，使系统资源殆尽
+粒子的发射器指定生成规则，指定仿真逻辑，描述如何渲染粒子
+粒子模拟力学模拟模拟控,"> 
+    <meta name="author" content="Jack Chen"> 
+    <link rel="alternative" href="atom.xml" title="浪子之心" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+<meta name="generator" content="Hexo 5.4.1"><link rel="stylesheet" href="/css/prism.css" type="text/css"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">浪子之心</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="https://mrchenlreanspace.github.io"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">Games104总结粒子系统和声效</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">Games104总结粒子系统和声效</h1>
+        <div class="stuff">
+            <span>七月 08, 2022</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/Shader/" rel="tag">Shader</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h1 id="粒子系统"><a href="#粒子系统" class="headerlink" title="粒子系统"></a>粒子系统</h1><h2 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h2><p>坐标，初速度，大小，颜色，生命周期，…</p>
+<h2 id="粒子的生命周期"><a href="#粒子的生命周期" class="headerlink" title="粒子的生命周期"></a>粒子的生命周期</h2><p><img src="https://img-blog.csdnimg.cn/98a3e9499786481286a3b9e752658647.png" alt="在这里插入图片描述"></p>
+<p>如果控制失败就会出现粒子越来越多，使系统资源殆尽</p>
+<h2 id="粒子的发射器"><a href="#粒子的发射器" class="headerlink" title="粒子的发射器"></a>粒子的发射器</h2><p>指定生成规则，指定仿真逻辑，描述如何渲染粒子</p>
+<h2 id="粒子模拟"><a href="#粒子模拟" class="headerlink" title="粒子模拟"></a>粒子模拟</h2><p>力学模拟<br><img src="https://img-blog.csdnimg.cn/ab1877400741445f904523bdc35bf20d.png" alt="在这里插入图片描述"><br>模拟控制粒子如何随时间变化<br>粒子碰撞</p>
+<h2 id="三种粒子效果制作"><a href="#三种粒子效果制作" class="headerlink" title="三种粒子效果制作"></a>三种粒子效果制作</h2><p>面片粒子，网格粒子，光带粒子（拖尾）<br>光带粒子系统路径使用CatMull-Rom插值，效果会更柔和<br><img src="https://img-blog.csdnimg.cn/e0545c5034964042bddb756a39388d5e.png" alt="在这里插入图片描述"></p>
+<h2 id="粒子系统渲染"><a href="#粒子系统渲染" class="headerlink" title="粒子系统渲染"></a>粒子系统渲染</h2><p>透明度排序<br>全局排序：准确，但性能消耗大<br>层次结构:每个系统-&gt;每个发射器-&gt;发射器内部<br>排序规则<br>粒子之间:基于粒子与相机的距离<br>系统或发射器之间:包围盒</p>
+<h2 id="完全解决粒子"><a href="#完全解决粒子" class="headerlink" title="完全解决粒子"></a>完全解决粒子</h2><p>基于屏幕的解决办法，最坏情况充满整个屏幕</p>
+<h2 id="Low-Resolution-Particles"><a href="#Low-Resolution-Particles" class="headerlink" title="Low-Resolution Particles"></a>Low-Resolution Particles</h2><p><img src="https://img-blog.csdnimg.cn/428232c075ba4e0dac8ce2813624d824.png" alt="在这里插入图片描述"><br>如图，通过Half-ResolutionDepth进行混合</p>
+<h2 id="GPU-粒子"><a href="#GPU-粒子" class="headerlink" title="GPU 粒子"></a>GPU 粒子</h2><h3 id="GPU处理粒子系统"><a href="#GPU处理粒子系统" class="headerlink" title="GPU处理粒子系统"></a>GPU处理粒子系统</h3><p>高度并行工作，适合模拟大量粒子<br>释放你的CPU去编写游戏代码<br>易于访问深度缓冲做碰撞</p>
+<h3 id="初始状态"><a href="#初始状态" class="headerlink" title="初始状态"></a>初始状态</h3><p>右边的图显示了一个空的池，最多包含8个粒子，开始时所有8个槽都处于死可用状态<br><img src="https://img-blog.csdnimg.cn/5f6cf71adea84289b6ba07afd91ca1ae.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/75a6e787bcb1418da66776441ed6695c.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/fb67aa94e7b149f8b130c9a65922e854.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/21c102d116c844778e60295376027947.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/b79b2e1c598941c39f904b4bcfbfbc57.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/d5989b1c242d4e5aa5d40474321624c1.png" alt="在这里插入图片描述"></p>
+<h3 id="注意的问题"><a href="#注意的问题" class="headerlink" title="注意的问题"></a>注意的问题</h3><p>当摄像头没看粒子系统时被裁剪掉，当回头看时会显得很突兀 </p>
+<h3 id="排序，渲染和交换活列表"><a href="#排序，渲染和交换活列表" class="headerlink" title="排序，渲染和交换活列表"></a>排序，渲染和交换活列表</h3><p>根据距离缓冲对活列表进行排序<br>渲染粒子排序后的活列表剔除<br>交换活着列表<br><img src="https://img-blog.csdnimg.cn/23761dba4c8b4737b5806ef1743fc181.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/4aa1aead2fd6404cb947c1ba8880fc78.png" alt=" "></p>
+<h3 id="深度缓冲碰撞"><a href="#深度缓冲碰撞" class="headerlink" title="深度缓冲碰撞"></a>深度缓冲碰撞</h3><p> 1.重新投影粒子位置到之前的帧屏幕空间纹理坐标<br> 2.从昂贵的帧深度纹理读取深度值<br> 3.检查粒子是否与深度缓冲碰撞，但不完全在它后面(厚度值被使用)<br> 4.如果发生碰撞，计算表面法线和反弹粒子<br><img src="https://img-blog.csdnimg.cn/90f253d980844ca2a702af2a23616b77.png" alt="在这里插入图片描述"></p>
+<h1 id="声音系统"><a href="#声音系统" class="headerlink" title="声音系统"></a>声音系统</h1><h2 id="Volume"><a href="#Volume" class="headerlink" title="Volume"></a>Volume</h2><p><img src="https://img-blog.csdnimg.cn/9158d8b1054f437f84b8c18f2525d760.png" alt="在这里插入图片描述"></p>
+<p>声压(p):由声音引起的局部与环境气压的偏差波，国际单位制单位（帕）<br>粒子速度(V):粒子在介质中传播波的速度，单位为SI (m&#x2F;s)<br>声强(1):声波在单位面积上沿垂直于该面积方向所携带的功率，SI单位:W &#x2F; m2<br><img src="https://img-blog.csdnimg.cn/f267187f59fe4e47a4116d19c37631d6.png" alt="在这里插入图片描述"><br> 声压级(Lp):声音相对于参考值的有效压力的对数量度，单位为国际标准单位(dB)<br> <img src="https://img-blog.csdnimg.cn/c604b86573da42afa03f137bed81c573.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/6606a0f46e8d442e87cb72220303c8bd.png" alt="在这里插入图片描述"></p>
+<p> 参考声压，是人类听觉的阈值，常用在空气中(大概是3米外蚊子飞过的声音)</p>
+<h2 id="Pitch"><a href="#Pitch" class="headerlink" title="Pitch"></a>Pitch</h2><p> 决定声音的高或低<br> 这取决于声音的频率波<br> <img src="https://img-blog.csdnimg.cn/b7ffb7c0496741dfa6048544be8fc98b.png" alt="在这里插入图片描述"></p>
+<h2 id="音色（Timbre）"><a href="#音色（Timbre）" class="headerlink" title="音色（Timbre）"></a>音色（Timbre）</h2><p>泛音或谐波的组合<br>频率<br>相对强度 </p>
+<h2 id="相位和噪声消除"><a href="#相位和噪声消除" class="headerlink" title="相位和噪声消除"></a>相位和噪声消除</h2><p>相同的频率，振幅，但不同的相位<br><img src="https://img-blog.csdnimg.cn/0c902f7b87cc4d4b939a57095e6f9a6e.png" alt="在这里插入图片描述"></p>
+<h2 id="人类听觉特性"><a href="#人类听觉特性" class="headerlink" title="人类听觉特性"></a>人类听觉特性</h2><p>人耳可听见的声音<br>频率范围:20-20KHz<br>声压级范围(0-130db)<br><img src="https://img-blog.csdnimg.cn/3feeb00410d049e3a59d9fb02bc7ed74.png" alt="在这里插入图片描述"></p>
+<h2 id="数字声音"><a href="#数字声音" class="headerlink" title="数字声音"></a>数字声音</h2><h3 id="Pulse-code-Modulation-（PCM）"><a href="#Pulse-code-Modulation-（PCM）" class="headerlink" title="Pulse-code Modulation （PCM）"></a>Pulse-code Modulation （PCM）</h3><p>对采样模拟声音信号进行编码的标准方法<br>抽样，量化，编码<br><img src="https://img-blog.csdnimg.cn/c3b4447f592e48bb87370da03d49d01d.png" alt="在这里插入图片描述"></p>
+<h3 id="采样"><a href="#采样" class="headerlink" title="采样"></a>采样</h3><p>采样频率:每秒采样次数(Hz)<br>采样的频率高一点<br><img src="https://img-blog.csdnimg.cn/bfd036399a6f46a39075e1f160cd6cb1.png" alt="在这里插入图片描述"></p>
+<h3 id="量化"><a href="#量化" class="headerlink" title="量化"></a>量化</h3><p> 位深度:位深度是每个样本中信息的位数<br> <img src="https://img-blog.csdnimg.cn/7e9b0c17da474d7dbd21884514124072.png" alt="在这里插入图片描述"></p>
+<h3 id="Audio-Format"><a href="#Audio-Format" class="headerlink" title="Audio Format"></a>Audio Format</h3><p><img src="https://img-blog.csdnimg.cn/6c60c25593724c55b76c39df5b306e6d.png" alt="在这里插入图片描述"></p>
+<h2 id="3维的声音的渲染"><a href="#3维的声音的渲染" class="headerlink" title="3维的声音的渲染"></a>3维的声音的渲染</h2><p>一种单音音频信号<br>从特定位置发出的 </p>
+<h2 id="侦听器"><a href="#侦听器" class="headerlink" title="侦听器"></a>侦听器</h2><p>“虚拟麦克风”位置 ，速度，朝向</p>
+<h2 id="空间化"><a href="#空间化" class="headerlink" title="空间化"></a>空间化</h2><p>用来确定声音相对于听者的方向的技术<br><img src="https://img-blog.csdnimg.cn/d889e62f9a5d49a3b3a4090a4a5043b9.png" alt="在这里插入图片描述"></p>
+<h3 id="Panning"><a href="#Panning" class="headerlink" title="Panning"></a>Panning</h3><p>将一个音频信号分配到一个新的立体声或多声道声场<br>主要思想:对于增益为1的立体声信号，左、右两个信道的增益之和应为1<br><img src="https://img-blog.csdnimg.cn/aee5b89cee354c19863b47663c17e8b5.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/7f7ae0cdeead48e88033959f8679e2a1.png" alt="在这里插入图片描述"></p>
+<h4 id="线性平移"><a href="#线性平移" class="headerlink" title="线性平移"></a>线性平移</h4><p>当声音在中间平移时，能量会下降(x &#x3D; 0.5)<br><img src="https://img-blog.csdnimg.cn/0185132269e647349518ec66b53267c0.png" alt="在这里插入图片描述"></p>
+<h4 id="等平方平移"><a href="#等平方平移" class="headerlink" title="等平方平移"></a>等平方平移</h4><p> 在平移过程中保持功率限制，而不是保持振幅不变，以保持恒定的响度<br> <img src="https://img-blog.csdnimg.cn/b829e99f348f4b02a272edb66a4de295.png" alt="在这里插入图片描述"></p>
+<p> 这个方程有几个可能的解，一个是正弦&#x2F;余弦方程<br> <img src="https://img-blog.csdnimg.cn/30d68778eaa94069805127bcdeb70d90.png" alt=" "></p>
+<h3 id="衰弱"><a href="#衰弱" class="headerlink" title="衰弱"></a>衰弱</h3><p>音量会随着听者的离开而衰减在现实世界中，球形声波的声压(P)随着距离球中心1&#x2F;r的距离减小:<br><img src="https://img-blog.csdnimg.cn/8aacb541cf914cfc8edd962efba42cf9.png" alt="在这里插入图片描述"></p>
+<h3 id="障碍物"><a href="#障碍物" class="headerlink" title="障碍物"></a>障碍物</h3><p><img src="https://img-blog.csdnimg.cn/b87553c6245c46cdb64116e9472b4875.png" alt="在这里插入图片描述"></p>
+<h2 id="混响"><a href="#混响" class="headerlink" title="混响"></a>混响</h2><p> <img src="https://img-blog.csdnimg.cn/b91198a2fe4c48fd856dc56654de2d3f.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/337b8213969f4a75ba3a59d3333286fb.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/dd4d3b66699a4b288e3d8ae137c20b0b.png" alt="在这里插入图片描述"><br>回音<br><img src="https://img-blog.csdnimg.cn/c06d01d110d74c30ac8cc9e91149ea5c.png" alt="在这里插入图片描述"><br>多普勒效应<br><img src="https://img-blog.csdnimg.cn/84468ebdc0bb43b5adcec55ab5af6694.png" alt="在这里插入图片描述"></p>
+<h2 id="声场"><a href="#声场" class="headerlink" title="声场"></a>声场</h2><p><img src="https://img-blog.csdnimg.cn/b46adb00f015498bb97684584cf01e14.png" alt="在这里插入图片描述"></p>
+<h2 id="中间件"><a href="#中间件" class="headerlink" title="中间件"></a>中间件</h2><p><img src="https://img-blog.csdnimg.cn/88b02085c15b42ecb67969f5710d9d19.png" alt="在这里插入图片描述"></p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="/music/jucilang.mp3">
+            </audio>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+		data-enable='true'
+        data-ae='true'
+        data-ci='35b8fbd0e6865c1adf60'
+        data-cs='6d2988de68c828bce78247ad604846cdc30e7ca3'
+        data-r='mrchenlreanspace.github.io'
+        data-o='MrChenLreanSpace'
+        data-a='MrChenLreanSpace'
+        data-d='false'
+    >查看评论</div>
+
+
+    </div>
+    
+        <div class='side'>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%B2%92%E5%AD%90%E7%B3%BB%E7%BB%9F"><span class="toc-number">1.</span> <span class="toc-text">粒子系统</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B1%9E%E6%80%A7"><span class="toc-number">1.1.</span> <span class="toc-text">属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B2%92%E5%AD%90%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="toc-number">1.2.</span> <span class="toc-text">粒子的生命周期</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B2%92%E5%AD%90%E7%9A%84%E5%8F%91%E5%B0%84%E5%99%A8"><span class="toc-number">1.3.</span> <span class="toc-text">粒子的发射器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B2%92%E5%AD%90%E6%A8%A1%E6%8B%9F"><span class="toc-number">1.4.</span> <span class="toc-text">粒子模拟</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E7%A7%8D%E7%B2%92%E5%AD%90%E6%95%88%E6%9E%9C%E5%88%B6%E4%BD%9C"><span class="toc-number">1.5.</span> <span class="toc-text">三种粒子效果制作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B2%92%E5%AD%90%E7%B3%BB%E7%BB%9F%E6%B8%B2%E6%9F%93"><span class="toc-number">1.6.</span> <span class="toc-text">粒子系统渲染</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%8C%E5%85%A8%E8%A7%A3%E5%86%B3%E7%B2%92%E5%AD%90"><span class="toc-number">1.7.</span> <span class="toc-text">完全解决粒子</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Low-Resolution-Particles"><span class="toc-number">1.8.</span> <span class="toc-text">Low-Resolution Particles</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GPU-%E7%B2%92%E5%AD%90"><span class="toc-number">1.9.</span> <span class="toc-text">GPU 粒子</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#GPU%E5%A4%84%E7%90%86%E7%B2%92%E5%AD%90%E7%B3%BB%E7%BB%9F"><span class="toc-number">1.9.1.</span> <span class="toc-text">GPU处理粒子系统</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9D%E5%A7%8B%E7%8A%B6%E6%80%81"><span class="toc-number">1.9.2.</span> <span class="toc-text">初始状态</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F%E7%9A%84%E9%97%AE%E9%A2%98"><span class="toc-number">1.9.3.</span> <span class="toc-text">注意的问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%92%E5%BA%8F%EF%BC%8C%E6%B8%B2%E6%9F%93%E5%92%8C%E4%BA%A4%E6%8D%A2%E6%B4%BB%E5%88%97%E8%A1%A8"><span class="toc-number">1.9.4.</span> <span class="toc-text">排序，渲染和交换活列表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B7%B1%E5%BA%A6%E7%BC%93%E5%86%B2%E7%A2%B0%E6%92%9E"><span class="toc-number">1.9.5.</span> <span class="toc-text">深度缓冲碰撞</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%A3%B0%E9%9F%B3%E7%B3%BB%E7%BB%9F"><span class="toc-number">2.</span> <span class="toc-text">声音系统</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Volume"><span class="toc-number">2.1.</span> <span class="toc-text">Volume</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Pitch"><span class="toc-number">2.2.</span> <span class="toc-text">Pitch</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9F%B3%E8%89%B2%EF%BC%88Timbre%EF%BC%89"><span class="toc-number">2.3.</span> <span class="toc-text">音色（Timbre）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%B8%E4%BD%8D%E5%92%8C%E5%99%AA%E5%A3%B0%E6%B6%88%E9%99%A4"><span class="toc-number">2.4.</span> <span class="toc-text">相位和噪声消除</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%BA%E7%B1%BB%E5%90%AC%E8%A7%89%E7%89%B9%E6%80%A7"><span class="toc-number">2.5.</span> <span class="toc-text">人类听觉特性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E5%AD%97%E5%A3%B0%E9%9F%B3"><span class="toc-number">2.6.</span> <span class="toc-text">数字声音</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Pulse-code-Modulation-%EF%BC%88PCM%EF%BC%89"><span class="toc-number">2.6.1.</span> <span class="toc-text">Pulse-code Modulation （PCM）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%87%87%E6%A0%B7"><span class="toc-number">2.6.2.</span> <span class="toc-text">采样</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%87%8F%E5%8C%96"><span class="toc-number">2.6.3.</span> <span class="toc-text">量化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Audio-Format"><span class="toc-number">2.6.4.</span> <span class="toc-text">Audio Format</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3%E7%BB%B4%E7%9A%84%E5%A3%B0%E9%9F%B3%E7%9A%84%E6%B8%B2%E6%9F%93"><span class="toc-number">2.7.</span> <span class="toc-text">3维的声音的渲染</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BE%A6%E5%90%AC%E5%99%A8"><span class="toc-number">2.8.</span> <span class="toc-text">侦听器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A9%BA%E9%97%B4%E5%8C%96"><span class="toc-number">2.9.</span> <span class="toc-text">空间化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Panning"><span class="toc-number">2.9.1.</span> <span class="toc-text">Panning</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BA%BF%E6%80%A7%E5%B9%B3%E7%A7%BB"><span class="toc-number">2.9.1.1.</span> <span class="toc-text">线性平移</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AD%89%E5%B9%B3%E6%96%B9%E5%B9%B3%E7%A7%BB"><span class="toc-number">2.9.1.2.</span> <span class="toc-text">等平方平移</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A1%B0%E5%BC%B1"><span class="toc-number">2.9.2.</span> <span class="toc-text">衰弱</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9A%9C%E7%A2%8D%E7%89%A9"><span class="toc-number">2.9.3.</span> <span class="toc-text">障碍物</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B7%B7%E5%93%8D"><span class="toc-number">2.10.</span> <span class="toc-text">混响</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A3%B0%E5%9C%BA"><span class="toc-number">2.11.</span> <span class="toc-text">声场</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%AD%E9%97%B4%E4%BB%B6"><span class="toc-number">2.12.</span> <span class="toc-text">中间件</span></a></li></ol></li></ol>	
+        </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"], linebreaks: { automatic:true }, EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50) },
+        tex2jax: { inlineMath: [ ["$", "$"], ["\\(","\\)"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno",skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']},
+        TeX: {  noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } }, Macros: { href: "{}" } },
+        messageStyle: "none"
+    });
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+<!-- Google Analytics -->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YMJ8CBH8F7"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-YMJ8CBH8F7');
+</script>
+<!-- End Google Analytics -->
+
+
+</html>

@@ -321,6 +321,9 @@
 <p>在游戏中进行简单的建模可以用ProBuilder和Polybrush这两个包进行修改地形的顶点</p>
 <p>ProGrids做方格的校准</p>
 <h1 id="阴影部分"><a href="#阴影部分" class="headerlink" title="阴影部分"></a>阴影部分</h1><p><a href="https://zhuanlan.zhihu.com/p/444286597">百人计划说的很详细了</a></p>
+<h1 id="简单着色样例"><a href="#简单着色样例" class="headerlink" title="简单着色样例"></a>简单着色样例</h1><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">Shader <span class="string">&quot;CustomLit&quot;</span></span><br><span class="line">&#123;</span><br><span class="line">    Properties</span><br><span class="line">    &#123;</span><br><span class="line">        _MainTex(<span class="string">&quot;主贴图&quot;</span>, <span class="number">2</span>D) = <span class="string">&quot;white&quot;</span> &#123;&#125;</span><br><span class="line">    &#125;</span><br><span class="line">        SubShader</span><br><span class="line">        &#123;</span><br><span class="line">        Tags &#123; <span class="string">&quot;RenderType&quot;</span> = <span class="string">&quot;Transparent&quot;</span> <span class="string">&quot;Queue&quot;</span> = <span class="string">&quot;Transparent&quot;</span> &#125;</span><br><span class="line">        Pass</span><br><span class="line">        &#123;</span><br><span class="line">            Blend SrcAlpha OneMinusSrcAlpha</span><br><span class="line">            Tags</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="string">&quot;LightMode&quot;</span> = <span class="string">&quot;UniversalForward&quot;</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//Zwrite off</span></span><br><span class="line">            HLSLPROGRAM</span><br><span class="line">            <span class="meta">#<span class="keyword">pragma</span> vertex vert</span></span><br><span class="line">            <span class="meta">#<span class="keyword">pragma</span> fragment frag</span></span><br><span class="line"></span><br><span class="line">            <span class="meta">#<span class="keyword">pragma</span> multi_compile _ _MAIN_LIGHT_SHADOWS</span></span><br><span class="line">            <span class="meta">#<span class="keyword">pragma</span> multi_compile _ _MAIN_LIGHT_SHADOWS_CASCADE</span></span><br><span class="line">            <span class="meta">#<span class="keyword">pragma</span> multi_compile _ Anti_Aliasing_ON</span></span><br><span class="line"></span><br><span class="line">            <span class="meta">#<span class="keyword">include</span> <span class="string">&quot;Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl&quot;</span></span></span><br><span class="line">            <span class="meta">#<span class="keyword">include</span> <span class="string">&quot;Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl&quot;</span></span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">struct</span> appdata</span><br><span class="line">            &#123;</span><br><span class="line">                float4 vertex : POSITION;</span><br><span class="line">                float4 uv : TEXCOORD0;</span><br><span class="line"></span><br><span class="line">            &#125;;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">struct</span> <span class="title class_">v2f</span></span><br><span class="line">            &#123;</span><br><span class="line">                float4 pos : SV_POSITION;</span><br><span class="line">                float2 uv : TEXCOORD0;</span><br><span class="line">                float3 worldPos : TEXCOORD1;</span><br><span class="line">            &#125;;</span><br><span class="line"></span><br><span class="line">            sampler2D _MainTex;</span><br><span class="line">            float4 _MainTex_ST;</span><br><span class="line"></span><br><span class="line">            <span class="function">v2f <span class="title">vert</span><span class="params">(appdata v)</span></span></span><br><span class="line"><span class="function">            </span>&#123;</span><br><span class="line">                v2f o;</span><br><span class="line">                o.pos = <span class="built_in">mul</span>(UNITY_MATRIX_MVP, v.vertex);</span><br><span class="line">                o.worldPos = <span class="built_in">mul</span>(unity_ObjectToWorld, v.vertex);</span><br><span class="line">                o.uv = <span class="built_in">TRANSFORM_TEX</span>(v.uv, _MainTex);</span><br><span class="line"></span><br><span class="line">                <span class="keyword">return</span> o;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            float4 _Color;</span><br><span class="line"></span><br><span class="line">            <span class="function">float4 <span class="title">frag</span><span class="params">(v2f i)</span> : SV_Target</span></span><br><span class="line"><span class="function">            &#123;</span></span><br><span class="line">                float4 SHADOW_COORDS = <span class="built_in">TransformWorldToShadowCoord</span>(i.worldPos);</span><br><span class="line"></span><br><span class="line">                Light mainLight = <span class="built_in">GetMainLight</span>(SHADOW_COORDS);</span><br><span class="line">                half shadow = <span class="built_in">MainLightRealtimeShadow</span>(SHADOW_COORDS);</span><br><span class="line"></span><br><span class="line">                <span class="keyword">return</span> <span class="built_in">float4</span>(shadow, shadow, shadow,<span class="number">1</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            ENDHLSL</span><br><span class="line">        &#125;</span><br><span class="line">         UsePass <span class="string">&quot;Universal Render Pipeline/Lit/ShadowCaster&quot;</span></span><br><span class="line">        <span class="comment">//pass &#123;</span></span><br><span class="line">        <span class="comment">//    Name &quot;ShadowCast&quot;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//    Tags&#123; &quot;LightMode&quot; = &quot;ShadowCaster&quot; &#125;</span></span><br><span class="line">        <span class="comment">//    HLSLPROGRAM</span></span><br><span class="line">        <span class="comment">//    #pragma vertex vert</span></span><br><span class="line">        <span class="comment">//    #pragma fragment frag</span></span><br><span class="line">        <span class="comment">//    #include &quot;Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl&quot;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//        struct appdata</span></span><br><span class="line">        <span class="comment">//    &#123;</span></span><br><span class="line">        <span class="comment">//        float4 vertex : POSITION;</span></span><br><span class="line">        <span class="comment">//    &#125;;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//    struct v2f</span></span><br><span class="line">        <span class="comment">//    &#123;</span></span><br><span class="line">        <span class="comment">//        float4 pos : SV_POSITION;</span></span><br><span class="line">        <span class="comment">//    &#125;;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//    sampler2D _MainTex;</span></span><br><span class="line">        <span class="comment">//    float4 _MainTex_ST;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//    v2f vert(appdata v)</span></span><br><span class="line">        <span class="comment">//    &#123;</span></span><br><span class="line">        <span class="comment">//        v2f o;</span></span><br><span class="line">        <span class="comment">//        o.pos = mul(UNITY_MATRIX_MVP, v.vertex);</span></span><br><span class="line">        <span class="comment">//        return o;</span></span><br><span class="line">        <span class="comment">//    &#125;</span></span><br><span class="line">        <span class="comment">//    float4 frag(v2f i) : SV_Target</span></span><br><span class="line">        <span class="comment">//    &#123;</span></span><br><span class="line">        <span class="comment">//        float4 color;</span></span><br><span class="line">        <span class="comment">//        color.xyz = float3(0.0, 0.0, 0.0);</span></span><br><span class="line">        <span class="comment">//        return color;</span></span><br><span class="line">        <span class="comment">//    &#125;</span></span><br><span class="line">        <span class="comment">//    ENDHLSL</span></span><br><span class="line">        <span class="comment">//&#125;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/92085b661bd14a2dac4ccfb8b9e7b1d7.png" alt="在这里插入图片描述"></p>
 ]]></content>
       <categories>
         <category>升级渲染管线</category>
@@ -2273,6 +2276,208 @@
       </categories>
       <tags>
         <tag>Shader</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Games104总结粒子系统和声效</title>
+    <url>/2022/07/08/Games104%E6%80%BB%E7%BB%93%E7%B2%92%E5%AD%90%E7%B3%BB%E7%BB%9F%E5%92%8C%E5%A3%B0%E6%95%88/</url>
+    <content><![CDATA[<h1 id="粒子系统"><a href="#粒子系统" class="headerlink" title="粒子系统"></a>粒子系统</h1><h2 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h2><p>坐标，初速度，大小，颜色，生命周期，…</p>
+<h2 id="粒子的生命周期"><a href="#粒子的生命周期" class="headerlink" title="粒子的生命周期"></a>粒子的生命周期</h2><p><img src="https://img-blog.csdnimg.cn/98a3e9499786481286a3b9e752658647.png" alt="在这里插入图片描述"></p>
+<p>如果控制失败就会出现粒子越来越多，使系统资源殆尽</p>
+<h2 id="粒子的发射器"><a href="#粒子的发射器" class="headerlink" title="粒子的发射器"></a>粒子的发射器</h2><p>指定生成规则，指定仿真逻辑，描述如何渲染粒子</p>
+<h2 id="粒子模拟"><a href="#粒子模拟" class="headerlink" title="粒子模拟"></a>粒子模拟</h2><p>力学模拟<br><img src="https://img-blog.csdnimg.cn/ab1877400741445f904523bdc35bf20d.png" alt="在这里插入图片描述"><br>模拟控制粒子如何随时间变化<br>粒子碰撞</p>
+<h2 id="三种粒子效果制作"><a href="#三种粒子效果制作" class="headerlink" title="三种粒子效果制作"></a>三种粒子效果制作</h2><p>面片粒子，网格粒子，光带粒子（拖尾）<br>光带粒子系统路径使用CatMull-Rom插值，效果会更柔和<br><img src="https://img-blog.csdnimg.cn/e0545c5034964042bddb756a39388d5e.png" alt="在这里插入图片描述"></p>
+<h2 id="粒子系统渲染"><a href="#粒子系统渲染" class="headerlink" title="粒子系统渲染"></a>粒子系统渲染</h2><p>透明度排序<br>全局排序：准确，但性能消耗大<br>层次结构:每个系统-&gt;每个发射器-&gt;发射器内部<br>排序规则<br>粒子之间:基于粒子与相机的距离<br>系统或发射器之间:包围盒</p>
+<h2 id="完全解决粒子"><a href="#完全解决粒子" class="headerlink" title="完全解决粒子"></a>完全解决粒子</h2><p>基于屏幕的解决办法，最坏情况充满整个屏幕</p>
+<h2 id="Low-Resolution-Particles"><a href="#Low-Resolution-Particles" class="headerlink" title="Low-Resolution Particles"></a>Low-Resolution Particles</h2><p><img src="https://img-blog.csdnimg.cn/428232c075ba4e0dac8ce2813624d824.png" alt="在这里插入图片描述"><br>如图，通过Half-ResolutionDepth进行混合</p>
+<h2 id="GPU-粒子"><a href="#GPU-粒子" class="headerlink" title="GPU 粒子"></a>GPU 粒子</h2><h3 id="GPU处理粒子系统"><a href="#GPU处理粒子系统" class="headerlink" title="GPU处理粒子系统"></a>GPU处理粒子系统</h3><p>高度并行工作，适合模拟大量粒子<br>释放你的CPU去编写游戏代码<br>易于访问深度缓冲做碰撞</p>
+<h3 id="初始状态"><a href="#初始状态" class="headerlink" title="初始状态"></a>初始状态</h3><p>右边的图显示了一个空的池，最多包含8个粒子，开始时所有8个槽都处于死可用状态<br><img src="https://img-blog.csdnimg.cn/5f6cf71adea84289b6ba07afd91ca1ae.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/75a6e787bcb1418da66776441ed6695c.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/fb67aa94e7b149f8b130c9a65922e854.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/21c102d116c844778e60295376027947.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/b79b2e1c598941c39f904b4bcfbfbc57.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/d5989b1c242d4e5aa5d40474321624c1.png" alt="在这里插入图片描述"></p>
+<h3 id="注意的问题"><a href="#注意的问题" class="headerlink" title="注意的问题"></a>注意的问题</h3><p>当摄像头没看粒子系统时被裁剪掉，当回头看时会显得很突兀 </p>
+<h3 id="排序，渲染和交换活列表"><a href="#排序，渲染和交换活列表" class="headerlink" title="排序，渲染和交换活列表"></a>排序，渲染和交换活列表</h3><p>根据距离缓冲对活列表进行排序<br>渲染粒子排序后的活列表剔除<br>交换活着列表<br><img src="https://img-blog.csdnimg.cn/23761dba4c8b4737b5806ef1743fc181.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/4aa1aead2fd6404cb947c1ba8880fc78.png" alt=" "></p>
+<h3 id="深度缓冲碰撞"><a href="#深度缓冲碰撞" class="headerlink" title="深度缓冲碰撞"></a>深度缓冲碰撞</h3><p> 1.重新投影粒子位置到之前的帧屏幕空间纹理坐标<br> 2.从昂贵的帧深度纹理读取深度值<br> 3.检查粒子是否与深度缓冲碰撞，但不完全在它后面(厚度值被使用)<br> 4.如果发生碰撞，计算表面法线和反弹粒子<br><img src="https://img-blog.csdnimg.cn/90f253d980844ca2a702af2a23616b77.png" alt="在这里插入图片描述"></p>
+<h1 id="声音系统"><a href="#声音系统" class="headerlink" title="声音系统"></a>声音系统</h1><h2 id="Volume"><a href="#Volume" class="headerlink" title="Volume"></a>Volume</h2><p><img src="https://img-blog.csdnimg.cn/9158d8b1054f437f84b8c18f2525d760.png" alt="在这里插入图片描述"></p>
+<p>声压(p):由声音引起的局部与环境气压的偏差波，国际单位制单位（帕）<br>粒子速度(V):粒子在介质中传播波的速度，单位为SI (m&#x2F;s)<br>声强(1):声波在单位面积上沿垂直于该面积方向所携带的功率，SI单位:W &#x2F; m2<br><img src="https://img-blog.csdnimg.cn/f267187f59fe4e47a4116d19c37631d6.png" alt="在这里插入图片描述"><br> 声压级(Lp):声音相对于参考值的有效压力的对数量度，单位为国际标准单位(dB)<br> <img src="https://img-blog.csdnimg.cn/c604b86573da42afa03f137bed81c573.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/6606a0f46e8d442e87cb72220303c8bd.png" alt="在这里插入图片描述"></p>
+<p> 参考声压，是人类听觉的阈值，常用在空气中(大概是3米外蚊子飞过的声音)</p>
+<h2 id="Pitch"><a href="#Pitch" class="headerlink" title="Pitch"></a>Pitch</h2><p> 决定声音的高或低<br> 这取决于声音的频率波<br> <img src="https://img-blog.csdnimg.cn/b7ffb7c0496741dfa6048544be8fc98b.png" alt="在这里插入图片描述"></p>
+<h2 id="音色（Timbre）"><a href="#音色（Timbre）" class="headerlink" title="音色（Timbre）"></a>音色（Timbre）</h2><p>泛音或谐波的组合<br>频率<br>相对强度 </p>
+<h2 id="相位和噪声消除"><a href="#相位和噪声消除" class="headerlink" title="相位和噪声消除"></a>相位和噪声消除</h2><p>相同的频率，振幅，但不同的相位<br><img src="https://img-blog.csdnimg.cn/0c902f7b87cc4d4b939a57095e6f9a6e.png" alt="在这里插入图片描述"></p>
+<h2 id="人类听觉特性"><a href="#人类听觉特性" class="headerlink" title="人类听觉特性"></a>人类听觉特性</h2><p>人耳可听见的声音<br>频率范围:20-20KHz<br>声压级范围(0-130db)<br><img src="https://img-blog.csdnimg.cn/3feeb00410d049e3a59d9fb02bc7ed74.png" alt="在这里插入图片描述"></p>
+<h2 id="数字声音"><a href="#数字声音" class="headerlink" title="数字声音"></a>数字声音</h2><h3 id="Pulse-code-Modulation-（PCM）"><a href="#Pulse-code-Modulation-（PCM）" class="headerlink" title="Pulse-code Modulation （PCM）"></a>Pulse-code Modulation （PCM）</h3><p>对采样模拟声音信号进行编码的标准方法<br>抽样，量化，编码<br><img src="https://img-blog.csdnimg.cn/c3b4447f592e48bb87370da03d49d01d.png" alt="在这里插入图片描述"></p>
+<h3 id="采样"><a href="#采样" class="headerlink" title="采样"></a>采样</h3><p>采样频率:每秒采样次数(Hz)<br>采样的频率高一点<br><img src="https://img-blog.csdnimg.cn/bfd036399a6f46a39075e1f160cd6cb1.png" alt="在这里插入图片描述"></p>
+<h3 id="量化"><a href="#量化" class="headerlink" title="量化"></a>量化</h3><p> 位深度:位深度是每个样本中信息的位数<br> <img src="https://img-blog.csdnimg.cn/7e9b0c17da474d7dbd21884514124072.png" alt="在这里插入图片描述"></p>
+<h3 id="Audio-Format"><a href="#Audio-Format" class="headerlink" title="Audio Format"></a>Audio Format</h3><p><img src="https://img-blog.csdnimg.cn/6c60c25593724c55b76c39df5b306e6d.png" alt="在这里插入图片描述"></p>
+<h2 id="3维的声音的渲染"><a href="#3维的声音的渲染" class="headerlink" title="3维的声音的渲染"></a>3维的声音的渲染</h2><p>一种单音音频信号<br>从特定位置发出的 </p>
+<h2 id="侦听器"><a href="#侦听器" class="headerlink" title="侦听器"></a>侦听器</h2><p>“虚拟麦克风”位置 ，速度，朝向</p>
+<h2 id="空间化"><a href="#空间化" class="headerlink" title="空间化"></a>空间化</h2><p>用来确定声音相对于听者的方向的技术<br><img src="https://img-blog.csdnimg.cn/d889e62f9a5d49a3b3a4090a4a5043b9.png" alt="在这里插入图片描述"></p>
+<h3 id="Panning"><a href="#Panning" class="headerlink" title="Panning"></a>Panning</h3><p>将一个音频信号分配到一个新的立体声或多声道声场<br>主要思想:对于增益为1的立体声信号，左、右两个信道的增益之和应为1<br><img src="https://img-blog.csdnimg.cn/aee5b89cee354c19863b47663c17e8b5.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/7f7ae0cdeead48e88033959f8679e2a1.png" alt="在这里插入图片描述"></p>
+<h4 id="线性平移"><a href="#线性平移" class="headerlink" title="线性平移"></a>线性平移</h4><p>当声音在中间平移时，能量会下降(x &#x3D; 0.5)<br><img src="https://img-blog.csdnimg.cn/0185132269e647349518ec66b53267c0.png" alt="在这里插入图片描述"></p>
+<h4 id="等平方平移"><a href="#等平方平移" class="headerlink" title="等平方平移"></a>等平方平移</h4><p> 在平移过程中保持功率限制，而不是保持振幅不变，以保持恒定的响度<br> <img src="https://img-blog.csdnimg.cn/b829e99f348f4b02a272edb66a4de295.png" alt="在这里插入图片描述"></p>
+<p> 这个方程有几个可能的解，一个是正弦&#x2F;余弦方程<br> <img src="https://img-blog.csdnimg.cn/30d68778eaa94069805127bcdeb70d90.png" alt=" "></p>
+<h3 id="衰弱"><a href="#衰弱" class="headerlink" title="衰弱"></a>衰弱</h3><p>音量会随着听者的离开而衰减在现实世界中，球形声波的声压(P)随着距离球中心1&#x2F;r的距离减小:<br><img src="https://img-blog.csdnimg.cn/8aacb541cf914cfc8edd962efba42cf9.png" alt="在这里插入图片描述"></p>
+<h3 id="障碍物"><a href="#障碍物" class="headerlink" title="障碍物"></a>障碍物</h3><p><img src="https://img-blog.csdnimg.cn/b87553c6245c46cdb64116e9472b4875.png" alt="在这里插入图片描述"></p>
+<h2 id="混响"><a href="#混响" class="headerlink" title="混响"></a>混响</h2><p> <img src="https://img-blog.csdnimg.cn/b91198a2fe4c48fd856dc56654de2d3f.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/337b8213969f4a75ba3a59d3333286fb.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/dd4d3b66699a4b288e3d8ae137c20b0b.png" alt="在这里插入图片描述"><br>回音<br><img src="https://img-blog.csdnimg.cn/c06d01d110d74c30ac8cc9e91149ea5c.png" alt="在这里插入图片描述"><br>多普勒效应<br><img src="https://img-blog.csdnimg.cn/84468ebdc0bb43b5adcec55ab5af6694.png" alt="在这里插入图片描述"></p>
+<h2 id="声场"><a href="#声场" class="headerlink" title="声场"></a>声场</h2><p><img src="https://img-blog.csdnimg.cn/b46adb00f015498bb97684584cf01e14.png" alt="在这里插入图片描述"></p>
+<h2 id="中间件"><a href="#中间件" class="headerlink" title="中间件"></a>中间件</h2><p><img src="https://img-blog.csdnimg.cn/88b02085c15b42ecb67969f5710d9d19.png" alt="在这里插入图片描述"></p>
+]]></content>
+      <categories>
+        <category>游戏</category>
+      </categories>
+      <tags>
+        <tag>Shader</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>游戏服务器学习</title>
+    <url>/2022/07/04/%E6%B8%B8%E6%88%8F%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AD%A6%E4%B9%A0/</url>
+    <content><![CDATA[<h1 id="游戏大厅"><a href="#游戏大厅" class="headerlink" title="游戏大厅"></a>游戏大厅</h1><p>棋牌类大厅</p>
+<p>MMORPG大厅</p>
+<h1 id="大厅功能"><a href="#大厅功能" class="headerlink" title="大厅功能"></a>大厅功能</h1><p>（1）服务器启动，等待客户端连入</p>
+<p>（2）维护一个当前所有连入的客户端的数据列表，数据内容包含IP地址，名字等。</p>
+<p>（3）如果客户端创建了一个游戏服务(房间)，则把该游戏服务加入到一个列表中，并向其他客户端刷新列表数据,触发该客户端成为游戏的主机。<br>（4）当有客户端选择加入某个游戏服务时,帮助它连接到主机。</p>
+<p>（5）维护当前所有游戏服务的参加游戏人数、游戏是否已经开始等相关信息，这些信息由服务器向建立服务的主机玩家获取。<br>（6）当一场游戏结束后，服务器从主机玩家那里获取游戏结果和分数等信息，并更新排行榜。</p>
+]]></content>
+      <categories>
+        <category>游戏</category>
+      </categories>
+      <tags>
+        <tag>服务器</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Games104网络基础部分</title>
+    <url>/2022/09/27/Games104%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86/</url>
+    <content><![CDATA[<h1 id="面临的挑战"><a href="#面临的挑战" class="headerlink" title="面临的挑战"></a>面临的挑战</h1><p>实现网络物体一致</p>
+<p>网络延迟 网络掉线和重连</p>
+<p>反作弊和防信息泄露</p>
+<p>对于不同设备连接和实现同步 多个游戏的子系统实现同步</p>
+<p>承载更多的用户<br>高并发 高可用性 高性能</p>
+<h1 id="TCP"><a href="#TCP" class="headerlink" title="TCP"></a>TCP</h1><h2 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h2><p>面向连接  可靠和有序 流控制 拥塞控制</p>
+<h2 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h2><p>太慢了</p>
+<h1 id="UDP"><a href="#UDP" class="headerlink" title="UDP"></a>UDP</h1><h2 id="优点-1"><a href="#优点-1" class="headerlink" title="优点"></a>优点</h2><p>快</p>
+<h2 id="缺点-1"><a href="#缺点-1" class="headerlink" title="缺点"></a>缺点</h2><p>无连接 不可靠和无序 没有流控制 没有拥塞控制</p>
+<h1 id="对于UDP和TCP的混合使用"><a href="#对于UDP和TCP的混合使用" class="headerlink" title="对于UDP和TCP的混合使用"></a>对于UDP和TCP的混合使用</h1><p>使用在udp的连接下使用<strong>自动重传协议</strong> ARQ和 <strong>前向纠错</strong> FEC</p>
+<h2 id="ARQ"><a href="#ARQ" class="headerlink" title="ARQ"></a>ARQ</h2><p>通过滑动窗口和选择性重传</p>
+<p>在选择性重复ARQ中，只有损坏或丢失的帧被重传</p>
+<p>接收端发送每一帧的ack，发送端维护每一帧的超时时间</p>
+<p>当接收端收到损坏的数据包时，它将发送一个NACK，发送端将发送&#x2F;重传接收到NACK的帧</p>
+<h2 id="FEC"><a href="#FEC" class="headerlink" title="FEC"></a>FEC</h2><h3 id="XOF异或"><a href="#XOF异或" class="headerlink" title="XOF异或"></a>XOF异或</h3><p>Let E &#x3D; XOR (A, B, C, D)<br>• A &#x3D; XOR (B, C, D, E)<br>• B &#x3D; XOR (A, C, D, E)<br>• C &#x3D; XOR (A, B, D, E)<br>• D &#x3D; XOR (A, B, C, E)<br><img src="https://img-blog.csdnimg.cn/e506987daf694a88b1f6d762b8fd50d6.png" alt="在这里插入图片描述"><br>如果有报文丢失，可以和其他4个报文一起恢复<br>在连续数据传输中，只能丢失一个数据包。如果A和B同时丢失，则算法无法恢复</p>
+<h3 id="Reed-Solomon-Codes"><a href="#Reed-Solomon-Codes" class="headerlink" title="Reed-Solomon Codes"></a>Reed-Solomon Codes</h3><p><img src="https://img-blog.csdnimg.cn/fd2d060129124af99978e1d25f0eda21.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/99251fc2ba744f32b2a8c03e2204e5a7.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/40b7ebf40d2d40bf98ec5c88191890a7.png" alt="在这里插入图片描述"></p>
+<h2 id="定制您的UDP基于ARQ和FEC"><a href="#定制您的UDP基于ARQ和FEC" class="headerlink" title="定制您的UDP基于ARQ和FEC"></a>定制您的UDP基于ARQ和FEC</h2><h3 id="可靠性"><a href="#可靠性" class="headerlink" title="可靠性"></a>可靠性</h3><p>选择性重复ARQ</p>
+<h3 id="混合-ARQ-和-FEC使用"><a href="#混合-ARQ-和-FEC使用" class="headerlink" title="混合 ARQ 和 FEC使用"></a>混合 ARQ 和 FEC使用</h3><p>在ARQ之前，采用FEC进行纠错</p>
+<h3 id="实时"><a href="#实时" class="headerlink" title="实时"></a>实时</h3><p>更小的重传超时时间RTO增长<br>没有拥塞控制<br>速度重传机制<br>没有延迟ACK传输</p>
+<h3 id="灵活性"><a href="#灵活性" class="headerlink" title="灵活性"></a>灵活性</h3><p>设计协议速度<br>支持可靠和不可靠</p>
+<h1 id="时钟同步"><a href="#时钟同步" class="headerlink" title="时钟同步"></a>时钟同步</h1><h2 id="RTT往返时间"><a href="#RTT往返时间" class="headerlink" title="RTT往返时间"></a>RTT往返时间</h2><p><img src="https://img-blog.csdnimg.cn/c1d9e901debd42f6a39e866f9235bbcd.png" alt="在这里插入图片描述"></p>
+<h2 id="NTP网络时间协议"><a href="#NTP网络时间协议" class="headerlink" title="NTP网络时间协议"></a>NTP网络时间协议</h2><p>理想情况下，上行和下行速度一样。<br><img src="https://img-blog.csdnimg.cn/18e41aa844be46a3a7c293a9642ce181.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/9408326cad60463d99229de2e20cc87e.png" alt="在这里插入图片描述"><br>现实中，不一样的处理方法</p>
+<p><img src="https://img-blog.csdnimg.cn/213f7cef825e4083aaca213686962d4d.png" alt="在这里插入图片描述"><br>多求几次RTT然后去除最高值，取剩下的平均值。</p>
+<h1 id="Remote-Procedure-Call（RPC）"><a href="#Remote-Procedure-Call（RPC）" class="headerlink" title="Remote Procedure Call（RPC）"></a>Remote Procedure Call（RPC）</h1><p>远程调用函数<br><img src="https://img-blog.csdnimg.cn/169e744bb0b74e7dbbecec9d23d991d7.png" alt="在这里插入图片描述"></p>
+<h2 id="Interface-Definition-Language接口定义语言"><a href="#Interface-Definition-Language接口定义语言" class="headerlink" title="Interface Definition Language接口定义语言"></a>Interface Definition Language接口定义语言</h2><p>类似于用来两边对话的格式，例如ProtoBuf<br><img src="https://img-blog.csdnimg.cn/b0cb53d6345049a89e9eee27bc281ff0.png" alt="在这里插入图片描述"></p>
+<h2 id="RPC-Stubs"><a href="#RPC-Stubs" class="headerlink" title="RPC Stubs"></a>RPC Stubs</h2><p>客户端存根是一个过程，它在客户端看来就像是一个可调用的服务器过程<br>•客户端程序认为它在调用服务器，但实际上它是在调用客户端存根<br>服务器端存根看起来像服务器的调用者<br>•服务器程序认为它是由客户端调用的，但实际上它是由服务器端存根调用的<br>•存根相互发送消息，使RPC透明地发生<br><img src="https://img-blog.csdnimg.cn/92cdef1c51084896b555d2389e9a4059.png" alt="在这里插入图片描述"></p>
+<h2 id="Stub-Compiler"><a href="#Stub-Compiler" class="headerlink" title="Stub Compiler"></a>Stub Compiler</h2><p>票据编译器<br>比如ProtoBuf直接做好了。<br>•“存根编译器”读取IDL声明，并为每个服务器过程生成两个存根过程<br>•服务器程序员实现服务的过程，并将它们与服务器端存根链接<br>客户端程序员实现客户端程序，并将其与客户端存根链接<br>•存根管理客户端和服务器之间远程通信的所有细节<br>#Real RPC Package Journey</p>
+<p><img src="https://img-blog.csdnimg.cn/fdb86ae3cc1d4fc89f3cdf2fa036b735.png" alt="在这里插入图片描述"></p>
+<h1 id="网络拓扑结构"><a href="#网络拓扑结构" class="headerlink" title="网络拓扑结构"></a>网络拓扑结构</h1><h2 id="原始的p2p"><a href="#原始的p2p" class="headerlink" title="原始的p2p"></a>原始的p2p</h2><p><img src="https://img-blog.csdnimg.cn/48792c2758d74039aeb3a869772662a3.png" alt="在这里插入图片描述"><br>两者进行相互连接就行<br>每个客户端向所有人广播游戏事件<br>其他人<br>•鲁棒性<br>•作弊更容易<br>•所有节点之间需要同步，以保持分布式游戏状态的一致性</p>
+<h2 id="通过建立hostServe的P2P"><a href="#通过建立hostServe的P2P" class="headerlink" title="通过建立hostServe的P2P"></a>通过建立hostServe的P2P</h2><p>•玩家可以充当“服务器”，即主机<br>•如果主机断开连接，游戏可能会结束<br>•主机需要处理玩家无法控制的游戏参与者，如机器人<br><img src="https://img-blog.csdnimg.cn/3af8ade5f6cf484e8881d65752b9646e.png" alt="在这里插入图片描述"><br>运用游戏如下<br><img src="https://img-blog.csdnimg.cn/76868ebfc2ed44e8926992890fbd7ada.png" alt="在这里插入图片描述"></p>
+<h3 id="优点-2"><a href="#优点-2" class="headerlink" title="优点"></a>优点</h3><ol>
+<li>更加灵活</li>
+<li>移除多人游戏中“服务器问题”的问题。</li>
+<li>在服务器上没有额外的成本<h3 id="缺点-2"><a href="#缺点-2" class="headerlink" title="缺点"></a>缺点</h3></li>
+<li>作弊就容易多了</li>
+<li>每个玩家都需要一个像样的网络连接才能让游戏正常运行</li>
+</ol>
+<p>3.只能处理有限数量的玩家</p>
+<h2 id="专用的服务器Dedicated-Server"><a href="#专用的服务器Dedicated-Server" class="headerlink" title="专用的服务器Dedicated Server"></a>专用的服务器Dedicated Server</h2><p>•权力<br>模拟游戏世界<br>•向玩家分发数据<br>•高性能要求高<br><img src="https://img-blog.csdnimg.cn/ac4c470b4d8e421c81f24fd098b86941.png" alt="在这里插入图片描述"></p>
+<h3 id="优点-3"><a href="#优点-3" class="headerlink" title="优点"></a>优点</h3><ol>
+<li>易于维护以及避免作弊</li>
+<li>能否应对庞大的游戏世界</li>
+<li>游戏的响应性并不依赖于每个客户端的网络条件<h3 id="缺点-3"><a href="#缺点-3" class="headerlink" title="缺点"></a>缺点</h3></li>
+<li>服务器成本高</li>
+<li>更多的工作在服务器端程序</li>
+<li>单点故障<h1 id="游戏同步"><a href="#游戏同步" class="headerlink" title="游戏同步"></a>游戏同步</h1><h2 id="Snapshot-Synchronization-快照同步"><a href="#Snapshot-Synchronization-快照同步" class="headerlink" title="Snapshot Synchronization 快照同步"></a>Snapshot Synchronization 快照同步</h2><h3 id="基本步骤"><a href="#基本步骤" class="headerlink" title="基本步骤"></a>基本步骤</h3>•客户端向服务器发送输入<br>•服务器模拟游戏世界<br>•生成整个游戏状态快照<br>•发送给客户<br>•客户端根据快照更新显示<br><img src="https://img-blog.csdnimg.cn/87ccc57589e14b2fa8ea0a10ce3d7c10.png" alt="在这里插入图片描述"><h3 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h3>对比上一帧快照只发送变化的部分<h2 id="Lockstep-Synchronization帧同步"><a href="#Lockstep-Synchronization帧同步" class="headerlink" title="Lockstep Synchronization帧同步"></a>Lockstep Synchronization帧同步</h2><h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><h4 id="帧同步初始化"><a href="#帧同步初始化" class="headerlink" title="帧同步初始化"></a>帧同步初始化</h4>加载……<br>•确保每个节点的初始数据客户是确定的<br>•游戏模型<br>•静态数据<br>•……<br>•同步时钟<h4 id="准确性同步"><a href="#准确性同步" class="headerlink" title="准确性同步"></a>准确性同步</h4>•客户端向服务器发送输入<br>•服务器接收和排序<br>•等待所有客户端输入后再转发<br>•客户端从服务器接收数据后，执行游戏逻辑<br><img src="https://img-blog.csdnimg.cn/6d989435cb984617a076e8139ca8801c.png" alt="在这里插入图片描述"><h4 id="缺点-4"><a href="#缺点-4" class="headerlink" title="缺点"></a>缺点</h4>需要全部用户都收集完成后才实现同步，出现了网慢者得利的情况。<br><img src="https://img-blog.csdnimg.cn/f91d1f2c24c34c7ba6cc7172a8cae676.png" alt="在这里插入图片描述"><h4 id="Bucket-Synchronization-桶同步"><a href="#Bucket-Synchronization-桶同步" class="headerlink" title="Bucket Synchronization 桶同步"></a>Bucket Synchronization 桶同步</h4>•桶:固定时间段<br>•每一个桶<br>•收集所有指示<br>•向所有玩家广播<br>•不需要等待所有玩家的命令被接收才转发<br><img src="https://img-blog.csdnimg.cn/0ee00e52c0ba482c93cfdb2660a80fd2.png" alt="在这里插入图片描述"><br>如果超时服务器将不做出反应，或滞留下一帧处理。<h3 id="同步的准确性难点"><a href="#同步的准确性难点" class="headerlink" title="同步的准确性难点"></a>同步的准确性难点</h3></li>
+</ol>
+<p><strong>•确定的</strong><br>•相同的输入序列需要在所有机器上产生相同的游戏状态<br><strong>•确定性难处</strong><br>•浮点<br>•随机数<br>•容器和算法(排序，添加，删除等)<br>•数学工具(向量，四元数等)<br>•物理模拟(非常困难)<br>•代码逻辑执行顺序<br><img src="https://img-blog.csdnimg.cn/31a015745ae94b968a34044d0ee9de4b.png" alt="在这里插入图片描述"></p>
+<h4 id="浮点数"><a href="#浮点数" class="headerlink" title="浮点数"></a>浮点数</h4><p>使用统一标准IEEE 754<br>数学库的统一，浮点编译器的情况，及运行平台的情况<br>解决方案:避免精度边界问题<br>定制精度定点<br>数学库查表(三角函数等)<br>放大和截断</p>
+<h4 id="随机数"><a href="#随机数" class="headerlink" title="随机数"></a>随机数</h4><p>使用随机种子保证每台设备的随即结果相同。</p>
+<h3 id="跟踪和调试"><a href="#跟踪和调试" class="headerlink" title="跟踪和调试"></a>跟踪和调试</h3><h4 id="获取校验和的方法"><a href="#获取校验和的方法" class="headerlink" title="获取校验和的方法"></a>获取校验和的方法</h4><p>所有数据校验<br>关键数据校验<br>其他方法</p>
+<h4 id="自动定位错误"><a href="#自动定位错误" class="headerlink" title="自动定位错误"></a>自动定位错误</h4><p>服务器比较不同<br>客户端的校验和客户端上传50帧完整的日志<br>在比较的日志中查找不一致的地方</p>
+<h3 id="延迟"><a href="#延迟" class="headerlink" title="延迟"></a>延迟</h3><p>因为网络造成的延时</p>
+<h4 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h4><p>使用缓冲到缓存器中<br><img src="https://img-blog.csdnimg.cn/f7682e2c92164a0b873a037fa9cf119e.png" alt="在这里插入图片描述"></p>
+<h3 id="重连"><a href="#重连" class="headerlink" title="重连"></a>重连</h3><p><img src="https://img-blog.csdnimg.cn/713089b345f34f42a6dc73574a13e86d.png" alt="在这里插入图片描述"><br>快照可以定期保存在本地客户端，并序列化到磁盘<br>当重新连接发生时，从磁盘序列化数据恢复游戏状态<br>服务器在快照后发送玩家命令<br>加速以赶上游戏进度<br><img src="https://img-blog.csdnimg.cn/dbc5eb6903cb45d9a05fab40d8aa38d7.png" alt="在这里插入图片描述"></p>
+<h3 id="怎样追赶上帧"><a href="#怎样追赶上帧" class="headerlink" title="怎样追赶上帧"></a>怎样追赶上帧</h3><p>在示例代码中，每次跟踪10帧<br>如果最初是每秒10帧，当追逐帧时，它可能运行每秒100帧</p>
+<h2 id="State-Synchronization状态同步"><a href="#State-Synchronization状态同步" class="headerlink" title="State Synchronization状态同步"></a>State Synchronization状态同步</h2><p>实现：将相关的状态传给服务器，让服务器判断结果，并通知所以客户端。<br><img src="https://img-blog.csdnimg.cn/51f29dce43ce4125b98bd19527a86fb6.png" alt="在这里插入图片描述"><br>比如玩家将移动和攻击这个状态传给服务器。</p>
+<h3 id="物体的复制协议"><a href="#物体的复制协议" class="headerlink" title="物体的复制协议"></a>物体的复制协议</h3><h4 id="状态数据"><a href="#状态数据" class="headerlink" title="状态数据"></a>状态数据</h4><p>保证了大多数当前状态的最终交付<br>对象的位置<br>对象的生命值</p>
+<ul>
+<li>150 +属性<h4 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h4>瞬时事件的不可靠通知<br>请开枪<br>这把枪是开的<br>炸弹引爆<br>更多的事件<h4 id="控制数据"><a href="#控制数据" class="headerlink" title="控制数据"></a>控制数据</h4>高频，从玩家控制输入中提取的快速更新数据的最佳传输方式<br>当前所有玩家的模拟杆值<br>病人自己当前的位置<br>更多的属性<h3 id="游戏状态"><a href="#游戏状态" class="headerlink" title="游戏状态"></a>游戏状态</h3>•游戏状态是表示游戏世界的必要条件。例句:HP,MP<h3 id="状态同步"><a href="#状态同步" class="headerlink" title="状态同步"></a>状态同步</h3>•服务器不会为所有客户端生成单个更新。它向客户端发送一个定制的数据包<br>•如果游戏世界太复杂，你可以设置一个兴趣区域Area Of Interest(AOI)来减少服务器开销<h3 id="服务器授权游戏世界"><a href="#服务器授权游戏世界" class="headerlink" title="服务器授权游戏世界"></a>服务器授权游戏世界</h3>服务器<br>•游戏世界授权<br>从客户端接收输入和状态<br>•运行游戏逻辑<br>•发送状态<br>客户端<br>•接收数据，模拟游戏世界<br>•游戏玩法改进<br><img src="https://img-blog.csdnimg.cn/8413c418c9744ce3b47054dc144eac84.png" alt="在这里插入图片描述"><h3 id="授权和复制的客户端"><a href="#授权和复制的客户端" class="headerlink" title="授权和复制的客户端"></a>授权和复制的客户端</h3>授权(1P)<br>•玩家的本地游戏客户端<br>服务器<br>•授权服务器<br>复制(3 P)<br>•在其他玩家的客户端中模拟角色<br><img src="https://img-blog.csdnimg.cn/aa0d0f852b5345e794266667538d4386.png" alt="在这里插入图片描述"><br>如玩家只能对玩家的状态进行改变，在其他客户端中出现的是复制品。<br><img src="https://img-blog.csdnimg.cn/52f7256afa104e9e9902b5a64201f4cb.png" alt="在这里插入图片描述"><h3 id="愚蠢的客户端问题"><a href="#愚蠢的客户端问题" class="headerlink" title="愚蠢的客户端问题"></a>愚蠢的客户端问题</h3><img src="https://img-blog.csdnimg.cn/4abefeb1e32147c5888dd3603028db39.png" alt="在这里插入图片描述"><br>客户端在收到之前不能做任何事情<br>服务器状态更新<br>如何看到即时回应?<h4 id="客户端预测"><a href="#客户端预测" class="headerlink" title="客户端预测"></a>客户端预测</h4>守望先锋的举例</li>
+</ul>
+<p>• RTT &#x3D; 160ms<br>• Half RTT &#x3D; 80ms<br>• Command frame &#x3D; 16ms<br><img src="https://img-blog.csdnimg.cn/4a4edc638fd34921be4cff65948009a9.png" alt="在这里插入图片描述"><br>所以我们将预测96ms的动作。    </p>
+<h4 id="服务器和解"><a href="#服务器和解" class="headerlink" title="服务器和解"></a>服务器和解</h4><blockquote>
+<p>授权客户端:缓冲区<br>• 记录客户预测时的每一个状态<br>• 与客户端接收到的过去服务器数据进行比较</p>
+</blockquote>
+<blockquote>
+<p>环形状态缓冲区<br>•在客户端存储我们过去几帧的所有状态<br>过程<br>•如果客户端计算出与服务器相同的结果，客户端将继续其愉快的方式来模拟下一个输入<br><img src="https://img-blog.csdnimg.cn/04a3b9eeaa5647baa062f6fb2fc398a3.png" alt="在这里插入图片描述"></p>
+</blockquote>
+<blockquote>
+<p>如果被服务器上的运动被障碍阻塞<br>• 位置错误!(红色)<br>• 客户端必须接受新的服务器更新<br>• 从新确认的位置开始回溯所有预测移动<br>•如果客户端和服务器对结果不一致，我们就预测错了<br>•必须和解<br>环形输入缓冲区<br>•在客户端上存储过去几帧的所有输入。<br>过程<br>•用服务器的结果覆盖客户端的结果<br>•重放你所有的输入，以跟上你现在所相信的<br><img src="https://img-blog.csdnimg.cn/2a98cf4486ae41ed8f72aebc5e6213a8.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/285b00854b824e82a9316060147e3f43.png" alt="在这里插入图片描述"></p>
+</blockquote>
+<h3 id="丢包问题"><a href="#丢包问题" class="headerlink" title="丢包问题"></a>丢包问题</h3><p>•客户端输入包无法到达服务器<br>•服务器试图保留很小的未处理输入缓冲区<br>•如果服务器耗尽了输入缓冲区，服务器将在一个窗口中复制你最后的输入<br>•推送客户端尽快发送遗漏的输入<br>当然不同游戏可能处理方案也不一样，可能直接停止了</p>
+<h2 id="状态同步VS帧同步"><a href="#状态同步VS帧同步" class="headerlink" title="状态同步VS帧同步"></a>状态同步VS帧同步</h2><table>
+<thead>
+<tr>
+<th></th>
+<th>状态同步</th>
+<th>帧同步</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>是否要写进逻辑</td>
+<td>非必要的</td>
+<td>必要的</td>
+</tr>
+<tr>
+<td>响应</td>
+<td>更好的响应</td>
+<td>较差的响应</td>
+</tr>
+<tr>
+<td>网络流量</td>
+<td>通常高</td>
+<td>通常低</td>
+</tr>
+<tr>
+<td>开发效率高</td>
+<td>复杂得多</td>
+<td>易于开发，难于调试</td>
+</tr>
+<tr>
+<td>玩家数量</td>
+<td>玩家数量少</td>
+<td>支持少量和大量的玩家</td>
+</tr>
+<tr>
+<td>跨平台</td>
+<td>相对容易</td>
+<td>相对困难</td>
+</tr>
+<tr>
+<td>重新连接</td>
+<td>相对容易</td>
+<td>相对困难</td>
+</tr>
+<tr>
+<td>重放文件大小</td>
+<td>大</td>
+<td>小</td>
+</tr>
+<tr>
+<td>作弊难度</td>
+<td>相对难</td>
+<td>相对容易</td>
+</tr>
+</tbody></table>
+]]></content>
+      <categories>
+        <category>游戏</category>
+      </categories>
+      <tags>
+        <tag>网络</tag>
       </tags>
   </entry>
 </search>

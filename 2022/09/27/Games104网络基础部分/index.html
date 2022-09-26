@@ -1,0 +1,322 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Games104网络基础部分 - 浪子之心</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Blog,"> 
+    <meta name="description" content="MrChen Bolg,面临的挑战实现网络物体一致
+网络延迟 网络掉线和重连
+反作弊和防信息泄露
+对于不同设备连接和实现同步 多个游戏的子系统实现同步
+承载更多的用户高并发 高可用性 高性能
+TCP优点面向连接  可靠和有,"> 
+    <meta name="author" content="Jack Chen"> 
+    <link rel="alternative" href="atom.xml" title="浪子之心" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+<meta name="generator" content="Hexo 5.4.1"><link rel="stylesheet" href="/css/prism.css" type="text/css"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">浪子之心</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="https://mrchenlreanspace.github.io"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">Games104网络基础部分</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">Games104网络基础部分</h1>
+        <div class="stuff">
+            <span>九月 27, 2022</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E7%BD%91%E7%BB%9C/" rel="tag">网络</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h1 id="面临的挑战"><a href="#面临的挑战" class="headerlink" title="面临的挑战"></a>面临的挑战</h1><p>实现网络物体一致</p>
+<p>网络延迟 网络掉线和重连</p>
+<p>反作弊和防信息泄露</p>
+<p>对于不同设备连接和实现同步 多个游戏的子系统实现同步</p>
+<p>承载更多的用户<br>高并发 高可用性 高性能</p>
+<h1 id="TCP"><a href="#TCP" class="headerlink" title="TCP"></a>TCP</h1><h2 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h2><p>面向连接  可靠和有序 流控制 拥塞控制</p>
+<h2 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h2><p>太慢了</p>
+<h1 id="UDP"><a href="#UDP" class="headerlink" title="UDP"></a>UDP</h1><h2 id="优点-1"><a href="#优点-1" class="headerlink" title="优点"></a>优点</h2><p>快</p>
+<h2 id="缺点-1"><a href="#缺点-1" class="headerlink" title="缺点"></a>缺点</h2><p>无连接 不可靠和无序 没有流控制 没有拥塞控制</p>
+<h1 id="对于UDP和TCP的混合使用"><a href="#对于UDP和TCP的混合使用" class="headerlink" title="对于UDP和TCP的混合使用"></a>对于UDP和TCP的混合使用</h1><p>使用在udp的连接下使用<strong>自动重传协议</strong> ARQ和 <strong>前向纠错</strong> FEC</p>
+<h2 id="ARQ"><a href="#ARQ" class="headerlink" title="ARQ"></a>ARQ</h2><p>通过滑动窗口和选择性重传</p>
+<p>在选择性重复ARQ中，只有损坏或丢失的帧被重传</p>
+<p>接收端发送每一帧的ack，发送端维护每一帧的超时时间</p>
+<p>当接收端收到损坏的数据包时，它将发送一个NACK，发送端将发送&#x2F;重传接收到NACK的帧</p>
+<h2 id="FEC"><a href="#FEC" class="headerlink" title="FEC"></a>FEC</h2><h3 id="XOF异或"><a href="#XOF异或" class="headerlink" title="XOF异或"></a>XOF异或</h3><p>Let E &#x3D; XOR (A, B, C, D)<br>• A &#x3D; XOR (B, C, D, E)<br>• B &#x3D; XOR (A, C, D, E)<br>• C &#x3D; XOR (A, B, D, E)<br>• D &#x3D; XOR (A, B, C, E)<br><img src="https://img-blog.csdnimg.cn/e506987daf694a88b1f6d762b8fd50d6.png" alt="在这里插入图片描述"><br>如果有报文丢失，可以和其他4个报文一起恢复<br>在连续数据传输中，只能丢失一个数据包。如果A和B同时丢失，则算法无法恢复</p>
+<h3 id="Reed-Solomon-Codes"><a href="#Reed-Solomon-Codes" class="headerlink" title="Reed-Solomon Codes"></a>Reed-Solomon Codes</h3><p><img src="https://img-blog.csdnimg.cn/fd2d060129124af99978e1d25f0eda21.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/99251fc2ba744f32b2a8c03e2204e5a7.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/40b7ebf40d2d40bf98ec5c88191890a7.png" alt="在这里插入图片描述"></p>
+<h2 id="定制您的UDP基于ARQ和FEC"><a href="#定制您的UDP基于ARQ和FEC" class="headerlink" title="定制您的UDP基于ARQ和FEC"></a>定制您的UDP基于ARQ和FEC</h2><h3 id="可靠性"><a href="#可靠性" class="headerlink" title="可靠性"></a>可靠性</h3><p>选择性重复ARQ</p>
+<h3 id="混合-ARQ-和-FEC使用"><a href="#混合-ARQ-和-FEC使用" class="headerlink" title="混合 ARQ 和 FEC使用"></a>混合 ARQ 和 FEC使用</h3><p>在ARQ之前，采用FEC进行纠错</p>
+<h3 id="实时"><a href="#实时" class="headerlink" title="实时"></a>实时</h3><p>更小的重传超时时间RTO增长<br>没有拥塞控制<br>速度重传机制<br>没有延迟ACK传输</p>
+<h3 id="灵活性"><a href="#灵活性" class="headerlink" title="灵活性"></a>灵活性</h3><p>设计协议速度<br>支持可靠和不可靠</p>
+<h1 id="时钟同步"><a href="#时钟同步" class="headerlink" title="时钟同步"></a>时钟同步</h1><h2 id="RTT往返时间"><a href="#RTT往返时间" class="headerlink" title="RTT往返时间"></a>RTT往返时间</h2><p><img src="https://img-blog.csdnimg.cn/c1d9e901debd42f6a39e866f9235bbcd.png" alt="在这里插入图片描述"></p>
+<h2 id="NTP网络时间协议"><a href="#NTP网络时间协议" class="headerlink" title="NTP网络时间协议"></a>NTP网络时间协议</h2><p>理想情况下，上行和下行速度一样。<br><img src="https://img-blog.csdnimg.cn/18e41aa844be46a3a7c293a9642ce181.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/9408326cad60463d99229de2e20cc87e.png" alt="在这里插入图片描述"><br>现实中，不一样的处理方法</p>
+<p><img src="https://img-blog.csdnimg.cn/213f7cef825e4083aaca213686962d4d.png" alt="在这里插入图片描述"><br>多求几次RTT然后去除最高值，取剩下的平均值。</p>
+<h1 id="Remote-Procedure-Call（RPC）"><a href="#Remote-Procedure-Call（RPC）" class="headerlink" title="Remote Procedure Call（RPC）"></a>Remote Procedure Call（RPC）</h1><p>远程调用函数<br><img src="https://img-blog.csdnimg.cn/169e744bb0b74e7dbbecec9d23d991d7.png" alt="在这里插入图片描述"></p>
+<h2 id="Interface-Definition-Language接口定义语言"><a href="#Interface-Definition-Language接口定义语言" class="headerlink" title="Interface Definition Language接口定义语言"></a>Interface Definition Language接口定义语言</h2><p>类似于用来两边对话的格式，例如ProtoBuf<br><img src="https://img-blog.csdnimg.cn/b0cb53d6345049a89e9eee27bc281ff0.png" alt="在这里插入图片描述"></p>
+<h2 id="RPC-Stubs"><a href="#RPC-Stubs" class="headerlink" title="RPC Stubs"></a>RPC Stubs</h2><p>客户端存根是一个过程，它在客户端看来就像是一个可调用的服务器过程<br>•客户端程序认为它在调用服务器，但实际上它是在调用客户端存根<br>服务器端存根看起来像服务器的调用者<br>•服务器程序认为它是由客户端调用的，但实际上它是由服务器端存根调用的<br>•存根相互发送消息，使RPC透明地发生<br><img src="https://img-blog.csdnimg.cn/92cdef1c51084896b555d2389e9a4059.png" alt="在这里插入图片描述"></p>
+<h2 id="Stub-Compiler"><a href="#Stub-Compiler" class="headerlink" title="Stub Compiler"></a>Stub Compiler</h2><p>票据编译器<br>比如ProtoBuf直接做好了。<br>•“存根编译器”读取IDL声明，并为每个服务器过程生成两个存根过程<br>•服务器程序员实现服务的过程，并将它们与服务器端存根链接<br>客户端程序员实现客户端程序，并将其与客户端存根链接<br>•存根管理客户端和服务器之间远程通信的所有细节<br>#Real RPC Package Journey</p>
+<p><img src="https://img-blog.csdnimg.cn/fdb86ae3cc1d4fc89f3cdf2fa036b735.png" alt="在这里插入图片描述"></p>
+<h1 id="网络拓扑结构"><a href="#网络拓扑结构" class="headerlink" title="网络拓扑结构"></a>网络拓扑结构</h1><h2 id="原始的p2p"><a href="#原始的p2p" class="headerlink" title="原始的p2p"></a>原始的p2p</h2><p><img src="https://img-blog.csdnimg.cn/48792c2758d74039aeb3a869772662a3.png" alt="在这里插入图片描述"><br>两者进行相互连接就行<br>每个客户端向所有人广播游戏事件<br>其他人<br>•鲁棒性<br>•作弊更容易<br>•所有节点之间需要同步，以保持分布式游戏状态的一致性</p>
+<h2 id="通过建立hostServe的P2P"><a href="#通过建立hostServe的P2P" class="headerlink" title="通过建立hostServe的P2P"></a>通过建立hostServe的P2P</h2><p>•玩家可以充当“服务器”，即主机<br>•如果主机断开连接，游戏可能会结束<br>•主机需要处理玩家无法控制的游戏参与者，如机器人<br><img src="https://img-blog.csdnimg.cn/3af8ade5f6cf484e8881d65752b9646e.png" alt="在这里插入图片描述"><br>运用游戏如下<br><img src="https://img-blog.csdnimg.cn/76868ebfc2ed44e8926992890fbd7ada.png" alt="在这里插入图片描述"></p>
+<h3 id="优点-2"><a href="#优点-2" class="headerlink" title="优点"></a>优点</h3><ol>
+<li>更加灵活</li>
+<li>移除多人游戏中“服务器问题”的问题。</li>
+<li>在服务器上没有额外的成本<h3 id="缺点-2"><a href="#缺点-2" class="headerlink" title="缺点"></a>缺点</h3></li>
+<li>作弊就容易多了</li>
+<li>每个玩家都需要一个像样的网络连接才能让游戏正常运行</li>
+</ol>
+<p>3.只能处理有限数量的玩家</p>
+<h2 id="专用的服务器Dedicated-Server"><a href="#专用的服务器Dedicated-Server" class="headerlink" title="专用的服务器Dedicated Server"></a>专用的服务器Dedicated Server</h2><p>•权力<br>模拟游戏世界<br>•向玩家分发数据<br>•高性能要求高<br><img src="https://img-blog.csdnimg.cn/ac4c470b4d8e421c81f24fd098b86941.png" alt="在这里插入图片描述"></p>
+<h3 id="优点-3"><a href="#优点-3" class="headerlink" title="优点"></a>优点</h3><ol>
+<li>易于维护以及避免作弊</li>
+<li>能否应对庞大的游戏世界</li>
+<li>游戏的响应性并不依赖于每个客户端的网络条件<h3 id="缺点-3"><a href="#缺点-3" class="headerlink" title="缺点"></a>缺点</h3></li>
+<li>服务器成本高</li>
+<li>更多的工作在服务器端程序</li>
+<li>单点故障<h1 id="游戏同步"><a href="#游戏同步" class="headerlink" title="游戏同步"></a>游戏同步</h1><h2 id="Snapshot-Synchronization-快照同步"><a href="#Snapshot-Synchronization-快照同步" class="headerlink" title="Snapshot Synchronization 快照同步"></a>Snapshot Synchronization 快照同步</h2><h3 id="基本步骤"><a href="#基本步骤" class="headerlink" title="基本步骤"></a>基本步骤</h3>•客户端向服务器发送输入<br>•服务器模拟游戏世界<br>•生成整个游戏状态快照<br>•发送给客户<br>•客户端根据快照更新显示<br><img src="https://img-blog.csdnimg.cn/87ccc57589e14b2fa8ea0a10ce3d7c10.png" alt="在这里插入图片描述"><h3 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h3>对比上一帧快照只发送变化的部分<h2 id="Lockstep-Synchronization帧同步"><a href="#Lockstep-Synchronization帧同步" class="headerlink" title="Lockstep Synchronization帧同步"></a>Lockstep Synchronization帧同步</h2><h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><h4 id="帧同步初始化"><a href="#帧同步初始化" class="headerlink" title="帧同步初始化"></a>帧同步初始化</h4>加载……<br>•确保每个节点的初始数据客户是确定的<br>•游戏模型<br>•静态数据<br>•……<br>•同步时钟<h4 id="准确性同步"><a href="#准确性同步" class="headerlink" title="准确性同步"></a>准确性同步</h4>•客户端向服务器发送输入<br>•服务器接收和排序<br>•等待所有客户端输入后再转发<br>•客户端从服务器接收数据后，执行游戏逻辑<br><img src="https://img-blog.csdnimg.cn/6d989435cb984617a076e8139ca8801c.png" alt="在这里插入图片描述"><h4 id="缺点-4"><a href="#缺点-4" class="headerlink" title="缺点"></a>缺点</h4>需要全部用户都收集完成后才实现同步，出现了网慢者得利的情况。<br><img src="https://img-blog.csdnimg.cn/f91d1f2c24c34c7ba6cc7172a8cae676.png" alt="在这里插入图片描述"><h4 id="Bucket-Synchronization-桶同步"><a href="#Bucket-Synchronization-桶同步" class="headerlink" title="Bucket Synchronization 桶同步"></a>Bucket Synchronization 桶同步</h4>•桶:固定时间段<br>•每一个桶<br>•收集所有指示<br>•向所有玩家广播<br>•不需要等待所有玩家的命令被接收才转发<br><img src="https://img-blog.csdnimg.cn/0ee00e52c0ba482c93cfdb2660a80fd2.png" alt="在这里插入图片描述"><br>如果超时服务器将不做出反应，或滞留下一帧处理。<h3 id="同步的准确性难点"><a href="#同步的准确性难点" class="headerlink" title="同步的准确性难点"></a>同步的准确性难点</h3></li>
+</ol>
+<p><strong>•确定的</strong><br>•相同的输入序列需要在所有机器上产生相同的游戏状态<br><strong>•确定性难处</strong><br>•浮点<br>•随机数<br>•容器和算法(排序，添加，删除等)<br>•数学工具(向量，四元数等)<br>•物理模拟(非常困难)<br>•代码逻辑执行顺序<br><img src="https://img-blog.csdnimg.cn/31a015745ae94b968a34044d0ee9de4b.png" alt="在这里插入图片描述"></p>
+<h4 id="浮点数"><a href="#浮点数" class="headerlink" title="浮点数"></a>浮点数</h4><p>使用统一标准IEEE 754<br>数学库的统一，浮点编译器的情况，及运行平台的情况<br>解决方案:避免精度边界问题<br>定制精度定点<br>数学库查表(三角函数等)<br>放大和截断</p>
+<h4 id="随机数"><a href="#随机数" class="headerlink" title="随机数"></a>随机数</h4><p>使用随机种子保证每台设备的随即结果相同。</p>
+<h3 id="跟踪和调试"><a href="#跟踪和调试" class="headerlink" title="跟踪和调试"></a>跟踪和调试</h3><h4 id="获取校验和的方法"><a href="#获取校验和的方法" class="headerlink" title="获取校验和的方法"></a>获取校验和的方法</h4><p>所有数据校验<br>关键数据校验<br>其他方法</p>
+<h4 id="自动定位错误"><a href="#自动定位错误" class="headerlink" title="自动定位错误"></a>自动定位错误</h4><p>服务器比较不同<br>客户端的校验和客户端上传50帧完整的日志<br>在比较的日志中查找不一致的地方</p>
+<h3 id="延迟"><a href="#延迟" class="headerlink" title="延迟"></a>延迟</h3><p>因为网络造成的延时</p>
+<h4 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h4><p>使用缓冲到缓存器中<br><img src="https://img-blog.csdnimg.cn/f7682e2c92164a0b873a037fa9cf119e.png" alt="在这里插入图片描述"></p>
+<h3 id="重连"><a href="#重连" class="headerlink" title="重连"></a>重连</h3><p><img src="https://img-blog.csdnimg.cn/713089b345f34f42a6dc73574a13e86d.png" alt="在这里插入图片描述"><br>快照可以定期保存在本地客户端，并序列化到磁盘<br>当重新连接发生时，从磁盘序列化数据恢复游戏状态<br>服务器在快照后发送玩家命令<br>加速以赶上游戏进度<br><img src="https://img-blog.csdnimg.cn/dbc5eb6903cb45d9a05fab40d8aa38d7.png" alt="在这里插入图片描述"></p>
+<h3 id="怎样追赶上帧"><a href="#怎样追赶上帧" class="headerlink" title="怎样追赶上帧"></a>怎样追赶上帧</h3><p>在示例代码中，每次跟踪10帧<br>如果最初是每秒10帧，当追逐帧时，它可能运行每秒100帧</p>
+<h2 id="State-Synchronization状态同步"><a href="#State-Synchronization状态同步" class="headerlink" title="State Synchronization状态同步"></a>State Synchronization状态同步</h2><p>实现：将相关的状态传给服务器，让服务器判断结果，并通知所以客户端。<br><img src="https://img-blog.csdnimg.cn/51f29dce43ce4125b98bd19527a86fb6.png" alt="在这里插入图片描述"><br>比如玩家将移动和攻击这个状态传给服务器。</p>
+<h3 id="物体的复制协议"><a href="#物体的复制协议" class="headerlink" title="物体的复制协议"></a>物体的复制协议</h3><h4 id="状态数据"><a href="#状态数据" class="headerlink" title="状态数据"></a>状态数据</h4><p>保证了大多数当前状态的最终交付<br>对象的位置<br>对象的生命值</p>
+<ul>
+<li>150 +属性<h4 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h4>瞬时事件的不可靠通知<br>请开枪<br>这把枪是开的<br>炸弹引爆<br>更多的事件<h4 id="控制数据"><a href="#控制数据" class="headerlink" title="控制数据"></a>控制数据</h4>高频，从玩家控制输入中提取的快速更新数据的最佳传输方式<br>当前所有玩家的模拟杆值<br>病人自己当前的位置<br>更多的属性<h3 id="游戏状态"><a href="#游戏状态" class="headerlink" title="游戏状态"></a>游戏状态</h3>•游戏状态是表示游戏世界的必要条件。例句:HP,MP<h3 id="状态同步"><a href="#状态同步" class="headerlink" title="状态同步"></a>状态同步</h3>•服务器不会为所有客户端生成单个更新。它向客户端发送一个定制的数据包<br>•如果游戏世界太复杂，你可以设置一个兴趣区域Area Of Interest(AOI)来减少服务器开销<h3 id="服务器授权游戏世界"><a href="#服务器授权游戏世界" class="headerlink" title="服务器授权游戏世界"></a>服务器授权游戏世界</h3>服务器<br>•游戏世界授权<br>从客户端接收输入和状态<br>•运行游戏逻辑<br>•发送状态<br>客户端<br>•接收数据，模拟游戏世界<br>•游戏玩法改进<br><img src="https://img-blog.csdnimg.cn/8413c418c9744ce3b47054dc144eac84.png" alt="在这里插入图片描述"><h3 id="授权和复制的客户端"><a href="#授权和复制的客户端" class="headerlink" title="授权和复制的客户端"></a>授权和复制的客户端</h3>授权(1P)<br>•玩家的本地游戏客户端<br>服务器<br>•授权服务器<br>复制(3 P)<br>•在其他玩家的客户端中模拟角色<br><img src="https://img-blog.csdnimg.cn/aa0d0f852b5345e794266667538d4386.png" alt="在这里插入图片描述"><br>如玩家只能对玩家的状态进行改变，在其他客户端中出现的是复制品。<br><img src="https://img-blog.csdnimg.cn/52f7256afa104e9e9902b5a64201f4cb.png" alt="在这里插入图片描述"><h3 id="愚蠢的客户端问题"><a href="#愚蠢的客户端问题" class="headerlink" title="愚蠢的客户端问题"></a>愚蠢的客户端问题</h3><img src="https://img-blog.csdnimg.cn/4abefeb1e32147c5888dd3603028db39.png" alt="在这里插入图片描述"><br>客户端在收到之前不能做任何事情<br>服务器状态更新<br>如何看到即时回应?<h4 id="客户端预测"><a href="#客户端预测" class="headerlink" title="客户端预测"></a>客户端预测</h4>守望先锋的举例</li>
+</ul>
+<p>• RTT &#x3D; 160ms<br>• Half RTT &#x3D; 80ms<br>• Command frame &#x3D; 16ms<br><img src="https://img-blog.csdnimg.cn/4a4edc638fd34921be4cff65948009a9.png" alt="在这里插入图片描述"><br>所以我们将预测96ms的动作。    </p>
+<h4 id="服务器和解"><a href="#服务器和解" class="headerlink" title="服务器和解"></a>服务器和解</h4><blockquote>
+<p>授权客户端:缓冲区<br>• 记录客户预测时的每一个状态<br>• 与客户端接收到的过去服务器数据进行比较</p>
+</blockquote>
+<blockquote>
+<p>环形状态缓冲区<br>•在客户端存储我们过去几帧的所有状态<br>过程<br>•如果客户端计算出与服务器相同的结果，客户端将继续其愉快的方式来模拟下一个输入<br><img src="https://img-blog.csdnimg.cn/04a3b9eeaa5647baa062f6fb2fc398a3.png" alt="在这里插入图片描述"></p>
+</blockquote>
+<blockquote>
+<p>如果被服务器上的运动被障碍阻塞<br>• 位置错误!(红色)<br>• 客户端必须接受新的服务器更新<br>• 从新确认的位置开始回溯所有预测移动<br>•如果客户端和服务器对结果不一致，我们就预测错了<br>•必须和解<br>环形输入缓冲区<br>•在客户端上存储过去几帧的所有输入。<br>过程<br>•用服务器的结果覆盖客户端的结果<br>•重放你所有的输入，以跟上你现在所相信的<br><img src="https://img-blog.csdnimg.cn/2a98cf4486ae41ed8f72aebc5e6213a8.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/285b00854b824e82a9316060147e3f43.png" alt="在这里插入图片描述"></p>
+</blockquote>
+<h3 id="丢包问题"><a href="#丢包问题" class="headerlink" title="丢包问题"></a>丢包问题</h3><p>•客户端输入包无法到达服务器<br>•服务器试图保留很小的未处理输入缓冲区<br>•如果服务器耗尽了输入缓冲区，服务器将在一个窗口中复制你最后的输入<br>•推送客户端尽快发送遗漏的输入<br>当然不同游戏可能处理方案也不一样，可能直接停止了</p>
+<h2 id="状态同步VS帧同步"><a href="#状态同步VS帧同步" class="headerlink" title="状态同步VS帧同步"></a>状态同步VS帧同步</h2><table>
+<thead>
+<tr>
+<th></th>
+<th>状态同步</th>
+<th>帧同步</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>是否要写进逻辑</td>
+<td>非必要的</td>
+<td>必要的</td>
+</tr>
+<tr>
+<td>响应</td>
+<td>更好的响应</td>
+<td>较差的响应</td>
+</tr>
+<tr>
+<td>网络流量</td>
+<td>通常高</td>
+<td>通常低</td>
+</tr>
+<tr>
+<td>开发效率高</td>
+<td>复杂得多</td>
+<td>易于开发，难于调试</td>
+</tr>
+<tr>
+<td>玩家数量</td>
+<td>玩家数量少</td>
+<td>支持少量和大量的玩家</td>
+</tr>
+<tr>
+<td>跨平台</td>
+<td>相对容易</td>
+<td>相对困难</td>
+</tr>
+<tr>
+<td>重新连接</td>
+<td>相对容易</td>
+<td>相对困难</td>
+</tr>
+<tr>
+<td>重放文件大小</td>
+<td>大</td>
+<td>小</td>
+</tr>
+<tr>
+<td>作弊难度</td>
+<td>相对难</td>
+<td>相对容易</td>
+</tr>
+</tbody></table>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="/music/jucilang.mp3">
+            </audio>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+		data-enable='true'
+        data-ae='true'
+        data-ci='35b8fbd0e6865c1adf60'
+        data-cs='6d2988de68c828bce78247ad604846cdc30e7ca3'
+        data-r='mrchenlreanspace.github.io'
+        data-o='MrChenLreanSpace'
+        data-a='MrChenLreanSpace'
+        data-d='false'
+    >查看评论</div>
+
+
+    </div>
+    
+        <div class='side'>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%9D%A2%E4%B8%B4%E7%9A%84%E6%8C%91%E6%88%98"><span class="toc-number">1.</span> <span class="toc-text">面临的挑战</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#TCP"><span class="toc-number">2.</span> <span class="toc-text">TCP</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BC%98%E7%82%B9"><span class="toc-number">2.1.</span> <span class="toc-text">优点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%BA%E7%82%B9"><span class="toc-number">2.2.</span> <span class="toc-text">缺点</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#UDP"><span class="toc-number">3.</span> <span class="toc-text">UDP</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BC%98%E7%82%B9-1"><span class="toc-number">3.1.</span> <span class="toc-text">优点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%BA%E7%82%B9-1"><span class="toc-number">3.2.</span> <span class="toc-text">缺点</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AF%B9%E4%BA%8EUDP%E5%92%8CTCP%E7%9A%84%E6%B7%B7%E5%90%88%E4%BD%BF%E7%94%A8"><span class="toc-number">4.</span> <span class="toc-text">对于UDP和TCP的混合使用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#ARQ"><span class="toc-number">4.1.</span> <span class="toc-text">ARQ</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#FEC"><span class="toc-number">4.2.</span> <span class="toc-text">FEC</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#XOF%E5%BC%82%E6%88%96"><span class="toc-number">4.2.1.</span> <span class="toc-text">XOF异或</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Reed-Solomon-Codes"><span class="toc-number">4.2.2.</span> <span class="toc-text">Reed-Solomon Codes</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9A%E5%88%B6%E6%82%A8%E7%9A%84UDP%E5%9F%BA%E4%BA%8EARQ%E5%92%8CFEC"><span class="toc-number">4.3.</span> <span class="toc-text">定制您的UDP基于ARQ和FEC</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%AF%E9%9D%A0%E6%80%A7"><span class="toc-number">4.3.1.</span> <span class="toc-text">可靠性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B7%B7%E5%90%88-ARQ-%E5%92%8C-FEC%E4%BD%BF%E7%94%A8"><span class="toc-number">4.3.2.</span> <span class="toc-text">混合 ARQ 和 FEC使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E6%97%B6"><span class="toc-number">4.3.3.</span> <span class="toc-text">实时</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%81%B5%E6%B4%BB%E6%80%A7"><span class="toc-number">4.3.4.</span> <span class="toc-text">灵活性</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%97%B6%E9%92%9F%E5%90%8C%E6%AD%A5"><span class="toc-number">5.</span> <span class="toc-text">时钟同步</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#RTT%E5%BE%80%E8%BF%94%E6%97%B6%E9%97%B4"><span class="toc-number">5.1.</span> <span class="toc-text">RTT往返时间</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NTP%E7%BD%91%E7%BB%9C%E6%97%B6%E9%97%B4%E5%8D%8F%E8%AE%AE"><span class="toc-number">5.2.</span> <span class="toc-text">NTP网络时间协议</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Remote-Procedure-Call%EF%BC%88RPC%EF%BC%89"><span class="toc-number">6.</span> <span class="toc-text">Remote Procedure Call（RPC）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Interface-Definition-Language%E6%8E%A5%E5%8F%A3%E5%AE%9A%E4%B9%89%E8%AF%AD%E8%A8%80"><span class="toc-number">6.1.</span> <span class="toc-text">Interface Definition Language接口定义语言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RPC-Stubs"><span class="toc-number">6.2.</span> <span class="toc-text">RPC Stubs</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Stub-Compiler"><span class="toc-number">6.3.</span> <span class="toc-text">Stub Compiler</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E6%8B%93%E6%89%91%E7%BB%93%E6%9E%84"><span class="toc-number">7.</span> <span class="toc-text">网络拓扑结构</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8E%9F%E5%A7%8B%E7%9A%84p2p"><span class="toc-number">7.1.</span> <span class="toc-text">原始的p2p</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%9A%E8%BF%87%E5%BB%BA%E7%AB%8BhostServe%E7%9A%84P2P"><span class="toc-number">7.2.</span> <span class="toc-text">通过建立hostServe的P2P</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%98%E7%82%B9-2"><span class="toc-number">7.2.1.</span> <span class="toc-text">优点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%BA%E7%82%B9-2"><span class="toc-number">7.2.2.</span> <span class="toc-text">缺点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%93%E7%94%A8%E7%9A%84%E6%9C%8D%E5%8A%A1%E5%99%A8Dedicated-Server"><span class="toc-number">7.3.</span> <span class="toc-text">专用的服务器Dedicated Server</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%98%E7%82%B9-3"><span class="toc-number">7.3.1.</span> <span class="toc-text">优点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%BA%E7%82%B9-3"><span class="toc-number">7.3.2.</span> <span class="toc-text">缺点</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B8%B8%E6%88%8F%E5%90%8C%E6%AD%A5"><span class="toc-number">8.</span> <span class="toc-text">游戏同步</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Snapshot-Synchronization-%E5%BF%AB%E7%85%A7%E5%90%8C%E6%AD%A5"><span class="toc-number">8.1.</span> <span class="toc-text">Snapshot Synchronization 快照同步</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%AD%A5%E9%AA%A4"><span class="toc-number">8.1.1.</span> <span class="toc-text">基本步骤</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%98%E5%8C%96"><span class="toc-number">8.1.2.</span> <span class="toc-text">优化</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Lockstep-Synchronization%E5%B8%A7%E5%90%8C%E6%AD%A5"><span class="toc-number">8.2.</span> <span class="toc-text">Lockstep Synchronization帧同步</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AD%A5%E9%AA%A4"><span class="toc-number">8.2.1.</span> <span class="toc-text">步骤</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B8%A7%E5%90%8C%E6%AD%A5%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="toc-number">8.2.1.1.</span> <span class="toc-text">帧同步初始化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%87%86%E7%A1%AE%E6%80%A7%E5%90%8C%E6%AD%A5"><span class="toc-number">8.2.1.2.</span> <span class="toc-text">准确性同步</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BC%BA%E7%82%B9-4"><span class="toc-number">8.2.1.3.</span> <span class="toc-text">缺点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Bucket-Synchronization-%E6%A1%B6%E5%90%8C%E6%AD%A5"><span class="toc-number">8.2.1.4.</span> <span class="toc-text">Bucket Synchronization 桶同步</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%8C%E6%AD%A5%E7%9A%84%E5%87%86%E7%A1%AE%E6%80%A7%E9%9A%BE%E7%82%B9"><span class="toc-number">8.2.2.</span> <span class="toc-text">同步的准确性难点</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B5%AE%E7%82%B9%E6%95%B0"><span class="toc-number">8.2.2.1.</span> <span class="toc-text">浮点数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%9A%8F%E6%9C%BA%E6%95%B0"><span class="toc-number">8.2.2.2.</span> <span class="toc-text">随机数</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B7%9F%E8%B8%AA%E5%92%8C%E8%B0%83%E8%AF%95"><span class="toc-number">8.2.3.</span> <span class="toc-text">跟踪和调试</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E6%A0%A1%E9%AA%8C%E5%92%8C%E7%9A%84%E6%96%B9%E6%B3%95"><span class="toc-number">8.2.3.1.</span> <span class="toc-text">获取校验和的方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%87%AA%E5%8A%A8%E5%AE%9A%E4%BD%8D%E9%94%99%E8%AF%AF"><span class="toc-number">8.2.3.2.</span> <span class="toc-text">自动定位错误</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BB%B6%E8%BF%9F"><span class="toc-number">8.2.4.</span> <span class="toc-text">延迟</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="toc-number">8.2.4.1.</span> <span class="toc-text">解决方案</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%87%8D%E8%BF%9E"><span class="toc-number">8.2.5.</span> <span class="toc-text">重连</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%8E%E6%A0%B7%E8%BF%BD%E8%B5%B6%E4%B8%8A%E5%B8%A7"><span class="toc-number">8.2.6.</span> <span class="toc-text">怎样追赶上帧</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#State-Synchronization%E7%8A%B6%E6%80%81%E5%90%8C%E6%AD%A5"><span class="toc-number">8.3.</span> <span class="toc-text">State Synchronization状态同步</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%89%A9%E4%BD%93%E7%9A%84%E5%A4%8D%E5%88%B6%E5%8D%8F%E8%AE%AE"><span class="toc-number">8.3.1.</span> <span class="toc-text">物体的复制协议</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%8A%B6%E6%80%81%E6%95%B0%E6%8D%AE"><span class="toc-number">8.3.1.1.</span> <span class="toc-text">状态数据</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6"><span class="toc-number">8.3.1.2.</span> <span class="toc-text">事件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8E%A7%E5%88%B6%E6%95%B0%E6%8D%AE"><span class="toc-number">8.3.1.3.</span> <span class="toc-text">控制数据</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B8%B8%E6%88%8F%E7%8A%B6%E6%80%81"><span class="toc-number">8.3.2.</span> <span class="toc-text">游戏状态</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%8A%B6%E6%80%81%E5%90%8C%E6%AD%A5"><span class="toc-number">8.3.3.</span> <span class="toc-text">状态同步</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%8E%88%E6%9D%83%E6%B8%B8%E6%88%8F%E4%B8%96%E7%95%8C"><span class="toc-number">8.3.4.</span> <span class="toc-text">服务器授权游戏世界</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%88%E6%9D%83%E5%92%8C%E5%A4%8D%E5%88%B6%E7%9A%84%E5%AE%A2%E6%88%B7%E7%AB%AF"><span class="toc-number">8.3.5.</span> <span class="toc-text">授权和复制的客户端</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%84%9A%E8%A0%A2%E7%9A%84%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%97%AE%E9%A2%98"><span class="toc-number">8.3.6.</span> <span class="toc-text">愚蠢的客户端问题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%A2%84%E6%B5%8B"><span class="toc-number">8.3.6.1.</span> <span class="toc-text">客户端预测</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%92%8C%E8%A7%A3"><span class="toc-number">8.3.6.2.</span> <span class="toc-text">服务器和解</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%A2%E5%8C%85%E9%97%AE%E9%A2%98"><span class="toc-number">8.3.7.</span> <span class="toc-text">丢包问题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%8A%B6%E6%80%81%E5%90%8C%E6%AD%A5VS%E5%B8%A7%E5%90%8C%E6%AD%A5"><span class="toc-number">8.4.</span> <span class="toc-text">状态同步VS帧同步</span></a></li></ol></li></ol>	
+        </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"], linebreaks: { automatic:true }, EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50) },
+        tex2jax: { inlineMath: [ ["$", "$"], ["\\(","\\)"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno",skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']},
+        TeX: {  noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } }, Macros: { href: "{}" } },
+        messageStyle: "none"
+    });
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+<!-- Google Analytics -->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YMJ8CBH8F7"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-YMJ8CBH8F7');
+</script>
+<!-- End Google Analytics -->
+
+
+</html>
