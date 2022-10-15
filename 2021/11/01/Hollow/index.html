@@ -69,23 +69,23 @@
 <p>keywords ||    网站的关键词。支持多个关键词。</p>
 <p>author ||    您的名字</p>
 <p>language  ||    网站使用的语言。对于简体中文用户来说，使用不同的主题可能需要设置成不同的值，请参考你的主题的文档自行设置，常见的有 zh-Hans和 zh-CN。</p>
-<p>timezone ||    网站时区。Hexo 默认使用您电脑的时区。请参考 时区列表 进行设置，如 America/New_York, Japan, 和 UTC 。一般的，对于中国大陆地区可以使用 Asia/Shanghai。</p>
+<p>timezone ||    网站时区。Hexo 默认使用您电脑的时区。请参考 时区列表 进行设置，如 America&#x2F;New_York, Japan, 和 UTC 。一般的，对于中国大陆地区可以使用 Asia&#x2F;Shanghai。</p>
 <p><strong>网址</strong></p>
-<p>url    || 网址, 必须以 http:// 或 https:// 开头    </p>
+<p>url    || 网址, 必须以 http:&#x2F;&#x2F; 或 https:&#x2F;&#x2F; 开头    </p>
 <p>root ||    网站根目录    url’s pathname</p>
-<p>permalink ||    文章的 永久链接 格式    :year/:month/:day/:title/</p>
+<p>permalink ||    文章的 永久链接 格式    :year&#x2F;:month&#x2F;:day&#x2F;:title&#x2F;</p>
 <p>permalink_defaults ||     永久链接中各部分的默认值    </p>
 <p>pretty_urls ||    改写 permalink 的值来美化 URL    </p>
 <p>pretty_urls.trailing_index ||    是否在永久链接中保留尾部的index.html，设置为 false 时去除    true</p>
 <p>pretty_urls.trailing_html    是否在永久链接中保留尾部的 .html, 设置为 false 时去除 (对尾部的 index.html无效)</p>
-<p><em>网站存放在子目录<br>如果您的网站存放在子目录中，例如 <a target="_blank" rel="noopener" href="http://example.com/blog%EF%BC%8C%E5%88%99%E8%AF%B7%E5%B0%86%E6%82%A8%E7%9A%84">http://example.com/blog，则请将您的</a> url 设为 <a target="_blank" rel="noopener" href="http://example.com/blog">http://example.com/blog</a> 并把 root 设为 /blog/。</em><br><em>例如：# 比如，一个页面的永久链接是 <a target="_blank" rel="noopener" href="http://example.com/foo/bar/index.html">http://example.com/foo/bar/index.html</a><br>pretty_urls:<br>  trailing_index: false<br>此时页面的永久链接会变为 <a target="_blank" rel="noopener" href="http://example.com/foo/bar/">http://example.com/foo/bar/</a></em></p>
+<p><em>网站存放在子目录<br>如果您的网站存放在子目录中，例如 <a target="_blank" rel="noopener" href="http://example.com/blog%EF%BC%8C%E5%88%99%E8%AF%B7%E5%B0%86%E6%82%A8%E7%9A%84">http://example.com/blog，则请将您的</a> url 设为 <a target="_blank" rel="noopener" href="http://example.com/blog">http://example.com/blog</a> 并把 root 设为 &#x2F;blog&#x2F;。</em><br><em>例如：# 比如，一个页面的永久链接是 <a target="_blank" rel="noopener" href="http://example.com/foo/bar/index.html">http://example.com/foo/bar/index.html</a><br>pretty_urls:<br>  trailing_index: false<br>此时页面的永久链接会变为 <a target="_blank" rel="noopener" href="http://example.com/foo/bar/">http://example.com/foo/bar/</a></em></p>
 <p><strong>目录</strong><br>参数  ||    描述  ||    默认值</p>
 <p>source_dir ||    资源文件夹，这个文件夹用来存放内容。||    source</p>
 <p>public_dir ||    公共文件夹，这个文件夹用于存放生成的站点文件。||    public</p>
 <p>tag_dir  ||    标签文件夹 ||    tags</p>
 <p>archive_dir    归档文件夹    archives</p>
 <p>category_dir    分类文件夹    categories</p>
-<p>code_dir    Include code 文件夹，source_dir 下的子目录    downloads/code</p>
+<p>code_dir    Include code 文件夹，source_dir 下的子目录    downloads&#x2F;code</p>
 <p>i18n_dir    国际化（i18n）文件夹    :lang</p>
 <p>skip_render    跳过指定文件的渲染。匹配到的文件将会被不做改动地复制到 public 目录中。您可使用 glob 表达式来匹配路径。</p>
 <p><strong>文章</strong><br>参数    描述    默认值</p>
@@ -110,7 +110,7 @@
 <p>default_category    默认分类    uncategorized</p>
 <p>category_map    分类别名    </p>
 <p>tag_map    标签别名    </p>
-<p><strong>日期 / 时间格式</strong></p>
+<p><strong>日期 &#x2F; 时间格式</strong></p>
 <p>参数    描述    默认值</p>
 <p>date_format    日期格式    YYYY-MM-DD</p>
 <p>time_format    时间格式    HH:mm:ss</p>
@@ -120,7 +120,7 @@
 <p><em>use_date_for_updated | 启用以后，如果 Front Matter 中没有指定 updated， post.updated 将会使用 date 的值而不是文件的创建时间。在 Git 工作流中这个选项会很有用 | true</em></p>
 <p><strong>分页</strong></p>
 <p>参数    描述    默认值</p>
-<p>per_page    每页显示的文章量 (0 = 关闭分页功能)    10</p>
+<p>per_page    每页显示的文章量 (0 &#x3D; 关闭分页功能)    10</p>
 <p>pagination_dir    分页目录    page</p>
 <p><strong>扩展</strong><br>参数    描述</p>
 <p>theme    当前主题名称。值为false时禁用主题</p>
@@ -128,8 +128,14 @@
 <p>deploy    部署部分的设置</p>
 <p>meta_generator    Meta generator 标签。 值为 false 时 Hexo 不会在头部插入该标签</p>
 <ul>
-<li>*<h3 id="特别注意，记得修改配置中的连接和主题"><a href="#特别注意，记得修改配置中的连接和主题" class="headerlink" title="特别注意，记得修改配置中的连接和主题"></a>特别注意，记得修改配置中的连接和主题</h3></li>
-<li>*</li>
+<li><ul>
+<li><h3 id="特别注意，记得修改配置中的连接和主题"><a href="#特别注意，记得修改配置中的连接和主题" class="headerlink" title="特别注意，记得修改配置中的连接和主题"></a>特别注意，记得修改配置中的连接和主题</h3></li>
+</ul>
+</li>
+<li><ul>
+<li></li>
+</ul>
+</li>
 </ul>
 <h2 id="开始部署"><a href="#开始部署" class="headerlink" title="开始部署"></a>开始部署</h2><p>配置好配置中的部署部分</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repository: https://github.com/MrChenLreanSpace/MrChenLreanSpace.github.io.git</span><br><span class="line">  branch: main</span><br></pre></td></tr></table></figure>

@@ -58,17 +58,17 @@
             <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>虽然学习很久了，但没有好好总结过shader用到的数学，以至于在用的过程中总是忘记，然后花时间去找，裂开，没有搞完的发现后后续补充。</p>
 <h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><h2 id="长度length-a"><a href="#长度length-a" class="headerlink" title="长度length(a)"></a>长度length(a)</h2><p>简单的欧式距离，根号下平方的那个。</p>
 <h2 id="点乘dot（-a，b）"><a href="#点乘dot（-a，b）" class="headerlink" title="点乘dot（ a，b）"></a>点乘dot（ a，b）</h2><p>点乘是通过将对应分量逐个相乘，然后再把所得积相加来计算的。就是高中学的向量的乘法</p>
-<p>v¯⋅k¯=||v¯||⋅||k¯||⋅cosθ</p>
+<p>v¯⋅k¯&#x3D;||v¯||⋅||k¯||⋅cosθ</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(a1,a2,a3)⋅(b1,b2,b3)=a1*b1+a2* b2+a3*b3</span><br></pre></td></tr></table></figure>
 
 <h3 id="用处"><a href="#用处" class="headerlink" title="用处"></a>用处</h3><p>当两个向量都是单位向量时就是两个向量的夹角的余弦值，常用于计算角度。</p>
 <h2 id="叉乘cross（Lhs，Rhs）"><a href="#叉乘cross（Lhs，Rhs）" class="headerlink" title="叉乘cross（Lhs，Rhs）"></a>叉乘cross（Lhs，Rhs）</h2><p>叉乘只在3D空间中有定义，它需要两个不平行向量作为输入，生成一个正交于两个输入向量的第三个向量。如果输入的两个向量也是正交的，那么叉乘之后将会产生3个互相正交的向量。接下来的教程中这会非常有用。下面的图片展示了3D空间中叉乘的样子    ：</p>
 <p><img src="https://learnopengl-cn.github.io/img/01/07/vectors_crossproduct.png" alt="叉乘图"></p>
 <p><strong>注意：</strong>顺序在此运算符上很重要，因为 <strong>AxB</strong> 输出的结果与 <strong>BxA</strong> 不同（其结果类似于 <strong>-AxB</strong> ）。</p>
-<p>c=cross（a,b）</p>
-<p>c1=a2b3-a3b2</p>
-<p>c2=a3b1-a1b3</p>
-<p>c3=a1b2-a2b1</p>
+<p>c&#x3D;cross（a,b）</p>
+<p>c1&#x3D;a2b3-a3b2</p>
+<p>c2&#x3D;a3b1-a1b3</p>
+<p>c3&#x3D;a1b2-a2b1</p>
 <h3 id="用处-1"><a href="#用处-1" class="headerlink" title="用处"></a>用处</h3><p>得到两个向量做成平面的法向量；</p>
 <h2 id="Saturate"><a href="#Saturate" class="headerlink" title="Saturate"></a>Saturate</h2><p>饱和节点输出在其上设置的向量的值或单个分量饱和到[0 1]范围。</p>
 <ul>
@@ -90,7 +90,7 @@
 <h2 id="平滑阶梯smoothstep-min-max-input"><a href="#平滑阶梯smoothstep-min-max-input" class="headerlink" title="平滑阶梯smoothstep(min,max,input)"></a>平滑阶梯smoothstep(min,max,input)</h2><p>Clamp 节点输出其输入值或夹紧在 Min， Max范围之间的矢量的各个分量。</p>
 <ul>
 <li><strong>最小值：</strong>如果输入值小于 Min，则返回0</li>
-<li><em><strong>输入：</strong></em>如果输入值介于最小值和最大值之间，则返回clamp（（input-min）/（max-min），0，1）</li>
+<li><em><strong>输入：</strong></em>如果输入值介于最小值和最大值之间，则返回clamp（（input-min）&#x2F;（max-min），0，1）</li>
 <li><strong>最大值：</strong>如果输入值大于 Max，则返回1</li>
 </ul>
 <p><img src="http://amplify.pt/NodeDetail/SmoothstepGraphicNode.png"></p>
