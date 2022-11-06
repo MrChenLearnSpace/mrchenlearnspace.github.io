@@ -2337,7 +2337,7 @@
   </entry>
   <entry>
     <title>游戏服务器学习</title>
-    <url>/2022/10/13/%E6%B8%B8%E6%88%8F%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AD%A6%E4%B9%A0/</url>
+    <url>/2022/11/06/%E6%B8%B8%E6%88%8F%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AD%A6%E4%B9%A0/</url>
     <content><![CDATA[<h1 id="游戏大厅"><a href="#游戏大厅" class="headerlink" title="游戏大厅"></a>游戏大厅</h1><p>棋牌类大厅</p>
 <p>MMORPG大厅</p>
 <h1 id="大厅功能"><a href="#大厅功能" class="headerlink" title="大厅功能"></a>大厅功能</h1><p>（1）服务器启动，等待客户端连入</p>
@@ -2357,6 +2357,59 @@
 <p>当总项目使用热更部分时</p>
 <figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">HandleMsg</span>(<span class="params">Conn conn, ProtocolBase protoBase</span>)</span> &#123;</span><br><span class="line">    <span class="built_in">string</span> name = protoBase.GetName();</span><br><span class="line">    <span class="built_in">string</span> methodName = <span class="string">&quot;Msg&quot;</span> + name;</span><br><span class="line">    <span class="comment">//连接协议分发</span></span><br><span class="line">    <span class="keyword">if</span> (conn.player == <span class="literal">null</span> || name == <span class="string">&quot;HeatBeat&quot;</span> || name == <span class="string">&quot;Logout&quot;</span>) &#123;</span><br><span class="line">        MethodInfo mm = CodeLoader.GetInstance().Find(<span class="string">&quot;MMONetworkServer.Logic.HandleConnMsg&quot;</span>).GetType().GetMethod(methodName);</span><br><span class="line">        <span class="keyword">if</span> (mm == <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="built_in">string</span> str = <span class="string">&quot;[警告]HandleMsg没有处理连接方法 &quot;</span>;</span><br><span class="line">            Console.WriteLine(str + methodName);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        Object[] obj = <span class="keyword">new</span> <span class="built_in">object</span>[] &#123; conn, protoBase &#125;;</span><br><span class="line">        Console.WriteLine(<span class="string">&quot;[处理连接消息]&quot;</span> + conn.GetAdress() + <span class="string">&quot; :&quot;</span> + name);</span><br><span class="line">        mm.Invoke(CodeLoader.GetInstance().Find(<span class="string">&quot;MMONetworkServer.Logic.HandleConnMsg&quot;</span>), obj);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//角色协议分发</span></span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        MethodInfo mm = CodeLoader.GetInstance().Find(<span class="string">&quot;MMONetworkServer.Logic.HandlePlayerMsg&quot;</span>).GetType().GetMethod(methodName);</span><br><span class="line">        <span class="keyword">if</span> (mm == <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="built_in">string</span> str = <span class="string">&quot;[警告]HandleMsg没有处理玩家方法&quot;</span>;</span><br><span class="line">        Console.WriteLine(str + methodName);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        Object[] obj = <span class="keyword">new</span> <span class="built_in">object</span>[] &#123; conn.player, protoBase &#125;;</span><br><span class="line">        Console.WriteLine(<span class="string">&quot;[处理玩家消息]&quot;</span> + conn.player.id + <span class="string">&quot; :&quot;</span> + name);</span><br><span class="line">        mm.Invoke(CodeLoader.GetInstance().Find(<span class="string">&quot;MMONetworkServer.Logic.HandlePlayerMsg&quot;</span>), obj);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <p>事件部分因为依赖于总项目所以能直接编译。</p>
+<h2 id="对于反射部分的优化"><a href="#对于反射部分的优化" class="headerlink" title="对于反射部分的优化"></a>对于反射部分的优化</h2><p>使用委托来完成。<a href="https://focus-creative-games.github.io/hybridclr/best_practices/#%E7%83%AD%E6%9B%B4%E6%96%B0%E5%B1%82%E8%BF%94%E5%9B%9E%E4%B8%80%E4%B8%AA-delegate">学习渠道参考文章</a>   <a href="http://www.zkea.net/blog/detail/csharp-fast-get-property-value.html">性能测试</a>  </p>
+<h3 id="反射"><a href="#反射" class="headerlink" title="反射"></a>反射</h3><figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="comment">//HandleConnMsg</span></span><br><span class="line">MethodInfo mm = CodeLoader.GetInstance().Find(<span class="string">&quot;MMONetworkServer.Logic.HandleConnMsg&quot;</span>).GetType().GetMethod(methodName);</span><br><span class="line">Object[] obj = <span class="keyword">new</span> <span class="built_in">object</span>[] &#123; conn, protoBase &#125;;</span><br><span class="line">mm.Invoke(CodeLoader.GetInstance().Find(<span class="string">&quot;ServerLoginHotfix.HandleConnMsg&quot;</span>), obj);</span><br><span class="line"><span class="comment">//HandlePlayerMsg</span></span><br><span class="line">MethodInfo mm = CodeLoader.GetInstance().Find(<span class="string">&quot;MMONetworkServer.Logic.HandlePlayerMsg&quot;</span>).GetType().GetMethod(methodName);</span><br><span class="line">Object[] obj = <span class="keyword">new</span> <span class="built_in">object</span>[] &#123; conn.player, protoBase &#125;;</span><br><span class="line">Console.WriteLine(<span class="string">&quot;[处理玩家消息]&quot;</span> + conn.player.id + <span class="string">&quot; :&quot;</span> + name);</span><br></pre></td></tr></table></figure>
+
+<h3 id="委托"><a href="#委托" class="headerlink" title="委托"></a>委托</h3><figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="comment">//HandleConnMsg</span></span><br><span class="line">MethodInfo mm = CodeLoader.GetInstance().Find(<span class="string">&quot;MMONetworkServer.Logic.HandleConnMsg&quot;</span>).GetType().GetMethod(methodName);</span><br><span class="line">Action&lt;Conn, ProtocolBase&gt; updateDel = (Action&lt;Conn,ProtocolBase&gt;)Delegate.CreateDelegate(<span class="keyword">typeof</span>(Action&lt;Conn, ProtocolBase&gt;), <span class="literal">null</span>, mm);</span><br><span class="line">updateDel(conn, protoBase);</span><br><span class="line"><span class="comment">//HandlePlayerMsg</span></span><br><span class="line">MethodInfo mm = CodeLoader.GetInstance().Find(<span class="string">&quot;MMONetworkServer.Logic.HandleConnMsg&quot;</span>).GetType().GetMethod(methodName);</span><br><span class="line">Action&lt;IPlayer, ProtocolBase&gt; updateDel = (Action&lt;IPlayer, ProtocolBase&gt;)Delegate.CreateDelegate(<span class="keyword">typeof</span>(Action&lt;IPlayer, ProtocolBase&gt;), <span class="literal">null</span>, mm);</span><br><span class="line">updateDel(conn.player, protoBase);</span><br></pre></td></tr></table></figure>
+
+<h3 id="比较"><a href="#比较" class="headerlink" title="比较"></a>比较</h3><h4 id="运行速度"><a href="#运行速度" class="headerlink" title="运行速度"></a>运行速度</h4><p>虽然上面参考文章上写着委托比反射快，但我测试数据如下</p>
+<table>
+<thead>
+<tr>
+<th>反射</th>
+<th>委托</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>[处理玩家消息] Time: 00:00:00.188 3370</td>
+<td>[处理玩家消息] Time: 00:00:00.188 6885</td>
+</tr>
+<tr>
+<td>[处理玩家消息] Time: 00:00:00.022 5805</td>
+<td>[处理玩家消息] Time: 00:00:00.023 2066</td>
+</tr>
+<tr>
+<td>[处理玩家消息] Time: 00:00:00.010 5767</td>
+<td>[处理玩家消息] Time: 00:00:00.006 4742</td>
+</tr>
+<tr>
+<td>[处理玩家消息] Time: 00:00:00.000 7305</td>
+<td>[处理玩家消息] Time: 00:00:00.000 8893</td>
+</tr>
+<tr>
+<td>[处理玩家消息] Time: 00:00:00.005 2011</td>
+<td>[处理玩家消息] Time: 00:00:00.005 4224</td>
+</tr>
+<tr>
+<td>[处理玩家消息] Time: 00:00:00.000 6916</td>
+<td>[处理玩家消息] Time: 00:00:00.000 7680</td>
+</tr>
+</tbody></table>
+<p>可能是因为我在codeloader读取数据集时将所有类进行了实例化，因此加快了反射的速度。</p>
+<h4 id="内存开销"><a href="#内存开销" class="headerlink" title="内存开销"></a>内存开销</h4><p>委托会比反射造成内存开销小，因为舍去了将运行参数装箱拆箱的过程，减少了内存gc。</p>
+<h4 id="热更类的变化"><a href="#热更类的变化" class="headerlink" title="热更类的变化"></a>热更类的变化</h4><ol>
+<li><p>委托方法调用方法及方法内使用的变量和参数的逻辑类将进行静态处理否则将会委托绑定不到具体对象。例如</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">partial</span> <span class="keyword">class</span> <span class="title">HandleConnMsg</span> &#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">static</span> HandlePlayerEvent handlePlayerEvent = <span class="keyword">new</span> HandlePlayerEvent();</span><br><span class="line">        <span class="keyword">static</span> LogicManager logicManager;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">MsgHeatBeat</span>(<span class="params">Conn conn, ProtocolBase protoBase</span>)</span> &#123;</span><br><span class="line">            conn.lastTickTime = Sys.GetTimeStamp();</span><br><span class="line">            Console.WriteLine(<span class="string">&quot;[更新心跳时间]&quot;</span> + conn.GetAdress());</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+</li>
+<li><p>委托的具体参数一定要一致，不能为某个类的子类，否则会委托与具体函数签名不一致。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">partial</span> <span class="keyword">class</span> <span class="title">HandlePlayerMsg</span> &#123;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">MsgWWWW</span>(<span class="params">IPlayer iplayer, ProtocolBase protoBase</span>)</span> &#123;</span><br><span class="line">           Console.WriteLine(<span class="string">&quot;wwwwwww&quot;</span>);</span><br><span class="line">       &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>​    反射可以直接写为player，但委托要与委托变量一致</p>
+</li>
+</ol>
+<p>​    </p>
 ]]></content>
       <categories>
         <category>游戏</category>
