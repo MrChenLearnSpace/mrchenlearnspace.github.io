@@ -1402,7 +1402,7 @@
 <p><strong>在终端运行以下命令</strong></p>
 <p>sudo docker-compose up -d</p>
 <p><strong>使用自带的火狐浏览器，访问 <a href="http://127.0.0.1:81/">http://127.0.0.1:81</a></strong></p>
-<p><strong>未更改 docker-compose.yml 文件内邮箱密码的话，默认用户名 <a href="mailto:&#x6d;&#x65;&#64;&#101;&#x78;&#x61;&#109;&#x70;&#x6c;&#101;&#46;&#x63;&#x6f;&#109;">&#x6d;&#x65;&#64;&#101;&#x78;&#x61;&#109;&#x70;&#x6c;&#101;&#46;&#x63;&#x6f;&#109;</a> 密码 asecret</strong></p>
+<p><strong>未更改 docker-compose.yml 文件内邮箱密码的话，默认用户名 <a href="mailto:&#109;&#101;&#64;&#x65;&#x78;&#x61;&#109;&#x70;&#x6c;&#101;&#x2e;&#99;&#x6f;&#x6d;">&#109;&#101;&#64;&#x65;&#x78;&#x61;&#109;&#x70;&#x6c;&#101;&#x2e;&#99;&#x6f;&#x6d;</a> 密码 asecret</strong></p>
 <p><strong>请在路由器转发 http 使用的 81 端口至服务器</strong></p>
 <p><strong>全平台客户端下载链接 <a href="https://www.seafile.com/download/">https://www.seafile.com/download/</a></strong></p>
 <h2 id="免费网盘-SeaFile-配置教程-https"><a href="#免费网盘-SeaFile-配置教程-https" class="headerlink" title="免费网盘 SeaFile 配置教程 (https)"></a>免费网盘 SeaFile 配置教程 (https)</h2><p><strong>于各个免费平台申请相应域名的 SSL 证书</strong></p>
