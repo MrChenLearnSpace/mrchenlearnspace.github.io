@@ -2,7 +2,7 @@
 <search>
   <entry>
     <title>搭建博客</title>
-    <url>/blog/2021/11/01/Hollow/</url>
+    <url>/2021/11/01/Hollow/</url>
     <content><![CDATA[<h1 id="博客搭建"><a href="#博客搭建" class="headerlink" title="博客搭建"></a>博客搭建</h1><p>文档格式<br><strong>需要git，Node.js，npm</strong></p>
 <h2 id="做好准备"><a href="#做好准备" class="headerlink" title="做好准备"></a>做好准备</h2><p>安装好软件，配置好相关的环境</p>
 <p>建立一个github仓库，由于在部署时未设置配置建议改成 用户名.github.io,方便网站进入导致只打开一个html，与整个页面脱节的情况</p>
@@ -111,7 +111,7 @@
   </entry>
   <entry>
     <title>OpenGL学习之路之窗口的建立</title>
-    <url>/blog/2021/11/02/OpenGL%E5%AD%A6%E4%B9%A0%E4%B9%8B%E8%B7%AF%E4%B9%8B%E7%AA%97%E5%8F%A3%E7%9A%84%E5%BB%BA%E7%AB%8B/</url>
+    <url>/2021/11/02/OpenGL%E5%AD%A6%E4%B9%A0%E4%B9%8B%E8%B7%AF%E4%B9%8B%E7%AA%97%E5%8F%A3%E7%9A%84%E5%BB%BA%E7%AB%8B/</url>
     <content><![CDATA[<h1 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h1><p>先建立一个空项目，建立一个c++文件，然后设置解决方案的属性设置三个位置<br><strong>第一是c&#x2F;c++\常规\附加包含目录加入include的文件夹，glfw和glew都需要，第二，链接器\常规\附加库目录，lib文件夹，第三，链接器\输入\附加依赖库，opengl32.lib glfw3.lib glew32s.lib</strong></p>
 <h1 id="创建自己的引擎"><a href="#创建自己的引擎" class="headerlink" title="创建自己的引擎"></a>创建自己的引擎</h1><p>将文件修改为main作为主函数</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> GLEW_STATIC</span></span><br></pre></td></tr></table></figure>
@@ -139,7 +139,7 @@
   </entry>
   <entry>
     <title>OpenGL学习之路之三角形绘制</title>
-    <url>/blog/2021/11/02/OpenGL%E5%AD%A6%E4%B9%A0%E4%B9%8B%E8%B7%AF%E4%B9%8B%E4%B8%89%E8%A7%92%E5%BD%A2%E7%BB%98%E5%88%B6/</url>
+    <url>/2021/11/02/OpenGL%E5%AD%A6%E4%B9%A0%E4%B9%8B%E8%B7%AF%E4%B9%8B%E4%B8%89%E8%A7%92%E5%BD%A2%E7%BB%98%E5%88%B6/</url>
     <content><![CDATA[<p><strong>先从几何阶段取出顶点转换成vbo转到vao如果有重复顶点可以转到EBo<br>openGL是一个状态机只能运行context的状态只能放一个vao<br>状态机中必须要一个vao</strong></p>
 <h3 id="VAO"><a href="#VAO" class="headerlink" title="VAO"></a>VAO</h3><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">   <span class="type">unsigned</span> <span class="type">int</span> VAO;</span><br><span class="line"><span class="built_in">glGenVertexArrays</span>(<span class="number">1</span>, &amp;VAO);</span><br><span class="line"><span class="built_in">glBindVertexArray</span>(VAO);<span class="comment">//注意</span></span><br></pre></td></tr></table></figure>
 <h3 id="VBO"><a href="#VBO" class="headerlink" title="VBO"></a>VBO</h3><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="type">unsigned</span> <span class="type">int</span> VBO;</span><br><span class="line"><span class="built_in">glGenBuffers</span>(<span class="number">1</span>, &amp;VBO);<span class="comment">//一个缓冲ID生成一个VBO对象建立顶点缓冲对象</span></span><br><span class="line"><span class="built_in">glBindBuffer</span>(GL_ARRAY_BUFFER, VBO);<span class="comment">//新创建的缓冲绑定到GL_ARRAY_BUFFER目标</span></span><br><span class="line"><span class="built_in">glBufferData</span>(GL_ARRAY_BUFFER, <span class="built_in">sizeof</span>(vertices), vertices, GL_STATIC_DRAW);<span class="comment">//它会把之前定义的顶点数据复制到缓冲的内存中</span></span><br></pre></td></tr></table></figure>
@@ -172,7 +172,7 @@
   </entry>
   <entry>
     <title>Hello World</title>
-    <url>/blog/2021/11/01/hello-world/</url>
+    <url>/2021/11/01/hello-world/</url>
     <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
 <h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
 
@@ -190,7 +190,7 @@
   </entry>
   <entry>
     <title>全景图传输</title>
-    <url>/blog/2022/03/21/%E5%85%A8%E6%99%AF%E5%9B%BE%E4%BC%A0%E8%BE%93/</url>
+    <url>/2022/03/21/%E5%85%A8%E6%99%AF%E5%9B%BE%E4%BC%A0%E8%BE%93/</url>
     <content><![CDATA[<h1 id="全景图"><a href="#全景图" class="headerlink" title="全景图"></a>全景图</h1><h2 id="知识储备"><a href="#知识储备" class="headerlink" title="知识储备"></a>知识储备</h2><h3 id="将全景图转变为Byte数组"><a href="#将全景图转变为Byte数组" class="headerlink" title="将全景图转变为Byte数组"></a>将全景图转变为Byte数组</h3><figure class="highlight c#"><table><tr><td class="code"><pre><span class="line">Camera.main.RenderToCubemap(cm);</span><br><span class="line">texture2D = <span class="keyword">new</span> Texture2D(width, hight);</span><br><span class="line">texture2D.SetPixels(cm.GetPixels(CubemapFace.NegativeZ));</span><br><span class="line">texture2D.Apply();</span><br><span class="line">byt = texture2D.EncodeToPNG();</span><br></pre></td></tr></table></figure>
 
 <h3 id="将Byte数组变成全景图"><a href="#将Byte数组变成全景图" class="headerlink" title="将Byte数组变成全景图"></a>将Byte数组变成全景图</h3><figure class="highlight c#"><table><tr><td class="code"><pre><span class="line">texture2DFix.LoadImage(byt);</span><br><span class="line">texture2DFix.Apply</span><br><span class="line">cm1.SetPixels(texture2DFix.GetPixels(), CubemapFace.PositiveZ);</span><br><span class="line">cm1.Apply();</span><br></pre></td></tr></table></figure>
@@ -250,7 +250,7 @@
   </entry>
   <entry>
     <title>OpenGL学习之路之光照贴图</title>
-    <url>/blog/2021/12/07/OpenGL%E5%AD%A6%E4%B9%A0%E4%B9%8B%E8%B7%AF%E4%B9%8B%E5%85%89%E7%85%A7%E8%B4%B4%E5%9B%BE/</url>
+    <url>/2021/12/07/OpenGL%E5%AD%A6%E4%B9%A0%E4%B9%8B%E8%B7%AF%E4%B9%8B%E5%85%89%E7%85%A7%E8%B4%B4%E5%9B%BE/</url>
     <content><![CDATA[<h1 id="Phong光照模型"><a href="#Phong光照模型" class="headerlink" title="Phong光照模型"></a>Phong光照模型</h1><p>效果混合相加：diffuse + ambient + specular</p>
 <p>图片混和相乘：(diffuse + ambient + specular) * objColor</p>
 <figure class="highlight c"><table><tr><td class="code"><pre><span class="line">FragColor =vec4((diffuse + ambient + specular) * objColor,<span class="number">1.0f</span>);</span><br></pre></td></tr></table></figure>
@@ -275,7 +275,7 @@
   </entry>
   <entry>
     <title>OpenGL学习之路之光源大总结</title>
-    <url>/blog/2021/12/19/OpenGL%E5%AD%A6%E4%B9%A0%E4%B9%8B%E8%B7%AF%E4%B9%8B%E5%85%89%E6%BA%90%E5%A4%A7%E6%80%BB%E7%BB%93/</url>
+    <url>/2021/12/19/OpenGL%E5%AD%A6%E4%B9%A0%E4%B9%8B%E8%B7%AF%E4%B9%8B%E5%85%89%E6%BA%90%E5%A4%A7%E6%80%BB%E7%BB%93/</url>
     <content><![CDATA[<h1 id="光源所需条件"><a href="#光源所需条件" class="headerlink" title="光源所需条件"></a>光源所需条件</h1><h4 id="1-光照信息"><a href="#1-光照信息" class="headerlink" title="1.光照信息"></a>1.光照信息</h4><p>定向光 点光源 聚光灯的属性</p>
 <h4 id="2-法线向量"><a href="#2-法线向量" class="headerlink" title="2.法线向量"></a>2.法线向量</h4><p>将顶点着色器的法线信息接收，并进行标准化</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">vec3 uNormal=<span class="built_in">normalize</span>(Normal);</span><br></pre></td></tr></table></figure>
@@ -317,7 +317,7 @@
   </entry>
   <entry>
     <title>Unity升级管线的注意事项</title>
-    <url>/blog/2022/01/18/Unity%E5%8D%87%E7%BA%A7%E7%AE%A1%E7%BA%BF%E7%9A%84%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/</url>
+    <url>/2022/01/18/Unity%E5%8D%87%E7%BA%A7%E7%AE%A1%E7%BA%BF%E7%9A%84%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/</url>
     <content><![CDATA[<blockquote>
 <h1 id="升级渲染管线在PM中下载-Universal-RP"><a href="#升级渲染管线在PM中下载-Universal-RP" class="headerlink" title="升级渲染管线在PM中下载 Universal RP"></a>升级渲染管线在PM中下载 Universal RP</h1></blockquote>
 <p>材质记得替，不如会出现洋红色</p>
@@ -344,7 +344,7 @@
   </entry>
   <entry>
     <title>Shader的主要节点介绍</title>
-    <url>/blog/2022/02/20/Shader%E7%9A%84%E4%B8%BB%E8%A6%81%E8%8A%82%E7%82%B9%E4%BB%8B%E7%BB%8D/</url>
+    <url>/2022/02/20/Shader%E7%9A%84%E4%B8%BB%E8%A6%81%E8%8A%82%E7%82%B9%E4%BB%8B%E7%BB%8D/</url>
     <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>虽然学习很久了，但没有好好总结过shader用到的数学，以至于在用的过程中总是忘记，然后花时间去找，裂开，没有搞完的发现后后续补充。</p>
 <h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><h2 id="长度length-a"><a href="#长度length-a" class="headerlink" title="长度length(a)"></a>长度length(a)</h2><p>简单的欧式距离，根号下平方的那个。</p>
 <h2 id="点乘dot（-a，b）"><a href="#点乘dot（-a，b）" class="headerlink" title="点乘dot（ a，b）"></a>点乘dot（ a，b）</h2><p>点乘是通过将对应分量逐个相乘，然后再把所得积相加来计算的。就是高中学的向量的乘法</p>
@@ -395,7 +395,7 @@
   </entry>
   <entry>
     <title>视觉计算观后感</title>
-    <url>/blog/2022/03/13/%E8%A7%86%E8%A7%89%E8%AE%A1%E7%AE%97%E8%A7%82%E5%90%8E%E6%84%9F/</url>
+    <url>/2022/03/13/%E8%A7%86%E8%A7%89%E8%AE%A1%E7%AE%97%E8%A7%82%E5%90%8E%E6%84%9F/</url>
     <content><![CDATA[<h1 id="数据"><a href="#数据" class="headerlink" title="数据"></a>数据</h1><h2 id="采样"><a href="#采样" class="headerlink" title="采样"></a>采样</h2><p>从样本数据提取数据，等距提取就是均匀采样，不等距就是非均匀采样。</p>
 <h2 id="噪声"><a href="#噪声" class="headerlink" title="噪声"></a>噪声</h2><p>椒盐噪点可以用中值滤波器消除，有条纹状的噪声可以用陷波滤波器，比较细致模糊的噪点可以用低通滤波器</p>
 <h1 id="卷积"><a href="#卷积" class="headerlink" title="卷积"></a>卷积</h1><h2 id="线性滤波器"><a href="#线性滤波器" class="headerlink" title="线性滤波器"></a>线性滤波器</h2><h3 id="全通"><a href="#全通" class="headerlink" title="全通"></a>全通</h3><p>没有消除和阻止任何一个频率。作用未知。</p>
@@ -438,7 +438,7 @@
   </entry>
   <entry>
     <title>Games104第2节记录</title>
-    <url>/blog/2022/03/22/Games104%E7%AC%AC2%E8%8A%82%E8%AE%B0%E5%BD%95/</url>
+    <url>/2022/03/22/Games104%E7%AC%AC2%E8%8A%82%E8%AE%B0%E5%BD%95/</url>
     <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>Tool Layer    给予开发者使用的工具</p>
 <p>Function Layer </p>
 <p>Resource Layer </p>
@@ -480,7 +480,7 @@
   </entry>
   <entry>
     <title>OpenCV的边缘计算</title>
-    <url>/blog/2022/03/22/OpenCV%E7%9A%84%E8%BE%B9%E7%BC%98%E8%AE%A1%E7%AE%97/</url>
+    <url>/2022/03/22/OpenCV%E7%9A%84%E8%BE%B9%E7%BC%98%E8%AE%A1%E7%AE%97/</url>
     <content><![CDATA[<h1 id="基于梯度的检测器"><a href="#基于梯度的检测器" class="headerlink" title="基于梯度的检测器"></a>基于梯度的检测器</h1><p><img src="https://img-blog.csdn.net/20160911165855683?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center"></p>
 <p>梯边缘，顶边缘，坡边缘</p>
 <h2 id="有限差分"><a href="#有限差分" class="headerlink" title="有限差分"></a>有限差分</h2><p>最简单的梯度算子<br>$$<br>gx&#x3D;f(x+1,y)-f(x,y) \<br>gy&#x3D;f(x,y+1)-f(x,y)<br>$$</p>
@@ -546,7 +546,7 @@
   </entry>
   <entry>
     <title>学习记录</title>
-    <url>/blog/2020/03/01/C++%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/</url>
+    <url>/2020/03/01/C++%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/</url>
     <content><![CDATA[<h1 id="第七章"><a href="#第七章" class="headerlink" title="第七章"></a>第七章</h1><h2 id="流操纵算子"><a href="#流操纵算子" class="headerlink" title="流操纵算子"></a>流操纵算子</h2><p>需要头文件<br>#include<iomanip><br>整数dec10，oct8，hex16，setbase<br>小数点setiosflags(ios::fixed)或fixed<br>浮点精度precision，setprecision<br>取消小数点resetiosflags(ios::fixed)<br>科学计数法scientific<br>设置宽域setw，width<br>非负数显示正号showpos()<br>非负数不显示正号noshowpos()<br>填充符号setfill(‘’)<br>数字的位置left，right</p>
 <h2 id="模板"><a href="#模板" class="headerlink" title="模板"></a>模板</h2><p>templatea<class T>&#x2F;&#x2F;T就变成了某个数据类型</p>
 <h1 id="第八章"><a href="#第八章" class="headerlink" title="第八章"></a>第八章</h1><h2 id="string类"><a href="#string类" class="headerlink" title="string类"></a>string类</h2><h3 id="赋值"><a href="#赋值" class="headerlink" title="赋值"></a>赋值</h3><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">string <span class="title">s1</span><span class="params">(<span class="string">&quot;Hello&quot;</span>)</span></span>;</span><br><span class="line">cout &lt;&lt;s1.<span class="built_in">length</span>()&lt;&lt;endl;<span class="comment">//string类型长度输出</span></span><br><span class="line">cout&lt;&lt;s1&lt;&lt;endl;</span><br><span class="line"><span class="function">string <span class="title">s2</span><span class="params">(<span class="number">8</span>,<span class="string">&#x27;x&#x27;</span>)</span></span>;<span class="comment">//s2是8个x</span></span><br><span class="line">cout&lt;&lt;s2&lt;&lt;endl;</span><br><span class="line">string month=<span class="string">&quot;march&quot;</span>;<span class="comment">//直接赋值</span></span><br><span class="line">cout &lt;&lt; month&lt;&lt;endl;</span><br><span class="line">string s;</span><br><span class="line">s=<span class="string">&#x27;n&#x27;</span>;<span class="comment">//可以单个赋值</span></span><br><span class="line">cout&lt;&lt;s&lt;&lt;endl;</span><br></pre></td></tr></table></figure>
@@ -640,7 +640,7 @@
   </entry>
   <entry>
     <title>Games104第2节记录</title>
-    <url>/blog/2022/03/22/Games104%E7%AC%AC3%E8%8A%82%E8%AE%B0%E5%BD%95/</url>
+    <url>/2022/03/22/Games104%E7%AC%AC3%E8%8A%82%E8%AE%B0%E5%BD%95/</url>
     <content><![CDATA[<h1 id="如何构建游戏世界"><a href="#如何构建游戏世界" class="headerlink" title="如何构建游戏世界"></a>如何构建游戏世界</h1><h1 id="如何让游戏世界活起来"><a href="#如何让游戏世界活起来" class="headerlink" title="如何让游戏世界活起来"></a>如何让游戏世界活起来</h1><p>将物体变成GO（ Game Object）</p>
 <p>动态物体</p>
 <p><img src="https://img-blog.csdnimg.cn/ecc483da75994bb9a6fe64b7a709b970.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
@@ -689,7 +689,7 @@
   </entry>
   <entry>
     <title>Games104第4节记录</title>
-    <url>/blog/2022/04/04/Games104%E7%AC%AC4%E8%8A%82%E8%AE%B0%E5%BD%95/</url>
+    <url>/2022/04/04/Games104%E7%AC%AC4%E8%8A%82%E8%AE%B0%E5%BD%95/</url>
     <content><![CDATA[<h1 id="游戏渲染的挑战"><a href="#游戏渲染的挑战" class="headerlink" title="游戏渲染的挑战"></a>游戏渲染的挑战</h1><p><img src="https://img-blog.csdnimg.cn/89157de1c7774ef1aa07522e078e9dad.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_17,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 <p><img src="https://img-blog.csdnimg.cn/23dfe2cb80ac45288e9f972fa8d0c9b1.png" alt="在这里插入图片描述"></p>
 <p><img src="https://img-blog.csdnimg.cn/c5076d29a380491493992c71ead34a7c.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_15,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
@@ -734,7 +734,7 @@
   </entry>
   <entry>
     <title>Games104第5节记录</title>
-    <url>/blog/2022/04/11/Games104%E7%AC%AC5%E8%8A%82%E8%AE%B0%E5%BD%95/</url>
+    <url>/2022/04/11/Games104%E7%AC%AC5%E8%8A%82%E8%AE%B0%E5%BD%95/</url>
     <content><![CDATA[<h1 id="光照，材质，着色"><a href="#光照，材质，着色" class="headerlink" title="光照，材质，着色"></a>光照，材质，着色</h1><p><img src="https://img-blog.csdnimg.cn/6741651a20b34bf2bef50909951cc455.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 <h1 id="光照"><a href="#光照" class="headerlink" title="光照"></a>光照</h1><h2 id="第一个挑战"><a href="#第一个挑战" class="headerlink" title="第一个挑战"></a>第一个挑战</h2><p>多样的光</p>
 <p>复杂的光照信息</p>
@@ -830,7 +830,7 @@
   </entry>
   <entry>
     <title>Imgui学习</title>
-    <url>/blog/2022/04/12/Imgui%E5%AD%A6%E4%B9%A0/</url>
+    <url>/2022/04/12/Imgui%E5%AD%A6%E4%B9%A0/</url>
     <content><![CDATA[<h1 id="让控制台消失"><a href="#让控制台消失" class="headerlink" title="让控制台消失"></a>让控制台消失</h1><p>GetConsoleWindow()&#x2F;&#x2F;获取控制台窗口句柄</p>
 <p>SW_HIDE             0<br>SW_SHOWNORMAL       1<br>SW_NORMAL           1<br>SW_SHOWMINIMIZED    2<br>SW_SHOWMAXIMIZED    3<br>SW_MAXIMIZE         3<br>SW_SHOWNOACTIVATE   4<br>SW_SHOW             5<br>SW_MINIMIZE         6<br>SW_SHOWMINNOACTIVE  7<br>SW_SHOWNA           8<br>SW_RESTORE          9<br>SW_SHOWDEFAULT      10<br>SW_FORCEMINIMIZE    11<br>SW_MAX              11</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;Windows.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span>, <span class="type">char</span>**)</span></span>&#123;</span><br><span class="line">     <span class="built_in">ShowWindow</span>(<span class="built_in">GetConsoleWindow</span>(), SW_HIDE);</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -905,7 +905,7 @@
   </entry>
   <entry>
     <title>Games104第6节记录</title>
-    <url>/blog/2022/04/18/Games104%E7%AC%AC6%E8%8A%82%E8%AE%B0%E5%BD%95/</url>
+    <url>/2022/04/18/Games104%E7%AC%AC6%E8%8A%82%E8%AE%B0%E5%BD%95/</url>
     <content><![CDATA[<h1 id="地形渲染"><a href="#地形渲染" class="headerlink" title="地形渲染"></a>地形渲染</h1><h1 id="height-field-高层图"><a href="#height-field-高层图" class="headerlink" title="height field 高层图"></a>height field 高层图</h1><p><img src="https://img-blog.csdnimg.cn/1f3a296315884eb2bebd6322557d20a4.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 <p>渲染地形高层图，地形分成不同的网格，通过高层图修改相关顶点。不适用于开饭大世界</p>
 <h1 id="地形渲染的方法"><a href="#地形渲染的方法" class="headerlink" title="地形渲染的方法"></a>地形渲染的方法</h1><p><img src="https://img-blog.csdnimg.cn/95f3dc406ae44389b2b7d03cb6c5ba27.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
@@ -989,7 +989,7 @@
   </entry>
   <entry>
     <title>大话设计模式观后感之创建型模式</title>
-    <url>/blog/2022/04/22/%E5%A4%A7%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E8%A7%82%E5%90%8E%E6%84%9F%E4%B9%8B%E5%88%9B%E5%BB%BA%E5%9E%8B%E6%A8%A1%E5%BC%8F/</url>
+    <url>/2022/04/22/%E5%A4%A7%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E8%A7%82%E5%90%8E%E6%84%9F%E4%B9%8B%E5%88%9B%E5%BB%BA%E5%9E%8B%E6%A8%A1%E5%BC%8F/</url>
     <content><![CDATA[<h1 id="创建型模式"><a href="#创建型模式" class="headerlink" title="创建型模式"></a>创建型模式</h1><h2 id="为什么我们需要创建型模式"><a href="#为什么我们需要创建型模式" class="headerlink" title="为什么我们需要创建型模式?"></a>为什么我们需要创建型模式?</h2><p><strong>创建型模式隐藏了这些类的实例是如何被创建和放在一起，整个系统关于这些对象所知道的是由抽象类所定义的接口。这样，创建型模式在创建了什么、谁创建它、它是怎么被创建的，以及何时创建这些方面提供了很大的灵活性。</strong></p>
 <p>当一个系统应该独立于它的产品创建、构成和表示时，应该考虑用创建性模式。<strong>建立相应数目的原型并克隆它们通常比每次用合适的状态手工实例化该类更方便一些</strong></p>
 <h2 id="松耦合的理解"><a href="#松耦合的理解" class="headerlink" title="松耦合的理解"></a>松耦合的理解</h2><p>这个问题首先要谈谈<strong>内聚性与耦合性</strong><br><strong>内聚性</strong>描述的是一个例程内部组成部分之间相互联系的紧密程度。<br><strong>耦合性</strong>描述的是一个例程与其他例程之间联系的紧密程度。<br>软件开发的目标应该是创建这样的例程:<strong>内部完整，也就是高内聚</strong>，而与<strong>其他例程之间的联系则是小巧、直接、可见、灵活的，这就是松耦合</strong>。</p>
@@ -1048,7 +1048,7 @@
   </entry>
   <entry>
     <title>大话设计模式观后感之设计原则</title>
-    <url>/blog/2022/04/18/%E5%A4%A7%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E8%A7%82%E5%90%8E%E6%84%9F%E4%B9%8B%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99/</url>
+    <url>/2022/04/18/%E5%A4%A7%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E8%A7%82%E5%90%8E%E6%84%9F%E4%B9%8B%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99/</url>
     <content><![CDATA[<h1 id="单一职责原则"><a href="#单一职责原则" class="headerlink" title="单一职责原则"></a>单一职责原则</h1><p><strong>就一个类而言，应该仅有一个引起它变化的原因</strong></p>
 <p>一个类不应该搞得很复杂，当傅老师黑魂教程中处理玩家数据时新建一个ActorData来装载玩家数据，ActorController来改变数据。一个类承担某种职责。</p>
 <h1 id="里氏替换原则"><a href="#里氏替换原则" class="headerlink" title="里氏替换原则"></a>里氏替换原则</h1><p><strong>子类型必须能够代替掉它们的父类型</strong></p>
@@ -1112,7 +1112,7 @@
   </entry>
   <entry>
     <title>Games104第7节记录</title>
-    <url>/blog/2022/04/18/Games104%E7%AC%AC7%E8%8A%82%E8%AE%B0%E5%BD%95/</url>
+    <url>/2022/04/18/Games104%E7%AC%AC7%E8%8A%82%E8%AE%B0%E5%BD%95/</url>
     <content><![CDATA[<h1 id="环境光遮蔽-Ambient-Occasion"><a href="#环境光遮蔽-Ambient-Occasion" class="headerlink" title="环境光遮蔽(Ambient Occasion)"></a>环境光遮蔽(Ambient Occasion)</h1><p><img src="https://img-blog.csdnimg.cn/25497739fd2c430fae63e9c0192b6234.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 <h2 id="预计算AO"><a href="#预计算AO" class="headerlink" title="预计算AO"></a>预计算AO</h2><p>采用光线追踪离线计算AO，并将结果存储到纹理中，这种方法广泛应用于物体建模过程中：</p>
 <ol>
@@ -1159,7 +1159,7 @@
   </entry>
   <entry>
     <title>UnityShader入门</title>
-    <url>/blog/2022/01/10/UnityShader%E5%85%A5%E9%97%A8/</url>
+    <url>/2022/01/10/UnityShader%E5%85%A5%E9%97%A8/</url>
     <content><![CDATA[<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><h2 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h2><h4 id="平铺和偏移"><a href="#平铺和偏移" class="headerlink" title="平铺和偏移"></a>平铺和偏移</h4><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">//properties</span></span><br><span class="line">_Texture(<span class="string">&quot;Texture&quot;</span>,<span class="number">2</span>D)=<span class="string">&quot;white&quot;</span>&#123;&#125;</span><br><span class="line"><span class="comment">//SubPass/Pass</span></span><br><span class="line">sampler2D _Texture;</span><br><span class="line">float4 _Texture_ST;  </span><br><span class="line">o.uv=v.uv*_Texture_ST.xy+_Texture_ST.zw;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <h4 id="顶点坐标系MVP转换"><a href="#顶点坐标系MVP转换" class="headerlink" title="顶点坐标系MVP转换"></a>顶点坐标系MVP转换</h4><figure class="highlight c"><table><tr><td class="code"><pre><span class="line">float4 pos_world = mul(unity_ObjectToWorld, v.vertex);</span><br><span class="line">float4 pos_view = mul(UNITY_MATRIX_V,pos_world);</span><br><span class="line">float4 pos_clip = mul(UNITY_MATRIX_P,pos_view);</span><br><span class="line">o.pos=pos_clip;</span><br></pre></td></tr></table></figure>
@@ -1275,7 +1275,7 @@
   </entry>
   <entry>
     <title>Ubuntu系统和Docker的奇妙故事</title>
-    <url>/blog/2022/04/07/Ubuntu%E7%B3%BB%E7%BB%9F%E5%92%8CDocker%E7%9A%84%E5%A5%87%E5%A6%99%E6%95%85%E4%BA%8B/</url>
+    <url>/2022/04/07/Ubuntu%E7%B3%BB%E7%BB%9F%E5%92%8CDocker%E7%9A%84%E5%A5%87%E5%A6%99%E6%95%85%E4%BA%8B/</url>
     <content><![CDATA[<h1 id="装系统"><a href="#装系统" class="headerlink" title="装系统"></a>装系统</h1><p>下载镜像，制作</p>
 <p>跳过更新过程</p>
 <p>找到软件和更新</p>
@@ -1420,7 +1420,7 @@
   </entry>
   <entry>
     <title>houdini导入渲染顶点动画流动图片</title>
-    <url>/blog/2022/04/30/houdini%E5%AF%BC%E5%85%A5%E6%B8%B2%E6%9F%93%E9%A1%B6%E7%82%B9%E5%8A%A8%E7%94%BB%E6%B5%81%E5%8A%A8%E5%9B%BE%E7%89%87/</url>
+    <url>/2022/04/30/houdini%E5%AF%BC%E5%85%A5%E6%B8%B2%E6%9F%93%E9%A1%B6%E7%82%B9%E5%8A%A8%E7%94%BB%E6%B5%81%E5%8A%A8%E5%9B%BE%E7%89%87/</url>
     <content><![CDATA[<h1 id="VAT动画"><a href="#VAT动画" class="headerlink" title="VAT动画"></a>VAT动画</h1><h2 id="材料"><a href="#材料" class="headerlink" title="材料"></a>材料</h2><p><img src="https://img-blog.csdnimg.cn/81a8e0ecbb5a43f29ec8f6743a211673.png#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/b45b4f80e3334f4c924528347c895065.png#pic_center" alt="在这里插入图片描述"><br>行代表顶点，列代表帧<br>需要每个顶点从左到右循环偏移顶点即可</p>
 <h2 id="时间推移"><a href="#时间推移" class="headerlink" title="时间推移"></a>时间推移</h2><p><img src="https://img-blog.csdnimg.cn/2f6448719b11418290d1b6bf5bbf03c8.png" alt="在这里插入图片描述"></p>
 <h2 id="合成流动的UV"><a href="#合成流动的UV" class="headerlink" title="合成流动的UV"></a>合成流动的UV</h2><p><img src="https://img-blog.csdnimg.cn/587bfd6898014048acfb1e23efff1731.png" alt="在这里插入图片描述"></p>
@@ -1441,7 +1441,7 @@
   </entry>
   <entry>
     <title>人物扫光</title>
-    <url>/blog/2022/01/21/%E4%BA%BA%E7%89%A9%E6%89%AB%E5%85%89/</url>
+    <url>/2022/01/21/%E4%BA%BA%E7%89%A9%E6%89%AB%E5%85%89/</url>
     <content><![CDATA[<h1 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h1><h2 id="边缘光"><a href="#边缘光" class="headerlink" title="边缘光"></a>边缘光</h2><p><img src="https://img-blog.csdnimg.cn/ae5ddfb6e8464ec0aa7ffeb6c7f1bf90.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述">    </p>
 <h2 id="流光"><a href="#流光" class="headerlink" title="流光"></a>流光</h2><p><img src="https://img-blog.csdnimg.cn/1ee1c9a1e9ad45809bdd840452952c77.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>当一个三维向量补全为四维向量的时候，如果是点的话最后需要补成1.0，如果是向量的话需要补0.0</p>
@@ -1455,7 +1455,7 @@
   </entry>
   <entry>
     <title>光照模型与法线贴图</title>
-    <url>/blog/2022/02/14/%E5%85%89%E7%85%A7%E6%A8%A1%E5%9E%8B%E4%B8%8E%E6%B3%95%E7%BA%BF%E8%B4%B4%E5%9B%BE/</url>
+    <url>/2022/02/14/%E5%85%89%E7%85%A7%E6%A8%A1%E5%9E%8B%E4%B8%8E%E6%B3%95%E7%BA%BF%E8%B4%B4%E5%9B%BE/</url>
     <content><![CDATA[<h1 id="渲染路径"><a href="#渲染路径" class="headerlink" title="渲染路径"></a>渲染路径</h1><h2 id="前向渲染"><a href="#前向渲染" class="headerlink" title="前向渲染"></a>前向渲染</h2><p>对每一个物体每一个光源进行渲染，超出范围的灯光以顶点灯光渲染，适用于灯光较少的情况</p>
 <h3 id="ForwardBase"><a href="#ForwardBase" class="headerlink" title="ForwardBase"></a>ForwardBase</h3><p>在这个Pass里面，主方向灯以及超出范围的灯光作为顶点灯光传入SH，   LightMap，Reflection， Probe等计算均在这个Pass里面完成。</p>
 <h3 id="ForwardAdd"><a href="#ForwardAdd" class="headerlink" title="ForwardAdd"></a>ForwardAdd</h3><p>数量范围内的灯光，每个灯光的计算，均会调用一次这个pass，计算的结果通过Blend one one 叠加起来。</p>
@@ -1516,7 +1516,7 @@
   </entry>
   <entry>
     <title>后处理技术（上）</title>
-    <url>/blog/2022/02/20/%E5%90%8E%E5%A4%84%E7%90%86%E6%8A%80%E6%9C%AF1/</url>
+    <url>/2022/02/20/%E5%90%8E%E5%A4%84%E7%90%86%E6%8A%80%E6%9C%AF1/</url>
     <content><![CDATA[<h1 id="后处理（上）"><a href="#后处理（上）" class="headerlink" title="后处理（上）"></a>后处理（上）</h1><h2 id="启用后处理"><a href="#启用后处理" class="headerlink" title="启用后处理"></a>启用后处理</h2><p>在摄像头添加脚本</p>
 <figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="keyword">using</span> System.Collections;</span><br><span class="line"><span class="keyword">using</span> System.Collections.Generic;</span><br><span class="line"><span class="keyword">using</span> UnityEngine;</span><br><span class="line">[<span class="meta">ExecuteInEditMode()</span>]<span class="comment">//编辑模式就能看到效果</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">CameraPostPress</span> : <span class="title">MonoBehaviour</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> Material mat;</span><br><span class="line">    <span class="comment">// Start is called before the first frame update</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Start</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(mat==<span class="literal">null</span>||SystemInfo.supportsImageEffects==<span class="literal">false</span>||mat.shader==<span class="literal">null</span>||mat.shader.isSupported==<span class="literal">false</span>) &#123;</span><br><span class="line">            enabled = <span class="literal">false</span>;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">OnRenderImage</span>(<span class="params">RenderTexture source, RenderTexture destination</span>)</span> &#123;</span><br><span class="line">        <span class="comment">//当渲染图片启用   source是帧处理的图片 0是pass的顺序</span></span><br><span class="line">        Graphics.Blit(source,destination,mat, <span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
@@ -1575,7 +1575,7 @@
   </entry>
   <entry>
     <title>后处理技术（下）</title>
-    <url>/blog/2022/02/24/%E5%90%8E%E5%A4%84%E7%90%86%E6%8A%80%E6%9C%AF3/</url>
+    <url>/2022/02/24/%E5%90%8E%E5%A4%84%E7%90%86%E6%8A%80%E6%9C%AF3/</url>
     <content><![CDATA[<h1 id="HDRBloom（光晕）"><a href="#HDRBloom（光晕）" class="headerlink" title="HDRBloom（光晕）"></a>HDRBloom（光晕）</h1><p>取亮光部分，进行降采样，在升采样的过程中，叠加降采样对应尺寸的图片，合并效果图和源图片</p>
 <h2 id="初处理"><a href="#初处理" class="headerlink" title="初处理"></a>初处理</h2><p>如果放入的是HDR图片，可以在shader里面加float4 _MainTex_HDR;   col.rgb  &#x3D; DecodeHDR(col,_MainTex_HDR);进行解码。</p>
 <h2 id="取光亮部分"><a href="#取光亮部分" class="headerlink" title="取光亮部分"></a>取光亮部分</h2><p>先进行均值模糊，取亮色部分。</p>
@@ -1627,7 +1627,7 @@
   </entry>
   <entry>
     <title>特效篇溶解算法</title>
-    <url>/blog/2022/04/25/%E7%89%B9%E6%95%88%E7%AF%87%E6%BA%B6%E8%A7%A3%E7%AE%97%E6%B3%95/</url>
+    <url>/2022/04/25/%E7%89%B9%E6%95%88%E7%AF%87%E6%BA%B6%E8%A7%A3%E7%AE%97%E6%B3%95/</url>
     <content><![CDATA[<h1 id="简单的溶解"><a href="#简单的溶解" class="headerlink" title="简单的溶解"></a>简单的溶解</h1><h2 id="渐变"><a href="#渐变" class="headerlink" title="渐变"></a>渐变</h2><p><img src="https://img-blog.csdnimg.cn/32ce53bae89a46b09a75ba4bd24aad1a.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 <h2 id="溶解边缘"><a href="#溶解边缘" class="headerlink" title="溶解边缘"></a>溶解边缘</h2><p><img src="https://img-blog.csdnimg.cn/475b6118b8ce4488926b9e174b1c02e6.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 <h2 id="合成效果"><a href="#合成效果" class="headerlink" title="合成效果"></a>合成效果</h2><p><img src="https://img-blog.csdnimg.cn/0c70eee974984a19a21bc3f15ff2e1ec.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
@@ -1645,7 +1645,7 @@
   </entry>
   <entry>
     <title>特效篇火焰</title>
-    <url>/blog/2022/03/01/%E7%89%B9%E6%95%88%E7%AF%87%E7%81%AB%E7%84%B0/</url>
+    <url>/2022/03/01/%E7%89%B9%E6%95%88%E7%AF%87%E7%81%AB%E7%84%B0/</url>
     <content><![CDATA[<h1 id="火焰"><a href="#火焰" class="headerlink" title="火焰"></a>火焰</h1><h2 id="制作原理"><a href="#制作原理" class="headerlink" title="制作原理"></a>制作原理</h2><p>利用裁剪方程，将噪点图进行向上流动达到火焰往上升的效果，用一张渐变图和噪点图相乘把上半部分进行裁剪，将颜色的HDR效果打开，现在得到初步的火焰加一点点细节，让火的边缘柔和一点。让噪声图减去一个变量，并钳制在0到1之间，调大变量会使边缘柔和化，接下来是让火焰外焰和内焰效果</p>
 <h2 id="透明度"><a href="#透明度" class="headerlink" title="透明度"></a>透明度</h2><p><img src="https://img-blog.csdnimg.cn/b18d6793b8d14c4dbc1549b8e17d6b16.png" alt="在这里插入图片描述"></p>
 <h2 id="噪点值"><a href="#噪点值" class="headerlink" title="噪点值"></a>噪点值</h2><p><img src="https://img-blog.csdnimg.cn/a9f0ed3772e7465785f1f268de05ebd6.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
@@ -1666,7 +1666,7 @@
   </entry>
   <entry>
     <title>色调映射视差偏移</title>
-    <url>/blog/2022/03/26/%E8%89%B2%E8%B0%83%E6%98%A0%E5%B0%84%E8%A7%86%E5%B7%AE%E5%81%8F%E7%A7%BB/</url>
+    <url>/2022/03/26/%E8%89%B2%E8%B0%83%E6%98%A0%E5%B0%84%E8%A7%86%E5%B7%AE%E5%81%8F%E7%A7%BB/</url>
     <content><![CDATA[<h1 id="Blinn-Phong"><a href="#Blinn-Phong" class="headerlink" title="Blinn-Phong"></a>Blinn-Phong</h1><p>半角向量&#x3D;观察方向V+光照方向L；</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">half3 view_dir = <span class="built_in">normalize</span>(_WorldSpaceCameraPos.xyz - i.pos_world);</span><br><span class="line">                half3 light_dir =<span class="built_in">normalize</span>( _WorldSpaceLightPos0.xyz );</span><br><span class="line">                half3 half_dir  = <span class="built_in">normalize</span>(view_dir+light_dir);</span><br><span class="line">half NotH = <span class="built_in">max</span>(<span class="built_in">dot</span>(normal_dir,half_dir),<span class="number">0</span>);</span><br><span class="line">half3 specular =  <span class="built_in">pow</span>(<span class="built_in">max</span>(NotH,<span class="number">0</span>),_Shininess)* _LightColor0.xyz*_SpecularIntensity*spec_mask;</span><br></pre></td></tr></table></figure>
 
@@ -1716,7 +1716,7 @@
   </entry>
   <entry>
     <title>薄膜干涉效果</title>
-    <url>/blog/2022/01/22/%E8%96%84%E8%86%9C%E5%B9%B2%E6%B6%89%E6%95%88%E6%9E%9C/</url>
+    <url>/2022/01/22/%E8%96%84%E8%86%9C%E5%B9%B2%E6%B6%89%E6%95%88%E6%9E%9C/</url>
     <content><![CDATA[<blockquote>
 <h1 id="薄膜干涉"><a href="#薄膜干涉" class="headerlink" title="薄膜干涉"></a>薄膜干涉</h1></blockquote>
 <h2 id="材质捕捉效果（Material-Capture）"><a href="#材质捕捉效果（Material-Capture）" class="headerlink" title="材质捕捉效果（Material Capture）"></a>材质捕捉效果（Material Capture）</h2><p><strong>预览效果</strong></p>
@@ -1773,7 +1773,7 @@
   </entry>
   <entry>
     <title>藤曼生长</title>
-    <url>/blog/2022/02/10/%E8%97%A4%E6%9B%BC%E7%94%9F%E9%95%BF/</url>
+    <url>/2022/02/10/%E8%97%A4%E6%9B%BC%E7%94%9F%E9%95%BF/</url>
     <content><![CDATA[<h1 id="藤曼生长"><a href="#藤曼生长" class="headerlink" title="藤曼生长"></a>藤曼生长</h1><p><strong>预览视图</strong></p>
 <p><img src="https://img-blog.csdnimg.cn/239148c16c944873b02c02d3147cd67d.png" alt="在这里插入图片描述"><img src="https://img-blog.csdnimg.cn/4606bf1634494bfb9d0af5015ae90502.png" alt="在这里插入图片描述"></p>
 <p><strong>PBR材质下的效果</strong></p>
@@ -1802,7 +1802,7 @@
   </entry>
   <entry>
     <title>透光效果模拟</title>
-    <url>/blog/2022/04/03/%E9%80%8F%E5%85%89%E6%95%88%E6%9E%9C%E6%A8%A1%E6%8B%9F/</url>
+    <url>/2022/04/03/%E9%80%8F%E5%85%89%E6%95%88%E6%9E%9C%E6%A8%A1%E6%8B%9F/</url>
     <content><![CDATA[<h1 id="向量"><a href="#向量" class="headerlink" title="向量"></a>向量</h1><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">float3 diffuse_color = _DiffuseColor;</span><br><span class="line">float3 normalDir = <span class="built_in">normalize</span>(i.normalDir);</span><br><span class="line">float3 viewDir = <span class="built_in">normalize</span>(_WorldSpaceCameraPos - i.posWorld.xyz);</span><br><span class="line">float3 lightDir = <span class="built_in">normalize</span>(_WorldSpaceLightPos0.xyz);</span><br></pre></td></tr></table></figure>
 
 <h1 id="漫反射"><a href="#漫反射" class="headerlink" title="漫反射"></a>漫反射</h1><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="type">float</span> diff_term = <span class="built_in">max</span>(<span class="number">0.0</span>, <span class="built_in">dot</span>(normalDir, lightDir));</span><br><span class="line">float3 diffuselight_color = diff_term * diffuse_color * _LightColor0.rgb;</span><br><span class="line"><span class="type">float</span> sky_sphere = (<span class="built_in">dot</span>(normalDir,<span class="built_in">float3</span>(<span class="number">0</span>,<span class="number">1</span>,<span class="number">0</span>)) + <span class="number">1.0</span>) * <span class="number">0.5</span>;</span><br><span class="line">float3 sky_light = sky_sphere * diffuse_color;</span><br><span class="line">float3 final_diffuse = diffuselight_color + sky_light * _Opacity + _AddColor.xyz;</span><br></pre></td></tr></table></figure>
@@ -1824,7 +1824,7 @@
   </entry>
   <entry>
     <title>魔镜世界</title>
-    <url>/blog/2022/02/13/%E9%AD%94%E9%95%9C%E4%B8%96%E7%95%8C/</url>
+    <url>/2022/02/13/%E9%AD%94%E9%95%9C%E4%B8%96%E7%95%8C/</url>
     <content><![CDATA[<h1 id="魔镜世界"><a href="#魔镜世界" class="headerlink" title="魔镜世界"></a>魔镜世界</h1><p><img src="https://img-blog.csdnimg.cn/708f8e4dc58e4eebb462a598386feb4b.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_12,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><img src="https://img-blog.csdnimg.cn/60384ee277de4032bb962961f62b6cce.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_11,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 <h2 id="渲染队列和颜色遮罩"><a href="#渲染队列和颜色遮罩" class="headerlink" title="渲染队列和颜色遮罩"></a>渲染队列和颜色遮罩</h2><h3 id="Rendering-Queue"><a href="#Rendering-Queue" class="headerlink" title="Rendering Queue"></a>Rendering Queue</h3><p>从小到大进行排序</p>
 <p>几何体 2000</p>
@@ -1870,7 +1870,7 @@
   </entry>
   <entry>
     <title>后处理技术（中）</title>
-    <url>/blog/2022/02/22/%E5%90%8E%E5%A4%84%E7%90%86%E6%8A%80%E6%9C%AF2/</url>
+    <url>/2022/02/22/%E5%90%8E%E5%A4%84%E7%90%86%E6%8A%80%E6%9C%AF2/</url>
     <content><![CDATA[<h1 id="模糊处理"><a href="#模糊处理" class="headerlink" title="模糊处理"></a>模糊处理</h1><p>本文章参考<a href="https://zhuanlan.zhihu.com/p/125744132">毛星云大佬的文章</a>学习，十分推荐看大佬的原文<img src="https://pic3.zhimg.com/80/v2-c2a9906331826e66f66ffda71192411a_720w.jpg"></p>
 <p><strong>降采样是常见的优化性能的方法减少中间贴图的尺寸大小</strong></p>
 <p><strong>产生的中间贴图一定要记得释放内存，否则造成内存泄漏</strong></p>
@@ -1924,7 +1924,7 @@
   </entry>
   <entry>
     <title>环境贴图技术</title>
-    <url>/blog/2022/04/01/%E7%8E%AF%E5%A2%83%E8%B4%B4%E5%9B%BE%E6%8A%80%E6%9C%AF/</url>
+    <url>/2022/04/01/%E7%8E%AF%E5%A2%83%E8%B4%B4%E5%9B%BE%E6%8A%80%E6%9C%AF/</url>
     <content><![CDATA[<h1 id="大纲"><a href="#大纲" class="headerlink" title="大纲"></a>大纲</h1><p><img src="https://img-blog.csdnimg.cn/88c6172ddf434fe08f2402d04f5c72ed.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center" alt="在这里插入图片描述"></p>
 <h1 id="环境贴图"><a href="#环境贴图" class="headerlink" title="环境贴图"></a>环境贴图</h1><p><img src="https://img-blog.csdnimg.cn/3dbe7748467c4b17b46bef1315a907f5.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_15,color_FFFFFF,t_70,g_se,x_16" alt="请添加图片描述"></p>
 <p>立方体贴图采样如上</p>
@@ -1977,7 +1977,7 @@
   </entry>
   <entry>
     <title>移动端人物渲染</title>
-    <url>/blog/2022/04/14/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E4%BA%BA%E7%89%A9%E6%B8%B2%E6%9F%93/</url>
+    <url>/2022/04/14/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E4%BA%BA%E7%89%A9%E6%B8%B2%E6%9F%93/</url>
     <content><![CDATA[<p><img src="https://img-blog.csdnimg.cn/c4b325b53d024b859f7199f85712707f.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAUEMgRXJyb3I=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 <h1 id="模型与贴图分析"><a href="#模型与贴图分析" class="headerlink" title="模型与贴图分析"></a>模型与贴图分析</h1><h2 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h2><p>导入武器时属于泛型。</p>
 <p>psk导入模型时3dmax效果比blender好，blender的模型不会平滑，选用3dmax加载模型。</p>
@@ -2029,7 +2029,7 @@
   </entry>
   <entry>
     <title>人物3渲2学习总结</title>
-    <url>/blog/2022/05/11/%E4%BA%BA%E7%89%A93%E6%B8%B22%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/</url>
+    <url>/2022/05/11/%E4%BA%BA%E7%89%A93%E6%B8%B22%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/</url>
     <content><![CDATA[<h1 id="描边"><a href="#描边" class="headerlink" title="描边"></a>描边</h1><h2 id="法线外扩法"><a href="#法线外扩法" class="headerlink" title="法线外扩法"></a>法线外扩法</h2><p>中文一般称为“法线外扩法”、“背面膨胀法”，日文资料中会称作「背面法」，它们指的是同一个技术</p>
 <h3 id="解决方式"><a href="#解决方式" class="headerlink" title="解决方式"></a>解决方式</h3><p>第一个Pass：正常打光和绘制<br>第二个Pass：</p>
 <p>Vertex Shader阶段将顶点向顶点法线方向移动一定距离<br>Rasterization阶段将Cull Mode设置为Cull Front</p>
@@ -2084,7 +2084,7 @@
   </entry>
   <entry>
     <title>大话设计模式观后感之结构型设计模式</title>
-    <url>/blog/2022/06/02/%E5%A4%A7%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E8%A7%82%E5%90%8E%E6%84%9F%E4%B9%8B%E7%BB%93%E6%9E%84%E5%9E%8B%E6%A8%A1%E5%BC%8F/</url>
+    <url>/2022/06/02/%E5%A4%A7%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E8%A7%82%E5%90%8E%E6%84%9F%E4%B9%8B%E7%BB%93%E6%9E%84%E5%9E%8B%E6%A8%A1%E5%BC%8F/</url>
     <content><![CDATA[<h1 id="外观模式"><a href="#外观模式" class="headerlink" title="外观模式"></a>外观模式</h1><p><strong>外观模式(Facade)，为子系统中的一组接口提供一个一致的界面，此模式定义了一个高层接口，这个接口使得这一子系统更加容易使用。</strong></p>
 <p>在原子系统加一层封装，提供系统相关功能完成分层。</p>
 <p><img src="https://img-blog.csdnimg.cn/49b062f2726c41299f755c6146eb5dfc.png" alt="在这里插入图片描述"></p>
@@ -2150,7 +2150,7 @@
   </entry>
   <entry>
     <title>大话设计模式观后感之行为型设计模式</title>
-    <url>/blog/2022/06/02/%E5%A4%A7%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E8%A7%82%E5%90%8E%E6%84%9F%E4%B9%8B%E8%A1%8C%E4%B8%BA%E5%9E%8B%E6%A8%A1%E5%BC%8F/</url>
+    <url>/2022/06/02/%E5%A4%A7%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E8%A7%82%E5%90%8E%E6%84%9F%E4%B9%8B%E8%A1%8C%E4%B8%BA%E5%9E%8B%E6%A8%A1%E5%BC%8F/</url>
     <content><![CDATA[<h1 id="观察者模式"><a href="#观察者模式" class="headerlink" title="观察者模式"></a>观察者模式</h1><p><strong>观察者模式定义了一种一对多的依赖关系，让多个观察者对象<br>同时监听某一个主题对象。这个主题对象在状态发生变化时，<br>会通知所有观察者对象，使它们能够自动更新自己。</strong><br><img src="https://img-blog.csdnimg.cn/a08843640baf483fa713240efd659f61.png" alt="在这里插入图片描述"></p>
 <h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><p><img src="https://img-blog.csdnimg.cn/62404e611632437897269a8ff0d5fc87.png" alt="在这里插入图片描述"></p>
 <h3 id="抽象通知接口"><a href="#抽象通知接口" class="headerlink" title="抽象通知接口"></a>抽象通知接口</h3><p><img src="https://img-blog.csdnimg.cn/2c0d5364de8d4218aed872c8aa633979.png" alt="在这里插入图片描述"></p>
@@ -2177,7 +2177,7 @@
   </entry>
   <entry>
     <title>UI背包系统</title>
-    <url>/blog/2022/06/04/UI%E8%83%8C%E5%8C%85%E7%B3%BB%E7%BB%9F/</url>
+    <url>/2022/06/04/UI%E8%83%8C%E5%8C%85%E7%B3%BB%E7%BB%9F/</url>
     <content><![CDATA[<p><a href="https://github.com/MrChenLreanSpace/InventroyTutorial">项目练习链接</a></p>
 <h1 id="关闭打开菜单栏"><a href="#关闭打开菜单栏" class="headerlink" title="关闭打开菜单栏"></a>关闭打开菜单栏</h1><figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">OpenMyBag</span>()</span> &#123;</span><br><span class="line">    <span class="keyword">if</span>(Input.GetKeyDown(KeyCode.O)) &#123;</span><br><span class="line">        isOpen = !bag.activeSelf;</span><br><span class="line">        bag.SetActive(isOpen);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h1 id="Grid-Layerout-Group"><a href="#Grid-Layerout-Group" class="headerlink" title="Grid Layerout Group"></a>Grid Layerout Group</h1><p>他的子节点将会被填充到格子中<br><img src="https://img-blog.csdnimg.cn/e227c959129845a683ee99e438c7c781.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/5a272dde12874ca2a4bed287c0ae725d.png" alt="在这里插入图片描述"></p>
@@ -2208,7 +2208,7 @@
   </entry>
   <entry>
     <title>天空盒和水面渲染</title>
-    <url>/blog/2022/07/04/%E5%A4%A9%E7%A9%BA%E7%9B%92%E5%92%8C%E6%B0%B4%E9%9D%A2%E6%B8%B2%E6%9F%93/</url>
+    <url>/2022/07/04/%E5%A4%A9%E7%A9%BA%E7%9B%92%E5%92%8C%E6%B0%B4%E9%9D%A2%E6%B8%B2%E6%9F%93/</url>
     <content><![CDATA[<h1 id="天空球"><a href="#天空球" class="headerlink" title="天空球"></a>天空球</h1><p>防止被相机裁剪</p>
 <figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">if</span> UNITY_REVERSED_Z</span></span><br><span class="line">    o.vertex.z = o.vertex.w * <span class="number">0.000001f</span>;</span><br><span class="line"><span class="meta">#<span class="keyword">else</span></span></span><br><span class="line">    o.vertex.z = o.vertex.w * <span class="number">0.999999f</span>;</span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br></pre></td></tr></table></figure>
 <p>渲染队列改成1000左右。</p>
@@ -2232,7 +2232,7 @@
   </entry>
   <entry>
     <title>雾效</title>
-    <url>/blog/2022/07/04/%E9%9B%BE%E6%95%88/</url>
+    <url>/2022/07/04/%E9%9B%BE%E6%95%88/</url>
     <content><![CDATA[<h1 id="距离雾"><a href="#距离雾" class="headerlink" title="距离雾"></a>距离雾</h1><p>计算出顶点与摄像机的距离将范围映射到雾效范围中。<br><img src="https://img-blog.csdnimg.cn/0a9d486e997541a6bacc2dac2fe7a939.png" alt="在这里插入图片描述"></p>
 <h1 id="高度雾"><a href="#高度雾" class="headerlink" title="高度雾"></a>高度雾</h1><p>将距离雾中的距离改变为顶点坐标的y坐标。<br><img src="https://img-blog.csdnimg.cn/486ff6ddaae2435380b01d259181591f.png" alt="在这里插入图片描述"></p>
 <h1 id="太阳光对雾效的影响"><a href="#太阳光对雾效的影响" class="headerlink" title="太阳光对雾效的影响"></a>太阳光对雾效的影响</h1><p><img src="https://img-blog.csdnimg.cn/b36f512a792e4025bec56c7242450009.png" alt="在这里插入图片描述"></p>
@@ -2247,7 +2247,7 @@
   </entry>
   <entry>
     <title>风格化水体渲染</title>
-    <url>/blog/2022/07/07/%E9%A3%8E%E6%A0%BC%E5%8C%96%E6%B0%B4%E4%BD%93%E6%B8%B2%E6%9F%93/</url>
+    <url>/2022/07/07/%E9%A3%8E%E6%A0%BC%E5%8C%96%E6%B0%B4%E4%BD%93%E6%B8%B2%E6%9F%93/</url>
     <content><![CDATA[<h1 id="水体属性"><a href="#水体属性" class="headerlink" title="水体属性"></a>水体属性</h1><h2 id="水体深度"><a href="#水体深度" class="headerlink" title="水体深度"></a>水体深度</h2><p>从深度图获取水下顶点的世界坐标，与水面顶点坐标相减得到当前顶点的水深度。<br><img src="https://img-blog.csdnimg.cn/20bb4693fa9e441eb7497313a8030069.png" alt="在这里插入图片描述"></p>
 <h1 id="水体颜色"><a href="#水体颜色" class="headerlink" title="水体颜色"></a>水体颜色</h1><p>当深水区时使用较深的颜色且透明的调为不透明，浅水区可以浅一点，透明度透明一点<br>如图，使用lerp深度作为权重。<br><img src="https://img-blog.csdnimg.cn/a5cbb87ed14c461ea0dfd478ed7154eb.png" alt="在这里插入图片描述"></p>
 <h1 id="水体表面扰动"><a href="#水体表面扰动" class="headerlink" title="水体表面扰动"></a>水体表面扰动</h1><p><a href="https://mrchenlreanspace.github.io/2022/07/04/%E5%A4%A9%E7%A9%BA%E7%9B%92%E5%92%8C%E6%B0%B4%E9%9D%A2%E6%B8%B2%E6%9F%93/">参考之前的水面渲染</a></p>
@@ -2268,7 +2268,7 @@
   </entry>
   <entry>
     <title>地形系统Shader学习</title>
-    <url>/blog/2022/07/08/%E5%9C%B0%E5%BD%A2%E7%B3%BB%E7%BB%9FShader%E5%AD%A6%E4%B9%A0/</url>
+    <url>/2022/07/08/%E5%9C%B0%E5%BD%A2%E7%B3%BB%E7%BB%9FShader%E5%AD%A6%E4%B9%A0/</url>
     <content><![CDATA[<h1 id="基于混合因子的地形材质混合"><a href="#基于混合因子的地形材质混合" class="headerlink" title="基于混合因子的地形材质混合"></a>基于混合因子的地形材质混合</h1><h2 id="取第一套UV"><a href="#取第一套UV" class="headerlink" title="取第一套UV"></a>取第一套UV</h2><p><img src="https://img-blog.csdnimg.cn/ac02382463784ee9a47d5a460dae9e76.png" alt="在这里插入图片描述"></p>
 <h2 id="取第一层材质的数据"><a href="#取第一层材质的数据" class="headerlink" title="取第一层材质的数据"></a>取第一层材质的数据</h2><p><img src="https://img-blog.csdnimg.cn/33a4fe5dbc4f490393ecd64005c1ce81.png" alt="在这里插入图片描述"><br>同样取出其他的材质， layer2，layer3.</p>
 <h2 id="使用顶点色材质的使用量"><a href="#使用顶点色材质的使用量" class="headerlink" title="使用顶点色材质的使用量"></a>使用顶点色材质的使用量</h2><p>HeightLerp<br>输入<br>Height  从高度图采样的高度<br>Transition 用来控制材质使用量的参数，一般使用顶点色的4个通道<br>BlendContrast 混合对比度，数值越大对比越明显<br>输出<br>得到一个基于高度的混合因子<br><img src="https://img-blog.csdnimg.cn/ba25f83805064ed2adea8881cf4f5250.png" alt="在这里插入图片描述"><br>混合因子的制作<br><img src="https://img-blog.csdnimg.cn/10a69305174d48c8a495ea10cf82033d.png" alt="在这里插入图片描述"></p>
@@ -2289,7 +2289,7 @@
   </entry>
   <entry>
     <title>Games104总结粒子系统和声效</title>
-    <url>/blog/2022/07/08/Games104%E6%80%BB%E7%BB%93%E7%B2%92%E5%AD%90%E7%B3%BB%E7%BB%9F%E5%92%8C%E5%A3%B0%E6%95%88/</url>
+    <url>/2022/07/08/Games104%E6%80%BB%E7%BB%93%E7%B2%92%E5%AD%90%E7%B3%BB%E7%BB%9F%E5%92%8C%E5%A3%B0%E6%95%88/</url>
     <content><![CDATA[<h1 id="粒子系统"><a href="#粒子系统" class="headerlink" title="粒子系统"></a>粒子系统</h1><h2 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h2><p>坐标，初速度，大小，颜色，生命周期，…</p>
 <h2 id="粒子的生命周期"><a href="#粒子的生命周期" class="headerlink" title="粒子的生命周期"></a>粒子的生命周期</h2><p><img src="https://img-blog.csdnimg.cn/98a3e9499786481286a3b9e752658647.png" alt="在这里插入图片描述"></p>
 <p>如果控制失败就会出现粒子越来越多，使系统资源殆尽</p>
@@ -2337,7 +2337,7 @@
   </entry>
   <entry>
     <title>游戏服务器学习</title>
-    <url>/blog/2022/11/06/%E6%B8%B8%E6%88%8F%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AD%A6%E4%B9%A0/</url>
+    <url>/2022/11/06/%E6%B8%B8%E6%88%8F%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AD%A6%E4%B9%A0/</url>
     <content><![CDATA[<h1 id="游戏大厅"><a href="#游戏大厅" class="headerlink" title="游戏大厅"></a>游戏大厅</h1><p>棋牌类大厅</p>
 <p>MMORPG大厅</p>
 <h1 id="大厅功能"><a href="#大厅功能" class="headerlink" title="大厅功能"></a>大厅功能</h1><p>（1）服务器启动，等待客户端连入</p>
@@ -2409,7 +2409,10 @@
 <p>​    反射可以直接写为player，但委托要与委托变量一致</p>
 </li>
 </ol>
-<p>​    </p>
+<h1 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h1><h2 id="Mysql数据库二进制文件的方式"><a href="#Mysql数据库二进制文件的方式" class="headerlink" title="Mysql数据库二进制文件的方式"></a>Mysql数据库二进制文件的方式</h2><p>在Mysql存储二进制数据那一栏选Blob</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="built_in">string</span> formatStr = <span class="string">&quot;update player set data =@data,ip =&#x27;&#123;0&#125;&#x27; where id = &#x27;&#123;1&#125;&#x27;;&quot;</span>;</span><br><span class="line"><span class="built_in">string</span> cmdStr = <span class="built_in">string</span>.Format(formatStr,ip, id);</span><br><span class="line">MySqlCommand cmd = <span class="keyword">new</span> MySqlCommand(cmdStr, sqlConn);</span><br><span class="line">cmd.Parameters.Add(<span class="string">&quot;@data&quot;</span>, MySqlDbType.Blob);</span><br><span class="line">cmd.Parameters[<span class="number">0</span>].Value = playerStream;</span><br></pre></td></tr></table></figure>
+
+<p>playerStream为二进制数据文件</p>
 ]]></content>
       <categories>
         <category>游戏</category>
@@ -2420,7 +2423,7 @@
   </entry>
   <entry>
     <title>Games104网络基础部分</title>
-    <url>/blog/2022/09/27/Games104%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86/</url>
+    <url>/2022/09/27/Games104%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86/</url>
     <content><![CDATA[<h1 id="面临的挑战"><a href="#面临的挑战" class="headerlink" title="面临的挑战"></a>面临的挑战</h1><p>实现网络物体一致</p>
 <p>网络延迟 网络掉线和重连</p>
 <p>反作弊和防信息泄露</p>
@@ -2557,7 +2560,7 @@
   </entry>
   <entry>
     <title>网络部分知识开发和应用</title>
-    <url>/blog/2022/10/15/%E7%BD%91%E7%BB%9C%E9%83%A8%E5%88%86%E7%9F%A5%E8%AF%86%E5%BC%80%E5%8F%91%E5%92%8C%E5%BA%94%E7%94%A8/</url>
+    <url>/2022/10/15/%E7%BD%91%E7%BB%9C%E9%83%A8%E5%88%86%E7%9F%A5%E8%AF%86%E5%BC%80%E5%8F%91%E5%92%8C%E5%BA%94%E7%94%A8/</url>
     <content><![CDATA[<h1 id="网络模型"><a href="#网络模型" class="headerlink" title="网络模型"></a>网络模型</h1><p>socket结构<br><img src="https://img-blog.csdnimg.cn/92c574ee864f4bc685e8ec5213c70e1c.png" alt="在这里插入图片描述"></p>
 <h2 id="iocp（Input-x2F-output-completion-port）"><a href="#iocp（Input-x2F-output-completion-port）" class="headerlink" title="iocp（Input&#x2F;output completion port）"></a>iocp（Input&#x2F;output completion port）</h2><p><a href="https://learn.microsoft.com/zh-cn/dotnet/api/system.net.sockets?view=net-6.0">SocketAPI</a><br>输入&#x2F;输出完成端口，常常使用在windows系统中，采用异步的方式对每个socket进行监听和接收。</p>
 <figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Start</span>(<span class="params"><span class="built_in">string</span> host, <span class="built_in">int</span> port</span>)</span> &#123;</span><br><span class="line"></span><br><span class="line">    timer.Elapsed += <span class="keyword">new</span> System.Timers.ElapsedEventHandler(HandleMainTimer);</span><br><span class="line">    timer.AutoReset = <span class="literal">false</span>;</span><br><span class="line">    timer.Enabled = <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    conns = <span class="keyword">new</span> Conn[maxConn];</span><br><span class="line">    <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; maxConn; i++) &#123;</span><br><span class="line">        conns[i] = <span class="keyword">new</span> Conn();</span><br><span class="line">    &#125;</span><br><span class="line">    listenfd = <span class="keyword">new</span> Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);</span><br><span class="line">    IPAddress ipAdr = IPAddress.Parse(host);</span><br><span class="line">    IPEndPoint ipEp = <span class="keyword">new</span> IPEndPoint(ipAdr, port);</span><br><span class="line">    listenfd.Bind(ipEp);</span><br><span class="line">    listenfd.Listen(maxConn);</span><br><span class="line">    listenfd.BeginAccept(AcceptCb, <span class="literal">null</span>);</span><br><span class="line">    Console.WriteLine (<span class="string">&quot;[服务器]启动成功&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"> <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">AcceptCb</span>(<span class="params">IAsyncResult ar</span>)</span> &#123;</span><br><span class="line">    Socket socket = listenfd.EndAccept(ar);</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="comment">//接收客户端</span></span><br><span class="line">        <span class="built_in">int</span> index = NewIndex();</span><br><span class="line">        <span class="keyword">if</span> (index &lt; <span class="number">0</span>) &#123;</span><br><span class="line">            socket.Close();</span><br><span class="line">            Console.WriteLine(<span class="string">&quot;[警告]连接已满&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            Conn conn = conns[index];</span><br><span class="line">            conn.Init(socket);</span><br><span class="line">            <span class="built_in">string</span> host = conn.GetAdress();</span><br><span class="line">            Console.WriteLine(<span class="string">&quot;客户端连接:[&quot;</span> + host + <span class="string">&quot;] conn池ID:&quot;</span> + index);</span><br><span class="line">            conn.socket.BeginReceive(conn.readBuff, conn.buffCount, conn.BuffRemain(), SocketFlags.None, ReciveCb, conn);<span class="comment">//接收的同时调用ReciveCb回调函数</span></span><br><span class="line">        &#125;</span><br><span class="line">        listenfd.BeginAccept(AcceptCb, <span class="literal">null</span>);<span class="comment">//再次调用AcceprCb回调函数</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">        Console.WriteLine(<span class="string">&quot;AccpetCb 失败:&quot;</span> + e.Message);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">private</span>  <span class="keyword">void</span> <span class="title">ReciveCb</span>(<span class="params">IAsyncResult ar</span>)</span> &#123;</span><br><span class="line">    Conn conn = (Conn)ar.AsyncState;<span class="comment">//这个AsyncState就是上面那个BeginRecive函数里面最后一个参数</span></span><br><span class="line">    <span class="keyword">lock</span> (conn) &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="built_in">int</span> count = conn.socket.EndReceive(ar);<span class="comment">//返回接收的字节数</span></span><br><span class="line">                                                   <span class="comment">//没有信息就关闭</span></span><br><span class="line">            <span class="keyword">if</span> (count &lt;= <span class="number">0</span>) &#123;</span><br><span class="line">                Console.WriteLine(<span class="string">&quot;收到[&quot;</span> + conn.GetAdress() + <span class="string">&quot;] 断开连接&quot;</span>);</span><br><span class="line">                conn.Close();</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            conn.buffCount += count;</span><br><span class="line">            ProcessData(conn);</span><br><span class="line">            </span><br><span class="line">            <span class="comment">//继续接收</span></span><br><span class="line">            conn.socket.BeginReceive(conn.readBuff, conn.buffCount, conn.BuffRemain(), SocketFlags.None, ReciveCb, conn);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            Console.WriteLine(<span class="string">&quot;Recive失败&quot;</span> + e.Message);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
@@ -2596,21 +2599,47 @@
 
 <h2 id="异步连接"><a href="#异步连接" class="headerlink" title="异步连接"></a>异步连接</h2><p>引用致Unity网络游戏实战第二版</p>
 <figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="comment">//连接</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Connect</span>(<span class="params"><span class="built_in">string</span> ip, <span class="built_in">int</span> port</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="comment">//状态判断</span></span><br><span class="line">  <span class="keyword">if</span>(socket!=<span class="literal">null</span> &amp;&amp; socket.Connected)&#123;</span><br><span class="line">    Debug.Log(<span class="string">&quot;Connect fail, already connected!&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span>(isConnecting)&#123;</span><br><span class="line">    Debug.Log(<span class="string">&quot;Connect fail, isConnecting&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">//初始化成员</span></span><br><span class="line">  InitState();</span><br><span class="line">  <span class="comment">//参数设置</span></span><br><span class="line">  socket.NoDelay = <span class="literal">true</span>;</span><br><span class="line">  <span class="comment">//Connect</span></span><br><span class="line">  isConnecting = <span class="literal">true</span>;</span><br><span class="line">  socket.BeginConnect(ip, port, ConnectCallback, socket);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//初始化状态</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">InitState</span>()</span>&#123;</span><br><span class="line">  <span class="comment">//Socket</span></span><br><span class="line">  socket = <span class="keyword">new</span> Socket(AddressFamily.InterNetwork,</span><br><span class="line">    SocketType.Stream, ProtocolType.Tcp);</span><br><span class="line">  <span class="comment">//接收缓冲区</span></span><br><span class="line">  readBuff = <span class="keyword">new</span> ByteArray();</span><br><span class="line">  <span class="comment">//写入队列</span></span><br><span class="line">  writeQueue = <span class="keyword">new</span> Queue&lt;ByteArray&gt;();</span><br><span class="line">  <span class="comment">//是否正在连接</span></span><br><span class="line">  isConnecting = <span class="literal">false</span>;</span><br><span class="line">  <span class="comment">//是否正在关闭</span></span><br><span class="line">  isClosing = <span class="literal">false</span>;</span><br><span class="line">  <span class="comment">//消息列表</span></span><br><span class="line">  msgList = <span class="keyword">new</span> List&lt;MsgBase&gt;();</span><br><span class="line">  <span class="comment">//消息列表长度</span></span><br><span class="line">  msgCount = <span class="number">0</span>;</span><br><span class="line">  <span class="comment">//上一次发送PING的时间</span></span><br><span class="line">  lastPingTime = Time.time;</span><br><span class="line">  <span class="comment">//上一次收到PONG的时间</span></span><br><span class="line">  lastPongTime = Time.time;</span><br><span class="line">  <span class="comment">//监听PONG协议</span></span><br><span class="line">  <span class="keyword">if</span>(!msgListeners.ContainsKey(<span class="string">&quot;MsgPong&quot;</span>))&#123;</span><br><span class="line">    AddMsgListener(<span class="string">&quot;MsgPong&quot;</span>, OnMsgPong);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//Connect回调</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">ConnectCallback</span>(<span class="params">IAsyncResult ar</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">try</span>&#123;</span><br><span class="line">    Socket socket = (Socket) ar.AsyncState;</span><br><span class="line">    socket.EndConnect(ar);</span><br><span class="line">    Debug.Log(<span class="string">&quot;Socket Connect Succ &quot;</span>);</span><br><span class="line">    FireEvent(NetEvent.ConnectSucc,<span class="string">&quot;&quot;</span>);</span><br><span class="line">    isConnecting = <span class="literal">false</span>;</span><br><span class="line">    <span class="comment">//开始接收</span></span><br><span class="line">    socket.BeginReceive( readBuff.bytes, readBuff.writeIdx, readBuff.remain, <span class="number">0</span>, ReceiveCallback, socket);</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">catch</span> (SocketException ex)&#123;</span><br><span class="line">    Debug.Log(<span class="string">&quot;Socket Connect fail &quot;</span> + ex.ToString());</span><br><span class="line">    FireEvent(NetEvent.ConnectFail, ex.ToString());</span><br><span class="line">    isConnecting = <span class="literal">false</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//关闭连接</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Close</span>()</span>&#123;</span><br><span class="line">  <span class="comment">//状态判断</span></span><br><span class="line">  <span class="keyword">if</span>(socket==<span class="literal">null</span> || !socket.Connected)&#123;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span>(isConnecting)&#123;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">//还有数据在发送</span></span><br><span class="line">  <span class="keyword">if</span>(writeQueue.Count &gt; <span class="number">0</span>)&#123;</span><br><span class="line">    isClosing = <span class="literal">true</span>;</span><br><span class="line">  &#125; </span><br><span class="line">  <span class="comment">//没有数据在发送</span></span><br><span class="line">  <span class="keyword">else</span>&#123;</span><br><span class="line">    socket.Close();</span><br><span class="line">    FireEvent(NetEvent.Close, <span class="string">&quot;&quot;</span>);</span><br><span class="line">  &#125; </span><br><span class="line">&#125; </span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h3 id="改进"><a href="#改进" class="headerlink" title="改进"></a>改进</h3><h2 id="异步发送"><a href="#异步发送" class="headerlink" title="异步发送"></a>异步发送</h2><p>引用致Unity网络游戏实战第二版</p>
+<h3 id=""><a href="#" class="headerlink" title=""></a></h3><h2 id="异步发送"><a href="#异步发送" class="headerlink" title="异步发送"></a>异步发送</h2><p>引用致Unity网络游戏实战第二版</p>
 <figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="comment">//发送数据</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Send</span>(<span class="params">MsgBase msg</span>)</span> &#123;</span><br><span class="line">  <span class="comment">//状态判断</span></span><br><span class="line">  <span class="keyword">if</span>(socket==<span class="literal">null</span> || !socket.Connected)&#123;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span>(isConnecting)&#123;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span>(isClosing)&#123;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">  &#125; </span><br><span class="line">  <span class="comment">//数据编码                 #带修改用linq改进</span></span><br><span class="line">  <span class="built_in">byte</span>[] nameBytes = MsgBase.EncodeName(msg);</span><br><span class="line">  <span class="built_in">byte</span>[] bodyBytes = MsgBase.Encode(msg);</span><br><span class="line">  <span class="built_in">int</span> len = nameBytes.Length + bodyBytes.Length;</span><br><span class="line">  <span class="built_in">byte</span>[] sendBytes = <span class="keyword">new</span> <span class="built_in">byte</span>[<span class="number">2</span>+len];</span><br><span class="line">  <span class="comment">//组装长度</span></span><br><span class="line">  sendBytes[<span class="number">0</span>] = (<span class="built_in">byte</span>)(len%<span class="number">256</span>);</span><br><span class="line">  sendBytes[<span class="number">1</span>] = (<span class="built_in">byte</span>)(len/<span class="number">256</span>);</span><br><span class="line">  <span class="comment">//组装名字</span></span><br><span class="line">  Array.Copy(nameBytes, <span class="number">0</span>, sendBytes, <span class="number">2</span>, nameBytes.Length);</span><br><span class="line">  <span class="comment">//组装消息体</span></span><br><span class="line">  Array.Copy(bodyBytes, <span class="number">0</span>, sendBytes, <span class="number">2</span>+nameBytes.Length, bodyBytes.Length);</span><br><span class="line">  <span class="comment">//写入队列                 /#带修改用linq改进</span></span><br><span class="line">  ByteArray ba = <span class="keyword">new</span> ByteArray(sendBytes);</span><br><span class="line">  <span class="built_in">int</span> count = <span class="number">0</span>;	<span class="comment">//writeQueue的长度</span></span><br><span class="line">  <span class="keyword">lock</span>(writeQueue)&#123;</span><br><span class="line">    writeQueue.Enqueue(ba);</span><br><span class="line">    count = writeQueue.Count;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">//send</span></span><br><span class="line">  <span class="keyword">if</span>(count == <span class="number">1</span>)&#123;</span><br><span class="line">    socket.BeginSend(sendBytes, <span class="number">0</span>, sendBytes.Length, </span><br><span class="line">      <span class="number">0</span>, SendCallback, socket);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//Send回调</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">SendCallback</span>(<span class="params">IAsyncResult ar</span>)</span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="comment">//获取state、EndSend的处理</span></span><br><span class="line">  Socket socket = (Socket) ar.AsyncState;</span><br><span class="line">  <span class="comment">//状态判断</span></span><br><span class="line">  <span class="keyword">if</span>(socket == <span class="literal">null</span> || !socket.Connected)&#123;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">//EndSend</span></span><br><span class="line">  <span class="built_in">int</span> count = socket.EndSend(ar);</span><br><span class="line">  <span class="comment">//获取写入队列第一条数据            </span></span><br><span class="line">  ByteArray ba;</span><br><span class="line">  <span class="keyword">lock</span>(writeQueue)&#123;</span><br><span class="line">    ba = writeQueue.First();</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">//完整发送</span></span><br><span class="line">  ba.readIdx+=count;</span><br><span class="line">  <span class="keyword">if</span>(ba.length == <span class="number">0</span>)&#123;</span><br><span class="line">    <span class="keyword">lock</span>(writeQueue)&#123;</span><br><span class="line">      writeQueue.Dequeue();</span><br><span class="line">      ba = writeQueue.First();</span><br><span class="line">     &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">//继续发送</span></span><br><span class="line">  <span class="keyword">if</span>(ba != <span class="literal">null</span>)&#123;</span><br><span class="line">    socket.BeginSend(ba.bytes, ba.readIdx, ba.length, </span><br><span class="line">      <span class="number">0</span>, SendCallback, socket);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">//正在关闭</span></span><br><span class="line">  <span class="keyword">else</span> <span class="keyword">if</span>(isClosing) &#123;</span><br><span class="line">    socket.Close();</span><br><span class="line">  &#125; </span><br><span class="line">&#125; </span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h3 id="改进-1"><a href="#改进-1" class="headerlink" title="改进"></a>改进</h3><h2 id="异步接收"><a href="#异步接收" class="headerlink" title="异步接收"></a>异步接收</h2><p>引用致Unity网络游戏实战第二版</p>
+<h3 id="-1"><a href="#-1" class="headerlink" title=""></a></h3><h2 id="异步接收"><a href="#异步接收" class="headerlink" title="异步接收"></a>异步接收</h2><p>引用致Unity网络游戏实战第二版</p>
 <figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="comment">//Receive回调</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">ReceiveCallback</span>(<span class="params">IAsyncResult ar</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    Socket socket = (Socket) ar.AsyncState;</span><br><span class="line">    <span class="comment">//获取接收数据长度</span></span><br><span class="line">    <span class="built_in">int</span> count = socket.EndReceive(ar);</span><br><span class="line">    readBuff.writeIdx+=count;</span><br><span class="line">    <span class="comment">//处理二进制消息</span></span><br><span class="line">    OnReceiveData();</span><br><span class="line">    <span class="comment">//继续接收数据</span></span><br><span class="line">    <span class="keyword">if</span>(readBuff.remain &lt; <span class="number">8</span>)&#123;</span><br><span class="line">      readBuff.MoveBytes();</span><br><span class="line">      readBuff.ReSize(readBuff.length*<span class="number">2</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    socket.BeginReceive( readBuff.bytes, readBuff.writeIdx, readBuff.remain, <span class="number">0</span>, ReceiveCallback, socket);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">catch</span> (SocketException ex)&#123;</span><br><span class="line">    Debug.Log(<span class="string">&quot;Socket Receive fail&quot;</span> + ex.ToString());</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//数据处理</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">OnReceiveData</span>()</span>&#123;</span><br><span class="line">  <span class="comment">//消息长度</span></span><br><span class="line">  <span class="keyword">if</span>(readBuff.length &lt;= <span class="number">2</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">//获取消息体长度</span></span><br><span class="line">  <span class="built_in">int</span> readIdx = readBuff.readIdx;</span><br><span class="line">  <span class="built_in">byte</span>[] bytes =readBuff.bytes; </span><br><span class="line">  Int16 bodyLength = (Int16)((bytes[readIdx+<span class="number">1</span>] &lt;&lt; <span class="number">8</span> )| bytes[readIdx]);</span><br><span class="line">  <span class="keyword">if</span>(readBuff.length &lt; bodyLength)</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">  readBuff.readIdx+=<span class="number">2</span>; </span><br><span class="line">  <span class="comment">//解析协议名</span></span><br><span class="line">  <span class="built_in">int</span> nameCount = <span class="number">0</span>;</span><br><span class="line">  <span class="built_in">string</span> protoName = MsgBase.DecodeName(readBuff.bytes, readBuff.readIdx, <span class="keyword">out</span> nameCount);</span><br><span class="line">  <span class="keyword">if</span>(protoName == <span class="string">&quot;&quot;</span>)&#123;</span><br><span class="line">    Debug.Log(<span class="string">&quot;OnReceiveData MsgBase.DecodeName fail&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  readBuff.readIdx += nameCount;</span><br><span class="line">  <span class="comment">//解析协议体</span></span><br><span class="line">  <span class="built_in">int</span> bodyCount = bodyLength - nameCount;</span><br><span class="line">  MsgBase msgBase = MsgBase.Decode(protoName, readBuff.bytes, readBuff.readIdx, bodyCount);</span><br><span class="line">  readBuff.readIdx += bodyCount;</span><br><span class="line">  readBuff.CheckAndMoveBytes();</span><br><span class="line">  <span class="comment">//添加到消息队列</span></span><br><span class="line">  <span class="keyword">lock</span>(msgList)&#123;</span><br><span class="line">    msgList.Add(msgBase);</span><br><span class="line">    msgCount++;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">//继续读取消息</span></span><br><span class="line">  <span class="keyword">if</span>(readBuff.length &gt; <span class="number">2</span>)&#123;</span><br><span class="line">    OnReceiveData();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h3 id="改进-2"><a href="#改进-2" class="headerlink" title="改进"></a>改进</h3><h1 id="ProtoBuf"><a href="#ProtoBuf" class="headerlink" title="ProtoBuf"></a>ProtoBuf</h1><p>和json功能一样作为序列化的工具，当产生消耗更小，优化带宽。</p>
+<h3 id="-2"><a href="#-2" class="headerlink" title=""></a></h3><h1 id="ProtoBuf"><a href="#ProtoBuf" class="headerlink" title="ProtoBuf"></a>ProtoBuf</h1><p>和json功能一样作为序列化的工具，当产生消耗更小，优化带宽。</p>
 <h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="comment">//将protobuf对象序列化为Byte数组  </span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="built_in">byte</span>[] <span class="title">Encode</span>(<span class="params">ProtoBuf.IExtensible msgBase</span>)</span>  </span><br><span class="line">  &#123;  </span><br><span class="line">    <span class="keyword">using</span> (<span class="keyword">var</span> memory = <span class="keyword">new</span> System.IO.MemoryStream())  </span><br><span class="line">    &#123;  </span><br><span class="line">      ProtoBuf.Serializer.Serialize(memory, msgBase); </span><br><span class="line">      <span class="keyword">return</span> memory.ToArray();  </span><br><span class="line">    &#125;  </span><br><span class="line">  &#125;  </span><br><span class="line"><span class="comment">//解码</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> ProtoBuf.<span class="function">IExtensible <span class="title">Decode</span>(<span class="params"><span class="built_in">string</span> protoName, <span class="built_in">byte</span>[] bytes, <span class="built_in">int</span> offset, <span class="built_in">int</span> count</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">using</span> (<span class="keyword">var</span> memory = <span class="keyword">new</span> System.IO.MemoryStream(bytes, offset, count))  </span><br><span class="line">    &#123;  </span><br><span class="line">      System.Type t = System.Type.GetType(protoName);</span><br><span class="line">      <span class="keyword">return</span> (ProtoBuf.IExtensible)ProtoBuf.Serializer.NonGeneric.Deserialize(t, memory);</span><br><span class="line">    &#125;  </span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
 <p>proto编写格式</p>
 <figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">message MsgMove&#123;</span><br><span class="line">  optional int32 x = <span class="number">1</span>;</span><br><span class="line">  optional int32 y = <span class="number">2</span>;</span><br><span class="line">  optional int32 z = <span class="number">3</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">message MsgAttack&#123;</span><br><span class="line">  optional <span class="built_in">string</span> desc = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <h2 id="生成代码"><a href="#生成代码" class="headerlink" title="生成代码"></a>生成代码</h2><figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="comment">//------------------------------------------------------------------------------</span></span><br><span class="line"><span class="comment">// &lt;auto-generated&gt;</span></span><br><span class="line"><span class="comment">//     This code was generated by a tool.</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//     Changes to this file may cause incorrect behavior and will be lost if</span></span><br><span class="line"><span class="comment">//     the code is regenerated.</span></span><br><span class="line"><span class="comment">// &lt;/auto-generated&gt;</span></span><br><span class="line"><span class="comment">//------------------------------------------------------------------------------</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Generated from: proto/BattleMsg.proto</span></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">proto.BattleMsg</span></span><br><span class="line">&#123;</span><br><span class="line">  [<span class="meta">global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@<span class="string">&quot;MsgMove&quot;</span>)</span>]</span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">partial</span> <span class="keyword">class</span> <span class="title">MsgMove</span> : <span class="title">global</span>::<span class="title">ProtoBuf.IExtensible</span></span><br><span class="line">  &#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MsgMove</span>()</span> &#123;&#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">private</span> <span class="built_in">int</span> _x = <span class="literal">default</span>(<span class="built_in">int</span>);</span><br><span class="line">    [<span class="meta">global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@<span class="string">&quot;x&quot;</span>, DataFormat = global::ProtoBuf.DataFormat.TwosComplement)</span>]</span><br><span class="line">    [<span class="meta">global::System.ComponentModel.DefaultValue(default(int))</span>]</span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">int</span> x</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="keyword">get</span> &#123; <span class="keyword">return</span> _x; &#125;</span><br><span class="line">      <span class="keyword">set</span> &#123; _x = <span class="keyword">value</span>; &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">private</span> <span class="built_in">int</span> _y = <span class="literal">default</span>(<span class="built_in">int</span>);</span><br><span class="line">    [<span class="meta">global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@<span class="string">&quot;y&quot;</span>, DataFormat = global::ProtoBuf.DataFormat.TwosComplement)</span>]</span><br><span class="line">    [<span class="meta">global::System.ComponentModel.DefaultValue(default(int))</span>]</span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">int</span> y</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="keyword">get</span> &#123; <span class="keyword">return</span> _y; &#125;</span><br><span class="line">      <span class="keyword">set</span> &#123; _y = <span class="keyword">value</span>; &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">private</span> <span class="built_in">int</span> _z = <span class="literal">default</span>(<span class="built_in">int</span>);</span><br><span class="line">    [<span class="meta">global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@<span class="string">&quot;z&quot;</span>, DataFormat = global::ProtoBuf.DataFormat.TwosComplement)</span>]</span><br><span class="line">    [<span class="meta">global::System.ComponentModel.DefaultValue(default(int))</span>]</span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">int</span> z</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="keyword">get</span> &#123; <span class="keyword">return</span> _z; &#125;</span><br><span class="line">      <span class="keyword">set</span> &#123; _z = <span class="keyword">value</span>; &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">global</span>::ProtoBuf.IExtension extensionObject;</span><br><span class="line">    <span class="keyword">global</span>::ProtoBuf.IExtension <span class="keyword">global</span>::ProtoBuf.IExtensible.GetExtensionObject(<span class="built_in">bool</span> createIfMissing)</span><br><span class="line">      &#123; <span class="keyword">return</span> <span class="keyword">global</span>::ProtoBuf.Extensible.GetExtensionObject(<span class="keyword">ref</span> extensionObject, createIfMissing); &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  [<span class="meta">global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@<span class="string">&quot;MsgAttack&quot;</span>)</span>]</span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">partial</span> <span class="keyword">class</span> <span class="title">MsgAttack</span> : <span class="title">global</span>::<span class="title">ProtoBuf.IExtensible</span></span><br><span class="line">  &#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MsgAttack</span>()</span> &#123;&#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">private</span> <span class="built_in">string</span> _desc = <span class="string">&quot;&quot;</span>;</span><br><span class="line">    [<span class="meta">global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@<span class="string">&quot;desc&quot;</span>, DataFormat = global::ProtoBuf.DataFormat.Default)</span>]</span><br><span class="line">    [<span class="meta">global::System.ComponentModel.DefaultValue(<span class="string">&quot;&quot;</span>)</span>]</span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">string</span> desc</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="keyword">get</span> &#123; <span class="keyword">return</span> _desc; &#125;</span><br><span class="line">      <span class="keyword">set</span> &#123; _desc = <span class="keyword">value</span>; &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">global</span>::ProtoBuf.IExtension extensionObject;</span><br><span class="line">    <span class="keyword">global</span>::ProtoBuf.IExtension <span class="keyword">global</span>::ProtoBuf.IExtensible.GetExtensionObject(<span class="built_in">bool</span> createIfMissing)</span><br><span class="line">      &#123; <span class="keyword">return</span> <span class="keyword">global</span>::ProtoBuf.Extensible.GetExtensionObject(<span class="keyword">ref</span> extensionObject, createIfMissing); &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="具体使用"><a href="#具体使用" class="headerlink" title="具体使用"></a>具体使用</h2><figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">MsgMove msgMove = <span class="keyword">new</span> MsgMove();</span><br><span class="line">msgMove.x = <span class="number">214</span>;</span><br><span class="line"><span class="built_in">byte</span>[] bs = Encode(msgMove);</span><br><span class="line">Debug.Log(System.BitConverter.ToString(bs));</span><br><span class="line"><span class="comment">//解码</span></span><br><span class="line">ProtoBuf.IExtensible m = Decode(<span class="string">&quot;proto.BattleMsg.MsgMove&quot;</span>, bs, <span class="number">0</span>, bs.Length);</span><br><span class="line">MsgMove m2 = (MsgMove)m;</span><br><span class="line">Debug.Log(m2.x);</span><br></pre></td></tr></table></figure>]]></content>
+<h2 id="具体使用"><a href="#具体使用" class="headerlink" title="具体使用"></a>具体使用</h2><figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">MsgMove msgMove = <span class="keyword">new</span> MsgMove();</span><br><span class="line">msgMove.x = <span class="number">214</span>;</span><br><span class="line"><span class="built_in">byte</span>[] bs = Encode(msgMove);</span><br><span class="line">Debug.Log(System.BitConverter.ToString(bs));</span><br><span class="line"><span class="comment">//解码</span></span><br><span class="line">ProtoBuf.IExtensible m = Decode(<span class="string">&quot;proto.BattleMsg.MsgMove&quot;</span>, bs, <span class="number">0</span>, bs.Length);</span><br><span class="line">MsgMove m2 = (MsgMove)m;</span><br><span class="line">Debug.Log(m2.x);</span><br></pre></td></tr></table></figure>
+
+<h1 id="命令行调试"><a href="#命令行调试" class="headerlink" title="命令行调试"></a>命令行调试</h1><figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span>()</span></span><br><span class="line">&#123;</span><br><span class="line">     <span class="keyword">var</span> args = GetCommandlineArgs();</span><br><span class="line"></span><br><span class="line">     <span class="keyword">if</span> (args.TryGetValue(<span class="string">&quot;-mode&quot;</span>, <span class="keyword">out</span> <span class="built_in">string</span> mode))</span><br><span class="line">     &#123;</span><br><span class="line">         <span class="comment">//通过mode字符串启动服务器或者客户端</span></span><br><span class="line">         <span class="keyword">switch</span> (mode)</span><br><span class="line">           &#123;</span><br><span class="line">               <span class="keyword">case</span> <span class="string">&quot;server&quot;</span>:</span><br><span class="line">                  </span><br><span class="line">                   <span class="keyword">break</span>;</span><br><span class="line">               <span class="keyword">case</span> <span class="string">&quot;host&quot;</span>:</span><br><span class="line"></span><br><span class="line">                   <span class="keyword">break</span>;</span><br><span class="line">               <span class="keyword">case</span> <span class="string">&quot;client&quot;</span>:</span><br><span class="line">                   <span class="keyword">break</span>;</span><br><span class="line">           &#125;</span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> Dictionary&lt;<span class="built_in">string</span>, <span class="built_in">string</span>&gt; <span class="title">GetCommandlineArgs</span>()</span></span><br><span class="line">   &#123;</span><br><span class="line">       Dictionary&lt;<span class="built_in">string</span>, <span class="built_in">string</span>&gt; argDictionary = <span class="keyword">new</span> Dictionary&lt;<span class="built_in">string</span>, <span class="built_in">string</span>&gt;();</span><br><span class="line"></span><br><span class="line">       <span class="keyword">var</span> args = System.Environment.GetCommandLineArgs();</span><br><span class="line"></span><br><span class="line">       <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; args.Length; ++i)</span><br><span class="line">       &#123;</span><br><span class="line">           <span class="keyword">var</span> arg = args[i].ToLower();</span><br><span class="line">           <span class="keyword">if</span> (arg.StartsWith(<span class="string">&quot;-&quot;</span>))</span><br><span class="line">           &#123;</span><br><span class="line">               <span class="keyword">var</span> <span class="keyword">value</span> = i &lt; args.Length - <span class="number">1</span> ? args[i + <span class="number">1</span>].ToLower() : <span class="literal">null</span>;</span><br><span class="line">               <span class="keyword">value</span> = (<span class="keyword">value</span>?.StartsWith(<span class="string">&quot;-&quot;</span>) ?? <span class="literal">false</span>) ? <span class="literal">null</span> : <span class="keyword">value</span>;</span><br><span class="line"></span><br><span class="line">               argDictionary.Add(arg, <span class="keyword">value</span>);</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">return</span> argDictionary;</span><br><span class="line">   &#125;  </span><br></pre></td></tr></table></figure>
+
+<p>启动指令</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">xxx.exe -mode server</span><br></pre></td></tr></table></figure>
+
+]]></content>
       <categories>
         <category>游戏</category>
       </categories>
       <tags>
         <tag>网络</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>MongoDB增删改查</title>
+    <url>/2022/12/29/MongoDB%E5%A2%9E%E5%88%A0%E6%94%B9%E6%9F%A5/</url>
+    <content><![CDATA[<h1 id="使用MongoDB-Driver"><a href="#使用MongoDB-Driver" class="headerlink" title="使用MongoDB Driver"></a>使用MongoDB Driver</h1><p>它是 MongoDB 的官方驱动程序，提供了在 .NET 中操作 MongoDB 的功能。<br>在Nuget包管理器中下载即可，其他编译器找到相关链接库部分就行。</p>
+<h1 id="Connect-Database"><a href="#Connect-Database" class="headerlink" title="Connect Database"></a>Connect Database</h1><figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">MongoClient client = <span class="keyword">new</span> MongoClient(<span class="string">&quot;mongodb://127.0.0.1:27017&quot;</span>);</span><br><span class="line">IMongoDatabase mongo = client.GetDatabase(<span class="string">&quot;DatabaseName&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h1 id="Insert-Data"><a href="#Insert-Data" class="headerlink" title="Insert Data"></a>Insert Data</h1><figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="comment">//获得集合</span></span><br><span class="line"> IMongoCollection&lt;BsonDocument&gt; collection = mongo.GetCollection&lt;BsonDocument&gt;(<span class="string">&quot;player&quot;</span>);</span><br><span class="line">BsonDocument filter = <span class="keyword">new</span> BsonDocument &#123;</span><br><span class="line"><span class="comment">//abc是字符串string</span></span><br><span class="line">    &#123; <span class="string">&quot;id&quot;</span>,<span class="string">&quot;12345&quot;</span>&#125;,</span><br><span class="line">    &#123;<span class="string">&quot;data&quot;</span>,abc &#125;,</span><br><span class="line">    &#123; <span class="string">&quot;ip&quot;</span>,<span class="string">&quot;127.0.0.1&quot;</span>&#125;</span><br><span class="line">&#125;;</span><br><span class="line">collection.InsertOne(filter);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h1 id="Delete-Data"><a href="#Delete-Data" class="headerlink" title="Delete Data"></a>Delete Data</h1><figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="comment">//寻找相关数据</span></span><br><span class="line">FilterDefinition&lt;BsonDocument&gt; file = Builders&lt;BsonDocument&gt;.Filter.Eq(<span class="string">&quot;id&quot;</span>, <span class="string">&quot;12345&quot;</span>);</span><br><span class="line"></span><br><span class="line">collection.DeleteOne(file);<span class="comment">//一个</span></span><br><span class="line">collection.DeleteMany(file);<span class="comment">//全部</span></span><br></pre></td></tr></table></figure>
+<h1 id="Update-Data"><a href="#Update-Data" class="headerlink" title="Update Data"></a>Update Data</h1><figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 创建筛选器定义</span></span><br><span class="line">FilterDefinition&lt;BsonDocument&gt; filter = Builders&lt;BsonDocument&gt;.Filter.Eq(<span class="string">&quot;name&quot;</span>, <span class="string">&quot;John&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建更新器定义</span></span><br><span class="line">UpdateDefinition&lt;BsonDocument&gt; update = Builders&lt;BsonDocument&gt;.Update.Set(<span class="string">&quot;age&quot;</span>, <span class="number">30</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 更新集合中的文档</span></span><br><span class="line">UpdateResult result = <span class="keyword">await</span> collection.UpdateManyAsync(filter, update);</span><br><span class="line">collection.UpdateMany(filter, update);</span><br></pre></td></tr></table></figure>
+<h1 id="Check-Data"><a href="#Check-Data" class="headerlink" title="Check Data"></a>Check Data</h1><figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="comment">//选择条件</span></span><br><span class="line"> FilterDefinition&lt;BsonDocument&gt; file = Builders&lt;BsonDocument&gt;.Filter.Eq(<span class="string">&quot;id&quot;</span>, <span class="string">&quot;12345&quot;</span>);</span><br><span class="line"> <span class="comment">//寻找全部</span></span><br><span class="line"> List&lt;BsonDocument&gt; list = collection.Find(file).ToList();</span><br><span class="line"><span class="comment">//打印全部</span></span><br><span class="line"> <span class="keyword">foreach</span> (<span class="keyword">var</span> doc <span class="keyword">in</span> list) &#123;</span><br><span class="line">     Console.WriteLine(doc);</span><br><span class="line"> &#125;</span><br><span class="line"><span class="comment">//转化为相关变量</span></span><br><span class="line">list[<span class="number">0</span>][<span class="string">&quot;data&quot;</span>].ToString()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>数据库</category>
+      </categories>
+      <tags>
+        <tag>服务器</tag>
       </tags>
   </entry>
 </search>

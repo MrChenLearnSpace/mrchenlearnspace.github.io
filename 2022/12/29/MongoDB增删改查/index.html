@@ -1,0 +1,200 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>MongoDB增删改查 - 浪子之心</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Blog,"> 
+    <meta name="description" content="MrChen Bolg,使用MongoDB Driver它是 MongoDB 的官方驱动程序，提供了在 .NET 中操作 MongoDB 的功能。在Nuget包管理器中下载即可，其他编译器找到相关链接库部分就行。
+Conn,"> 
+    <meta name="author" content="Jack Chen"> 
+    <link rel="alternative" href="atom.xml" title="浪子之心" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+<meta name="generator" content="Hexo 5.4.1"><link rel="stylesheet" href="/css/prism.css" type="text/css"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">浪子之心</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="https://mrchenlearnspace.github.io"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">MongoDB增删改查</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">MongoDB增删改查</h1>
+        <div class="stuff">
+            <span>十二月 29, 2022</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="tag">服务器</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h1 id="使用MongoDB-Driver"><a href="#使用MongoDB-Driver" class="headerlink" title="使用MongoDB Driver"></a>使用MongoDB Driver</h1><p>它是 MongoDB 的官方驱动程序，提供了在 .NET 中操作 MongoDB 的功能。<br>在Nuget包管理器中下载即可，其他编译器找到相关链接库部分就行。</p>
+<h1 id="Connect-Database"><a href="#Connect-Database" class="headerlink" title="Connect Database"></a>Connect Database</h1><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">MongoClient client = <span class="keyword">new</span> MongoClient(<span class="string">&quot;mongodb://127.0.0.1:27017&quot;</span>);</span><br><span class="line">IMongoDatabase mongo = client.GetDatabase(<span class="string">&quot;DatabaseName&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h1 id="Insert-Data"><a href="#Insert-Data" class="headerlink" title="Insert Data"></a>Insert Data</h1><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//获得集合</span></span><br><span class="line"> IMongoCollection&lt;BsonDocument&gt; collection = mongo.GetCollection&lt;BsonDocument&gt;(<span class="string">&quot;player&quot;</span>);</span><br><span class="line">BsonDocument filter = <span class="keyword">new</span> BsonDocument &#123;</span><br><span class="line"><span class="comment">//abc是字符串string</span></span><br><span class="line">    &#123; <span class="string">&quot;id&quot;</span>,<span class="string">&quot;12345&quot;</span>&#125;,</span><br><span class="line">    &#123;<span class="string">&quot;data&quot;</span>,abc &#125;,</span><br><span class="line">    &#123; <span class="string">&quot;ip&quot;</span>,<span class="string">&quot;127.0.0.1&quot;</span>&#125;</span><br><span class="line">&#125;;</span><br><span class="line">collection.InsertOne(filter);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h1 id="Delete-Data"><a href="#Delete-Data" class="headerlink" title="Delete Data"></a>Delete Data</h1><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//寻找相关数据</span></span><br><span class="line">FilterDefinition&lt;BsonDocument&gt; file = Builders&lt;BsonDocument&gt;.Filter.Eq(<span class="string">&quot;id&quot;</span>, <span class="string">&quot;12345&quot;</span>);</span><br><span class="line"></span><br><span class="line">collection.DeleteOne(file);<span class="comment">//一个</span></span><br><span class="line">collection.DeleteMany(file);<span class="comment">//全部</span></span><br></pre></td></tr></table></figure>
+<h1 id="Update-Data"><a href="#Update-Data" class="headerlink" title="Update Data"></a>Update Data</h1><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建筛选器定义</span></span><br><span class="line">FilterDefinition&lt;BsonDocument&gt; filter = Builders&lt;BsonDocument&gt;.Filter.Eq(<span class="string">&quot;name&quot;</span>, <span class="string">&quot;John&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建更新器定义</span></span><br><span class="line">UpdateDefinition&lt;BsonDocument&gt; update = Builders&lt;BsonDocument&gt;.Update.Set(<span class="string">&quot;age&quot;</span>, <span class="number">30</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 更新集合中的文档</span></span><br><span class="line">UpdateResult result = <span class="keyword">await</span> collection.UpdateManyAsync(filter, update);</span><br><span class="line">collection.UpdateMany(filter, update);</span><br></pre></td></tr></table></figure>
+<h1 id="Check-Data"><a href="#Check-Data" class="headerlink" title="Check Data"></a>Check Data</h1><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//选择条件</span></span><br><span class="line"> FilterDefinition&lt;BsonDocument&gt; file = Builders&lt;BsonDocument&gt;.Filter.Eq(<span class="string">&quot;id&quot;</span>, <span class="string">&quot;12345&quot;</span>);</span><br><span class="line"> <span class="comment">//寻找全部</span></span><br><span class="line"> List&lt;BsonDocument&gt; list = collection.Find(file).ToList();</span><br><span class="line"><span class="comment">//打印全部</span></span><br><span class="line"> <span class="keyword">foreach</span> (<span class="keyword">var</span> doc <span class="keyword">in</span> list) &#123;</span><br><span class="line">     Console.WriteLine(doc);</span><br><span class="line"> &#125;</span><br><span class="line"><span class="comment">//转化为相关变量</span></span><br><span class="line">list[<span class="number">0</span>][<span class="string">&quot;data&quot;</span>].ToString()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="/music/jucilang.mp3">
+            </audio>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+		data-enable='true'
+        data-ae='true'
+        data-ci='99f95a936c6fcdb1bd67'
+        data-cs='c2d1bba3d6b7f9ade4f3de09a63925bd837c25ea'
+        data-r='mrchenlearnspace.github.io'
+        data-o='MrChenLearnSpace'
+        data-a='MrChenLearnSpace'
+        data-d='false'
+    >查看评论</div>
+
+
+    </div>
+    
+        <div class='side'>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8MongoDB-Driver"><span class="toc-number">1.</span> <span class="toc-text">使用MongoDB Driver</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Connect-Database"><span class="toc-number">2.</span> <span class="toc-text">Connect Database</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Insert-Data"><span class="toc-number">3.</span> <span class="toc-text">Insert Data</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Delete-Data"><span class="toc-number">4.</span> <span class="toc-text">Delete Data</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Update-Data"><span class="toc-number">5.</span> <span class="toc-text">Update Data</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Check-Data"><span class="toc-number">6.</span> <span class="toc-text">Check Data</span></a></li></ol>	
+        </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"], linebreaks: { automatic:true }, EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50) },
+        tex2jax: { inlineMath: [ ["$", "$"], ["\\(","\\)"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno",skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']},
+        TeX: {  noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } }, Macros: { href: "{}" } },
+        messageStyle: "none"
+    });
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+<!-- Google Analytics -->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YMJ8CBH8F7"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-YMJ8CBH8F7');
+</script>
+<!-- End Google Analytics -->
+
+
+</html>
