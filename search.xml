@@ -2568,7 +2568,7 @@
   </entry>
   <entry>
     <title>ml-agent学习记录</title>
-    <url>/2022/12/29/ml-agent%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/</url>
+    <url>/2023/12/29/ml-agent%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/</url>
     <content><![CDATA[<h1 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h1><p>装gpu加cuda，略，b站有安装视频</p>
 <h1 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h1><p>强化学习是观察（observation）到决定（decision）到行动（action）到奖励（reward）后循环反馈到观察的过程。</p>
 <h1 id="代理制作流程"><a href="#代理制作流程" class="headerlink" title="代理制作流程"></a>代理制作流程</h1><h2 id="构建Agent"><a href="#构建Agent" class="headerlink" title="构建Agent"></a>构建Agent</h2><p>新建的脚本要继承于Agent</p>
