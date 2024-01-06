@@ -1,115 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>搭建博客</title>
-    <url>/2021/11/01/Hollow/</url>
-    <content><![CDATA[<h1 id="博客搭建"><a href="#博客搭建" class="headerlink" title="博客搭建"></a>博客搭建</h1><p>文档格式<br><strong>需要git，Node.js，npm</strong></p>
-<h2 id="做好准备"><a href="#做好准备" class="headerlink" title="做好准备"></a>做好准备</h2><p>安装好软件，配置好相关的环境</p>
-<p>建立一个github仓库，由于在部署时未设置配置建议改成 用户名.github.io,方便网站进入导致只打开一个html，与整个页面脱节的情况</p>
-<h2 id="寻找材料"><a href="#寻找材料" class="headerlink" title="寻找材料"></a>寻找材料</h2><p>到Hexo中找相关喜欢的主题，并找到相应的开源的GitHub，先hexo init在空文件夹中初始化，导入相关主题，修改全局中的theme变量</p>
-<h2 id="修改配置"><a href="#修改配置" class="headerlink" title="修改配置"></a>修改配置</h2><p><a href="https://hexo.io/zh-cn/docs/configuration">https://hexo.io/zh-cn/docs/configuration</a><br>具体配置连接</p>
-<p><strong>网站</strong></p>
-<p>参数  ||    描述</p>
-<p>title ||    网站标题</p>
-<p>subtitle ||    网站副标题</p>
-<p>description ||    网站描述</p>
-<p>keywords ||    网站的关键词。支持多个关键词。</p>
-<p>author ||    您的名字</p>
-<p>language  ||    网站使用的语言。对于简体中文用户来说，使用不同的主题可能需要设置成不同的值，请参考你的主题的文档自行设置，常见的有 zh-Hans和 zh-CN。</p>
-<p>timezone ||    网站时区。Hexo 默认使用您电脑的时区。请参考 时区列表 进行设置，如 America&#x2F;New_York, Japan, 和 UTC 。一般的，对于中国大陆地区可以使用 Asia&#x2F;Shanghai。</p>
-<p><strong>网址</strong></p>
-<p>url    || 网址, 必须以 http:&#x2F;&#x2F; 或 https:&#x2F;&#x2F; 开头    </p>
-<p>root ||    网站根目录    url’s pathname</p>
-<p>permalink ||    文章的 永久链接 格式    :year&#x2F;:month&#x2F;:day&#x2F;:title&#x2F;</p>
-<p>permalink_defaults ||     永久链接中各部分的默认值    </p>
-<p>pretty_urls ||    改写 permalink 的值来美化 URL    </p>
-<p>pretty_urls.trailing_index ||    是否在永久链接中保留尾部的index.html，设置为 false 时去除    true</p>
-<p>pretty_urls.trailing_html    是否在永久链接中保留尾部的 .html, 设置为 false 时去除 (对尾部的 index.html无效)</p>
-<p><em>网站存放在子目录<br>如果您的网站存放在子目录中，例如 <a href="http://example.com/blog%EF%BC%8C%E5%88%99%E8%AF%B7%E5%B0%86%E6%82%A8%E7%9A%84">http://example.com/blog，则请将您的</a> url 设为 <a href="http://example.com/blog">http://example.com/blog</a> 并把 root 设为 &#x2F;blog&#x2F;。</em><br><em>例如：# 比如，一个页面的永久链接是 <a href="http://example.com/foo/bar/index.html">http://example.com/foo/bar/index.html</a><br>pretty_urls:<br>  trailing_index: false<br>此时页面的永久链接会变为 <a href="http://example.com/foo/bar/">http://example.com/foo/bar/</a></em></p>
-<p><strong>目录</strong><br>参数  ||    描述  ||    默认值</p>
-<p>source_dir ||    资源文件夹，这个文件夹用来存放内容。||    source</p>
-<p>public_dir ||    公共文件夹，这个文件夹用于存放生成的站点文件。||    public</p>
-<p>tag_dir  ||    标签文件夹 ||    tags</p>
-<p>archive_dir    归档文件夹    archives</p>
-<p>category_dir    分类文件夹    categories</p>
-<p>code_dir    Include code 文件夹，source_dir 下的子目录    downloads&#x2F;code</p>
-<p>i18n_dir    国际化（i18n）文件夹    :lang</p>
-<p>skip_render    跳过指定文件的渲染。匹配到的文件将会被不做改动地复制到 public 目录中。您可使用 glob 表达式来匹配路径。</p>
-<p><strong>文章</strong><br>参数    描述    默认值</p>
-<p>new_post_name    新文章的文件名称    :title.md</p>
-<p>default_layout    预设布局    post</p>
-<p>auto_spacing    在中文和英文之间加入空格    false</p>
-<p>titlecase    把标题转换为 title case    false</p>
-<p>external_link    在新标签中打开链接    true</p>
-<p>external_link.enable    在新标签中打开链接    true</p>
-<p>external_link.field    对整个网站（site）生效或仅对文章（post）生效    site</p>
-<p>external_link.exclude    需要排除的域名。主域名和子域名如 www 需分别配置    []</p>
-<p>filename_case    把文件名称转换为 (1) 小写或 (2) 大写    0</p>
-<p>render_drafts    显示草稿    false</p>
-<p>post_asset_folder    启动 Asset 文件夹    false</p>
-<p>relative_link    把链接改为与根目录的相对位址    false</p>
-<p>future    显示未来的文章    true</p>
-<p>highlight    代码块的设置, 请参考 Highlight.js 进行设置    </p>
-<p>prismjs    代码块的设置, 请参考 PrismJS 进行设置</p>
-<p><em>默认情况下，Hexo 生成的超链接都是绝对地址。例如，如果您的网站域名为 example.com,您有一篇文章名为 hello，那么绝对链接可能像这样：<a href="http://example.com/hello.html%EF%BC%8C%E5%AE%83%E6%98%AF%E7%BB%9D%E5%AF%B9%E4%BA%8E%E5%9F%9F%E5%90%8D%E7%9A%84%E3%80%82%E7%9B%B8%E5%AF%B9%E9%93%BE%E6%8E%A5%E5%83%8F%E8%BF%99%E6%A0%B7%EF%BC%9A/hello.html%EF%BC%8C%E4%B9%9F%E5%B0%B1%E6%98%AF%E8%AF%B4%EF%BC%8C%E6%97%A0%E8%AE%BA%E7%94%A8%E4%BB%80%E4%B9%88%E5%9F%9F%E5%90%8D%E8%AE%BF%E9%97%AE%E8%AF%A5%E7%AB%99%E7%82%B9%EF%BC%8C%E9%83%BD%E6%B2%A1%E6%9C%89%E5%85%B3%E7%B3%BB%EF%BC%8C%E8%BF%99%E5%9C%A8%E8%BF%9B%E8%A1%8C%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E6%97%B6%E5%8F%AF%E8%83%BD%E7%94%A8%E5%88%B0%E3%80%82%E9%80%9A%E5%B8%B8%E6%83%85%E5%86%B5%E4%B8%8B%EF%BC%8C%E5%BB%BA%E8%AE%AE%E4%BD%BF%E7%94%A8%E7%BB%9D%E5%AF%B9%E5%9C%B0%E5%9D%80%E3%80%82">http://example.com/hello.html，它是绝对于域名的。相对链接像这样：/hello.html，也就是说，无论用什么域名访问该站点，都没有关系，这在进行反向代理时可能用到。通常情况下，建议使用绝对地址。</a></em></p>
-<p><strong>分类 &amp; 标签</strong></p>
-<p>参数    描述    默认值</p>
-<p>default_category    默认分类    uncategorized</p>
-<p>category_map    分类别名    </p>
-<p>tag_map    标签别名    </p>
-<p><strong>日期 &#x2F; 时间格式</strong></p>
-<p>参数    描述    默认值</p>
-<p>date_format    日期格式    YYYY-MM-DD</p>
-<p>time_format    时间格式    HH:mm:ss</p>
-<p>updated_option    当 Front Matter 中没有指定 updated 时 updated 的取值    mtime</p>
-<p>updated_option<br><em>updated_option 控制了当 Front Matter 中没有指定 updated 时，updated 如何取值：</em></p>
-<p><em>mtime: 使用文件的最后修改时间。这是从 Hexo 3.0.0 开始的默认行为。</em><br><em>date: 使用 date 作为 updated 的值。可被用于 Git 工作流之中，因为使用 Git 管理站点时，文件的最后修改日期常常会发生改变</em><br><em>empty: 直接删除 updated。使用这一选项可能会导致大部分主题和插件无法正常工作。</em><br><em>use_date_for_updated 选项已经被废弃，将会在下个重大版本发布时去除。请改为使用 updated_option: ‘date’。</em></p>
-<p><em>use_date_for_updated | 启用以后，如果 Front Matter 中没有指定 updated， post.updated 将会使用 date 的值而不是文件的创建时间。在 Git 工作流中这个选项会很有用 | true</em></p>
-<p><strong>分页</strong></p>
-<p>参数    描述    默认值</p>
-<p>per_page    每页显示的文章量 (0 &#x3D; 关闭分页功能)    10</p>
-<p>pagination_dir    分页目录    page</p>
-<p><strong>扩展</strong><br>参数    描述</p>
-<p>theme    当前主题名称。值为false时禁用主题</p>
-<p>theme_config    主题的配置文件。在这里放置的配置会覆盖主题目录下的 _config.yml 中的配置</p>
-<p>deploy    部署部分的设置</p>
-<p>meta_generator    Meta generator 标签。 值为 false 时 Hexo 不会在头部插入该标签</p>
-<ul>
-<li><ul>
-<li><h3 id="特别注意，记得修改配置中的连接和主题"><a href="#特别注意，记得修改配置中的连接和主题" class="headerlink" title="特别注意，记得修改配置中的连接和主题"></a>特别注意，记得修改配置中的连接和主题</h3></li>
-</ul>
-</li>
-<li><ul>
-<li></li>
-</ul>
-</li>
-</ul>
-<h2 id="开始部署"><a href="#开始部署" class="headerlink" title="开始部署"></a>开始部署</h2><p>配置好配置中的部署部分</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repository: https://github.com/MrChenLreanSpace/MrChenLreanSpace.github.io.git</span><br><span class="line">  branch: main</span><br></pre></td></tr></table></figure>
-<p>用 npm 安装好hexo-deployer-git.</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install hexo-deployer-git </span><br></pre></td></tr></table></figure>
-<p>有些加入搜索功能，需要插件</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install hexo-generator-searchdb --save</span><br></pre></td></tr></table></figure>
-<p>配置hexo全局配置文件（请将生成的索引文件放在网站根目录或修改主题js文件的path值）</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">search:</span><br><span class="line">  path: search.xml</span><br><span class="line">  field: post</span><br><span class="line">  format: html</span><br><span class="line">  limit: 10000</span><br></pre></td></tr></table></figure>
-<p>在主题配置文件启用本地搜索</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#本地搜索,请将索引文件放在网站根目录</span><br><span class="line">local_search:</span><br><span class="line">    #是否启用</span><br><span class="line">    enable: true</span><br></pre></td></tr></table></figure>
-<p>开始生成本地站点</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo g</span><br></pre></td></tr></table></figure>
-<p>本地测试</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo s 或者 hexo serve</span><br></pre></td></tr></table></figure>
-<p>完成之后，连上github，需要GitHub的令牌，令牌生成后记得记住密钥，之后会看不到<br>令牌在设置的开发者选项中第三个第一次上传需要登入和用用户名和令牌连上账户</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo clean&amp;&amp;hexo d</span><br></pre></td></tr></table></figure>
-<p>清除本地文件且部署到GitHub上</p>
-]]></content>
-      <categories>
-        <category>博客开始</category>
-      </categories>
-      <tags>
-        <tag>标签和分类可以多个</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>OpenGL学习之路之窗口的建立</title>
     <url>/2021/11/02/OpenGL%E5%AD%A6%E4%B9%A0%E4%B9%8B%E8%B7%AF%E4%B9%8B%E7%AA%97%E5%8F%A3%E7%9A%84%E5%BB%BA%E7%AB%8B/</url>
     <content><![CDATA[<h1 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h1><p>先建立一个空项目，建立一个c++文件，然后设置解决方案的属性设置三个位置<br><strong>第一是c&#x2F;c++\常规\附加包含目录加入include的文件夹，glfw和glew都需要，第二，链接器\常规\附加库目录，lib文件夹，第三，链接器\输入\附加依赖库，opengl32.lib glfw3.lib glew32s.lib</strong></p>
@@ -2667,12 +2558,176 @@
 <p>还可以使用 AssetDatabase.ImportAsset 从文件系统导入资源到Unity工程中,返回的是包含资源的路径的字符串数组</p>
 <figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">using</span> UnityEditor;</span><br><span class="line"></span><br><span class="line"><span class="built_in">string</span>[] importedAssets = AssetDatabase.ImportAsset(<span class="string">&quot;path/to/MyAsset.png&quot;</span>);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<h1 id="运行中"><a href="#运行中" class="headerlink" title="运行中"></a>运行中</h1>]]></content>
+<h1 id="运行中"><a href="#运行中" class="headerlink" title="运行中"></a>运行中</h1><h2 id="使用ab包导入"><a href="#使用ab包导入" class="headerlink" title="使用ab包导入"></a>使用ab包导入</h2><h2 id="使用C-文件流"><a href="#使用C-文件流" class="headerlink" title="使用C#文件流"></a>使用C#文件流</h2>]]></content>
       <categories>
         <category>Unity</category>
       </categories>
       <tags>
         <tag>资源导入</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>ml-agent学习记录</title>
+    <url>/2023/12/29/ml-agent%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/</url>
+    <content><![CDATA[<h1 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h1><p>装gpu加cuda，略，b站有安装视频</p>
+<h1 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h1><p>强化学习是观察（observation）到决定（decision）到行动（action）到奖励（reward）后循环反馈到观察的过程。</p>
+<h1 id="代理制作流程"><a href="#代理制作流程" class="headerlink" title="代理制作流程"></a>代理制作流程</h1><h2 id="构建Agent"><a href="#构建Agent" class="headerlink" title="构建Agent"></a>构建Agent</h2><p>新建的脚本要继承于Agent</p>
+<h2 id="加入观察参数"><a href="#加入观察参数" class="headerlink" title="加入观察参数"></a>加入观察参数</h2><figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="title">CollectObservations</span>(<span class="params">VectorSensor sensor</span>)</span> &#123;</span><br><span class="line">    sensor.AddObservation(transform.position);</span><br><span class="line">    <span class="keyword">foreach</span> (Transform target <span class="keyword">in</span> targets) &#123;</span><br><span class="line">        sensor.AddObservation(target.position);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Space Size：这是观察空间或动作空间的大小。对于观察空间，它是智能体每次观察到的信息的维度。对于动作空间，它是智能体可以执行的动作的数量或类型。</p>
+<p>Stacked Vectors：这是一个参数，用于指定智能体在每次决策时应该考虑多少个连续的观察。例如，如果Stacked Vectors设置为3，那么智能体在做出决策时，会考虑当前的观察以及前两个观察。这可以帮助智能体理解观察之间的时间关系，例如物体的运动方向和速度。<br><strong>其中Space Size和塞入的观察参数大小相关</strong></p>
+<h2 id="行动下一步"><a href="#行动下一步" class="headerlink" title="行动下一步"></a>行动下一步</h2><figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="title">OnActionReceived</span>(<span class="params">ActionBuffers actions</span>)</span> &#123;</span><br><span class="line">        <span class="built_in">float</span> moveX = actions.ContinuousActions[<span class="number">0</span>];</span><br><span class="line">        <span class="built_in">float</span> moveY = actions.ContinuousActions[<span class="number">1</span>];</span><br><span class="line">        <span class="comment">//print(new Vector3(moveX, 0, moveY));</span></span><br><span class="line">        transform.position += <span class="keyword">new</span> Vector3(moveX, <span class="number">0</span>, moveY) * speed;</span><br><span class="line">        <span class="keyword">for</span>(<span class="built_in">int</span> i=<span class="number">0</span>;i&lt;targets.Count;i++) &#123;</span><br><span class="line">            <span class="built_in">float</span> tempDistant = Vector3.Distance(targets[i].position, transform.position);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (tempDistant &lt; distants[i])</span><br><span class="line">                AddReward(<span class="number">0.001f</span>);</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                AddReward(<span class="number">-0.0005f</span>);</span><br><span class="line">            distants[i] = tempDistant;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>获取下一步行动的参数</p>
+<h2 id="重置训练场景"><a href="#重置训练场景" class="headerlink" title="重置训练场景"></a>重置训练场景</h2><figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="title">OnEpisodeBegin</span>()</span> &#123;</span><br><span class="line">    distants.Clear();</span><br><span class="line">    transform.position = RandomPosition();</span><br><span class="line">    <span class="keyword">foreach</span> (Transform t <span class="keyword">in</span> targets) &#123;</span><br><span class="line">        t.position= RandomPosition();</span><br><span class="line">        distants.Add(Vector3.Distance(t.position, transform.position));</span><br><span class="line">    &#125;</span><br><span class="line">    SetReward(<span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="手动控制ai（可选）"><a href="#手动控制ai（可选）" class="headerlink" title="手动控制ai（可选）"></a>手动控制ai（可选）</h2><figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="title">Heuristic</span>(<span class="params"><span class="keyword">in</span> ActionBuffers actionsOut</span>)</span> &#123;</span><br><span class="line">    ActionSegment&lt;<span class="built_in">float</span>&gt; continuousAction = actionsOut.ContinuousActions;</span><br><span class="line">    continuousAction[<span class="number">0</span>] = Input.GetAxisRaw(<span class="string">&quot;Horizontal&quot;</span>);</span><br><span class="line">    continuousAction[<span class="number">1</span>] = Input.GetAxisRaw(<span class="string">&quot;Vertical&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="重点记得加入脚本Decision-Request"><a href="#重点记得加入脚本Decision-Request" class="headerlink" title="重点记得加入脚本Decision Request"></a>重点记得加入脚本Decision Request</h2><p>卡了很久没动就是忘记挂这个组件了，，”Decision Requester”组件是用来控制智能体决策频率的一个组件。</p>
+<p>“Decision Requester”组件有一个”Decision Period”参数，它指定了智能体应该多久做一次决策。例如，如果”Decision Period”设置为5，那么智能体每5个步骤会做一次决策。</p>
+<p>在智能体不做决策的步骤中，它会重复执行上一次的动作。这可以减少智能体需要做决策的次数，从而提高训练速度。</p>
+<p>注意，”Decision Requester”组件只在训练时有效。在推理（即使用训练好的模型）时，智能体会在每个步骤都做决策。</p>
+<h1 id="附件"><a href="#附件" class="headerlink" title="附件"></a>附件</h1><h2 id="激活conda环境"><a href="#激活conda环境" class="headerlink" title="激活conda环境"></a>激活conda环境</h2><figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">conda activate 环境名</span><br></pre></td></tr></table></figure>
+<h2 id="训练ml-agent"><a href="#训练ml-agent" class="headerlink" title="训练ml-agent"></a>训练ml-agent</h2><p>Basic.yaml训练参数，run2文件夹</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">mlagents-learn  Basic.yaml --run-id=run2 --train --force</span><br></pre></td></tr></table></figure>
+<h2 id="查看训练数据"><a href="#查看训练数据" class="headerlink" title="查看训练数据"></a>查看训练数据</h2><figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">tensorboard --logdir=results <span class="comment">//result可递归文件夹下</span></span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>Unity</category>
+      </categories>
+      <tags>
+        <tag>强化学习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>搭建博客</title>
+    <url>/2021/11/01/%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/</url>
+    <content><![CDATA[<h1 id="博客搭建"><a href="#博客搭建" class="headerlink" title="博客搭建"></a>博客搭建</h1><p>文档格式<br><strong>需要git，Node.js，npm</strong></p>
+<h2 id="做好准备"><a href="#做好准备" class="headerlink" title="做好准备"></a>做好准备</h2><p>安装好软件，配置好相关的环境</p>
+<p>建立一个github仓库，由于在部署时未设置配置建议改成 用户名.github.io,方便网站进入导致只打开一个html，与整个页面脱节的情况</p>
+<h2 id="寻找材料"><a href="#寻找材料" class="headerlink" title="寻找材料"></a>寻找材料</h2><p>到Hexo中找相关喜欢的主题，并找到相应的开源的GitHub，先hexo init在空文件夹中初始化，导入相关主题，修改全局中的theme变量</p>
+<h2 id="修改配置"><a href="#修改配置" class="headerlink" title="修改配置"></a>修改配置</h2><p><a href="https://hexo.io/zh-cn/docs/configuration">https://hexo.io/zh-cn/docs/configuration</a><br>具体配置连接</p>
+<p><strong>网站</strong></p>
+<p>参数  ||    描述</p>
+<p>title ||    网站标题</p>
+<p>subtitle ||    网站副标题</p>
+<p>description ||    网站描述</p>
+<p>keywords ||    网站的关键词。支持多个关键词。</p>
+<p>author ||    您的名字</p>
+<p>language  ||    网站使用的语言。对于简体中文用户来说，使用不同的主题可能需要设置成不同的值，请参考你的主题的文档自行设置，常见的有 zh-Hans和 zh-CN。</p>
+<p>timezone ||    网站时区。Hexo 默认使用您电脑的时区。请参考 时区列表 进行设置，如 America&#x2F;New_York, Japan, 和 UTC 。一般的，对于中国大陆地区可以使用 Asia&#x2F;Shanghai。</p>
+<p><strong>网址</strong></p>
+<p>url    || 网址, 必须以 http:&#x2F;&#x2F; 或 https:&#x2F;&#x2F; 开头    </p>
+<p>root ||    网站根目录    url’s pathname</p>
+<p>permalink ||    文章的 永久链接 格式    :year&#x2F;:month&#x2F;:day&#x2F;:title&#x2F;</p>
+<p>permalink_defaults ||     永久链接中各部分的默认值    </p>
+<p>pretty_urls ||    改写 permalink 的值来美化 URL    </p>
+<p>pretty_urls.trailing_index ||    是否在永久链接中保留尾部的index.html，设置为 false 时去除    true</p>
+<p>pretty_urls.trailing_html    是否在永久链接中保留尾部的 .html, 设置为 false 时去除 (对尾部的 index.html无效)</p>
+<p><em>网站存放在子目录<br>如果您的网站存放在子目录中，例如 <a href="http://example.com/blog%EF%BC%8C%E5%88%99%E8%AF%B7%E5%B0%86%E6%82%A8%E7%9A%84">http://example.com/blog，则请将您的</a> url 设为 <a href="http://example.com/blog">http://example.com/blog</a> 并把 root 设为 &#x2F;blog&#x2F;。</em><br><em>例如：# 比如，一个页面的永久链接是 <a href="http://example.com/foo/bar/index.html">http://example.com/foo/bar/index.html</a><br>pretty_urls:<br>  trailing_index: false<br>此时页面的永久链接会变为 <a href="http://example.com/foo/bar/">http://example.com/foo/bar/</a></em></p>
+<p><strong>目录</strong><br>参数  ||    描述  ||    默认值</p>
+<p>source_dir ||    资源文件夹，这个文件夹用来存放内容。||    source</p>
+<p>public_dir ||    公共文件夹，这个文件夹用于存放生成的站点文件。||    public</p>
+<p>tag_dir  ||    标签文件夹 ||    tags</p>
+<p>archive_dir    归档文件夹    archives</p>
+<p>category_dir    分类文件夹    categories</p>
+<p>code_dir    Include code 文件夹，source_dir 下的子目录    downloads&#x2F;code</p>
+<p>i18n_dir    国际化（i18n）文件夹    :lang</p>
+<p>skip_render    跳过指定文件的渲染。匹配到的文件将会被不做改动地复制到 public 目录中。您可使用 glob 表达式来匹配路径。</p>
+<p><strong>文章</strong><br>参数    描述    默认值</p>
+<p>new_post_name    新文章的文件名称    :title.md</p>
+<p>default_layout    预设布局    post</p>
+<p>auto_spacing    在中文和英文之间加入空格    false</p>
+<p>titlecase    把标题转换为 title case    false</p>
+<p>external_link    在新标签中打开链接    true</p>
+<p>external_link.enable    在新标签中打开链接    true</p>
+<p>external_link.field    对整个网站（site）生效或仅对文章（post）生效    site</p>
+<p>external_link.exclude    需要排除的域名。主域名和子域名如 www 需分别配置    []</p>
+<p>filename_case    把文件名称转换为 (1) 小写或 (2) 大写    0</p>
+<p>render_drafts    显示草稿    false</p>
+<p>post_asset_folder    启动 Asset 文件夹    false</p>
+<p>relative_link    把链接改为与根目录的相对位址    false</p>
+<p>future    显示未来的文章    true</p>
+<p>highlight    代码块的设置, 请参考 Highlight.js 进行设置    </p>
+<p>prismjs    代码块的设置, 请参考 PrismJS 进行设置</p>
+<p><em>默认情况下，Hexo 生成的超链接都是绝对地址。例如，如果您的网站域名为 example.com,您有一篇文章名为 hello，那么绝对链接可能像这样：<a href="http://example.com/hello.html%EF%BC%8C%E5%AE%83%E6%98%AF%E7%BB%9D%E5%AF%B9%E4%BA%8E%E5%9F%9F%E5%90%8D%E7%9A%84%E3%80%82%E7%9B%B8%E5%AF%B9%E9%93%BE%E6%8E%A5%E5%83%8F%E8%BF%99%E6%A0%B7%EF%BC%9A/hello.html%EF%BC%8C%E4%B9%9F%E5%B0%B1%E6%98%AF%E8%AF%B4%EF%BC%8C%E6%97%A0%E8%AE%BA%E7%94%A8%E4%BB%80%E4%B9%88%E5%9F%9F%E5%90%8D%E8%AE%BF%E9%97%AE%E8%AF%A5%E7%AB%99%E7%82%B9%EF%BC%8C%E9%83%BD%E6%B2%A1%E6%9C%89%E5%85%B3%E7%B3%BB%EF%BC%8C%E8%BF%99%E5%9C%A8%E8%BF%9B%E8%A1%8C%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E6%97%B6%E5%8F%AF%E8%83%BD%E7%94%A8%E5%88%B0%E3%80%82%E9%80%9A%E5%B8%B8%E6%83%85%E5%86%B5%E4%B8%8B%EF%BC%8C%E5%BB%BA%E8%AE%AE%E4%BD%BF%E7%94%A8%E7%BB%9D%E5%AF%B9%E5%9C%B0%E5%9D%80%E3%80%82">http://example.com/hello.html，它是绝对于域名的。相对链接像这样：/hello.html，也就是说，无论用什么域名访问该站点，都没有关系，这在进行反向代理时可能用到。通常情况下，建议使用绝对地址。</a></em></p>
+<p><strong>分类 &amp; 标签</strong></p>
+<p>参数    描述    默认值</p>
+<p>default_category    默认分类    uncategorized</p>
+<p>category_map    分类别名    </p>
+<p>tag_map    标签别名    </p>
+<p><strong>日期 &#x2F; 时间格式</strong></p>
+<p>参数    描述    默认值</p>
+<p>date_format    日期格式    YYYY-MM-DD</p>
+<p>time_format    时间格式    HH:mm:ss</p>
+<p>updated_option    当 Front Matter 中没有指定 updated 时 updated 的取值    mtime</p>
+<p>updated_option<br><em>updated_option 控制了当 Front Matter 中没有指定 updated 时，updated 如何取值：</em></p>
+<p><em>mtime: 使用文件的最后修改时间。这是从 Hexo 3.0.0 开始的默认行为。</em><br><em>date: 使用 date 作为 updated 的值。可被用于 Git 工作流之中，因为使用 Git 管理站点时，文件的最后修改日期常常会发生改变</em><br><em>empty: 直接删除 updated。使用这一选项可能会导致大部分主题和插件无法正常工作。</em><br><em>use_date_for_updated 选项已经被废弃，将会在下个重大版本发布时去除。请改为使用 updated_option: ‘date’。</em></p>
+<p><em>use_date_for_updated | 启用以后，如果 Front Matter 中没有指定 updated， post.updated 将会使用 date 的值而不是文件的创建时间。在 Git 工作流中这个选项会很有用 | true</em></p>
+<p><strong>分页</strong></p>
+<p>参数    描述    默认值</p>
+<p>per_page    每页显示的文章量 (0 &#x3D; 关闭分页功能)    10</p>
+<p>pagination_dir    分页目录    page</p>
+<p><strong>扩展</strong><br>参数    描述</p>
+<p>theme    当前主题名称。值为false时禁用主题</p>
+<p>theme_config    主题的配置文件。在这里放置的配置会覆盖主题目录下的 _config.yml 中的配置</p>
+<p>deploy    部署部分的设置</p>
+<p>meta_generator    Meta generator 标签。 值为 false 时 Hexo 不会在头部插入该标签</p>
+<ul>
+<li><ul>
+<li><h3 id="特别注意，记得修改配置中的连接和主题"><a href="#特别注意，记得修改配置中的连接和主题" class="headerlink" title="特别注意，记得修改配置中的连接和主题"></a>特别注意，记得修改配置中的连接和主题</h3></li>
+</ul>
+</li>
+<li><ul>
+<li></li>
+</ul>
+</li>
+</ul>
+<h2 id="开始部署"><a href="#开始部署" class="headerlink" title="开始部署"></a>开始部署</h2><p>配置好配置中的部署部分</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repository: https://github.com/MrChenLreanSpace/MrChenLreanSpace.github.io.git</span><br><span class="line">  branch: main</span><br></pre></td></tr></table></figure>
+<p>用 npm 安装好hexo-deployer-git.</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install hexo-deployer-git </span><br></pre></td></tr></table></figure>
+<p>有些加入搜索功能，需要插件</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install hexo-generator-searchdb --save</span><br></pre></td></tr></table></figure>
+<p>配置hexo全局配置文件（请将生成的索引文件放在网站根目录或修改主题js文件的path值）</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">search:</span><br><span class="line">  path: search.xml</span><br><span class="line">  field: post</span><br><span class="line">  format: html</span><br><span class="line">  limit: 10000</span><br></pre></td></tr></table></figure>
+<p>在主题配置文件启用本地搜索</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#本地搜索,请将索引文件放在网站根目录</span><br><span class="line">local_search:</span><br><span class="line">    #是否启用</span><br><span class="line">    enable: true</span><br></pre></td></tr></table></figure>
+<p>开始生成本地站点</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo g</span><br></pre></td></tr></table></figure>
+<p>本地测试</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo s 或者 hexo serve</span><br></pre></td></tr></table></figure>
+<p>完成之后，连上github，需要GitHub的令牌，令牌生成后记得记住密钥，之后会看不到<br>令牌在设置的开发者选项中第三个第一次上传需要登入和用用户名和令牌连上账户</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo clean&amp;&amp;hexo d</span><br></pre></td></tr></table></figure>
+<p>清除本地文件且部署到GitHub上</p>
+]]></content>
+      <categories>
+        <category>博客开始</category>
+      </categories>
+      <tags>
+        <tag>标签和分类可以多个</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>正则表达式</title>
+    <url>/2023/01/06/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/</url>
+    <content><![CDATA[<h1 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h1><p>更多细节查看<a href="https://www.runoob.com/regexp/regexp-syntax.html">正则表达式 – 语法 | 菜鸟教程 (runoob.com)</a></p>
+<h2 id="限定符"><a href="#限定符" class="headerlink" title="限定符"></a>限定符</h2><p><strong>ab+c</strong> + 号代表前面的字符（b）必须至少出现一次（1次或多次）<br><strong>ab*c</strong> *号代表前面的字符（b）可以不出现，也可以出现一次或者多次（0次、或1次、或多次）</p>
+<p><strong>ab?c</strong> ?问号代表前面的字符(b)最多只可以出现一次（0次或1次)</p>
+<p><strong>{n}</strong>  n 是一个非负整数。匹配确定的 <strong>n</strong> 次。例如，<strong>o{2}</strong> 不能匹配 <strong>“Bob”</strong> 中的 <strong>o</strong>，但是能匹配 <strong>“food”</strong> 中的两个 <strong>o</strong>。</p>
+<p><strong>{n,}</strong>  n 是一个非负整数。至少匹配n 次。例如，<strong>o{2,}</strong> 不能匹配 <strong>“Bob”</strong> 中的 <strong>o</strong>，但能匹配 <strong>“foooood”</strong> 中的所有 <strong>o</strong>。<strong>o{1,}</strong> 等价于 <strong>o+<strong>。</strong>o{0,}</strong> 则等价于 **o***。</p>
+<p><strong>{n,m}</strong> m 和 n 均为非负整数，其中 n &lt;&#x3D; m。最少匹配 n 次且最多匹配 m 次。例如，<strong>o{1,3}</strong> 将匹配 <strong>“fooooood”</strong> 中的前三个 <strong>o</strong>。<strong>o{0,1}</strong> 等价于 **o?**。请注意在逗号和两个数之间不能有空格。</p>
+<h2 id="普通字符"><a href="#普通字符" class="headerlink" title="普通字符"></a>普通字符</h2><p><strong>[ABC]</strong> 匹配 <strong>[…]</strong> 中的所有字符，例如 <strong>[aeiou]</strong> 匹配字符串 “gtaobao” 中所有的 e o u a 字母。</p>
+<p><strong>[^ABC]</strong> 匹配除了 <strong>[…]</strong> 中字符的所有字符</p>
+<p><strong>[A-Z]</strong> [A-Z] 表示一个区间，匹配所有大写字母，[a-z] 表示所有小写字母。</p>
+<p><strong>.</strong> 匹配除换行符（\n、\r）之外的任何单个字符。</p>
+<p><strong>[\s\S]</strong> 匹配所有。\s 是匹配所有空白符，包括换行，\S 非空白符，不包括换行。</p>
+<p><strong>\w</strong> 匹配字母、数字、下划线。等价于 [A-Za-z0-9_]。</p>
+<p><strong>\d</strong> 匹配任意一个阿拉伯数字（0 到 9）。等价于 <strong>[0-9]</strong></p>
+<p>使用  [\d\w\s]</p>
+<h2 id="定位符"><a href="#定位符" class="headerlink" title="定位符"></a>定位符</h2><p>^   匹配输入字符串的开始位置，除非在方括号表达式中使用，当该符号在方括号表达式中使用时，表示不接受该方括号表达式中的字符集合。要匹配 ^ 字符本身，请使用 ^</p>
+<p>$ 匹配输入字符串的结尾位置。如果设置了 RegExp 对象的 Multiline 属性，则 $ 也匹配 ‘\n’ 或 ‘\r’。要匹配 $ 字符本身，请使用 $。</p>
+]]></content>
+      <categories>
+        <category>编程</category>
+      </categories>
+      <tags>
+        <tag>正则表达式</tag>
       </tags>
   </entry>
 </search>

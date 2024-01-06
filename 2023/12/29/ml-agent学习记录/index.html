@@ -1,0 +1,210 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ml-agent学习记录 - 浪子之心</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Blog,"> 
+    <meta name="description" content="MrChen Bolg,环境装gpu加cuda，略，b站有安装视频
+原理强化学习是观察（observation）到决定（decision）到行动（action）到奖励（reward）后循环反馈到观察的过程。
+代理制作流程构,"> 
+    <meta name="author" content="Jack Chen"> 
+    <link rel="alternative" href="atom.xml" title="浪子之心" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+<meta name="generator" content="Hexo 5.4.1"><link rel="stylesheet" href="/css/prism.css" type="text/css"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">浪子之心</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="https://mrchenlearnspace.github.io"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">ml-agent学习记录</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">ml-agent学习记录</h1>
+        <div class="stuff">
+            <span>十二月 29, 2023</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/" rel="tag">强化学习</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h1 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h1><p>装gpu加cuda，略，b站有安装视频</p>
+<h1 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h1><p>强化学习是观察（observation）到决定（decision）到行动（action）到奖励（reward）后循环反馈到观察的过程。</p>
+<h1 id="代理制作流程"><a href="#代理制作流程" class="headerlink" title="代理制作流程"></a>代理制作流程</h1><h2 id="构建Agent"><a href="#构建Agent" class="headerlink" title="构建Agent"></a>构建Agent</h2><p>新建的脚本要继承于Agent</p>
+<h2 id="加入观察参数"><a href="#加入观察参数" class="headerlink" title="加入观察参数"></a>加入观察参数</h2><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="title">CollectObservations</span>(<span class="params">VectorSensor sensor</span>)</span> &#123;</span><br><span class="line">    sensor.AddObservation(transform.position);</span><br><span class="line">    <span class="keyword">foreach</span> (Transform target <span class="keyword">in</span> targets) &#123;</span><br><span class="line">        sensor.AddObservation(target.position);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Space Size：这是观察空间或动作空间的大小。对于观察空间，它是智能体每次观察到的信息的维度。对于动作空间，它是智能体可以执行的动作的数量或类型。</p>
+<p>Stacked Vectors：这是一个参数，用于指定智能体在每次决策时应该考虑多少个连续的观察。例如，如果Stacked Vectors设置为3，那么智能体在做出决策时，会考虑当前的观察以及前两个观察。这可以帮助智能体理解观察之间的时间关系，例如物体的运动方向和速度。<br><strong>其中Space Size和塞入的观察参数大小相关</strong></p>
+<h2 id="行动下一步"><a href="#行动下一步" class="headerlink" title="行动下一步"></a>行动下一步</h2><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="title">OnActionReceived</span>(<span class="params">ActionBuffers actions</span>)</span> &#123;</span><br><span class="line">        <span class="built_in">float</span> moveX = actions.ContinuousActions[<span class="number">0</span>];</span><br><span class="line">        <span class="built_in">float</span> moveY = actions.ContinuousActions[<span class="number">1</span>];</span><br><span class="line">        <span class="comment">//print(new Vector3(moveX, 0, moveY));</span></span><br><span class="line">        transform.position += <span class="keyword">new</span> Vector3(moveX, <span class="number">0</span>, moveY) * speed;</span><br><span class="line">        <span class="keyword">for</span>(<span class="built_in">int</span> i=<span class="number">0</span>;i&lt;targets.Count;i++) &#123;</span><br><span class="line">            <span class="built_in">float</span> tempDistant = Vector3.Distance(targets[i].position, transform.position);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (tempDistant &lt; distants[i])</span><br><span class="line">                AddReward(<span class="number">0.001f</span>);</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                AddReward(<span class="number">-0.0005f</span>);</span><br><span class="line">            distants[i] = tempDistant;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>获取下一步行动的参数</p>
+<h2 id="重置训练场景"><a href="#重置训练场景" class="headerlink" title="重置训练场景"></a>重置训练场景</h2><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="title">OnEpisodeBegin</span>()</span> &#123;</span><br><span class="line">    distants.Clear();</span><br><span class="line">    transform.position = RandomPosition();</span><br><span class="line">    <span class="keyword">foreach</span> (Transform t <span class="keyword">in</span> targets) &#123;</span><br><span class="line">        t.position= RandomPosition();</span><br><span class="line">        distants.Add(Vector3.Distance(t.position, transform.position));</span><br><span class="line">    &#125;</span><br><span class="line">    SetReward(<span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="手动控制ai（可选）"><a href="#手动控制ai（可选）" class="headerlink" title="手动控制ai（可选）"></a>手动控制ai（可选）</h2><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="title">Heuristic</span>(<span class="params"><span class="keyword">in</span> ActionBuffers actionsOut</span>)</span> &#123;</span><br><span class="line">    ActionSegment&lt;<span class="built_in">float</span>&gt; continuousAction = actionsOut.ContinuousActions;</span><br><span class="line">    continuousAction[<span class="number">0</span>] = Input.GetAxisRaw(<span class="string">&quot;Horizontal&quot;</span>);</span><br><span class="line">    continuousAction[<span class="number">1</span>] = Input.GetAxisRaw(<span class="string">&quot;Vertical&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="重点记得加入脚本Decision-Request"><a href="#重点记得加入脚本Decision-Request" class="headerlink" title="重点记得加入脚本Decision Request"></a>重点记得加入脚本Decision Request</h2><p>卡了很久没动就是忘记挂这个组件了，，”Decision Requester”组件是用来控制智能体决策频率的一个组件。</p>
+<p>“Decision Requester”组件有一个”Decision Period”参数，它指定了智能体应该多久做一次决策。例如，如果”Decision Period”设置为5，那么智能体每5个步骤会做一次决策。</p>
+<p>在智能体不做决策的步骤中，它会重复执行上一次的动作。这可以减少智能体需要做决策的次数，从而提高训练速度。</p>
+<p>注意，”Decision Requester”组件只在训练时有效。在推理（即使用训练好的模型）时，智能体会在每个步骤都做决策。</p>
+<h1 id="附件"><a href="#附件" class="headerlink" title="附件"></a>附件</h1><h2 id="激活conda环境"><a href="#激活conda环境" class="headerlink" title="激活conda环境"></a>激活conda环境</h2><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda activate 环境名</span><br></pre></td></tr></table></figure>
+<h2 id="训练ml-agent"><a href="#训练ml-agent" class="headerlink" title="训练ml-agent"></a>训练ml-agent</h2><p>Basic.yaml训练参数，run2文件夹</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mlagents-learn  Basic.yaml --run-id=run2 --train --force</span><br></pre></td></tr></table></figure>
+<h2 id="查看训练数据"><a href="#查看训练数据" class="headerlink" title="查看训练数据"></a>查看训练数据</h2><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tensorboard --logdir=results <span class="comment">//result可递归文件夹下</span></span><br></pre></td></tr></table></figure>
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="/music/jucilang.mp3">
+            </audio>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+		data-enable='true'
+        data-ae='true'
+        data-ci='99f95a936c6fcdb1bd67'
+        data-cs='c2d1bba3d6b7f9ade4f3de09a63925bd837c25ea'
+        data-r='mrchenlearnspace.github.io'
+        data-o='MrChenLearnSpace'
+        data-a='MrChenLearnSpace'
+        data-d='false'
+    >查看评论</div>
+
+
+    </div>
+    
+        <div class='side'>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83"><span class="toc-number">1.</span> <span class="toc-text">环境</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8E%9F%E7%90%86"><span class="toc-number">2.</span> <span class="toc-text">原理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BB%A3%E7%90%86%E5%88%B6%E4%BD%9C%E6%B5%81%E7%A8%8B"><span class="toc-number">3.</span> <span class="toc-text">代理制作流程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9E%84%E5%BB%BAAgent"><span class="toc-number">3.1.</span> <span class="toc-text">构建Agent</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8A%A0%E5%85%A5%E8%A7%82%E5%AF%9F%E5%8F%82%E6%95%B0"><span class="toc-number">3.2.</span> <span class="toc-text">加入观察参数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A1%8C%E5%8A%A8%E4%B8%8B%E4%B8%80%E6%AD%A5"><span class="toc-number">3.3.</span> <span class="toc-text">行动下一步</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%87%8D%E7%BD%AE%E8%AE%AD%E7%BB%83%E5%9C%BA%E6%99%AF"><span class="toc-number">3.4.</span> <span class="toc-text">重置训练场景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%8B%E5%8A%A8%E6%8E%A7%E5%88%B6ai%EF%BC%88%E5%8F%AF%E9%80%89%EF%BC%89"><span class="toc-number">3.5.</span> <span class="toc-text">手动控制ai（可选）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%87%8D%E7%82%B9%E8%AE%B0%E5%BE%97%E5%8A%A0%E5%85%A5%E8%84%9A%E6%9C%ACDecision-Request"><span class="toc-number">3.6.</span> <span class="toc-text">重点记得加入脚本Decision Request</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%99%84%E4%BB%B6"><span class="toc-number">4.</span> <span class="toc-text">附件</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%BF%80%E6%B4%BBconda%E7%8E%AF%E5%A2%83"><span class="toc-number">4.1.</span> <span class="toc-text">激活conda环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%AD%E7%BB%83ml-agent"><span class="toc-number">4.2.</span> <span class="toc-text">训练ml-agent</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E8%AE%AD%E7%BB%83%E6%95%B0%E6%8D%AE"><span class="toc-number">4.3.</span> <span class="toc-text">查看训练数据</span></a></li></ol></li></ol>	
+        </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"], linebreaks: { automatic:true }, EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50) },
+        tex2jax: { inlineMath: [ ["$", "$"], ["\\(","\\)"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno",skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']},
+        TeX: {  noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } }, Macros: { href: "{}" } },
+        messageStyle: "none"
+    });
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+<!-- Google Analytics -->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YMJ8CBH8F7"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-YMJ8CBH8F7');
+</script>
+<!-- End Google Analytics -->
+
+
+</html>
